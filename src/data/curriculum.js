@@ -1891,13 +1891,15 @@ export const TOTAL_ACTS = ACTS.length
 export const LEVEL_ACT_NUMBERS = {
   young:  [1, 2, 3],
   junior: [1, 2, 3, 4, 5, 6, 7],
-  senior: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  // Seniors skip the visual-building acts — website is auto-generated.
+  // They jump straight into React, APIs, and Creator Challenges.
+  senior: [9, 10, 11],
 }
 
 export const LEVEL_INFO = {
-  young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3  },
-  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#6366f1', totalActs: 7  },
-  senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 11 },
+  young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3 },
+  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#6366f1', totalActs: 7 },
+  senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 3 },
 }
 
 // All missions a level goes through, in order

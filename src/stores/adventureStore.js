@@ -54,14 +54,51 @@ export const useAdventureStore = create(
       actCelebrating: null,
       levelComplete: false,
 
-      startAdventure: (adventureId) => set({
+      // startMissionNumber lets senior users begin at mission 21 (first React mission)
+      startAdventure: (adventureId, startMissionNumber = 1) => set({
         currentAdventure: adventureId,
-        currentMissionNumber: 1,
+        currentMissionNumber: startMissionNumber,
         currentStepIndex: 0,
         levelComplete: false,
       }),
 
       setLevelComplete: () => set({ levelComplete: true }),
+
+      // Builds the full website from scratch — used for senior users so they
+      // arrive at the adventure with a complete site ready to learn React on.
+      autoGenerateWebsite: (name, color, topic) => set((s) => ({
+        website: {
+          ...s.website,
+          name,
+          color,
+          topic,
+          styles: { ...s.website.styles, primaryColor: color },
+          sections: {
+            header: {
+              built: true,
+              content: {
+                title: name,
+                navLinks: ['Home', 'About', 'Gallery', 'Contact'],
+              },
+            },
+            hero: {
+              built: true,
+              content: {
+                headline: `Welcome to ${name}!`,
+                subtext: `Your go-to place for everything about ${topic}.`,
+                buttonText: 'Explore',
+              },
+            },
+            footer: {
+              built: true,
+              content: {
+                copyright: `© ${new Date().getFullYear()} ${name}`,
+                links: ['Privacy', 'Terms', 'Contact'],
+              },
+            },
+          },
+        },
+      })),
 
       setMission: (missionNumber) => set({
         currentMissionNumber: missionNumber,
