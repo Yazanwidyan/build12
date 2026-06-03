@@ -36,6 +36,7 @@ function OnboardingShell({ step, totalSteps, onSkip, tekiMood = 'happy', bubble,
         <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--app-raised)' }}>
           <motion.div
             className="h-full rounded-full"
+            initial={{ width: 0 }}
             animate={{ width: `${pct}%` }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{ background: 'linear-gradient(90deg, #2cbaff, #4ade80)' }}
