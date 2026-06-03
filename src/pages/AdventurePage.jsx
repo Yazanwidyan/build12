@@ -28,7 +28,7 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 220, damping: 22 }}
         className="rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-6 text-center"
-        style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)' }}
+        style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)' }}
       >
         <motion.div
           animate={{ y: [0, -10, 0] }}
@@ -92,7 +92,7 @@ export default function AdventurePage() {
     <div className="h-screen w-screen overflow-hidden relative">
 
       {/* ── Slim top bar ── */}
-      <div className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b px-4 h-9 flex items-center gap-2"
+      <div className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b-2 px-4 h-9 flex items-center gap-2"
            style={{ backgroundColor: 'rgba(var(--app-surface),0.85)', borderColor: 'var(--app-border)',
                     background: 'color-mix(in srgb, var(--app-surface) 85%, transparent)' }}>
         <button

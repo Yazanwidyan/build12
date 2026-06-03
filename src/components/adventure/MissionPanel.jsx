@@ -21,7 +21,7 @@ export default function MissionPanel() {
   return (
     <div className="flex flex-col h-full" style={{ backgroundColor: 'var(--app-surface)' }}>
       {/* Mission header */}
-      <div className="px-4 pt-3 pb-2 shrink-0" style={{ borderBottom: '1px solid var(--app-border)' }}>
+      <div className="px-4 pt-3 pb-2 shrink-0" style={{ borderBottom: '2px solid var(--app-border)' }}>
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             {act && (

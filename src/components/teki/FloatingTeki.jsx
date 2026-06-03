@@ -46,12 +46,12 @@ export default function FloatingTeki() {
               exit={{ opacity: 0, scale: 0.88, y: 12 }}
               transition={{ type: 'spring', stiffness: 380, damping: 28 }}
               className="rounded-2xl shadow-2xl overflow-hidden"
-              style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)' }}
+              style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)' }}
               style={{ width: 380 }}
             >
               {/* Title bar */}
               <div
-                className="flex items-center justify-between px-3 py-2 border-b border-gray-100"
+                className="flex items-center justify-between px-3 py-2 border-b-2 border-app-border"
                 style={{ background: levelInfo?.color ?? act?.color ?? '#2cbaff' }}
               >
                 <div className="flex items-center gap-2 min-w-0">
@@ -100,7 +100,7 @@ export default function FloatingTeki() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     className="mx-3 mt-1 mb-2 rounded-xl px-4 py-3"
-                    style={{ backgroundColor: 'var(--bubble-bg)', border: '1px solid var(--bubble-border)' }}
+                    style={{ backgroundColor: 'var(--bubble-bg)', border: '2px solid var(--app-border)' }}
                   >
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                       {shownText}

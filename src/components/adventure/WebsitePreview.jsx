@@ -20,7 +20,7 @@ export default function WebsitePreview() {
         className="px-3 py-2 flex items-center gap-2 shrink-0"
         style={{
           backgroundColor: 'var(--app-surface)',
-          borderBottom: '1px solid var(--app-border)',
+          borderBottom: '2px solid var(--app-border)',
         }}
       >
         {/* Traffic lights */}
@@ -33,7 +33,7 @@ export default function WebsitePreview() {
         {/* URL bar */}
         <div
           className="flex-1 rounded-md px-3 py-1 text-xs font-mono flex items-center gap-1 truncate"
-          style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)', color: 'var(--ink-faint)' }}
+          style={{ backgroundColor: 'var(--app-raised)', border: '2px solid var(--app-border)', color: 'var(--ink-faint)' }}
         >
           <span style={{ color: '#4ade80' }}>🔒</span>
           <span className="truncate">{siteName}.mysite.com</span>
@@ -50,8 +50,8 @@ export default function WebsitePreview() {
               onClick={() => setViewport(id)}
               className="p-1.5 rounded-lg transition-all"
               style={viewport === id
-                ? { backgroundColor: 'rgba(44,186,255,0.15)', color: '#2cbaff', border: '1px solid rgba(44,186,255,0.3)' }
-                : { backgroundColor: 'transparent', color: 'var(--ink-faint)', border: '1px solid transparent' }
+                ? { backgroundColor: 'rgba(44,186,255,0.15)', color: '#2cbaff', border: '2px solid var(--app-border)' }
+                : { backgroundColor: 'transparent', color: 'var(--ink-faint)', border: '2px solid transparent' }
               }
             >
               <Icon size={14} />

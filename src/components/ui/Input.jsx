@@ -16,7 +16,7 @@ const Input = forwardRef(function Input({ label, error, hint, className, ...prop
         ref={ref}
         className={cn(
           'input-base',
-          error && '!border-red-400 focus:!border-red-500 focus:![box-shadow:0_0_0_3px_rgba(239,68,68,0.15)]',
+          error && '!border-red-400 focus:!border-red-500',
           className,
         )}
         {...props}

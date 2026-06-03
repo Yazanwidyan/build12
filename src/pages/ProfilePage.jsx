@@ -95,7 +95,7 @@ function AvatarPicker({ current, onSelect }) {
           onClick={() => onSelect(id)}
           className="flex flex-col items-center gap-2 py-4 rounded-2xl border-2 transition-all"
           style={{
-            borderColor: current === id ? '#2cbaff' : 'var(--app-border)',
+            borderColor: 'var(--app-border)',
             backgroundColor: current === id ? 'rgba(44,186,255,0.07)' : 'var(--app-raised)',
           }}
         >
@@ -110,7 +110,7 @@ function AvatarPicker({ current, onSelect }) {
 // ── Act progress row ─────────────────────────────────────────────────────────────
 function ActProgressRow({ act, done }) {
   return (
-    <div className="flex items-center gap-3 py-2.5" style={{ borderBottom: '1px solid var(--app-line)' }}>
+    <div className="flex items-center gap-3 py-2.5" style={{ borderBottom: '2px solid var(--app-border)' }}>
       <div
         className="w-2.5 h-2.5 rounded-full shrink-0"
         style={{ backgroundColor: done ? act.color : 'var(--app-border)' }}
@@ -153,7 +153,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-app">
 
       {/* ── Nav ── */}
-      <nav className="border-b sticky top-0 z-30" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)', borderTop: '3px solid #2cbaff' }}>
+      <nav className="border-b-2 sticky top-0 z-30" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-4">
           <button
             onClick={() => navigate({ to: '/dashboard' })}
@@ -179,7 +179,7 @@ export default function ProfilePage() {
             <div className="relative">
               <div
                 className="w-28 h-28 rounded-2xl overflow-hidden flex items-center justify-center"
-                style={{ background: 'var(--accent-bg)', border: '2px solid var(--accent-border)' }}
+                style={{ background: 'var(--accent-bg)', border: '2px solid var(--app-border)' }}
               >
                 <AvatarDisplay avatarId={profile.avatar} size={108} />
               </div>
@@ -254,7 +254,7 @@ export default function ProfilePage() {
               { label: 'Badges Earned',    value: earnedBadges.length,     color: '#a78bfa' },
               { label: 'Powers Unlocked',  value: builderPowers.length,    color: '#22d3ee' },
             ].map((s) => (
-              <div key={s.label} className="flex items-center justify-between py-1.5" style={{ borderBottom: '1px solid var(--app-line)' }}>
+              <div key={s.label} className="flex items-center justify-between py-1.5" style={{ borderBottom: '2px solid var(--app-border)' }}>
                 <span className="text-xs text-muted">{s.label}</span>
                 <span className="text-sm font-black font-mono" style={{ color: s.color }}>{s.value}</span>
               </div>
@@ -283,7 +283,7 @@ export default function ProfilePage() {
                   <div
                     key={p.id}
                     className="flex items-center gap-3 p-3 rounded-xl"
-                    style={{ background: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
+                    style={{ background: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
                   >
                     <span className="text-2xl">{p.emoji}</span>
                     <div>
@@ -306,7 +306,7 @@ export default function ProfilePage() {
                     key={b.id}
                     whileHover={{ y: -3 }}
                     className="flex flex-col items-center gap-2 p-3 rounded-2xl text-center"
-                    style={{ background: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
+                    style={{ background: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
                   >
                     <span className="text-3xl">{b.emoji}</span>
                     <span className="text-[11px] font-semibold text-ink leading-tight">{b.label}</span>
@@ -342,7 +342,7 @@ export default function ProfilePage() {
             {completedLevels.includes(ageGroup) && (
               <div
                 className="mt-4 rounded-xl px-4 py-3 text-sm font-semibold text-center"
-                style={{ background: 'rgba(74,222,128,0.12)', border: '1px solid rgba(74,222,128,0.3)', color: '#4ade80' }}
+                style={{ background: 'rgba(74,222,128,0.12)', border: '2px solid var(--app-border)', color: '#4ade80' }}
               >
                 🎓 {levelInfo.label} — Complete!
               </div>

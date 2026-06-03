@@ -32,7 +32,7 @@ export default function BuilderPage() {
     <div className="h-screen flex flex-col overflow-hidden bg-app">
       {/* Nav */}
       <header
-        className="border-b shrink-0"
+        className="border-b-2 shrink-0"
         style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}
       >
       <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3">
@@ -49,7 +49,7 @@ export default function BuilderPage() {
         <span className="font-bold text-ink text-sm">Website Builder</span>
         <span
           className="text-xs rounded-full px-2 py-0.5 font-semibold"
-          style={{ background: 'rgba(74,222,128,0.15)', color: '#4ade80', border: '1px solid rgba(74,222,128,0.3)' }}
+          style={{ background: 'rgba(74,222,128,0.15)', color: '#4ade80', border: '2px solid var(--app-border)' }}
         >
           Free Mode
         </span>
@@ -60,7 +60,7 @@ export default function BuilderPage() {
 
       <div className="flex-1 flex min-h-0">
         {/* Preview */}
-        <div className="flex-1 border-r" style={{ borderColor: 'var(--app-border)' }}>
+        <div className="flex-1 border-r-2" style={{ borderColor: 'var(--app-border)' }}>
           <WebsitePreview />
         </div>
 
@@ -88,7 +88,7 @@ export default function BuilderPage() {
                 value={adventure.website.color}
                 onChange={(e) => adventure.setWebsiteColor(e.target.value)}
                 className="h-10 w-full rounded-xl cursor-pointer p-0.5"
-                style={{ border: '1.5px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
+                style={{ border: '2px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
               />
             </div>
           </div>

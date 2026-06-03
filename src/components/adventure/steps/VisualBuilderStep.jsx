@@ -58,7 +58,7 @@ function TagsField({ value = [], onChange, suggestions = [] }) {
             className="text-xs rounded-lg px-2 py-0.5 transition-colors"
             style={{
               color: 'var(--ink-faint)',
-              border: '1px solid var(--app-border)',
+              border: '2px solid var(--app-border)',
             }}
           >
             + {s}
@@ -90,7 +90,7 @@ function ColorField({ value, onChange }) {
         value={value || '#2cbaff'}
         onChange={(e) => onChange(e.target.value)}
         className="h-8 w-full rounded-xl cursor-pointer p-0.5"
-        style={{ border: '1.5px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
+        style={{ border: '2px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
       />
     </div>
   )

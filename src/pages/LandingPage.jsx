@@ -38,7 +38,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-app flex flex-col">
       {/* ── Nav ── */}
-      <nav className="border-b sticky border-app-border top-0 z-10 backdrop-blur-md">
+      <nav className="border-b-2 sticky border-app-border top-0 z-10 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 shrink-0">
             <span className="font-black text-ink text-base tracking-tight">
@@ -125,7 +125,7 @@ export default function LandingPage() {
 
       {/* ── Footer ── */}
       <footer
-        className="py-6 text-center text-xs border-t"
+        className="py-6 text-center text-xs border-t-2"
         style={{ borderColor: "var(--app-border)", color: "var(--ink-faint)" }}
       >
         <div className="max-w-6xl mx-auto px-6">

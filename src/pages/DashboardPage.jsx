@@ -173,7 +173,6 @@ function JumpBackInCard({ ageGroup, xp }) {
                   pct === 100
                     ? "linear-gradient(90deg,#4ade80,#22d3ee)"
                     : "linear-gradient(90deg,#2cbaff,#fde047)",
-                boxShadow: "0 0 8px rgba(44,186,255,0.6)",
               }}
             />
           </div>
@@ -189,7 +188,6 @@ function JumpBackInCard({ ageGroup, xp }) {
             className="px-5 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
             style={{
               background: "linear-gradient(135deg,#2cbaff,#06a4f0)",
-              boxShadow: "0 4px 16px rgba(44,186,255,0.45)",
             }}
           >
             {started ? "Continue Learning" : "Start Adventure"}
@@ -216,10 +214,10 @@ function AdventureExploreCard({ item }) {
       whileHover={!locked ? { y: -3 } : {}}
       whileTap={!locked ? { scale: 0.98 } : {}}
       onClick={() => !locked && item.route && navigate({ to: item.route })}
-      className="rounded-2xl overflow-hidden border flex flex-col transition-all duration-200"
+      className="rounded-2xl overflow-hidden border-2 flex flex-col transition-all duration-200"
       style={{
         backgroundColor: "var(--app-surface)",
-        borderColor: locked ? "var(--app-border)" : `${item.color}35`,
+        borderColor: "var(--app-border)",
         cursor: locked ? "default" : "pointer",
         opacity: locked ? 0.6 : 1,
       }}
@@ -245,7 +243,7 @@ function AdventureExploreCard({ item }) {
         <motion.span
           animate={!locked ? { y: [0, -5, 0] } : {}}
           transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          className="relative text-4xl z-10 drop-shadow-lg"
+          className="relative text-4xl z-10"
         >
           {item.emoji}
         </motion.span>
@@ -316,7 +314,7 @@ function AIBuilderView() {
           <motion.span
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="text-6xl drop-shadow-lg shrink-0"
+            className="text-6xl shrink-0"
           >
             🤖
           </motion.span>
@@ -369,7 +367,7 @@ function AIBuilderView() {
               className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
               style={{
                 background: f.color + "18",
-                border: `1px solid ${f.color}35`,
+                border: "2px solid var(--app-border)",
               }}
             >
               {f.emoji}
@@ -423,7 +421,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                     className="px-3 py-1.5 rounded-xl text-xs font-semibold"
                     style={{
                       background: "var(--accent-bg)",
-                      border: "1px solid var(--accent-border)",
+                      border: "2px solid var(--app-border)",
                       color: "var(--accent-light)",
                     }}
                   >
@@ -435,7 +433,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                     className="px-3 py-1.5 rounded-xl text-xs font-semibold text-muted"
                     style={{
                       background: "var(--app-raised)",
-                      border: "1px solid var(--app-border)",
+                      border: "2px solid var(--app-border)",
                     }}
                   >
                     +{completedMissions.length - 12} more
@@ -456,7 +454,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                     className="flex flex-col items-center gap-1 rounded-xl p-3"
                     style={{
                       background: "var(--app-raised)",
-                      border: "1px solid var(--app-border)",
+                      border: "2px solid var(--app-border)",
                       minWidth: 64,
                     }}
                   >
@@ -481,7 +479,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                     className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold"
                     style={{
                       background: "var(--accent-bg)",
-                      border: "1px solid var(--accent-border)",
+                      border: "2px solid var(--app-border)",
                       color: "var(--accent-light)",
                     }}
                   >
@@ -565,7 +563,7 @@ function ProfileSidebar({
               className="rounded-xl p-3"
               style={{
                 background: "var(--app-raised)",
-                border: "1px solid var(--app-border)",
+                border: "2px solid var(--app-border)",
               }}
             >
               <div className="flex items-center gap-1.5 mb-1">
@@ -583,7 +581,7 @@ function ProfileSidebar({
 
         <button
           onClick={() => navigate({ to: "/profile" })}
-          className="w-full py-2 rounded-xl border text-sm font-semibold transition-all active:scale-95"
+          className="w-full py-2 rounded-xl border-2 text-sm font-semibold transition-all active:scale-95"
           style={{
             borderColor: "var(--app-border)",
             color: "var(--ink-muted)",
@@ -606,7 +604,7 @@ function ProfileSidebar({
                 className="inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-semibold"
                 style={{
                   background: "var(--accent-bg)",
-                  border: "1px solid var(--accent-border)",
+                  border: "2px solid var(--app-border)",
                   color: "var(--accent-light)",
                 }}
               >
@@ -628,7 +626,7 @@ function ProfileSidebar({
                 className="flex flex-col items-center gap-1 rounded-xl p-2.5 text-center"
                 style={{
                   background: "var(--app-raised)",
-                  border: "1px solid var(--app-border)",
+                  border: "2px solid var(--app-border)",
                   minWidth: 56,
                 }}
               >
@@ -686,7 +684,7 @@ function UserMenu({ profile, navigate, onLogout }) {
       {/* Trigger */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 pl-2 ml-1 border-l py-1 rounded-lg transition-colors hover:bg-raised"
+        className="flex items-center gap-2 pl-2 ml-1 border-l-2 py-1 rounded-lg transition-colors hover:bg-raised"
         style={{ borderColor: "var(--app-border)" }}
       >
         <div
@@ -711,14 +709,14 @@ function UserMenu({ profile, navigate, onLogout }) {
             className="absolute right-0 top-full mt-2 w-52 rounded-2xl overflow-hidden z-50"
             style={{
               backgroundColor: "var(--app-surface)",
-              border: "1px solid var(--app-border)",
+              border: "2px solid var(--app-border)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
             }}
           >
             {/* Header */}
             <div
               className="flex items-center gap-3 px-4 py-3"
-              style={{ borderBottom: "1px solid var(--app-border)", backgroundColor: "var(--app-raised)" }}
+              style={{ borderBottom: "2px solid var(--app-border)", backgroundColor: "var(--app-raised)" }}
             >
               <div
                 className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
@@ -750,7 +748,7 @@ function UserMenu({ profile, navigate, onLogout }) {
             </div>
 
             {/* Logout */}
-            <div style={{ borderTop: "1px solid var(--app-border)" }} className="py-1.5">
+            <div style={{ borderTop: "2px solid var(--app-border)" }} className="py-1.5">
               <button
                 onClick={onLogout}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-colors text-left"
@@ -809,7 +807,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-app">
       {/* ── Top nav ── */}
-      <nav className="sticky top-0 z-30 border-b border-app-border">
+      <nav className="sticky top-0 z-30 border-b-2 border-app-border">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2 shrink-0">
@@ -830,11 +828,11 @@ export default function DashboardPage() {
                     ? {
                         backgroundColor: "rgba(44,186,255,0.12)",
                         color: "#2cbaff",
-                        border: "1px solid rgba(44,186,255,0.3)",
+                        border: "2px solid var(--app-border)",
                       }
                     : {
                         color: "var(--ink-muted)",
-                        border: "1px solid transparent",
+                        border: "2px solid transparent",
                       }
                 }
               >
@@ -853,7 +851,6 @@ export default function DashboardPage() {
               style={{
                 background: "linear-gradient(135deg, #fde047, #facc15)",
                 color: "#1a1200",
-                boxShadow: "0 2px 8px rgba(253,224,71,0.35)",
               }}
             >
               ⭐ {xp} XP
@@ -901,7 +898,7 @@ export default function DashboardPage() {
                     className="relative mt-2 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed max-w-sm"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
-                      border: "1px solid var(--bubble-border)",
+                      border: "2px solid var(--app-border)",
                       color: "var(--bubble-text)",
                     }}
                   >

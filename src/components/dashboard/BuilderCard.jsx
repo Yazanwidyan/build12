@@ -18,7 +18,7 @@ export default function BuilderCard({ builder: b }) {
     return (
       <div
         className="rounded-2xl p-5 opacity-60"
-        style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
+        style={{ backgroundColor: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
       >
         <div className="flex items-center gap-3 mb-3">
           <span className="text-3xl">{b.emoji}</span>
@@ -30,7 +30,7 @@ export default function BuilderCard({ builder: b }) {
         </div>
         <div
           className="text-xs rounded-lg px-3 py-2 text-center font-medium"
-          style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)', color: 'var(--ink-faint)' }}
+          style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)', color: 'var(--ink-faint)' }}
         >
           Complete {b.unlockAdventure} to unlock
         </div>

@@ -99,7 +99,7 @@ function OnboardingShell({ step, totalSteps, onSkip, tekiMood = 'happy', bubble,
                 className="w-full rounded-2xl px-6 py-4 text-sm leading-relaxed font-mono"
                 style={{
                   backgroundColor: 'var(--bubble-bg)',
-                  border: '1px solid var(--app-border)',
+                  border: '2px solid var(--app-border)',
                   color: 'var(--bubble-text)',
                 }}
               >
@@ -125,7 +125,6 @@ function OnboardingShell({ step, totalSteps, onSkip, tekiMood = 'happy', bubble,
               className="w-full py-3.5 rounded-xl text-base font-bold text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: '#2cbaff',
-                boxShadow: actionDisabled ? 'none' : '0 4px 20px rgba(44,186,255,0.4)',
                 fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
@@ -253,7 +252,6 @@ export default function OnboardingFlow() {
               style={{
                 borderColor: selected ? '#2cbaff' : 'var(--app-border)',
                 backgroundColor: selected ? 'rgba(44,186,255,0.06)' : 'var(--app-raised)',
-                boxShadow: selected ? '0 0 0 4px rgba(44,186,255,0.12)' : 'none',
               }}
             >
               <Char size={88} selected={selected} />
@@ -390,7 +388,7 @@ export default function OnboardingFlow() {
             type="color" value={siteColor}
             onChange={(e) => setSiteColor(e.target.value)}
             className="h-8 w-full rounded-xl cursor-pointer p-0.5"
-            style={{ border: '1.5px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
+            style={{ border: '2px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
           />
         </div>
 

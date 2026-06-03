@@ -15,7 +15,6 @@ const VARIANT_STYLES = {
     background: '#2cbaff',
     color: '#fff',
     border: '1px solid rgba(6,164,240,0.7)',
-    boxShadow: '0 2px 12px rgba(44,186,255,0.35)',
     '--hover-bg': '#06a4f0',
   },
   secondary: null,  // CSS-variable driven, handled via className

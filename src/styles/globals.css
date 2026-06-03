@@ -11,7 +11,7 @@
   --app-bg:      #ffffff;
   --app-surface: #ffffff;
   --app-raised:  #f0f2f8;
-  --app-border:  #e2e6f0;
+  --app-border:  #e2e8f0;
   --app-line:    #eaecf4;
 
   --ink:         #0f172a;
@@ -28,14 +28,12 @@
 
   --dot-color:        rgba(44,186,255,0.07);
 
-  --shadow-card:      0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
-  --shadow-card-hover:0 4px 16px rgba(0,0,0,0.1), 0 0 0 1px rgba(124,58,237,0.25);
 
   --scrollbar-track:  #f0f2f8;
   --scrollbar-thumb:  #d1d5e0;
 
   --code-bg:    #f8f9fc;
-  --code-border:#e2e6f0;
+  --code-border:#e2e8f0;
   --code-text:  #1e293b;
 
   --bubble-bg:    #F1F5F9;
@@ -65,8 +63,6 @@
 
   --dot-color:        rgba(44,186,255,0.10);
 
-  --shadow-card:      0 1px 3px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
-  --shadow-card-hover:0 4px 20px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.3);
 
   --scrollbar-track:  #0d1117;
   --scrollbar-thumb:  #2a3347;
@@ -135,36 +131,33 @@
   /* ── Cards ─────────────────────────────────────────────────────────────────── */
   .card {
     background-color: var(--app-surface);
-    border: 1px solid var(--app-border);
+    border: 2px solid var(--app-border);
     border-radius: 14px;
-    box-shadow: var(--shadow-card);
   }
 
   .card-hover {
     background-color: var(--app-surface);
-    border: 1px solid var(--app-border);
+    border: 2px solid var(--app-border);
     border-radius: 14px;
-    box-shadow: var(--shadow-card);
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
     cursor: pointer;
   }
   .card-hover:hover {
     border-color: var(--accent-border);
-    box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
   }
 
   /* ── Mission card ──────────────────────────────────────────────────────────── */
   .mission-card {
     background-color: var(--app-surface);
-    border: 1px solid var(--app-border);
+    border: 2px solid var(--app-border);
     border-radius: 14px;
   }
 
   /* ── TEKI speech bubble ────────────────────────────────────────────────────── */
   .teki-bubble {
     background-color: var(--bubble-bg);
-    border: 1px solid var(--bubble-border);
+    border: 2px solid var(--app-border);
     border-radius: 18px 18px 18px 4px;
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
@@ -198,7 +191,7 @@
     font-weight: 700;
     font-family: 'JetBrains Mono', monospace;
     background-color: rgba(253,224,71,0.12);
-    border: 1px solid rgba(253,224,71,0.4);
+    border: 2px solid var(--app-border);
     color: #fde047;
     letter-spacing: 0.02em;
   }
@@ -213,7 +206,7 @@
     font-size: 0.68rem;
     font-weight: 700;
     background-color: var(--accent-bg);
-    border: 1px solid var(--accent-border);
+    border: 2px solid var(--app-border);
     color: var(--accent-light);
   }
 
@@ -228,14 +221,14 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     background-color: var(--accent-bg);
-    border: 1px solid var(--accent-border);
+    border: 2px solid var(--app-border);
     color: var(--accent-light);
   }
 
   /* ── Code block ────────────────────────────────────────────────────────────── */
   .code-block {
     background-color: var(--code-bg);
-    border: 1px solid var(--code-border);
+    border: 2px solid var(--app-border);
     border-radius: 12px;
     padding: 1rem;
     font-size: 0.75rem;
@@ -252,16 +245,15 @@
     padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
     background-color: var(--app-raised);
-    border: 1.5px solid var(--app-border);
+    border: 2px solid var(--app-border);
     color: var(--ink);
     outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    transition: border-color 0.15s;
     caret-color: var(--accent);
   }
   .input-base::placeholder { color: var(--ink-faint); }
   .input-base:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--glow-color);
   }
 
   /* ── Progress ──────────────────────────────────────────────────────────────── */
@@ -275,7 +267,6 @@
     height: 100%;
     border-radius: 999px;
     background: linear-gradient(90deg, #2cbaff, #fde047);
-    box-shadow: 0 0 8px rgba(44,186,255,0.45);
     transition: width 0.5s ease;
   }
 
@@ -297,7 +288,7 @@
   }
   .nav-link.active {
     background-color: var(--accent-bg);
-    border: 1px solid var(--accent-border);
+    border: 2px solid var(--app-border);
     color: var(--accent);
   }
 
@@ -345,7 +336,7 @@
   }
 
   /* Glow borders */
-  .border-glow { border-color: var(--accent-border); box-shadow: 0 0 0 3px var(--glow-color); }
+  .border-glow { border-color: var(--accent-border); }
 
   /* Accent tinted surface */
   .bg-accent-subtle { background-color: var(--accent-bg); }
