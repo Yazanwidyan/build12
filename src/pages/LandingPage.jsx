@@ -1,6 +1,6 @@
 import TekiCharacter from "@/components/teki/TekiCharacter";
-import Header from "@/components/ui/Header";
 import Button from "@/components/ui/Button";
+import Header from "@/components/ui/Header";
 import { useAuthStore } from "@/stores/authStore";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -32,9 +32,9 @@ const FEATURES = [
 const BUILD_TAGS = [
   { label: "Websites", emoji: "🌐" },
   { label: "Games", emoji: "🎮" },
+  { label: "Mobile Apps", emoji: "📱" },
   { label: "AI Builder", emoji: "🤖" },
   { label: "Adventures", emoji: "🚀" },
-  { label: "Mobile Apps", emoji: "📱" },
 ];
 
 // Pre-seeded constellation stars
@@ -237,9 +237,11 @@ export default function LandingPage() {
               className="text-6xl font-black leading-[1.05] tracking-tight"
               style={{ color: txt }}
             >
-              Code your
+              Build it.
               <br />
-              <span style={{ color: "#2cbaff" }}>own adventure.</span>
+              Understand it.
+              <br />
+              <span style={{ color: "#2cbaff" }}>Own it.</span>
             </motion.h1>
 
             {/* Description */}
