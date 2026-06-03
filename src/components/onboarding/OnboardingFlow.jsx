@@ -44,6 +44,7 @@ const SENIOR_STEPS = 6;
 function OnboardingShell({
   step,
   totalSteps,
+  onBack,
   onSkip,
   tekiMood = "happy",
   tekiTop = false,
@@ -57,8 +58,15 @@ function OnboardingShell({
 
   return (
     <div className="min-h-screen bg-app flex flex-col">
-      {/* ── Progress bar + Skip ── */}
-      <div className="flex items-center gap-4 px-6 pt-5">
+      {/* ── Progress bar + Back + Skip ── */}
+      <div className="w-full max-w-2xl mx-auto flex items-center gap-4 pt-5">
+        {onBack ? (
+          <Button variant="ghost" color="neutral" size="sm" onClick={onBack}>
+            ← Back
+          </Button>
+        ) : (
+          <div className="w-[64px]" />
+        )}
         <div
           className="flex-1 h-2 rounded-full overflow-hidden"
           style={{ backgroundColor: "var(--app-raised)" }}
@@ -71,22 +79,28 @@ function OnboardingShell({
             style={{ background: "#22c55e" }}
           />
         </div>
-        {onSkip && (
+        {onSkip ? (
           <Button variant="ghost" color="neutral" size="sm" onClick={onSkip}>
             Skip
           </Button>
+        ) : (
+          <div className="w-[64px]" />
         )}
       </div>
 
       {/* ── Main content ── */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
+      <div className="flex-1 flex flex-col items-center px-6 py-8">
         <div className="w-full max-w-2xl flex flex-col items-center gap-6">
           {tekiTop ? (
             /* ── Top layout: big TEKI above, upward tail bubble below ── */
             <>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 <TekiCharacter size={130} mood={tekiMood} />
               </motion.div>
@@ -99,12 +113,30 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative w-full"
                 >
-                  <div className="absolute left-1/2 -top-3 -translate-x-1/2 w-0 h-0"
-                    style={{ borderLeft: "10px solid transparent", borderRight: "10px solid transparent", borderBottom: "12px solid var(--app-border)" }} />
-                  <div className="absolute left-1/2 -top-[10px] -translate-x-1/2 w-0 h-0"
-                    style={{ borderLeft: "9px solid transparent", borderRight: "9px solid transparent", borderBottom: "11px solid var(--bubble-bg)" }} />
-                  <div className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
-                    style={{ backgroundColor: "var(--bubble-bg)", border: "2px solid var(--app-border)", color: "var(--bubble-text)" }}>
+                  <div
+                    className="absolute left-1/2 -top-3 -translate-x-1/2 w-0 h-0"
+                    style={{
+                      borderLeft: "10px solid transparent",
+                      borderRight: "10px solid transparent",
+                      borderBottom: "12px solid var(--app-border)",
+                    }}
+                  />
+                  <div
+                    className="absolute left-1/2 -top-[10px] -translate-x-1/2 w-0 h-0"
+                    style={{
+                      borderLeft: "9px solid transparent",
+                      borderRight: "9px solid transparent",
+                      borderBottom: "11px solid var(--bubble-bg)",
+                    }}
+                  />
+                  <div
+                    className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
+                    style={{
+                      backgroundColor: "var(--bubble-bg)",
+                      border: "2px solid var(--app-border)",
+                      color: "var(--bubble-text)",
+                    }}
+                  >
                     {bubble}
                   </div>
                 </motion.div>
@@ -116,7 +148,11 @@ function OnboardingShell({
               <motion.div
                 className="shrink-0"
                 animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 <TekiCharacter size={80} mood={tekiMood} />
               </motion.div>
@@ -129,12 +165,30 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative flex-1"
                 >
-                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
-                    style={{ borderTop: "10px solid transparent", borderBottom: "10px solid transparent", borderRight: "12px solid var(--app-border)" }} />
-                  <div className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
-                    style={{ borderTop: "9px solid transparent", borderBottom: "9px solid transparent", borderRight: "11px solid var(--bubble-bg)" }} />
-                  <div className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed font-mono"
-                    style={{ backgroundColor: "var(--bubble-bg)", border: "2px solid var(--app-border)", color: "var(--bubble-text)" }}>
+                  <div
+                    className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
+                    style={{
+                      borderTop: "10px solid transparent",
+                      borderBottom: "10px solid transparent",
+                      borderRight: "12px solid var(--app-border)",
+                    }}
+                  />
+                  <div
+                    className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
+                    style={{
+                      borderTop: "9px solid transparent",
+                      borderBottom: "9px solid transparent",
+                      borderRight: "11px solid var(--bubble-bg)",
+                    }}
+                  />
+                  <div
+                    className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed font-mono"
+                    style={{
+                      backgroundColor: "var(--bubble-bg)",
+                      border: "2px solid var(--app-border)",
+                      color: "var(--bubble-text)",
+                    }}
+                  >
                     {bubble}
                   </div>
                 </motion.div>
@@ -183,6 +237,7 @@ export default function OnboardingFlow() {
   const totalSteps = isSenior ? SENIOR_STEPS : TOTAL_STEPS;
 
   const next = () => setStep((s) => s + 1);
+  const back = () => setStep((s) => s - 1);
 
   const skip = () => {
     // Skip only makes sense after choosing age group
@@ -244,59 +299,23 @@ export default function OnboardingFlow() {
       />
     );
 
-  // ── Step 1: Builder name ───────────────────────────────────────────────────
+  // ── Step 1: Avatar ─────────────────────────────────────────────────────────
   if (step === 1)
     return (
       <OnboardingShell
         step={1}
         totalSteps={totalSteps}
-        tekiMood="happy"
-        tekiTop
-        bubble="What should I call you, builder?"
-        action="Continue"
-        onAction={submitName}
-        actionDisabled={name.trim().length < 2}
-      >
-        <Input
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            setNameError("");
-          }}
-          placeholder="Your builder name..."
-          error={nameError}
-          onKeyDown={(e) => e.key === "Enter" && submitName()}
-          autoFocus
-        />
-      </OnboardingShell>
-    );
-
-  // ── Step 2: Avatar ─────────────────────────────────────────────────────────
-  if (step === 2)
-    return (
-      <OnboardingShell
-        step={2}
-        totalSteps={totalSteps}
+        onBack={back}
         tekiMood="excited"
-        bubble={`Nice to meet you, ${profile.builderName}! Choose your builder style.`}
+        bubble="First things first — pick your builder style!"
         action="Continue"
         onAction={next}
         actionDisabled={!profile.avatar}
       >
         <div className="grid grid-cols-2 gap-4">
           {[
-            {
-              id: "pixel",
-              label: "Pixel",
-              desc: "The techy builder",
-              Char: CharacterPixel,
-            },
-            {
-              id: "spark",
-              label: "Spark",
-              desc: "The creative builder",
-              Char: CharacterSpark,
-            },
+            { id: "pixel", label: "Pixel", desc: "The techy builder",    Char: CharacterPixel },
+            { id: "spark", label: "Spark", desc: "The creative builder", Char: CharacterSpark },
           ].map(({ id, label, desc, Char }) => {
             const selected = profile.avatar === id;
             return (
@@ -308,9 +327,7 @@ export default function OnboardingFlow() {
                 className="flex flex-col items-center gap-3 py-5 px-4 rounded-2xl border-2 transition-all"
                 style={{
                   borderColor: selected ? "#2cbaff" : "var(--app-border)",
-                  backgroundColor: selected
-                    ? "rgba(44,186,255,0.06)"
-                    : "var(--app-raised)",
+                  backgroundColor: selected ? "rgba(44,186,255,0.06)" : "var(--app-raised)",
                 }}
               >
                 <Char size={88} selected={selected} />
@@ -318,14 +335,7 @@ export default function OnboardingFlow() {
                   <p className="font-bold text-ink text-base">{label}</p>
                   <p className="text-sm text-muted mt-0.5">{desc}</p>
                 </div>
-                {selected && (
-                  <span
-                    className="text-sm font-bold"
-                    style={{ color: "#2cbaff" }}
-                  >
-                    Selected ✓
-                  </span>
-                )}
+                {selected && <span className="text-sm font-bold" style={{ color: "#2cbaff" }}>Selected ✓</span>}
               </motion.button>
             );
           })}
@@ -333,12 +343,42 @@ export default function OnboardingFlow() {
       </OnboardingShell>
     );
 
+  // ── Step 2: Builder name (with selected character) ─────────────────────────
+  if (step === 2) {
+    const SelectedChar = profile.avatar === "pixel" ? CharacterPixel : CharacterSpark;
+    return (
+      <OnboardingShell
+        step={2}
+        totalSteps={totalSteps}
+        onBack={back}
+        tekiMood="happy"
+        bubble="Nice choice! Now, what should I call you, builder?"
+        action="Continue"
+        onAction={submitName}
+        actionDisabled={name.trim().length < 2}
+      >
+        <div className="flex flex-col items-center gap-4">
+          <SelectedChar size={90} selected />
+          <Input
+            value={name}
+            onChange={(e) => { setName(e.target.value); setNameError(""); }}
+            placeholder="Your builder name..."
+            error={nameError}
+            onKeyDown={(e) => e.key === "Enter" && submitName()}
+            autoFocus
+          />
+        </div>
+      </OnboardingShell>
+    );
+  }
+
   // ── Step 3: Age group ──────────────────────────────────────────────────────
   if (step === 3)
     return (
       <OnboardingShell
         step={3}
         totalSteps={totalSteps}
+        onBack={back}
         tekiMood="thinking"
         bubble="I'll teach you the right way for your level. How old are you?"
         action="Continue"
@@ -386,6 +426,7 @@ export default function OnboardingFlow() {
       <OnboardingShell
         step={4}
         totalSteps={totalSteps}
+        onBack={back}
         onSkip={skip}
         tekiMood="excited"
         bubble={
@@ -448,6 +489,7 @@ export default function OnboardingFlow() {
       <OnboardingShell
         step={5}
         totalSteps={totalSteps}
+        onBack={back}
         tekiMood="excited"
         bubble="Let's set up your website. I'll generate it instantly — then we learn React on it!"
         action="Generate My Website ✨"
