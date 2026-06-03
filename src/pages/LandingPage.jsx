@@ -86,8 +86,6 @@ function HeroDark() {
         animate={{ top:["0%","100%"] }}
         transition={{ duration:10, repeat:Infinity, ease:"linear", repeatDelay:5 }} />
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none" style={{ background:"linear-gradient(to bottom,transparent,var(--app-bg))" }} />
     </div>
   )
 }
@@ -125,8 +123,6 @@ function HeroLight() {
           transition={{ duration:2+(i%5)*0.6, repeat:Infinity, ease:"easeInOut", delay:i*0.08 }} />
       ))}
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none" style={{ background:"linear-gradient(to bottom,transparent,var(--app-bg))" }} />
     </div>
   )
 }
@@ -280,14 +276,13 @@ export default function LandingPage() {
           <motion.div
             initial={{ opacity:0, scale:0.9 }} animate={{ opacity:1, scale:1 }} transition={{ duration:0.5, delay:0.1 }}
             className="relative flex items-center justify-center shrink-0"
-            style={{ width:280, height:280 }}>
+            style={{ width:340, height:340 }}>
 
             {/* Outer orbit ring */}
             <motion.div className="absolute"
               animate={{ rotate:360 }}
               transition={{ duration:16, repeat:Infinity, ease:"linear" }}
-              style={{ width:260, height:260, border:`1px dashed rgba(44,186,255,${dark?0.25:0.35})`, borderRadius:"50%" }}>
-              {/* Orbiting dot */}
+              style={{ width:320, height:320, border:`1px dashed rgba(44,186,255,${dark?0.25:0.35})`, borderRadius:"50%" }}>
               <div style={{ position:"absolute", top:-4, left:"50%", transform:"translateX(-50%)", width:8, height:8, borderRadius:"50%", background:"#2cbaff" }} />
             </motion.div>
 
@@ -295,18 +290,18 @@ export default function LandingPage() {
             <motion.div className="absolute"
               animate={{ rotate:-360 }}
               transition={{ duration:10, repeat:Infinity, ease:"linear" }}
-              style={{ width:180, height:180, border:`1px dashed rgba(44,186,255,${dark?0.15:0.25})`, borderRadius:"50%" }}>
+              style={{ width:230, height:230, border:`1px dashed rgba(44,186,255,${dark?0.15:0.25})`, borderRadius:"50%" }}>
               <div style={{ position:"absolute", bottom:-3, left:"50%", transform:"translateX(-50%)", width:6, height:6, borderRadius:"50%", background:"rgba(44,186,255,0.7)" }} />
             </motion.div>
 
             {/* Glow behind TEKI */}
-            <div className="absolute" style={{ width:140, height:140, borderRadius:"50%", background:`radial-gradient(circle,rgba(44,186,255,${dark?0.2:0.14}) 0%,transparent 70%)`, filter:"blur(12px)" }} />
+            <div className="absolute" style={{ width:180, height:180, borderRadius:"50%", background:`radial-gradient(circle,rgba(44,186,255,${dark?0.2:0.14}) 0%,transparent 70%)`, filter:"blur(14px)" }} />
 
             {/* TEKI */}
             <motion.div
               animate={{ y:[0,-14,0], rotate:[-4,4,-4] }}
               transition={{ duration:4, repeat:Infinity, ease:"easeInOut" }}>
-              <TekiCharacter size={120} />
+              <TekiCharacter size={160} />
             </motion.div>
           </motion.div>
 
