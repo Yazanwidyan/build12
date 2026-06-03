@@ -17,9 +17,9 @@ export default function NotFoundPage() {
             <TekiCharacter size={100} mood="surprised" />
           </motion.div>
           <div>
-            <h1 className="text-6xl font-black mb-2" style={{ color: 'var(--app-border)' }}>404</h1>
-            <h2 className="text-xl font-black text-ink mb-2">Lost in the code!</h2>
-            <p className="text-muted text-sm leading-relaxed">
+            <h1 className="text-7xl font-black mb-2" style={{ color: 'var(--app-border)' }}>404</h1>
+            <h2 className="text-2xl font-black text-ink mb-2">Lost in the code!</h2>
+            <p className="text-muted text-base leading-relaxed">
               This page doesn't exist. Even the best builders get lost sometimes!
             </p>
           </div>

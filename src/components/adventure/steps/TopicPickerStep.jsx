@@ -43,14 +43,14 @@ export default function TopicPickerStep({ step, onComplete }) {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => { setSelected(topic); setCustom('') }}
-            className="flex flex-col items-center gap-0.5 p-2 rounded-xl border-2 text-xs font-semibold transition-all"
+            className="flex flex-col items-center gap-0.5 p-2 rounded-xl border-2 text-sm font-semibold transition-all"
             style={{
               borderColor: selected === topic && !custom ? '#2cbaff' : 'var(--app-border)',
               backgroundColor: selected === topic && !custom ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
               color: selected === topic && !custom ? '#2cbaff' : 'var(--ink-muted)',
             }}
           >
-            <span className="text-lg">{TOPIC_EMOJIS[topic] || '📌'}</span>
+            <span className="text-xl">{TOPIC_EMOJIS[topic] || '📌'}</span>
             <span className="leading-tight">{topic}</span>
           </motion.button>
         ))}

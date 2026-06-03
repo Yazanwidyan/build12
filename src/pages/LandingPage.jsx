@@ -42,7 +42,7 @@ export default function LandingPage() {
       <nav className="border-b-2 sticky border-app-border top-0 z-10 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 shrink-0">
-            <span className="font-black text-ink text-base tracking-tight">
+            <span className="font-black text-ink text-lg tracking-tight">
               {`{ HelloBuildIt }`}
             </span>
           </div>
@@ -88,14 +88,14 @@ export default function LandingPage() {
             </motion.div>
 
             <div className="flex flex-col gap-4">
-              <h1 className="text-4xl font-black text-ink leading-tight">
+              <h1 className="text-5xl font-black text-ink leading-tight">
                 Build it.
                 <br />
                 <span style={{ color: "#2cbaff" }}>Understand it.</span>
                 <br />
                 Own it.
               </h1>
-              <p className="text-lg leading-relaxed text-muted">
+              <p className="text-xl leading-relaxed text-muted">
                 Learn to code by building real websites, games, and apps —
                 guided by TEKI, your AI companion.
               </p>
@@ -112,16 +112,16 @@ export default function LandingPage() {
               </Button>
             </motion.div>
 
-            <p className="text-xs text-faint">No experience needed · Ages 8+</p>
+            <p className="text-sm text-faint">No experience needed · Ages 8+</p>
           </div>
 
           {/* Feature grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full">
             {FEATURES.map((f) => (
               <div key={f.label} className="card p-4 text-left">
-                <div className="text-2xl mb-2">{f.emoji}</div>
-                <h3 className="font-bold text-ink text-sm">{f.label}</h3>
-                <p className="text-xs text-muted mt-0.5 leading-relaxed">
+                <div className="text-3xl mb-2">{f.emoji}</div>
+                <h3 className="font-bold text-ink text-base">{f.label}</h3>
+                <p className="text-sm text-muted mt-0.5 leading-relaxed">
                   {f.desc}
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function LandingPage() {
       <section className="max-w-6xl mx-auto px-6 py-16 w-full flex flex-col gap-12">
         <div>
           <p className="section-label mb-1">Design System</p>
-          <h2 className="text-2xl font-black text-ink">Button Components</h2>
+          <h2 className="text-3xl font-black text-ink">Button Components</h2>
         </div>
 
         {/* Variants × Colors */}
@@ -146,7 +146,7 @@ export default function LandingPage() {
           { variant: "link", label: "Link" },
         ].map(({ variant, label }) => (
           <div key={variant} className="flex flex-col gap-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">
+            <p className="text-sm font-bold uppercase tracking-widest text-muted font-mono">
               {label}
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -163,7 +163,7 @@ export default function LandingPage() {
 
         {/* Sizes */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">
+          <p className="text-sm font-bold uppercase tracking-widest text-muted font-mono">
             Sizes
           </p>
           <div className="flex flex-wrap items-center gap-3">
@@ -183,7 +183,7 @@ export default function LandingPage() {
 
         {/* With icons */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">
+          <p className="text-sm font-bold uppercase tracking-widest text-muted font-mono">
             With Icons
           </p>
           <div className="flex flex-wrap items-center gap-3">
@@ -208,7 +208,7 @@ export default function LandingPage() {
 
         {/* States */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">
+          <p className="text-sm font-bold uppercase tracking-widest text-muted font-mono">
             States
           </p>
           <div className="flex flex-wrap items-center gap-3">
@@ -230,7 +230,7 @@ export default function LandingPage() {
 
       {/* ── Footer ── */}
       <footer
-        className="py-6 text-center text-xs border-t-2"
+        className="py-6 text-center text-sm border-t-2"
         style={{ borderColor: "var(--app-border)", color: "var(--ink-faint)" }}
       >
         <div className="max-w-6xl mx-auto px-6">

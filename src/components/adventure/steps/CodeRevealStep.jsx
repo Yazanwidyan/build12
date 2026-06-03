@@ -48,12 +48,12 @@ export default function CodeRevealStep({ step, onComplete }) {
             <span className={`self-start text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${langColor}`}>
               {step.language}
             </span>
-            <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-xs leading-relaxed overflow-x-auto">
+            <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-sm leading-relaxed overflow-x-auto">
               <code>{code}</code>
             </pre>
             {explanation && (
               <div className="rounded-xl p-2.5" style={{ backgroundColor: 'rgba(253,224,71,0.1)', border: '1px solid rgba(253,224,71,0.25)' }}>
-                <p className="text-xs leading-relaxed" style={{ color: '#fde047' }}>💡 {explanation}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#fde047' }}>💡 {explanation}</p>
               </div>
             )}
           </motion.div>

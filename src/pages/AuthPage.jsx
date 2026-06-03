@@ -66,23 +66,23 @@ export default function AuthPage({ mode = 'signup' }) {
 
         {/* Card */}
         <div className="card p-8">
-          <h1 className="text-xl font-black text-ink mb-1 text-center">
+          <h1 className="text-2xl font-black text-ink mb-1 text-center">
             {isSignup ? 'Create your builder account' : 'Welcome back!'}
           </h1>
-          <p className="text-sm text-muted text-center mb-6">
+          <p className="text-base text-muted text-center mb-6">
             {isSignup ? 'Start your building adventure for free.' : 'Continue your adventure.'}
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <Input label="Email" type="email" placeholder="you@example.com" error={errors.email?.message} {...register('email')} />
             <Input label="Password" type="password" placeholder="••••••••" error={errors.password?.message} {...register('password')} />
-            {error && <p className="text-sm text-red-400 text-center">{error}</p>}
+            {error && <p className="text-base text-red-400 text-center">{error}</p>}
             <Button variant="solid" color="blue" fullWidth type="submit" disabled={isSubmitting}>
               {isSignup ? 'Create account' : 'Log in'}
             </Button>
           </form>
 
-          <p className="text-sm text-muted text-center mt-4">
+          <p className="text-base text-muted text-center mt-4">
             {isSignup ? 'Already have an account? ' : "Don't have an account? "}
             <Button variant="link" color="blue" size="sm" onClick={() => navigate({ to: isSignup ? '/login' : '/signup' })}>
               {isSignup ? 'Log in' : 'Sign up free'}

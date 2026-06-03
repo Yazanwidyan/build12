@@ -1,4 +1,4 @@
-import { clsx } from 'clsx'
+﻿import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { forwardRef } from 'react'
 
@@ -8,7 +8,7 @@ const Input = forwardRef(function Input({ label, error, hint, className, ...prop
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label className="text-sm font-semibold font-sans" style={{ color: 'var(--ink)' }}>
+        <label className="text-base font-semibold font-sans" style={{ color: 'var(--ink)' }}>
           {label}
         </label>
       )}
@@ -22,10 +22,10 @@ const Input = forwardRef(function Input({ label, error, hint, className, ...prop
         {...props}
       />
       {hint && !error && (
-        <p className="text-xs" style={{ color: 'var(--ink-faint)' }}>{hint}</p>
+        <p className="text-sm" style={{ color: 'var(--ink-faint)' }}>{hint}</p>
       )}
       {error && (
-        <p className="text-xs text-red-400">{error}</p>
+        <p className="text-sm text-red-400">{error}</p>
       )}
     </div>
   )

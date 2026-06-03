@@ -1,4 +1,4 @@
-import TekiCharacter from "@/components/teki/TekiCharacter";
+﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import AvatarDisplay from "@/components/ui/AvatarDisplay";
 import Button from "@/components/ui/Button";
 import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
@@ -130,11 +130,11 @@ function JumpBackInCard({ ageGroup, xp }) {
 
         {/* Title */}
         <div>
-          <h3 className="text-2xl font-black text-white leading-tight">
+          <h3 className="text-3xl font-black text-white leading-tight">
             Website Adventure
           </h3>
           <p
-            className="text-sm mt-0.5"
+            className="text-base mt-0.5"
             style={{ color: "rgba(255,255,255,0.6)" }}
           >
             {started
@@ -146,7 +146,7 @@ function JumpBackInCard({ ageGroup, xp }) {
         {/* Progress bar */}
         <div className="w-48">
           <div
-            className="flex justify-between text-xs mb-1"
+            className="flex justify-between text-sm mb-1"
             style={{ color: "rgba(255,255,255,0.45)" }}
           >
             <span>Progress</span>
@@ -244,7 +244,7 @@ function AdventureExploreCard({ item }) {
         <motion.span
           animate={!locked ? { y: [0, -5, 0] } : {}}
           transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          className="relative text-4xl z-10"
+          className="relative text-5xl z-10"
         >
           {item.emoji}
         </motion.span>
@@ -265,10 +265,10 @@ function AdventureExploreCard({ item }) {
       {/* Body */}
       <div className="p-4 flex flex-col gap-1 flex-1">
         <div className="flex items-center justify-between">
-          <h4 className="font-black text-ink text-sm">{item.label}</h4>
+          <h4 className="font-black text-ink text-base">{item.label}</h4>
           {!locked && <ChevronRight size={14} style={{ color: item.color }} />}
         </div>
-        <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
+        <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
       </div>
     </motion.div>
   );
@@ -315,7 +315,7 @@ function AIBuilderView() {
           <motion.span
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="text-6xl shrink-0"
+            className="text-7xl shrink-0"
           >
             🤖
           </motion.span>
@@ -326,9 +326,9 @@ function AIBuilderView() {
             >
               COMING SOON
             </span>
-            <h2 className="text-2xl font-black text-white mt-1">AI Builder</h2>
+            <h2 className="text-3xl font-black text-white mt-1">AI Builder</h2>
             <p
-              className="text-sm mt-1"
+              className="text-base mt-1"
               style={{ color: "rgba(255,255,255,0.6)" }}
             >
               TEKI-powered code generation, smart suggestions, and AI-assisted
@@ -365,7 +365,7 @@ function AIBuilderView() {
             className="card p-5 flex flex-col gap-3 opacity-70"
           >
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-2xl"
               style={{
                 background: f.color + "18",
                 border: "2px solid var(--app-border)",
@@ -374,8 +374,8 @@ function AIBuilderView() {
               {f.emoji}
             </div>
             <div>
-              <h4 className="font-bold text-ink text-sm">{f.label}</h4>
-              <p className="text-xs text-muted mt-0.5 leading-relaxed">
+              <h4 className="font-bold text-ink text-base">{f.label}</h4>
+              <p className="text-sm text-muted mt-0.5 leading-relaxed">
                 {f.desc}
               </p>
             </div>
@@ -398,13 +398,13 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
       transition={{ duration: 0.15 }}
       className="flex flex-col gap-6"
     >
-      <h2 className="text-xl font-black text-ink">My Projects</h2>
+      <h2 className="text-2xl font-black text-ink">My Projects</h2>
 
       {!hasActivity ? (
         <div className="card p-12 flex flex-col items-center gap-4 text-center">
-          <span className="text-5xl opacity-40">📁</span>
+          <span className="text-6xl opacity-40">📁</span>
           <p className="font-bold text-ink">No projects yet</p>
-          <p className="text-sm text-muted max-w-xs">
+          <p className="text-base text-muted max-w-xs">
             Complete adventures and build things — they'll appear here as your
             portfolio grows.
           </p>
@@ -419,7 +419,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                 {completedMissions.slice(0, 12).map((id) => (
                   <div
                     key={id}
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold"
+                    className="px-3 py-1.5 rounded-xl text-sm font-semibold"
                     style={{
                       background: "var(--accent-bg)",
                       border: "2px solid var(--app-border)",
@@ -431,7 +431,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                 ))}
                 {completedMissions.length > 12 && (
                   <div
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold text-muted"
+                    className="px-3 py-1.5 rounded-xl text-sm font-semibold text-muted"
                     style={{
                       background: "var(--app-raised)",
                       border: "2px solid var(--app-border)",
@@ -459,7 +459,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                       minWidth: 64,
                     }}
                   >
-                    <span className="text-2xl">{b.emoji}</span>
+                    <span className="text-3xl">{b.emoji}</span>
                     <span className="text-[10px] font-semibold text-muted text-center leading-tight">
                       {b.label}
                     </span>
@@ -477,7 +477,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
                 {builderPowers.map((p) => (
                   <div
                     key={p.id}
-                    className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold"
+                    className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-semibold"
                     style={{
                       background: "var(--accent-bg)",
                       border: "2px solid var(--app-border)",
@@ -526,7 +526,7 @@ function ProfileSidebar({
     {
       label: "Badges",
       value: earnedBadges.length,
-      icon: <span className="text-sm">🏅</span>,
+      icon: <span className="text-base">🏅</span>,
     },
     {
       label: "Missions",
@@ -553,7 +553,7 @@ function ProfileSidebar({
             <p className="font-bold text-ink truncate">
               {profile.builderName || "Builder"}
             </p>
-            <p className="text-xs text-muted">
+            <p className="text-sm text-muted">
               Level {level} · {levelInfo?.label}
             </p>
           </div>
@@ -576,7 +576,7 @@ function ProfileSidebar({
                   {s.label}
                 </span>
               </div>
-              <p className="font-black text-ink text-lg leading-none font-mono">
+              <p className="font-black text-ink text-xl leading-none font-mono">
                 {s.value}
               </p>
             </div>
@@ -601,7 +601,7 @@ function ProfileSidebar({
             {builderPowers.map((p) => (
               <div
                 key={p.id}
-                className="inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-semibold"
+                className="inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-sm font-semibold"
                 style={{
                   background: "var(--accent-bg)",
                   border: "2px solid var(--app-border)",
@@ -630,7 +630,7 @@ function ProfileSidebar({
                   minWidth: 56,
                 }}
               >
-                <span className="text-xl">{b.emoji}</span>
+                <span className="text-2xl">{b.emoji}</span>
                 <span className="text-[10px] font-semibold text-muted leading-tight">
                   {b.label}
                 </span>
@@ -706,7 +706,7 @@ function UserMenu({ profile, navigate, onLogout }) {
         >
           <AvatarDisplay avatarId={profile.avatar} size={28} />
         </div>
-        <span className="text-sm font-semibold text-ink hidden sm:block pr-1">
+        <span className="text-base font-semibold text-ink hidden sm:block pr-1">
           {profile.builderName}
         </span>
       </button>
@@ -744,10 +744,10 @@ function UserMenu({ profile, navigate, onLogout }) {
                 <AvatarDisplay avatarId={profile.avatar} size={36} />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold text-ink truncate">
+                <p className="text-base font-bold text-ink truncate">
                   {profile.builderName || "Builder"}
                 </p>
-                <p className="text-xs text-muted truncate capitalize">
+                <p className="text-sm text-muted truncate capitalize">
                   {profile.ageGroup ?? "builder"}
                 </p>
               </div>
@@ -837,7 +837,7 @@ export default function DashboardPage() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2 shrink-0">
-            <span className="font-black text-ink text-base tracking-tight">
+            <span className="font-black text-ink text-lg tracking-tight">
               {`{ HelloBuildIt }`}
             </span>
           </div>
@@ -863,7 +863,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             {/* XP pill */}
             <span
-              className="px-3 py-1.5 rounded-lg text-xs font-bold hidden sm:block"
+              className="px-3 py-1.5 rounded-lg text-sm font-bold hidden sm:block"
               style={{
                 background: "linear-gradient(135deg, #fde047, #facc15)",
                 color: "#1a1200",
@@ -911,7 +911,7 @@ export default function DashboardPage() {
                     <TekiCharacter size={76} mood="excited" />
                   </motion.div>
                   <div
-                    className="relative mt-2 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed max-w-sm"
+                    className="relative mt-2 rounded-2xl rounded-tl-sm px-4 py-3 text-base leading-relaxed max-w-sm"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
                       border: "2px solid var(--app-border)",
@@ -940,7 +940,7 @@ export default function DashboardPage() {
 
                 {/* Jump back in */}
                 <section>
-                  <h2 className="text-xl font-black text-ink mb-4">
+                  <h2 className="text-2xl font-black text-ink mb-4">
                     Jump back in
                   </h2>
                   <JumpBackInCard ageGroup={ageGroup} xp={xp} />
@@ -948,7 +948,7 @@ export default function DashboardPage() {
 
                 {/* Explore adventures */}
                 <section>
-                  <h2 className="text-xl font-black text-ink mb-4">
+                  <h2 className="text-2xl font-black text-ink mb-4">
                     Explore more
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

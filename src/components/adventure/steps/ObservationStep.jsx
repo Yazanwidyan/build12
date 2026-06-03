@@ -32,7 +32,7 @@ export default function ObservationStep({ step, onComplete }) {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, type: 'spring' }}
-          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-center"
+          className="rounded-xl px-4 py-2.5 text-base font-semibold text-center"
           style={{
             backgroundColor: 'rgba(44,186,255,0.1)',
             border: '1px solid rgba(44,186,255,0.3)',

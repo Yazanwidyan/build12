@@ -31,9 +31,9 @@ function StatTile({ icon, label, value, accent }) {
     <div className="card p-4 flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <span style={{ color: accent ?? 'var(--accent)' }}>{icon}</span>
-        <span className="text-xs font-semibold text-muted uppercase tracking-wider">{label}</span>
+        <span className="text-sm font-semibold text-muted uppercase tracking-wider">{label}</span>
       </div>
-      <p className="text-2xl font-black text-ink font-mono leading-none">{value}</p>
+      <p className="text-3xl font-black text-ink font-mono leading-none">{value}</p>
     </div>
   )
 }
@@ -54,7 +54,7 @@ function EditableName({ name, onSave }) {
           value={val}
           onChange={(e) => setVal(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') save(); if (e.key === 'Escape') setEditing(false) }}
-          className="input-base text-xl font-black w-48"
+          className="input-base text-2xl font-black w-48"
           autoFocus
         />
         <Button variant="ghost" color="blue" size="xs" onClick={save}><Check size={16} /></Button>
@@ -65,7 +65,7 @@ function EditableName({ name, onSave }) {
 
   return (
     <div className="flex items-center gap-2 group">
-      <h1 className="text-2xl font-black text-ink">{name}</h1>
+      <h1 className="text-3xl font-black text-ink">{name}</h1>
       <button
         onClick={() => setEditing(true)}
         className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
@@ -96,7 +96,7 @@ function AvatarPicker({ current, onSelect }) {
           }}
         >
           <Char size={72} selected={current === id} />
-          <span className="text-xs font-bold text-ink capitalize">{id}</span>
+          <span className="text-sm font-bold text-ink capitalize">{id}</span>
         </motion.button>
       ))}
     </div>
@@ -112,13 +112,13 @@ function ActProgressRow({ act, done }) {
         style={{ backgroundColor: done ? act.color : 'var(--app-border)' }}
       />
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-ink truncate">{act.title}</p>
-        <p className="text-xs text-muted truncate">{act.tagline}</p>
+        <p className="text-base font-semibold text-ink truncate">{act.title}</p>
+        <p className="text-sm text-muted truncate">{act.tagline}</p>
       </div>
       {done ? (
-        <span className="text-xs font-bold shrink-0" style={{ color: '#4ade80' }}>✓ Done</span>
+        <span className="text-sm font-bold shrink-0" style={{ color: '#4ade80' }}>✓ Done</span>
       ) : (
-        <span className="text-xs font-semibold shrink-0 text-faint">Locked</span>
+        <span className="text-sm font-semibold shrink-0 text-faint">Locked</span>
       )}
     </div>
   )
@@ -154,7 +154,7 @@ export default function ProfilePage() {
           <Button variant="ghost" color="neutral" size="sm" icon={<ArrowLeft size={15} />} onClick={() => navigate({ to: '/dashboard' })}>
             Dashboard
           </Button>
-          <span className="text-sm font-black text-ink ml-2">Profile</span>
+          <span className="text-base font-black text-ink ml-2">Profile</span>
           <div className="flex-1" />
         </div>
       </nav>
@@ -198,17 +198,17 @@ export default function ProfilePage() {
 
             <EditableName name={profile.builderName || 'Builder'} onSave={profile.setBuilderName} />
 
-            <div className="flex flex-col gap-1 text-sm">
+            <div className="flex flex-col gap-1 text-base">
               <span className="font-semibold" style={{ color: rank.color }}>
                 {rank.label} Rank
               </span>
-              <span className="text-xs text-muted">{levelInfo.emoji} {ageLabel} · Level {level}</span>
+              <span className="text-sm text-muted">{levelInfo.emoji} {ageLabel} · Level {level}</span>
             </div>
 
             {/* Rank progress */}
             {rank.next && (
               <div className="w-full">
-                <div className="flex justify-between text-xs text-muted mb-1">
+                <div className="flex justify-between text-sm text-muted mb-1">
                   <span style={{ color: rank.color }}>{rank.label}</span>
                   <span>{rankPct}%</span>
                   <span style={{ color: nextRank?.color }}>{nextRank?.label}</span>
@@ -245,8 +245,8 @@ export default function ProfilePage() {
               { label: 'Powers Unlocked',  value: builderPowers.length,    color: '#22d3ee' },
             ].map((s) => (
               <div key={s.label} className="flex items-center justify-between py-1.5" style={{ borderBottom: '2px solid var(--app-border)' }}>
-                <span className="text-xs text-muted">{s.label}</span>
-                <span className="text-sm font-black font-mono" style={{ color: s.color }}>{s.value}</span>
+                <span className="text-sm text-muted">{s.label}</span>
+                <span className="text-base font-black font-mono" style={{ color: s.color }}>{s.value}</span>
               </div>
             ))}
           </div>
@@ -275,9 +275,9 @@ export default function ProfilePage() {
                     className="flex items-center gap-3 p-3 rounded-xl"
                     style={{ background: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
                   >
-                    <span className="text-2xl">{p.emoji}</span>
+                    <span className="text-3xl">{p.emoji}</span>
                     <div>
-                      <p className="text-xs font-bold text-ink">{p.label}</p>
+                      <p className="text-sm font-bold text-ink">{p.label}</p>
                       <p className="text-[10px] text-muted">Power unlocked</p>
                     </div>
                   </div>
@@ -298,7 +298,7 @@ export default function ProfilePage() {
                     className="flex flex-col items-center gap-2 p-3 rounded-2xl text-center"
                     style={{ background: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
                   >
-                    <span className="text-3xl">{b.emoji}</span>
+                    <span className="text-4xl">{b.emoji}</span>
                     <span className="text-[11px] font-semibold text-ink leading-tight">{b.label}</span>
                   </motion.div>
                 ))}
@@ -306,9 +306,9 @@ export default function ProfilePage() {
             </div>
           ) : (
             <div className="card p-8 flex flex-col items-center gap-3 text-center opacity-50">
-              <span className="text-4xl">🏅</span>
-              <p className="font-bold text-ink text-sm">No badges yet</p>
-              <p className="text-xs text-muted">Complete missions to earn your first badge.</p>
+              <span className="text-5xl">🏅</span>
+              <p className="font-bold text-ink text-base">No badges yet</p>
+              <p className="text-sm text-muted">Complete missions to earn your first badge.</p>
             </div>
           )}
 
@@ -316,7 +316,7 @@ export default function ProfilePage() {
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
               <p className="section-label">Adventure Progress</p>
-              <span className="text-xs font-semibold text-muted">
+              <span className="text-sm font-semibold text-muted">
                 {completedActs.length} / {levelActs.length} acts
               </span>
             </div>
@@ -331,7 +331,7 @@ export default function ProfilePage() {
             </div>
             {completedLevels.includes(ageGroup) && (
               <div
-                className="mt-4 rounded-xl px-4 py-3 text-sm font-semibold text-center"
+                className="mt-4 rounded-xl px-4 py-3 text-base font-semibold text-center"
                 style={{ background: 'rgba(74,222,128,0.12)', border: '2px solid var(--app-border)', color: '#4ade80' }}
               >
                 🎓 {levelInfo.label} — Complete!

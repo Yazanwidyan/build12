@@ -22,7 +22,7 @@ function TagsField({ value = [], onChange, suggestions = [] }) {
         {value.map((tag) => (
           <span
             key={tag}
-            className="flex items-center gap-1 rounded-lg px-2 py-0.5 text-xs font-medium"
+            className="flex items-center gap-1 rounded-lg px-2 py-0.5 text-sm font-medium"
             style={{ backgroundColor: 'var(--accent-bg)', border: '1px solid var(--accent-border)', color: 'var(--accent-light)' }}
           >
             {tag}
@@ -36,7 +36,7 @@ function TagsField({ value = [], onChange, suggestions = [] }) {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); add(input) } }}
           placeholder="Type and press Enter..."
-          className="input-base flex-1 text-xs"
+          className="input-base flex-1 text-sm"
         />
         <button
           onClick={() => add(input)}
@@ -55,7 +55,7 @@ function TagsField({ value = [], onChange, suggestions = [] }) {
           <button
             key={s}
             onClick={() => add(s)}
-            className="text-xs rounded-lg px-2 py-0.5 transition-colors"
+            className="text-sm rounded-lg px-2 py-0.5 transition-colors"
             style={{
               color: 'var(--ink-faint)',
               border: '2px solid var(--app-border)',
@@ -103,7 +103,7 @@ function SelectField({ value, onChange, options, labels }) {
         <button
           key={opt}
           onClick={() => onChange(opt)}
-          className="px-3 py-1.5 rounded-xl text-xs font-semibold border-2 transition-all"
+          className="px-3 py-1.5 rounded-xl text-sm font-semibold border-2 transition-all"
           style={{
             borderColor: value === opt ? '#2cbaff' : 'var(--app-border)',
             backgroundColor: value === opt ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
@@ -164,7 +164,7 @@ export default function VisualBuilderStep({ step, onComplete }) {
     >
       {step.fields?.map((field) => (
         <div key={field.id}>
-          <label className="text-xs font-semibold block mb-1" style={{ color: 'var(--ink-muted)' }}>
+          <label className="text-sm font-semibold block mb-1" style={{ color: 'var(--ink-muted)' }}>
             {field.label}
             {field.hint && <span className="font-normal" style={{ color: 'var(--ink-faint)' }}> — {field.hint}</span>}
           </label>

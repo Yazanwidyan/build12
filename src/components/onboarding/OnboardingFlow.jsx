@@ -1,4 +1,4 @@
-import TekiCharacter from "@/components/teki/TekiCharacter";
+﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import {
   CharacterPixel,
   CharacterSpark,
@@ -118,7 +118,7 @@ function OnboardingShell({
 
               {/* Bubble body */}
               <div
-                className="w-full rounded-2xl px-6 py-4 text-sm leading-relaxed font-mono"
+                className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
                   border: "2px solid var(--app-border)",
@@ -301,12 +301,12 @@ export default function OnboardingFlow() {
               >
                 <Char size={88} selected={selected} />
                 <div className="text-center">
-                  <p className="font-bold text-ink text-sm">{label}</p>
-                  <p className="text-xs text-muted mt-0.5">{desc}</p>
+                  <p className="font-bold text-ink text-base">{label}</p>
+                  <p className="text-sm text-muted mt-0.5">{desc}</p>
                 </div>
                 {selected && (
                   <span
-                    className="text-xs font-bold"
+                    className="text-sm font-bold"
                     style={{ color: "#2cbaff" }}
                   >
                     Selected ✓
@@ -349,13 +349,13 @@ export default function OnboardingFlow() {
               }}
             >
               <div>
-                <p className="font-bold text-ink text-sm">{g.label}</p>
-                <p className="text-xs text-muted">{g.range}</p>
+                <p className="font-bold text-ink text-base">{g.label}</p>
+                <p className="text-sm text-muted">{g.range}</p>
               </div>
               {profile.ageGroup === g.id && (
                 <span
                   style={{ color: "#2cbaff" }}
-                  className="font-black text-lg"
+                  className="font-black text-xl"
                 >
                   ✓
                 </span>
@@ -391,10 +391,10 @@ export default function OnboardingFlow() {
               backgroundColor: "rgba(44,186,255,0.08)",
             }}
           >
-            <span className="text-3xl">🌐</span>
+            <span className="text-4xl">🌐</span>
             <div>
-              <p className="font-bold text-ink text-sm">Website Adventure</p>
-              <p className="text-xs text-muted mt-0.5">
+              <p className="font-bold text-ink text-base">Website Adventure</p>
+              <p className="text-sm text-muted mt-0.5">
                 {isSenior
                   ? "Auto-generate your site, then dive into React"
                   : "Build a real website from blueprint to live site"}
@@ -417,10 +417,10 @@ export default function OnboardingFlow() {
                 backgroundColor: "var(--app-raised)",
               }}
             >
-              <span className="text-3xl">{a.emoji}</span>
+              <span className="text-4xl">{a.emoji}</span>
               <div>
-                <p className="font-semibold text-muted text-sm">{a.label}</p>
-                <p className="text-xs text-faint">Coming soon</p>
+                <p className="font-semibold text-muted text-base">{a.label}</p>
+                <p className="text-sm text-faint">Coming soon</p>
               </div>
             </div>
           ))}
@@ -456,7 +456,7 @@ export default function OnboardingFlow() {
           />
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-ink">Main Color</label>
+            <label className="text-base font-semibold text-ink">Main Color</label>
             <div className="grid grid-cols-8 gap-2">
               {PRESET_COLORS.map((c) => (
                 <motion.button
@@ -488,7 +488,7 @@ export default function OnboardingFlow() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-ink">Topic</label>
+            <label className="text-base font-semibold text-ink">Topic</label>
             <div className="flex flex-wrap gap-2">
               {TOPIC_OPTIONS.map((t) => (
                 <button
@@ -497,7 +497,7 @@ export default function OnboardingFlow() {
                     setSiteTopic(t);
                     setSiteTopicCustom("");
                   }}
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold border-2 transition-all"
+                  className="px-3 py-1.5 rounded-xl text-sm font-semibold border-2 transition-all"
                   style={{
                     borderColor:
                       siteTopic === t && !siteTopicCustom

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { useAdventureStore } from '@/stores/adventureStore'
 
 const SECTIONS = [
@@ -13,7 +13,7 @@ export default function Blueprint() {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider text-center">
+      <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center">
         {website.name || 'My Website'} — Blueprint
       </p>
 
@@ -29,12 +29,12 @@ export default function Blueprint() {
               isBuilt ? 'border-teki-300 bg-teki-50' : 'border-dashed border-gray-300 bg-gray-50'
             }`}
           >
-            <span className="text-base">{s.icon}</span>
+            <span className="text-lg">{s.icon}</span>
             <div className="flex-1">
-              <p className={`text-xs font-semibold ${isBuilt ? 'text-teki-700' : 'text-gray-500'}`}>{s.label}</p>
-              <p className="text-xs text-gray-400">{s.hint}</p>
+              <p className={`text-sm font-semibold ${isBuilt ? 'text-teki-700' : 'text-gray-500'}`}>{s.label}</p>
+              <p className="text-sm text-gray-400">{s.hint}</p>
             </div>
-            <span className="text-sm">{isBuilt ? '✅' : '⬜'}</span>
+            <span className="text-base">{isBuilt ? '✅' : '⬜'}</span>
           </motion.div>
         )
       })}

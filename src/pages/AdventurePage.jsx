@@ -38,13 +38,13 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         </motion.div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#2cbaff' }}>
+          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: '#2cbaff' }}>
             Level Complete!
           </p>
-          <h2 className="text-2xl font-black text-ink mb-2">
+          <h2 className="text-3xl font-black text-ink mb-2">
             {levelInfo.emoji} {levelInfo.label}
           </h2>
-          <p className="text-muted text-sm leading-relaxed">
+          <p className="text-muted text-base leading-relaxed">
             You finished all {levelInfo.totalActs} acts in your level.
             The Website Builder is now unlocked — build anything you imagine!
           </p>
@@ -98,11 +98,11 @@ export default function AdventurePage() {
         <Button variant="ghost" color="neutral" size="xs" icon={<ArrowLeft size={12} />} onClick={() => navigate({ to: '/dashboard' })}>
           Dashboard
         </Button>
-        <span style={{ color: 'var(--app-border)' }} className="text-xs">|</span>
-        <span className="text-xs font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Adventure</span>
+        <span style={{ color: 'var(--app-border)' }} className="text-sm">|</span>
+        <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Adventure</span>
         <div className="flex-1" />
         <ThemeToggle />
-        <span className="text-xs ml-1" style={{ color: 'var(--ink-faint)' }}>
+        <span className="text-sm ml-1" style={{ color: 'var(--ink-faint)' }}>
           {profile.builderName}
         </span>
       </div>

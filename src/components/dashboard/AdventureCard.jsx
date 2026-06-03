@@ -24,14 +24,14 @@ export default function AdventureCard({ adventure: adv }) {
         style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
       >
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-3xl">{adv.emoji}</span>
+          <span className="text-4xl">{adv.emoji}</span>
           <div>
-            <h3 className="font-bold text-muted text-sm">{adv.label}</h3>
-            <p className="text-xs text-faint">{adv.desc}</p>
+            <h3 className="font-bold text-muted text-base">{adv.label}</h3>
+            <p className="text-sm text-faint">{adv.desc}</p>
           </div>
         </div>
         <div
-          className="text-xs rounded-lg px-3 py-1.5 text-center font-semibold"
+          className="text-sm rounded-lg px-3 py-1.5 text-center font-semibold"
           style={{ backgroundColor: 'var(--app-border)', color: 'var(--ink-faint)' }}
         >
           Coming Soon
@@ -53,14 +53,14 @@ export default function AdventureCard({ adventure: adv }) {
       onClick={() => navigate({ to: adv.route })}
     >
       <div className="flex items-center gap-3 mb-3">
-        <span className="text-3xl">{adv.emoji}</span>
+        <span className="text-4xl">{adv.emoji}</span>
         <div>
-          <h3 className="font-bold text-ink text-sm">{adv.label}</h3>
-          <p className="text-xs text-muted">{adv.desc}</p>
+          <h3 className="font-bold text-ink text-base">{adv.label}</h3>
+          <p className="text-sm text-muted">{adv.desc}</p>
         </div>
       </div>
       <div className="mb-3">
-        <div className="flex justify-between text-xs mb-1" style={{ color: 'var(--ink-faint)' }}>
+        <div className="flex justify-between text-sm mb-1" style={{ color: 'var(--ink-faint)' }}>
           <span>{levelInfo?.emoji} {doneActs}/{levelActs.length} acts · {levelInfo?.label}</span>
           <span className="font-mono font-bold">{pct}%</span>
         </div>

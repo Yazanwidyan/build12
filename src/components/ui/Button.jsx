@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+﻿import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 const cn = (...classes) => twMerge(clsx(classes));
@@ -61,11 +61,11 @@ const COLORS = {
 
 // ── Sizes ──────────────────────────────────────────────────────────────────────
 const SIZES = {
-  xs: "px-2.5 py-1    text-xs  rounded-lg",
-  sm: "px-3   py-1.5  text-xs  rounded-lg",
-  md: "px-4   py-2    text-sm  rounded-lg",
-  lg: "px-6   py-2.5  text-sm  rounded-lg",
-  xl: "px-8   py-3.5  text-base rounded-lg",
+  xs: "px-2.5 py-1    text-sm  rounded-lg",
+  sm: "px-3   py-1.5  text-sm  rounded-lg",
+  md: "px-4   py-2    text-base  rounded-lg",
+  lg: "px-6   py-2.5  text-base  rounded-lg",
+  xl: "px-8   py-3.5  text-lg rounded-lg",
 };
 
 // ── Legacy variant name → new API ─────────────────────────────────────────────

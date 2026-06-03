@@ -60,7 +60,7 @@ export default function ColorPickerStep({ step, onComplete }) {
             }}
           >
             {selected === c.value && (
-              <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-xs">✓</span>
+              <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm">✓</span>
             )}
           </motion.button>
         ))}
@@ -78,7 +78,7 @@ export default function ColorPickerStep({ step, onComplete }) {
           className="flex-1 h-8 rounded-xl flex items-center px-3"
           style={{ border: '2px solid var(--app-border)', background: selected + '22' }}
         >
-          <span className="text-xs font-mono" style={{ color: 'var(--ink-muted)' }}>{selected}</span>
+          <span className="text-sm font-mono" style={{ color: 'var(--ink-muted)' }}>{selected}</span>
         </div>
       </div>
 

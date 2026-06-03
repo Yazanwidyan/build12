@@ -29,12 +29,12 @@ function CodePanel({ step, value, explanation }) {
       <span className={`self-start text-[10px] font-black uppercase tracking-wide px-2 py-0.5 rounded border ${badge}`}>
         {lang}
       </span>
-      <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-xs leading-relaxed overflow-x-auto">
+      <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-sm leading-relaxed overflow-x-auto">
         <code>{display}</code>
       </pre>
       {explanation && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5">
-          <p className="text-xs text-amber-800 leading-relaxed">💡 {explanation}</p>
+          <p className="text-sm text-amber-800 leading-relaxed">💡 {explanation}</p>
         </div>
       )}
     </motion.div>
@@ -96,16 +96,16 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 updateStyles({ buttonStyle: opt.value })
                 confirm(opt.value)
               }}
-              className={`py-3 border-2 rounded-xl text-sm font-semibold flex flex-col items-center gap-1.5 transition-all
+              className={`py-3 border-2 rounded-xl text-base font-semibold flex flex-col items-center gap-1.5 transition-all
                 ${selected === opt.value
                   ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                   : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}
             >
-              <span className="text-xl">
+              <span className="text-2xl">
                 {opt.value === 'pill' ? '💊' : opt.value === 'square' ? '⬛' : '🔘'}
               </span>
               {opt.label}
-              {selected === opt.value && <span className="text-indigo-500 text-xs">✓ Active</span>}
+              {selected === opt.value && <span className="text-indigo-500 text-sm">✓ Active</span>}
             </motion.button>
           ))}
         </div>
@@ -135,14 +135,14 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
               setReactDemo({ heroBtnText: e.target.value || null })
             }}
             placeholder={step.placeholder || 'Type here…'}
-            className="flex-1 border-2 border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-400 transition-colors"
+            className="flex-1 border-2 border-gray-200 rounded-xl px-3 py-2 text-base focus:outline-none focus:border-indigo-400 transition-colors"
             onKeyDown={(e) => e.key === 'Enter' && textValue.trim() && confirm(textValue)}
           />
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => { if (textValue.trim()) confirm(textValue) }}
             disabled={!textValue.trim()}
-            className="px-4 py-2 bg-indigo-500 text-white rounded-xl text-sm font-semibold disabled:opacity-40 transition-opacity"
+            className="px-4 py-2 bg-indigo-500 text-white rounded-xl text-base font-semibold disabled:opacity-40 transition-opacity"
           >
             Set
           </motion.button>
@@ -151,7 +151,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="bg-gray-900 rounded-xl px-3 py-2"
           >
-            <code className="text-xs text-green-400 font-mono">{`<Button text="${textValue}" />`}</code>
+            <code className="text-sm text-green-400 font-mono">{`<Button text="${textValue}" />`}</code>
           </motion.div>
         )}
         <AnimatePresence>
@@ -182,7 +182,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 setReactDemo({ darkMode: opt.value, showThemeBar: true })
                 confirm(opt.label)
               }}
-              className={`py-4 px-4 border-2 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all
+              className={`py-4 px-4 border-2 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-all
                 ${selected === opt.label
                   ? opt.value
                     ? 'border-slate-600 bg-slate-800 text-white'
@@ -221,12 +221,12 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 setReactDemo({ activeSettingDemo: opt.value, mode: 'state' })
                 confirm(opt.value)
               }}
-              className={`py-3 px-4 border-2 rounded-xl text-sm font-semibold text-left flex items-center gap-3 transition-all
+              className={`py-3 px-4 border-2 rounded-xl text-base font-semibold text-left flex items-center gap-3 transition-all
                 ${selected === opt.value
                   ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                   : 'border-gray-200 text-gray-700 hover:border-indigo-300'}`}
             >
-              <span className="text-xl">{opt.icon}</span>
+              <span className="text-2xl">{opt.icon}</span>
               <span className="flex-1">{opt.label}</span>
               {selected === opt.value && <span className="text-indigo-500 font-bold">✓</span>}
             </motion.button>
@@ -260,12 +260,12 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 setReactDemo({ eventAction: opt.value, mode: 'events' })
                 confirm(opt.value)
               }}
-              className={`py-3 px-4 border-2 rounded-xl text-sm font-semibold text-left flex items-center gap-3 transition-all
+              className={`py-3 px-4 border-2 rounded-xl text-base font-semibold text-left flex items-center gap-3 transition-all
                 ${selected === opt.value
                   ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                   : 'border-gray-200 text-gray-700 hover:border-indigo-300'}`}
             >
-              <span className="text-xl">{opt.icon}</span>
+              <span className="text-2xl">{opt.icon}</span>
               <span className="flex-1">{opt.label}</span>
               {selected === opt.value && <span className="text-green-500 font-bold">✓</span>}
             </motion.button>
@@ -273,7 +273,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
         </div>
         {selected && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="text-xs text-gray-500 text-center"
+            className="text-sm text-gray-500 text-center"
           >
             Try clicking the button in the preview →
           </motion.div>
@@ -299,7 +299,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
       <Wrapper>
         <div className="flex items-center justify-between">
           <Label className="mb-0">Add a pet to the gallery:</Label>
-          <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+          <span className="text-sm text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
             {currentPets.length} pets
           </span>
         </div>
@@ -309,7 +309,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
             value={newPetName}
             onChange={(e) => setNewPetName(e.target.value)}
             placeholder="e.g. Mochi 🐱"
-            className="flex-1 border-2 border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-400 transition-colors"
+            className="flex-1 border-2 border-gray-200 rounded-xl px-3 py-2 text-base focus:outline-none focus:border-indigo-400 transition-colors"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && newPetName.trim()) {
                 const updated = [...currentPets, newPetName.trim()]
@@ -329,7 +329,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
               setNewPetName('')
               confirm(newPetName.trim())
             }}
-            className="px-4 py-2 bg-indigo-500 text-white rounded-xl text-sm font-semibold disabled:opacity-40"
+            className="px-4 py-2 bg-indigo-500 text-white rounded-xl text-base font-semibold disabled:opacity-40"
           >
             Add
           </motion.button>
@@ -362,12 +362,12 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 setReactDemo({ userType: opt.value, showConditional: true, mode: 'conditional' })
                 confirm(opt.value)
               }}
-              className={`flex-1 py-3 border-2 rounded-xl text-sm font-semibold flex flex-col items-center gap-1.5 transition-all
+              className={`flex-1 py-3 border-2 rounded-xl text-base font-semibold flex flex-col items-center gap-1.5 transition-all
                 ${selected === opt.value
                   ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                   : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}
             >
-              <span className="text-2xl">{opt.icon}</span>
+              <span className="text-3xl">{opt.icon}</span>
               {opt.label}
             </motion.button>
           ))}
@@ -409,13 +409,13 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 key={page}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => toggleRoute(page)}
-                className={`flex items-center justify-between px-4 py-2.5 border-2 rounded-xl text-sm font-semibold transition-all
+                className={`flex items-center justify-between px-4 py-2.5 border-2 rounded-xl text-base font-semibold transition-all
                   ${connected
                     ? 'border-green-400 bg-green-50 text-green-700'
                     : 'border-gray-200 text-gray-600 hover:border-indigo-300'}`}
               >
                 <span>{page}</span>
-                <span className="text-xs">
+                <span className="text-sm">
                   {connected ? '🟢 Connected' : '⚪ Click to connect'}
                 </span>
               </motion.button>
@@ -424,7 +424,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
         </div>
         {allConnected && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="text-xs text-center text-green-600 font-semibold"
+            className="text-sm text-center text-green-600 font-semibold"
           >
             All pages connected! Try the nav links in the preview. ✅
           </motion.div>
@@ -457,11 +457,11 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
                 setReactDemo({ themeColor: opt.value, showThemeSelector: true, mode: 'theme-selector' })
                 confirm(opt.value)
               }}
-              className={`py-3 border-2 rounded-xl text-sm font-semibold flex flex-col items-center gap-1.5 transition-all
+              className={`py-3 border-2 rounded-xl text-base font-semibold flex flex-col items-center gap-1.5 transition-all
                 ${selected === opt.value ? 'border-current' : 'border-gray-200 hover:border-gray-400'}`}
               style={selected === opt.value ? { background: opt.value + '22', borderColor: opt.value, color: opt.value } : {}}
             >
-              <span className="text-2xl">{opt.icon}</span>
+              <span className="text-3xl">{opt.icon}</span>
               {opt.label}
             </motion.button>
           ))}
@@ -501,6 +501,6 @@ function Wrapper({ children }) {
 
 function Label({ children, className = '' }) {
   return (
-    <p className={`text-sm font-semibold text-gray-600 mb-0.5 ${className}`}>{children}</p>
+    <p className={`text-base font-semibold text-gray-600 mb-0.5 ${className}`}>{children}</p>
   )
 }

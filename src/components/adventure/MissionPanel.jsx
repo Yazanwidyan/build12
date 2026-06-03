@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { useMissionEngine } from '@/engines/missionEngine'
 import { useProgressStore } from '@/stores/progressStore'
 import { ACTS } from '@/data/curriculum'
@@ -10,7 +10,7 @@ export default function MissionPanel() {
 
   if (!currentMission) {
     return (
-      <div className="flex items-center justify-center h-full text-sm" style={{ color: 'var(--ink-faint)' }}>
+      <div className="flex items-center justify-center h-full text-base" style={{ color: 'var(--ink-faint)' }}>
         No active mission
       </div>
     )
@@ -25,20 +25,20 @@ export default function MissionPanel() {
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             {act && (
-              <p className="text-xs font-semibold uppercase tracking-wider truncate" style={{ color: 'var(--ink-faint)' }}>
+              <p className="text-sm font-semibold uppercase tracking-wider truncate" style={{ color: 'var(--ink-faint)' }}>
                 ACT {act.number} — {act.title}
               </p>
             )}
-            <h2 className="text-base font-bold leading-tight text-ink">
+            <h2 className="text-lg font-bold leading-tight text-ink">
               {currentMission.number}. {currentMission.title}
             </h2>
-            <p className="text-xs truncate text-muted">{currentMission.subtitle}</p>
+            <p className="text-sm truncate text-muted">{currentMission.subtitle}</p>
           </div>
 
           <div className="shrink-0 flex flex-col items-end gap-1">
             <span className="xp-badge">⭐ {xp} XP</span>
             {currentMission.badge && (
-              <span className="text-xs" style={{ color: 'var(--ink-faint)' }}>{currentMission.badge.emoji} Badge</span>
+              <span className="text-sm" style={{ color: 'var(--ink-faint)' }}>{currentMission.badge.emoji} Badge</span>
             )}
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function MissionPanel() {
               transition={{ duration: 0.4, ease: 'easeOut' }}
             />
           </div>
-          <span className="text-xs shrink-0" style={{ color: 'var(--ink-faint)' }}>
+          <span className="text-sm shrink-0" style={{ color: 'var(--ink-faint)' }}>
             {currentStepIndex + 1}/{totalSteps}
           </span>
         </div>

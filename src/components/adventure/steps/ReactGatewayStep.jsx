@@ -45,14 +45,14 @@ export default function ReactGatewayStep({ step, onComplete }) {
         className={`bg-gradient-to-br ${gradient} rounded-2xl p-5 text-white shadow-lg`}
       >
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-black uppercase tracking-widest opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
+          <span className="text-sm font-black uppercase tracking-widest opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
             Chapter {step.chapterNumber}
           </span>
-          <span className="text-xs opacity-60">of 8</span>
+          <span className="text-sm opacity-60">of 8</span>
         </div>
-        <h2 className="text-xl font-black leading-tight">{step.chapterTitle}</h2>
+        <h2 className="text-2xl font-black leading-tight">{step.chapterTitle}</h2>
         {step.chapterSubtitle && (
-          <p className="text-sm opacity-75 mt-0.5 font-medium">({step.chapterSubtitle})</p>
+          <p className="text-base opacity-75 mt-0.5 font-medium">({step.chapterSubtitle})</p>
         )}
       </motion.div>
 

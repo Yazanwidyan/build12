@@ -40,16 +40,16 @@ export default function ActCompleteStep({ step, onComplete }) {
         <motion.div
           animate={{ rotate: [0, 15, -15, 10, -10, 0], scale: [1, 1.3, 1] }}
           transition={{ duration: 1 }}
-          className="text-5xl"
+          className="text-6xl"
         >
           🎓
         </motion.div>
 
         <div>
-          <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#2cbaff' }}>
+          <p className="text-sm font-bold uppercase tracking-wider mb-1" style={{ color: '#2cbaff' }}>
             {levelInfo?.emoji} {levelInfo?.label} Complete!
           </p>
-          <p className="text-sm text-muted leading-relaxed max-w-xs">
+          <p className="text-base text-muted leading-relaxed max-w-xs">
             You've finished every act in your level. The Website Builder is unlocked!
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function ActCompleteStep({ step, onComplete }) {
       <motion.div
         animate={{ rotate: [0, 12, -12, 8, -8, 0], scale: [1, 1.25, 1] }}
         transition={{ duration: 0.9 }}
-        className="text-5xl"
+        className="text-6xl"
       >
         {step.power?.emoji || '🏆'}
       </motion.div>

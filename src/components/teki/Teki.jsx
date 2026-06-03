@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import TekiCharacter from './TekiCharacter'
@@ -73,7 +73,7 @@ export default function Teki() {
           >
             {/* Message bubble */}
             <div className="teki-bubble mb-1">
-              <p className="text-sm leading-relaxed text-gray-800">
+              <p className="text-base leading-relaxed text-gray-800">
                 {displayedText || currentMessage}
                 {isTyping && (
                   <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 animate-pulse align-middle" />
@@ -94,7 +94,7 @@ export default function Teki() {
                     <button
                       key={choice.value ?? choice.label}
                       onClick={() => handleChoice(choice)}
-                      className="bg-white border border-teki-200 text-teki-700 rounded-xl px-3 py-1.5 text-xs font-medium
+                      className="bg-white border border-teki-200 text-teki-700 rounded-xl px-3 py-1.5 text-sm font-medium
                                  hover:bg-teki-50 hover:border-teki-400 active:bg-teki-100 transition-colors shadow-sm"
                     >
                       {choice.label}

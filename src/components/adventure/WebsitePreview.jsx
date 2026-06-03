@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Monitor, Smartphone } from 'lucide-react'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -33,7 +33,7 @@ export default function WebsitePreview() {
 
         {/* URL bar */}
         <div
-          className="flex-1 rounded-md px-3 py-1 text-xs font-mono flex items-center gap-1 truncate"
+          className="flex-1 rounded-md px-3 py-1 text-sm font-mono flex items-center gap-1 truncate"
           style={{ backgroundColor: 'var(--app-raised)', border: '2px solid var(--app-border)', color: 'var(--ink-faint)' }}
         >
           <span style={{ color: '#4ade80' }}>🔒</span>

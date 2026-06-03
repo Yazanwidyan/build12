@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+﻿import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Minus } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
@@ -64,7 +64,7 @@ export default function FloatingTeki() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-yellow-300 font-semibold">⭐{xp}</span>
+                  <span className="text-sm text-yellow-300 font-semibold">⭐{xp}</span>
                   <Button variant="ghost" color="neutral" size="xs" onPointerDown={(e) => e.stopPropagation()} onClick={() => setMinimized(true)} style={{ color: 'rgba(255,255,255,0.6)' }}>
                     <Minus size={13} />
                   </Button>
@@ -99,7 +99,7 @@ export default function FloatingTeki() {
                     className="mx-3 mt-1 mb-2 rounded-xl px-4 py-3"
                     style={{ backgroundColor: 'var(--bubble-bg)', border: '2px solid var(--app-border)' }}
                   >
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
+                    <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                       {shownText}
                       {isTyping && (
                         <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 align-middle animate-pulse" />

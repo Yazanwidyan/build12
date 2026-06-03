@@ -25,7 +25,7 @@ function BlueprintToComponentsAnim() {
         className="bg-white border-2 border-dashed border-indigo-300 rounded-xl px-6 py-3 text-center shadow-sm"
       >
         <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">Blueprint</span>
-        <div className="mt-1 bg-indigo-50 rounded-lg px-4 py-1.5 font-mono text-sm font-bold text-indigo-600">
+        <div className="mt-1 bg-indigo-50 rounded-lg px-4 py-1.5 font-mono text-base font-bold text-indigo-600">
           {'<Button />'}
         </div>
       </motion.div>
@@ -41,7 +41,7 @@ function BlueprintToComponentsAnim() {
             className="flex flex-col items-center gap-0.5 text-indigo-400"
           >
             <div className="w-0.5 h-5 bg-indigo-300" />
-            <span className="text-base font-bold leading-none">↓</span>
+            <span className="text-lg font-bold leading-none">↓</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -61,7 +61,7 @@ function BlueprintToComponentsAnim() {
                 initial={{ opacity: 0, scale: 0.7, y: 8 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: i * 0.1, type: 'spring', stiffness: 400, damping: 20 }}
-                className="px-3 py-1.5 bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow-sm"
+                className="px-3 py-1.5 bg-indigo-500 text-white rounded-lg text-sm font-semibold shadow-sm"
               >
                 {btn}
               </motion.button>
@@ -75,7 +75,7 @@ function BlueprintToComponentsAnim() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-xs text-gray-400 text-center"
+          className="text-sm text-gray-400 text-center"
         >
           4 buttons — 1 blueprint
         </motion.p>
@@ -103,7 +103,7 @@ function PropsStateFlowAnim() {
         className="bg-indigo-100 border-2 border-indigo-300 rounded-xl p-3 text-center"
       >
         <p className="text-[10px] font-black uppercase tracking-widest text-indigo-500 mb-1">Parent Component</p>
-        <code className="text-xs text-indigo-700 font-mono bg-white rounded px-2 py-0.5">
+        <code className="text-sm text-indigo-700 font-mono bg-white rounded px-2 py-0.5">
           const [theme, setTheme] = useState()
         </code>
       </motion.div>
@@ -118,7 +118,7 @@ function PropsStateFlowAnim() {
             className="flex items-center justify-center gap-2"
           >
             <div className="flex-1 h-px bg-sky-300" />
-            <span className="text-xs font-bold text-sky-600 px-2 py-0.5 bg-sky-50 border border-sky-200 rounded-full">
+            <span className="text-sm font-bold text-sky-600 px-2 py-0.5 bg-sky-50 border border-sky-200 rounded-full">
               props ↓
             </span>
             <div className="flex-1 h-px bg-sky-300" />
@@ -143,7 +143,7 @@ function PropsStateFlowAnim() {
                 transition={{ delay: i * 0.1 }}
                 className="bg-sky-50 border-2 border-sky-200 rounded-xl p-2.5 text-center"
               >
-                <p className="text-xs font-bold text-sky-700">{child}</p>
+                <p className="text-sm font-bold text-sky-700">{child}</p>
                 <code className="text-[10px] text-sky-500 font-mono mt-0.5 block">theme=…</code>
               </motion.div>
             ))}
@@ -156,7 +156,7 @@ function PropsStateFlowAnim() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-xs text-gray-400 text-center"
+          className="text-sm text-gray-400 text-center"
         >
           State lives in the parent. Props flow down to every child.
         </motion.p>
@@ -213,12 +213,12 @@ export default function ReactConceptStep({ step, onComplete }) {
             <span className={`self-start text-[10px] font-black uppercase tracking-wide px-2 py-0.5 rounded border ${langBadge}`}>
               {step.language || 'jsx'}
             </span>
-            <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-xs leading-relaxed overflow-x-auto">
+            <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-sm leading-relaxed overflow-x-auto">
               <code>{step.codeReveal}</code>
             </pre>
             {explanation && (
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5">
-                <p className="text-xs text-amber-800 leading-relaxed">💡 {explanation}</p>
+                <p className="text-sm text-amber-800 leading-relaxed">💡 {explanation}</p>
               </div>
             )}
           </motion.div>

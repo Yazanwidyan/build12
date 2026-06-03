@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+﻿import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useMissionEngine } from '@/engines/missionEngine'
 import { useProgressStore } from '@/stores/progressStore'
@@ -36,7 +36,7 @@ export default function TekiPanel() {
                 Act {act.number}
               </span>
             )}
-            <span className="text-xs font-semibold text-gray-700 truncate">
+            <span className="text-sm font-semibold text-gray-700 truncate">
               {currentMission?.title}
             </span>
           </div>
@@ -85,7 +85,7 @@ export default function TekiPanel() {
                 className="relative rounded-2xl rounded-tl-sm px-4 py-3"
                 style={{ backgroundColor: 'var(--bubble-bg)', border: '2px solid var(--app-border)' }}
               >
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
+                <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                   {shownText}
                   {isTyping && (
                     <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 animate-pulse align-middle" />

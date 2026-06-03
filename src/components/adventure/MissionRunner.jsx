@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+﻿import { AnimatePresence, motion } from 'framer-motion'
 import TekiMessageStep from './steps/TekiMessageStep'
 import InputStep from './steps/InputStep'
 import ColorPickerStep from './steps/ColorPickerStep'
@@ -37,7 +37,7 @@ export default function MissionRunner({ step, stepIndex, onComplete }) {
 
   if (!StepComponent) {
     return (
-      <div className="text-center text-sm text-gray-400 py-8">
+      <div className="text-center text-base text-gray-400 py-8">
         Unknown step type: {step.type}
       </div>
     )

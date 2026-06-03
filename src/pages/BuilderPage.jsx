@@ -16,9 +16,9 @@ export default function BuilderPage() {
   if (!isUnlocked) {
     return (
       <div className="min-h-screen bg-app flex flex-col items-center justify-center p-6 text-center">
-        <span className="text-6xl mb-4">🔒</span>
-        <h2 className="text-xl font-black text-ink mb-2">Builder Locked</h2>
-        <p className="text-muted mb-6 max-w-sm text-sm">
+        <span className="text-7xl mb-4">🔒</span>
+        <h2 className="text-2xl font-black text-ink mb-2">Builder Locked</h2>
+        <p className="text-muted mb-6 max-w-sm text-base">
           Complete the Website Adventure first to unlock the free-form builder!
         </p>
         <Button variant="solid" color="blue" onClick={() => navigate({ to: '/adventure' })}>
@@ -39,9 +39,9 @@ export default function BuilderPage() {
         <Button variant="ghost" color="neutral" size="sm" icon={<ArrowLeft size={14} />} onClick={() => navigate({ to: '/dashboard' })}>
           Dashboard
         </Button>
-        <span className="font-bold text-ink text-sm">Website Builder</span>
+        <span className="font-bold text-ink text-base">Website Builder</span>
         <span
-          className="text-xs rounded-full px-2 py-0.5 font-semibold"
+          className="text-sm rounded-full px-2 py-0.5 font-semibold"
           style={{ background: 'rgba(74,222,128,0.15)', color: '#4ade80', border: '2px solid var(--app-border)' }}
         >
           Free Mode
@@ -62,7 +62,7 @@ export default function BuilderPage() {
           className="w-72 overflow-y-auto p-4 flex flex-col gap-4"
           style={{ backgroundColor: 'var(--app-surface)' }}
         >
-          <h3 className="font-bold text-ink text-sm">Site Settings</h3>
+          <h3 className="font-bold text-ink text-base">Site Settings</h3>
 
           <div className="flex flex-col gap-3">
             <Input
@@ -73,7 +73,7 @@ export default function BuilderPage() {
             />
 
             <div>
-              <label className="text-xs font-semibold block mb-1" style={{ color: 'var(--ink-muted)' }}>
+              <label className="text-sm font-semibold block mb-1" style={{ color: 'var(--ink-muted)' }}>
                 Primary Color
               </label>
               <input
