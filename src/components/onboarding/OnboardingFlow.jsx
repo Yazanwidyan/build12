@@ -46,6 +46,7 @@ function OnboardingShell({
   totalSteps,
   onSkip,
   tekiMood = "happy",
+  tekiTop = false,
   bubble,
   children,
   action,
@@ -79,56 +80,67 @@ function OnboardingShell({
 
       {/* ── Main content ── */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
-        <div className="w-full max-w-lg flex flex-col items-center gap-6">
-          {/* TEKI character */}
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <TekiCharacter size={130} mood={tekiMood} />
-          </motion.div>
-
-          {/* Speech bubble with upward tail */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={bubble}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full"
-            >
-              {/* Upward-pointing tail */}
-              <div
-                className="absolute left-1/2 -top-3 -translate-x-1/2 w-0 h-0"
-                style={{
-                  borderLeft: "10px solid transparent",
-                  borderRight: "10px solid transparent",
-                  borderBottom: "12px solid var(--app-border)",
-                }}
-              />
-              <div
-                className="absolute left-1/2 -top-[10px] -translate-x-1/2 w-0 h-0"
-                style={{
-                  borderLeft: "9px solid transparent",
-                  borderRight: "9px solid transparent",
-                  borderBottom: "11px solid var(--bubble-bg)",
-                }}
-              />
-
-              {/* Bubble body */}
-              <div
-                className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
-                style={{
-                  backgroundColor: "var(--bubble-bg)",
-                  border: "2px solid var(--app-border)",
-                  color: "var(--bubble-text)",
-                }}
+        <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+          {tekiTop ? (
+            /* ── Top layout: big TEKI above, upward tail bubble below ── */
+            <>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
               >
-                {bubble}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                <TekiCharacter size={130} mood={tekiMood} />
+              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={bubble}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="relative w-full"
+                >
+                  <div className="absolute left-1/2 -top-3 -translate-x-1/2 w-0 h-0"
+                    style={{ borderLeft: "10px solid transparent", borderRight: "10px solid transparent", borderBottom: "12px solid var(--app-border)" }} />
+                  <div className="absolute left-1/2 -top-[10px] -translate-x-1/2 w-0 h-0"
+                    style={{ borderLeft: "9px solid transparent", borderRight: "9px solid transparent", borderBottom: "11px solid var(--bubble-bg)" }} />
+                  <div className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
+                    style={{ backgroundColor: "var(--bubble-bg)", border: "2px solid var(--app-border)", color: "var(--bubble-text)" }}>
+                    {bubble}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </>
+          ) : (
+            /* ── Side layout: small TEKI left, left-tail bubble ── */
+            <div className="flex items-center gap-6 w-full">
+              <motion.div
+                className="shrink-0"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <TekiCharacter size={80} mood={tekiMood} />
+              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={bubble}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="relative flex-1"
+                >
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
+                    style={{ borderTop: "10px solid transparent", borderBottom: "10px solid transparent", borderRight: "12px solid var(--app-border)" }} />
+                  <div className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
+                    style={{ borderTop: "9px solid transparent", borderBottom: "9px solid transparent", borderRight: "11px solid var(--bubble-bg)" }} />
+                  <div className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed font-mono"
+                    style={{ backgroundColor: "var(--bubble-bg)", border: "2px solid var(--app-border)", color: "var(--bubble-text)" }}>
+                    {bubble}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          )}
 
           {/* Step-specific content */}
           {children && <div className="w-full">{children}</div>}
@@ -225,6 +237,7 @@ export default function OnboardingFlow() {
         step={0}
         totalSteps={totalSteps}
         tekiMood="excited"
+        tekiTop
         bubble="Hey there! I'm TEKI — your personal coding companion!"
         action="Continue"
         onAction={next}
@@ -238,6 +251,7 @@ export default function OnboardingFlow() {
         step={1}
         totalSteps={totalSteps}
         tekiMood="happy"
+        tekiTop
         bubble="What should I call you, builder?"
         action="Continue"
         onAction={submitName}
@@ -456,7 +470,9 @@ export default function OnboardingFlow() {
           />
 
           <div className="flex flex-col gap-2">
-            <label className="text-base font-semibold text-ink">Main Color</label>
+            <label className="text-base font-semibold text-ink">
+              Main Color
+            </label>
             <div className="grid grid-cols-8 gap-2">
               {PRESET_COLORS.map((c) => (
                 <motion.button
