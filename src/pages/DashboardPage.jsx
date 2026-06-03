@@ -1,4 +1,5 @@
 import TekiCharacter from "@/components/teki/TekiCharacter";
+import AvatarDisplay from "@/components/ui/AvatarDisplay";
 import Button from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
@@ -495,7 +496,6 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
 // ── Profile sidebar ────────────────────────────────────────────────────────────
 function ProfileSidebar({
   profile,
-  avatar,
   xp,
   level,
   levelInfo,
@@ -504,6 +504,7 @@ function ProfileSidebar({
   completedMissions,
   onLogout,
 }) {
+  const navigate = useNavigate();
   const RANK_LABELS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
   const rank =
     RANK_LABELS[Math.min(Math.floor(xp / 500), RANK_LABELS.length - 1)];
@@ -537,13 +538,10 @@ function ProfileSidebar({
       <div className="card p-5">
         <div className="flex items-center gap-3 mb-4">
           <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
-            style={{
-              background: "var(--accent-bg)",
-              border: "1px solid var(--accent-border)",
-            }}
+            className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
+            style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
           >
-            {avatar?.emoji ?? "🧭"}
+            <AvatarDisplay avatarId={profile.avatar} size={44} />
           </div>
           <div className="min-w-0">
             <p className="font-bold text-ink truncate">
@@ -580,11 +578,14 @@ function ProfileSidebar({
         </div>
 
         <button
-          className="w-full py-2 rounded-xl border text-sm font-semibold transition-all hover:border-teki-400 hover:text-accent active:scale-95"
+          onClick={() => navigate({ to: "/profile" })}
+          className="w-full py-2 rounded-xl border text-sm font-semibold transition-all active:scale-95"
           style={{
             borderColor: "var(--app-border)",
             color: "var(--ink-muted)",
           }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = '#2cbaff'; e.currentTarget.style.color = '#2cbaff' }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--app-border)'; e.currentTarget.style.color = 'var(--ink-muted)' }}
         >
           View profile
         </button>
@@ -745,13 +746,10 @@ export default function DashboardPage() {
               style={{ borderColor: "var(--app-border)" }}
             >
               <div
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-sm"
-                style={{
-                  background: "var(--accent-bg)",
-                  border: "1px solid var(--accent-border)",
-                }}
+                className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center"
+                style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
               >
-                {avatar?.emoji ?? "🧭"}
+                <AvatarDisplay avatarId={profile.avatar} size={28} />
               </div>
               <span className="text-sm font-semibold text-ink hidden sm:block">
                 {profile.builderName}
@@ -867,7 +865,6 @@ export default function DashboardPage() {
         <aside className="w-72 shrink-0 hidden lg:block">
           <ProfileSidebar
             profile={profile}
-            avatar={avatar}
             xp={xp}
             level={level}
             levelInfo={levelInfo}

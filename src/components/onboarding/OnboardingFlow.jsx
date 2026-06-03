@@ -6,6 +6,7 @@ import { useAdventureStore } from '@/stores/adventureStore'
 import { getMissionsForLevel } from '@/data/curriculum'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Input from '@/components/ui/Input'
+import { CharacterPixel, CharacterSpark } from '@/components/ui/BuilderCharacters'
 
 const PRESET_COLORS = [
   { label: 'Sky',     value: '#2cbaff' },
@@ -237,22 +238,35 @@ export default function OnboardingFlow() {
       onAction={next}
       actionDisabled={!profile.avatar}
     >
-      <div className="grid grid-cols-2 gap-3">
-        {AVATARS.map((av) => (
-          <motion.button
-            key={av.id}
-            whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-            onClick={() => profile.setAvatar(av.id)}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all"
-            style={{
-              borderColor: profile.avatar === av.id ? '#2cbaff' : 'var(--app-border)',
-              backgroundColor: profile.avatar === av.id ? 'rgba(44,186,255,0.08)' : 'var(--app-raised)',
-            }}
-          >
-            <span className="text-3xl">{av.emoji}</span>
-            <span className="text-sm font-semibold text-ink">{av.label}</span>
-          </motion.button>
-        ))}
+      <div className="grid grid-cols-2 gap-4">
+        {[
+          { id: 'pixel', label: 'Pixel', desc: 'The techy builder',    Char: CharacterPixel },
+          { id: 'spark', label: 'Spark', desc: 'The creative builder',  Char: CharacterSpark },
+        ].map(({ id, label, desc, Char }) => {
+          const selected = profile.avatar === id
+          return (
+            <motion.button
+              key={id}
+              whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+              onClick={() => profile.setAvatar(id)}
+              className="flex flex-col items-center gap-3 py-5 px-4 rounded-2xl border-2 transition-all"
+              style={{
+                borderColor: selected ? '#2cbaff' : 'var(--app-border)',
+                backgroundColor: selected ? 'rgba(44,186,255,0.06)' : 'var(--app-raised)',
+                boxShadow: selected ? '0 0 0 4px rgba(44,186,255,0.12)' : 'none',
+              }}
+            >
+              <Char size={88} selected={selected} />
+              <div className="text-center">
+                <p className="font-bold text-ink text-sm">{label}</p>
+                <p className="text-xs text-muted mt-0.5">{desc}</p>
+              </div>
+              {selected && (
+                <span className="text-xs font-bold" style={{ color: '#2cbaff' }}>Selected ✓</span>
+              )}
+            </motion.button>
+          )
+        })}
       </div>
     </OnboardingShell>
   )

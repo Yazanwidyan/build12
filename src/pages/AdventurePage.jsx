@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import { useAdventureStore } from '@/stores/adventureStore'
-import { useProfileStore, AVATARS } from '@/stores/profileStore'
+import { useProfileStore } from '@/stores/profileStore'
 import { useProgressStore } from '@/stores/progressStore'
 import { useTekiStore } from '@/stores/tekiStore'
 import { LEVEL_INFO } from '@/data/curriculum'
@@ -70,7 +70,6 @@ export default function AdventurePage() {
   const profile     = useProfileStore()
   const progress    = useProgressStore()
   const speak       = useTekiStore((s) => s.speak)
-  const avatar      = AVATARS.find((a) => a.id === profile.avatar)
   const ageGroup    = profile.ageGroup ?? 'young'
 
   useEffect(() => {
@@ -111,7 +110,7 @@ export default function AdventurePage() {
         <div className="flex-1" />
         <ThemeToggle />
         <span className="text-xs ml-1" style={{ color: 'var(--ink-faint)' }}>
-          {profile.builderName} {avatar?.emoji}
+          {profile.builderName}
         </span>
       </div>
 

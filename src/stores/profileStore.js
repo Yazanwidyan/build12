@@ -2,10 +2,8 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export const AVATARS = [
-  { id: 'explorer',  label: 'Explorer',   emoji: '🧭' },
-  { id: 'inventor',  label: 'Inventor',   emoji: '⚗️' },
-  { id: 'astronaut', label: 'Astronaut',  emoji: '🚀' },
-  { id: 'wizard',    label: 'Wizard',     emoji: '🧙' },
+  { id: 'pixel', label: 'Pixel',  desc: 'The techy builder'   },
+  { id: 'spark', label: 'Spark',  desc: 'The creative builder' },
 ]
 
 export const AGE_GROUPS = [
