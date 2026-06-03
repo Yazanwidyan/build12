@@ -46,7 +46,7 @@ export default function FloatingTeki() {
               exit={{ opacity: 0, scale: 0.88, y: 12 }}
               transition={{ type: 'spring', stiffness: 380, damping: 28 }}
               className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
-              style={{ width: 296 }}
+              style={{ width: 380 }}
             >
               {/* Title bar */}
               <div
@@ -98,7 +98,7 @@ export default function FloatingTeki() {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="mx-3 mt-1 mb-2 bg-gray-50 rounded-xl border border-gray-100 px-3 py-2.5"
+                    className="mx-3 mt-1 mb-2 bg-gray-50 rounded-xl border border-gray-100 px-4 py-3"
                   >
                     <p className="text-sm text-gray-800 leading-relaxed">
                       {shownText}
@@ -113,7 +113,7 @@ export default function FloatingTeki() {
               {/* Step interaction */}
               <div
                 className="px-3 pb-3 overflow-y-auto"
-                style={{ maxHeight: '42vh' }}
+                style={{ maxHeight: '48vh' }}
                 onPointerDown={(e) => e.stopPropagation()}
               >
                 <MissionRunner
