@@ -7,27 +7,20 @@ export default function ThemeToggle({ className = '' }) {
 
   return (
     <motion.button
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.85 }}
       onClick={toggle}
       title={dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      className={`relative inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold
-                  transition-all duration-200 border select-none ${className}`}
-      style={{
-        background: dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
-        borderColor: 'var(--app-border)',
-        color: 'var(--ink-muted)',
-      }}
+      className={`p-2 rounded-lg transition-colors hover:bg-[var(--app-raised)] ${className}`}
+      style={{ color: 'var(--ink-muted)' }}
     >
-      <motion.span
-        key={dark ? 'moon' : 'sun'}
-        initial={{ rotate: -20, opacity: 0, scale: 0.7 }}
-        animate={{ rotate: 0,   opacity: 1, scale: 1 }}
-        exit={{ rotate: 20, opacity: 0 }}
+      <motion.div
+        key={dark ? 'sun' : 'moon'}
+        initial={{ rotate: -30, opacity: 0 }}
+        animate={{ rotate: 0,   opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        {dark ? <Moon size={13} /> : <Sun size={13} />}
-      </motion.span>
-      <span>{dark ? 'Dark' : 'Light'}</span>
+        {dark ? <Sun size={16} /> : <Moon size={16} />}
+      </motion.div>
     </motion.button>
   )
 }
