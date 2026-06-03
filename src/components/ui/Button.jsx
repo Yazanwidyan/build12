@@ -34,12 +34,12 @@ const COLORS = {
     softBorder: "rgba(239,68,68,0.35)",
   },
   yellow: {
-    base: "#f59e0b",
-    border: "#d97706",
-    inner: "rgba(255,255,255,0.28)",
-    shadow: "#78350f",
-    soft: "rgba(245,158,11,0.12)",
-    softBorder: "rgba(245,158,11,0.35)",
+    base: "#FACC15", // vibrant game-like yellow
+    border: "#EAB308",
+    inner: "rgba(255,255,255,0.35)",
+    shadow: "#A16207",
+    soft: "rgba(250,204,21,0.12)",
+    softBorder: "rgba(250,204,21,0.35)",
   },
   purple: {
     base: "#8b5cf6",
