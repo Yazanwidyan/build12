@@ -21,7 +21,7 @@ export default function Header() {
       <button
         key={to}
         onClick={() => navigate({ to })}
-        className="relative flex items-center px-3 text-base font-medium transition-colors"
+        className="relative flex items-center px-3 text-sm font-bold transition-colors"
         style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
         onMouseEnter={(e) => {
           if (!active) e.currentTarget.style.color = "var(--ink)";
@@ -44,11 +44,11 @@ export default function Header() {
   return (
     <nav className="border-b-2 border-app-border bg-app sticky top-0 z-10 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           {LOGOS.map(({ L, label }) => (
-            <L key={label} size={28} />
+            <L key={label} />
           ))}
-          <span className="font-black text-2xl text-ink tracking-tighter shrink-0">
+          <span className="font-black text-[1.35rem] text-ink tracking-tighter shrink-0">
             HelloBuildIt
           </span>
         </div>

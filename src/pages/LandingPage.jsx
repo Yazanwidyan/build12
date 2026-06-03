@@ -237,11 +237,9 @@ export default function LandingPage() {
               className="text-6xl font-black leading-[1.05] tracking-tight"
               style={{ color: txt }}
             >
-              Build it.
+              Stop scrolling.
               <br />
-              Understand it.
-              <br />
-              <span style={{ color: "#2cbaff" }}>Own it.</span>
+              <span style={{ color: "#2cbaff" }}>Start building.</span>
             </motion.h1>
 
             {/* Description */}
@@ -252,8 +250,9 @@ export default function LandingPage() {
               className="text-base leading-relaxed max-w-md"
               style={{ color: sub }}
             >
-              Build real websites, games, and apps — step by step, guided by
-              TEKI your AI companion. No experience needed.
+              Turn screen time into creation time. Build real websites, games,
+              and apps — guided every step by TEKI, your AI companion.
+              No experience needed.
             </motion.p>
 
             {/* Build tags */}
