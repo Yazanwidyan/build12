@@ -52,12 +52,16 @@ export const useAdventureStore = create(
       currentStepIndex: 0,
       website: { ...DEFAULT_WEBSITE },
       actCelebrating: null,
+      levelComplete: false,
 
       startAdventure: (adventureId) => set({
         currentAdventure: adventureId,
         currentMissionNumber: 1,
         currentStepIndex: 0,
+        levelComplete: false,
       }),
+
+      setLevelComplete: () => set({ levelComplete: true }),
 
       setMission: (missionNumber) => set({
         currentMissionNumber: missionNumber,

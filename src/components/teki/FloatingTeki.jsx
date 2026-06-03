@@ -4,20 +4,25 @@ import { Minus } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useMissionEngine } from '@/engines/missionEngine'
 import { useProgressStore } from '@/stores/progressStore'
-import { ACTS } from '@/data/curriculum'
+import { ACTS, LEVEL_INFO, getActsForLevel } from '@/data/curriculum'
 import TekiCharacter from './TekiCharacter'
 import MissionRunner from '@/components/adventure/MissionRunner'
 
 export default function FloatingTeki() {
   const { currentMessage, displayedText, isTyping, mood } = useTekiStore()
-  const { currentMission, currentStep, currentStepIndex, totalSteps, advanceStep, progressPercent } = useMissionEngine()
+  const { currentMission, currentStep, currentStepIndex, totalSteps, advanceStep, progressPercent, ageGroup } = useMissionEngine()
   const xp = useProgressStore((s) => s.xp)
+  const completedActs = useProgressStore((s) => s.completedActs)
 
   const [minimized, setMinimized] = useState(false)
   const constraintsRef = useRef(null)
 
-  const shownText = displayedText || currentMessage || ''
-  const act = ACTS.find((a) => a.number === currentMission?.act)
+  const shownText   = displayedText || currentMessage || ''
+  const act         = ACTS.find((a) => a.number === currentMission?.act)
+  const levelInfo   = LEVEL_INFO[ageGroup]
+  const levelActs   = getActsForLevel(ageGroup)
+  const doneActs    = completedActs.filter((id) => levelActs.some((a) => a.id === id)).length
+  const levelPct    = levelActs.length > 0 ? Math.round((doneActs / levelActs.length) * 100) : 0
 
   return (
     <>
@@ -46,11 +51,11 @@ export default function FloatingTeki() {
               {/* Title bar */}
               <div
                 className="flex items-center justify-between px-3 py-2 border-b border-gray-100"
-                style={{ background: act?.color ?? '#4f46e5' }}
+                style={{ background: levelInfo?.color ?? act?.color ?? '#4f46e5' }}
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-[10px] font-bold text-white/70 uppercase tracking-wider shrink-0">
-                    Act {act?.number ?? '?'}
+                    {levelInfo?.emoji} {levelInfo?.label}
                   </span>
                   <span className="text-[11px] font-semibold text-white truncate">
                     {currentMission?.title}
@@ -68,19 +73,19 @@ export default function FloatingTeki() {
                 </div>
               </div>
 
-              {/* Progress bar */}
+              {/* Level progress bar */}
               <div className="px-3 pt-2 pb-1">
                 <div className="flex items-center gap-2">
                   <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                     <motion.div
                       className="h-full rounded-full"
-                      style={{ background: act?.color ?? '#4f46e5' }}
-                      animate={{ width: `${progressPercent}%` }}
-                      transition={{ duration: 0.4 }}
+                      style={{ background: levelInfo?.color ?? '#4f46e5' }}
+                      animate={{ width: `${levelPct}%` }}
+                      transition={{ duration: 0.5 }}
                     />
                   </div>
                   <span className="text-[10px] text-gray-400 shrink-0">
-                    {currentStepIndex + 1}/{totalSteps}
+                    {doneActs}/{levelActs.length} acts
                   </span>
                 </div>
               </div>

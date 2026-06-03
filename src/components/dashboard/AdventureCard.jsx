@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from '@tanstack/react-router'
 import { useProgressStore } from '@/stores/progressStore'
-import { ACTS } from '@/data/curriculum'
+import { useProfileStore } from '@/stores/profileStore'
+import { getActsForLevel, LEVEL_INFO } from '@/data/curriculum'
 import Button from '@/components/ui/Button'
 
 export const ADVENTURES = [
@@ -11,9 +12,10 @@ export const ADVENTURES = [
 ]
 
 export default function AdventureCard({ adventure: adv }) {
-  const navigate = useNavigate()
-  const completedActs = useProgressStore((s) => s.completedActs)
+  const navigate          = useNavigate()
+  const completedActs     = useProgressStore((s) => s.completedActs)
   const completedMissions = useProgressStore((s) => s.completedMissions)
+  const ageGroup          = useProfileStore((s) => s.ageGroup) ?? 'young'
 
   if (!adv.active) {
     return (
@@ -32,9 +34,12 @@ export default function AdventureCard({ adventure: adv }) {
     )
   }
 
-  const doneActs = completedActs.filter((a) => a.startsWith('act')).length
-  const pct = Math.round((doneActs / ACTS.length) * 100)
-  const started = completedMissions.length > 0
+  const levelActs  = getActsForLevel(ageGroup)
+  const levelInfo  = LEVEL_INFO[ageGroup]
+  const doneActs   = completedActs.filter((id) => levelActs.some((a) => a.id === id)).length
+  const pct        = levelActs.length > 0 ? Math.round((doneActs / levelActs.length) * 100) : 0
+  const started    = completedMissions.length > 0
+  const cardColor  = levelInfo?.color ?? adv.color
 
   return (
     <motion.div
@@ -51,11 +56,11 @@ export default function AdventureCard({ adventure: adv }) {
       </div>
       <div className="mb-3">
         <div className="flex justify-between text-xs text-gray-400 mb-1">
-          <span>{doneActs}/{ACTS.length} acts</span>
+          <span>{levelInfo?.emoji} {doneActs}/{levelActs.length} acts · {levelInfo?.label}</span>
           <span>{pct}%</span>
         </div>
         <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: adv.color }} />
+          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: cardColor }} />
         </div>
       </div>
       <Button variant="primary" size="sm" fullWidth onClick={(e) => { e.stopPropagation(); navigate({ to: adv.route }) }}>

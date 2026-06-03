@@ -7,13 +7,15 @@ import AdventureCard, { ADVENTURES } from '@/components/dashboard/AdventureCard'
 import BuilderCard, { BUILDERS } from '@/components/dashboard/BuilderCard'
 import Teki from '@/components/teki/Teki'
 import Button from '@/components/ui/Button'
+import { LEVEL_INFO } from '@/data/curriculum'
 
 export default function DashboardPage() {
   const navigate = useNavigate()
   const { logout } = useAuthStore()
   const profile = useProfileStore()
   const { xp, level, earnedBadges, builderPowers, completedMissions } = useProgressStore()
-  const avatar = AVATARS.find((a) => a.id === profile.avatar)
+  const avatar     = AVATARS.find((a) => a.id === profile.avatar)
+  const levelInfo  = LEVEL_INFO[profile.ageGroup] ?? LEVEL_INFO.young
 
   const handleLogout = () => { logout(); navigate({ to: '/' }) }
 
@@ -33,9 +35,17 @@ export default function DashboardPage() {
       <main className="max-w-3xl mx-auto px-4 py-8 pb-24">
         {/* Welcome */}
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Welcome back, {profile.builderName}! {avatar?.emoji}
-          </h1>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h1 className="text-2xl font-bold text-gray-900">
+              Welcome back, {profile.builderName}! {avatar?.emoji}
+            </h1>
+            <span
+              className="text-xs font-semibold px-2.5 py-1 rounded-full text-white"
+              style={{ background: levelInfo.color }}
+            >
+              {levelInfo.emoji} {levelInfo.label}
+            </span>
+          </div>
           <p className="text-gray-500 text-sm mt-1">
             {completedMissions.length === 0
               ? 'Ready to start your first adventure?'

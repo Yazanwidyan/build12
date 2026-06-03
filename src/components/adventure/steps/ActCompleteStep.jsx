@@ -2,28 +2,92 @@ import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useProgressStore } from '@/stores/progressStore'
+import { useProfileStore } from '@/stores/profileStore'
+import { isLastActForLevel, LEVEL_INFO } from '@/data/curriculum'
 import Button from '@/components/ui/Button'
 
 export default function ActCompleteStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
+  const speak    = useTekiStore((s) => s.speak)
   const { addXP, completeAct } = useProgressStore()
+  const ageGroup = useProfileStore((s) => s.ageGroup) ?? 'young'
+
+  // Parse act number from step.actId (e.g. 'act3' → 3)
+  const actNumber   = parseInt(step.actId.replace('act', ''), 10)
+  const isLevelEnd  = isLastActForLevel(actNumber, ageGroup)
+  const levelInfo   = LEVEL_INFO[ageGroup]
 
   useEffect(() => {
-    speak([`${step.title}! 🏆`, step.message], { mood: 'proud' })
     completeAct(step.actId)
     if (step.xpBonus) addXP(step.xpBonus)
+
+    if (isLevelEnd) {
+      speak(
+        [
+          `${levelInfo?.label} — COMPLETE! 🎓`,
+          "You finished your entire level!",
+          "The Website Builder is now yours.",
+        ],
+        { mood: 'proud' }
+      )
+    } else {
+      speak([`${step.title}! 🏆`, step.message], { mood: 'proud' })
+    }
   }, [step.id])
 
+  if (isLevelEnd) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        className="flex flex-col items-center gap-4 py-2 text-center"
+      >
+        <motion.div
+          animate={{ rotate: [0, 15, -15, 10, -10, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 1 }}
+          className="text-5xl"
+        >
+          🎓
+        </motion.div>
+
+        <div>
+          <p className="text-xs font-semibold text-teki-500 uppercase tracking-wider mb-1">
+            {levelInfo?.emoji} {levelInfo?.label} Complete!
+          </p>
+          <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
+            You've finished every act in your level. The Website Builder is unlocked!
+          </p>
+        </div>
+
+        {step.xpBonus && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="xp-badge"
+          >
+            ⭐ +{step.xpBonus} XP bonus!
+          </motion.span>
+        )}
+
+        <Button variant="action" fullWidth onClick={onComplete}>
+          🔓 Open Website Builder
+        </Button>
+      </motion.div>
+    )
+  }
+
+  // Normal act completion
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className="flex flex-col items-center gap-4 py-2"
+      className="flex flex-col items-center gap-4 py-2 text-center"
     >
       <motion.div
         animate={{ rotate: [0, 12, -12, 8, -8, 0], scale: [1, 1.25, 1] }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
+        transition={{ duration: 0.9 }}
         className="text-5xl"
       >
         {step.power?.emoji || '🏆'}

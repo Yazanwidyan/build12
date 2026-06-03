@@ -1870,17 +1870,53 @@ function CatFact() {
   },
 ]
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+// ── Base helpers ───────────────────────────────────────────────────────────────
 
 export const getAllMissions = () => ACTS.flatMap((act) => act.missions)
-
 export const getMissionById = (id) => getAllMissions().find((m) => m.id === id)
-
 export const getMissionByNumber = (n) => getAllMissions().find((m) => m.number === n)
-
 export const getActById = (id) => ACTS.find((a) => a.id === id)
-
 export const getMissionsForAct = (actId) => ACTS.find((a) => a.id === actId)?.missions ?? []
-
 export const TOTAL_MISSIONS = getAllMissions().length
 export const TOTAL_ACTS = ACTS.length
+
+// ── Level scoping ──────────────────────────────────────────────────────────────
+// Each level is a distinct journey through a subset of acts.
+// Code depth within each act is controlled by ageExposure per step.
+//
+//  Young Builder  (under 11) → Acts 1–3  : visual building + HTML basics
+//  Junior Creator (11–14)    → Acts 1–7  : fundamentals through loops & functions
+//  Future Developer (15+)    → Acts 1–11 : full curriculum + React + APIs
+
+export const LEVEL_ACT_NUMBERS = {
+  young:  [1, 2, 3],
+  junior: [1, 2, 3, 4, 5, 6, 7],
+  senior: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+}
+
+export const LEVEL_INFO = {
+  young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3  },
+  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#6366f1', totalActs: 7  },
+  senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 11 },
+}
+
+// All missions a level goes through, in order
+export const getMissionsForLevel = (ageGroup) => {
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
+  return getAllMissions().filter((m) => actNums.includes(m.act))
+}
+
+// All acts a level contains
+export const getActsForLevel = (ageGroup) => {
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
+  return ACTS.filter((a) => actNums.includes(a.number))
+}
+
+// The final act number for a level (completing this act = level complete)
+export const getLastActNumberForLevel = (ageGroup) => {
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
+  return actNums[actNums.length - 1]
+}
+
+export const isLastActForLevel = (actNumber, ageGroup) =>
+  actNumber === getLastActNumberForLevel(ageGroup)

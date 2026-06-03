@@ -1,20 +1,36 @@
-// ─── Mission Engine ───────────────────────────────────────────────────────────
-// Drives users through mission steps and connects to progress/adventure stores.
-// ──────────────────────────────────────────────────────────────────────────────
-
 import { useAdventureStore } from '@/stores/adventureStore'
 import { useProgressStore } from '@/stores/progressStore'
-import { getAllMissions, getMissionByNumber, getActById } from '@/data/curriculum'
-import { tekiSpeak } from '@/engines/tekiEngine'
+import { useProfileStore } from '@/stores/profileStore'
+import {
+  getAllMissions,
+  getMissionByNumber,
+  getMissionsForLevel,
+  isLastActForLevel,
+} from '@/data/curriculum'
 
 export function useMissionEngine() {
-  const adventure = useAdventureStore()
-  const progress = useProgressStore()
+  const adventure  = useAdventureStore()
+  const progress   = useProgressStore()
+  const ageGroup   = useProfileStore((s) => s.ageGroup) ?? 'young'
 
   const currentMission = getMissionByNumber(adventure.currentMissionNumber)
-  const currentStep = currentMission?.steps[adventure.currentStepIndex] ?? null
-  const totalSteps = currentMission?.steps.length ?? 0
-  const isLastStep = adventure.currentStepIndex >= totalSteps - 1
+  const currentStep    = currentMission?.steps[adventure.currentStepIndex] ?? null
+  const totalSteps     = currentMission?.steps.length ?? 0
+  const isLastStep     = adventure.currentStepIndex >= totalSteps - 1
+
+  // All missions the user's level should go through, in order
+  const levelMissions    = getMissionsForLevel(ageGroup)
+  const totalLevelMissions = levelMissions.length
+
+  // How many level-missions are done (for a global progress indicator)
+  const doneLevelMissions  = levelMissions.filter((m) =>
+    progress.isMissionComplete(m.id)
+  ).length
+
+  // Step-level progress within the current mission
+  const stepProgressPercent = totalSteps > 0
+    ? Math.round((adventure.currentStepIndex / totalSteps) * 100)
+    : 0
 
   function advanceStep() {
     if (isLastStep) {
@@ -24,68 +40,53 @@ export function useMissionEngine() {
     }
   }
 
-  function goToStep(index) {
-    adventure.setStep(index)
-  }
-
   function completeMission() {
     const mission = currentMission
     if (!mission) return
 
     progress.completeMission(mission.id, mission.xp)
+    if (mission.badge) progress.earnBadge(mission.badge)
 
-    if (mission.badge) {
-      progress.earnBadge(mission.badge)
-    }
-
-    // Check act completion
-    const allMissions = getAllMissions()
-    const actMissions = allMissions.filter((m) => m.act === mission.act)
-    const allActComplete = actMissions.every((m) =>
-      m.id === mission.id || progress.isMissionComplete(m.id)
+    // Check if the whole act is now done
+    const allActMissions  = getAllMissions().filter((m) => m.act === mission.act)
+    const allActComplete  = allActMissions.every(
+      (m) => m.id === mission.id || progress.isMissionComplete(m.id)
     )
 
     if (allActComplete) {
       const actId = `act${mission.act}`
       progress.completeAct(actId)
-      if (actId === 'act11') {
-        progress.unlockBuilder('website')
+
+      // Is this the LAST act for the user's level? → level complete
+      if (isLastActForLevel(mission.act, ageGroup)) {
+        progress.completeLevel(ageGroup)
+        adventure.setLevelComplete()
+        return // stop — don't advance to next mission
       }
     }
 
-    // Advance to next mission
-    const allMissionsList = getAllMissions()
-    const nextMission = allMissionsList.find(
-      (m) => m.number === mission.number + 1
-    )
+    // Find the next mission that belongs to this level
+    const currentIndexInLevel = levelMissions.findIndex((m) => m.id === mission.id)
+    const nextLevelMission    = levelMissions[currentIndexInLevel + 1]
 
-    if (nextMission) {
-      adventure.setMission(nextMission.number)
+    if (nextLevelMission) {
+      adventure.setMission(nextLevelMission.number)
     }
-  }
-
-  function startMission(missionNumber) {
-    adventure.setMission(missionNumber)
+    // If no next level mission and we somehow get here, level is done
   }
 
   return {
     currentMission,
     currentStep,
-    currentStepIndex: adventure.currentStepIndex,
+    currentStepIndex:  adventure.currentStepIndex,
     totalSteps,
     isLastStep,
     advanceStep,
-    goToStep,
     completeMission,
-    startMission,
-    progressPercent: totalSteps > 0
-      ? Math.round((adventure.currentStepIndex / totalSteps) * 100)
-      : 0,
+    progressPercent:     stepProgressPercent,
+    levelMissions,
+    totalLevelMissions,
+    doneLevelMissions,
+    ageGroup,
   }
-}
-
-export function getNextMissionNumber(currentNumber) {
-  const all = getAllMissions()
-  const next = all.find((m) => m.number === currentNumber + 1)
-  return next?.number ?? null
 }

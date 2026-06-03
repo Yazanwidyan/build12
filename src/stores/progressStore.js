@@ -2,17 +2,17 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 const BUILDER_POWERS = {
-  'act1-complete': { id: 'builder',    label: 'Builder',           emoji: '🏗️', description: 'You built your first website!' },
-  'act2-complete': { id: 'designer',   label: 'Designer',          emoji: '🎨', description: 'You mastered design!' },
-  'act3-complete': { id: 'coder',      label: 'HTML Coder',        emoji: '📝', description: 'You speak HTML!' },
-  'act4-complete': { id: 'memory',     label: 'Memory Master',     emoji: '🧠', description: 'Variables unlocked!' },
-  'act5-complete': { id: 'thinker',    label: 'Logic Thinker',     emoji: '🤔', description: 'Conditionals mastered!' },
-  'act6-complete': { id: 'animator',   label: 'Action Creator',    emoji: '⚡', description: 'Events unlocked!' },
-  'act7-complete': { id: 'collector',  label: 'Data Collector',    emoji: '📦', description: 'Arrays & loops!' },
-  'act8-complete': { id: 'engineer',   label: 'Function Engineer', emoji: '🔧', description: 'Functions mastered!' },
-  'act9-complete': { id: 'react',      label: 'React Builder',     emoji: '🧩', description: 'React unlocked!' },
-  'act10-complete':{ id: 'connector',  label: 'Data Connector',    emoji: '🌎', description: 'APIs mastered!' },
-  'act11-complete':{ id: 'creator',    label: 'Full Creator',      emoji: '🏆', description: 'Adventure complete!' },
+  'act1-complete': { id: 'builder',   label: 'Builder',           emoji: '🏗️' },
+  'act2-complete': { id: 'designer',  label: 'Designer',          emoji: '🎨' },
+  'act3-complete': { id: 'coder',     label: 'HTML Coder',        emoji: '📝' },
+  'act4-complete': { id: 'memory',    label: 'Memory Master',     emoji: '🧠' },
+  'act5-complete': { id: 'thinker',   label: 'Logic Thinker',     emoji: '🤔' },
+  'act6-complete': { id: 'animator',  label: 'Action Creator',    emoji: '⚡' },
+  'act7-complete': { id: 'collector', label: 'Data Collector',    emoji: '📦' },
+  'act8-complete': { id: 'engineer',  label: 'Function Engineer', emoji: '🔧' },
+  'act9-complete': { id: 'react',     label: 'React Builder',     emoji: '🧩' },
+  'act10-complete':{ id: 'connector', label: 'Data Connector',    emoji: '🌎' },
+  'act11-complete':{ id: 'creator',   label: 'Full Creator',      emoji: '🏆' },
 }
 
 export const useProgressStore = create(
@@ -25,16 +25,16 @@ export const useProgressStore = create(
       earnedBadges: [],
       builderPowers: [],
       unlockedBuilders: [],
+      // Tracks which age-group levels have been fully completed
+      completedLevels: [],
 
       addXP: (amount) => {
         const newXP = get().xp + amount
-        const newLevel = Math.floor(newXP / 500) + 1
-        set({ xp: newXP, level: newLevel })
+        set({ xp: newXP, level: Math.floor(newXP / 500) + 1 })
       },
 
       completeMission: (missionId, xpReward = 100) => {
-        const { completedMissions } = get()
-        if (completedMissions.includes(missionId)) return
+        if (get().completedMissions.includes(missionId)) return
         set((s) => ({
           completedMissions: [...s.completedMissions, missionId],
           xp: s.xp + xpReward,
@@ -42,12 +42,23 @@ export const useProgressStore = create(
       },
 
       completeAct: (actId) => {
-        const { completedActs, builderPowers } = get()
-        if (completedActs.includes(actId)) return
+        if (get().completedActs.includes(actId)) return
         const power = BUILDER_POWERS[`${actId}-complete`]
         set((s) => ({
           completedActs: [...s.completedActs, actId],
           builderPowers: power ? [...s.builderPowers, power] : s.builderPowers,
+        }))
+      },
+
+      // Called when a user finishes the last act of their level
+      completeLevel: (ageGroup) => {
+        if (get().completedLevels.includes(ageGroup)) return
+        set((s) => ({
+          completedLevels: [...s.completedLevels, ageGroup],
+          // Unlock the builder when any level is finished
+          unlockedBuilders: s.unlockedBuilders.includes('website')
+            ? s.unlockedBuilders
+            : [...s.unlockedBuilders, 'website'],
         }))
       },
 
@@ -68,7 +79,8 @@ export const useProgressStore = create(
       },
 
       isMissionComplete: (missionId) => get().completedMissions.includes(missionId),
-      isActComplete: (actId) => get().completedActs.includes(actId),
+      isActComplete:     (actId)     => get().completedActs.includes(actId),
+      isLevelComplete:   (ageGroup)  => get().completedLevels.includes(ageGroup),
       isBuilderUnlocked: (builderId) => get().unlockedBuilders.includes(builderId),
 
       reset: () => set({
@@ -79,6 +91,7 @@ export const useProgressStore = create(
         earnedBadges: [],
         builderPowers: [],
         unlockedBuilders: [],
+        completedLevels: [],
       }),
     }),
     { name: 'hbi-progress' }
