@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+﻿import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
@@ -24,8 +24,8 @@ export default function NotFoundPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="ghost" onClick={() => window.history.back()}>Go back</Button>
-            <Button variant="primary" onClick={() => navigate({ to: '/' })}>Home</Button>
+            <Button variant="ghost" color="neutral" onClick={() => window.history.back()}>Go back</Button>
+            <Button variant="solid" color="blue" onClick={() => navigate({ to: '/' })}>Home</Button>
           </div>
         </motion.div>
       </div>

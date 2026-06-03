@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { useNavigate } from '@tanstack/react-router'
 import { useProgressStore } from '@/stores/progressStore'
 import { useProfileStore } from '@/stores/profileStore'
@@ -73,7 +73,7 @@ export default function AdventureCard({ adventure: adv }) {
           />
         </div>
       </div>
-      <Button variant="primary" size="sm" fullWidth onClick={(e) => { e.stopPropagation(); navigate({ to: adv.route }) }}>
+      <Button variant="solid" color="blue" size="sm" fullWidth onClick={(e) => { e.stopPropagation(); navigate({ to: adv.route }) }}>
         {started ? 'Continue Adventure' : 'Start Adventure'}
       </Button>
     </motion.div>

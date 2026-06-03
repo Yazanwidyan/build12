@@ -7,6 +7,7 @@ import { useProgressStore } from '@/stores/progressStore'
 import { ACTS, LEVEL_INFO, getActsForLevel } from '@/data/curriculum'
 import TekiCharacter from './TekiCharacter'
 import MissionRunner from '@/components/adventure/MissionRunner'
+import Button from '@/components/ui/Button'
 
 export default function FloatingTeki() {
   const { currentMessage, displayedText, isTyping, mood } = useTekiStore()
@@ -64,13 +65,9 @@ export default function FloatingTeki() {
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="text-xs text-yellow-300 font-semibold">⭐{xp}</span>
-                  <button
-                    onPointerDown={(e) => e.stopPropagation()}
-                    onClick={() => setMinimized(true)}
-                    className="text-white/60 hover:text-white transition-colors"
-                  >
+                  <Button variant="ghost" color="neutral" size="xs" onPointerDown={(e) => e.stopPropagation()} onClick={() => setMinimized(true)} style={{ color: 'rgba(255,255,255,0.6)' }}>
                     <Minus size={13} />
-                  </button>
+                  </Button>
                 </div>
               </div>
 

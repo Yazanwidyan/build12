@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Monitor, Smartphone } from 'lucide-react'
 import { useAdventureStore } from '@/stores/adventureStore'
 import { generateWebsiteHTML } from '@/engines/previewEngine'
+import Button from '@/components/ui/Button'
 
 export default function WebsitePreview() {
   const website   = useAdventureStore((s) => s.website)
@@ -45,17 +46,15 @@ export default function WebsitePreview() {
             { id: 'desktop', Icon: Monitor },
             { id: 'mobile',  Icon: Smartphone },
           ].map(({ id, Icon }) => (
-            <button
+            <Button
               key={id}
+              size="xs"
+              variant={viewport === id ? 'soft' : 'ghost'}
+              color={viewport === id ? 'blue' : 'neutral'}
               onClick={() => setViewport(id)}
-              className="p-1.5 rounded-lg transition-all"
-              style={viewport === id
-                ? { backgroundColor: 'rgba(44,186,255,0.15)', color: '#2cbaff', border: '2px solid var(--app-border)' }
-                : { backgroundColor: 'transparent', color: 'var(--ink-faint)', border: '2px solid transparent' }
-              }
             >
               <Icon size={14} />
-            </button>
+            </Button>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import Blueprint from '@/components/adventure/Blueprint'
@@ -43,7 +43,7 @@ export default function ObservationStep({ step, onComplete }) {
         </motion.div>
       )}
 
-      <Button variant="action" fullWidth onClick={onComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
         {step.action || 'Continue'}
       </Button>
     </motion.div>

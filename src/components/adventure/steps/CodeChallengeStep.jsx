@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, X } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
@@ -98,7 +98,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
         </div>
       )}
 
-      <Button variant="action" fullWidth onClick={check}>
+      <Button variant="solid" color="blue" fullWidth onClick={check}>
         {step.action || 'Check my answer!'}
       </Button>
     </motion.div>

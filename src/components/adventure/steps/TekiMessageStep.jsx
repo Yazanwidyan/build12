@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import Button from '@/components/ui/Button'
@@ -17,7 +17,7 @@ export default function TekiMessageStep({ step, onComplete }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
-      <Button variant="action" fullWidth onClick={onComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
         {step.action || 'Got it!'}
       </Button>
     </motion.div>

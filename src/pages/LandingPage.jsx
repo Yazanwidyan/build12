@@ -1,4 +1,4 @@
-import TekiCharacter from "@/components/teki/TekiCharacter";
+﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import Button from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useAuthStore } from "@/stores/authStore";
@@ -55,7 +55,7 @@ export default function LandingPage() {
             ) : (
               <>
                 <Button
-                  variant="ghost"
+                  variant="ghost" color="neutral"
                   size="sm"
                   onClick={() => navigate({ to: "/login" })}
                 >
@@ -101,7 +101,7 @@ export default function LandingPage() {
             </div>
 
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Button variant="action" size="xl" onClick={handleStart}>
+              <Button variant="solid" color="blue" size="xl" onClick={handleStart}>
                 Start Building — it's free
               </Button>
             </motion.div>

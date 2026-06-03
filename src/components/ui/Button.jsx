@@ -64,8 +64,8 @@ const SIZES = {
   xs: "px-2.5 py-1    text-xs  rounded-lg",
   sm: "px-3   py-1.5  text-xs  rounded-lg",
   md: "px-4   py-2    text-sm  rounded-lg",
-  lg: "px-6   py-2.5  text-sm  rounded-xl",
-  xl: "px-8   py-3.5  text-base rounded-xl",
+  lg: "px-6   py-2.5  text-sm  rounded-lg",
+  xl: "px-8   py-3.5  text-base rounded-lg",
 };
 
 // ── Legacy variant name → new API ─────────────────────────────────────────────
@@ -129,14 +129,14 @@ function buildStyle(variant, color, t) {
       return {
         background: "transparent",
         color: t.base,
-        border: `3px solid ${t.base}`,
+        border: `2px solid ${t.base}`,
         "--btn-hover": t.soft,
       };
     case "soft":
       return {
         background: t.soft,
         color: t.base,
-        border: `3px solid ${t.softBorder}`,
+        border: `2px solid ${t.softBorder}`,
         "--btn-hover": t.softBorder,
       };
     case "ghost":

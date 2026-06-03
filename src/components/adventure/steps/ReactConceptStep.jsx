@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAgeConfig } from '@/engines/ageEngine'
@@ -227,7 +227,7 @@ export default function ReactConceptStep({ step, onComplete }) {
 
       {showCode && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}>
-          <Button variant="action" fullWidth onClick={onComplete}>
+          <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
             {step.action || 'Next!'}
           </Button>
         </motion.div>

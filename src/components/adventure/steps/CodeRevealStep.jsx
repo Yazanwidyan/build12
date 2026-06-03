@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Code2 } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
@@ -35,14 +35,9 @@ export default function CodeRevealStep({ step, onComplete }) {
       className="flex flex-col gap-3"
     >
       {!revealed ? (
-        <button
-          onClick={() => setRevealed(true)}
-          className="flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-teki-300
-                     rounded-xl text-teki-600 font-medium text-sm hover:bg-teki-50 transition-colors"
-        >
-          <Code2 size={16} />
+        <Button variant="outline" color="blue" fullWidth icon={<Code2 size={16} />} onClick={() => setRevealed(true)}>
           Show me the code!
-        </button>
+        </Button>
       ) : (
         <AnimatePresence>
           <motion.div
@@ -65,7 +60,7 @@ export default function CodeRevealStep({ step, onComplete }) {
         </AnimatePresence>
       )}
 
-      <Button variant="action" fullWidth onClick={onComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
         {step.action || 'Continue'}
       </Button>
     </motion.div>

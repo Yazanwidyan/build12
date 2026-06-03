@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -49,7 +49,7 @@ export default function InputStep({ step, onComplete }) {
         onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
         autoFocus
       />
-      <Button variant="action" fullWidth onClick={handleSubmit} disabled={!value.trim()}>
+      <Button variant="solid" color="blue" fullWidth onClick={handleSubmit} disabled={!value.trim()}>
         {step.action || 'Continue'}
       </Button>
     </motion.div>

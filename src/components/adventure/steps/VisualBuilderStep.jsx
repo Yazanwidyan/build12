@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, X } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
@@ -184,7 +184,7 @@ export default function VisualBuilderStep({ step, onComplete }) {
         </div>
       ))}
 
-      <Button variant="action" fullWidth onClick={handleComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={handleComplete}>
         {step.action || 'Done!'}
       </Button>
     </motion.div>

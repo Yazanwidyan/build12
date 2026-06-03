@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Edit2, Check, X, Star, Trophy, Zap, Shield } from 'lucide-react'
@@ -57,12 +57,8 @@ function EditableName({ name, onSave }) {
           className="input-base text-xl font-black w-48"
           autoFocus
         />
-        <button onClick={save} className="p-1.5 rounded-lg transition-colors hover:bg-[var(--accent-bg)]" style={{ color: '#2cbaff' }}>
-          <Check size={16} />
-        </button>
-        <button onClick={() => setEditing(false)} className="p-1.5 rounded-lg transition-colors hover:bg-red-500/10" style={{ color: 'var(--ink-faint)' }}>
-          <X size={16} />
-        </button>
+        <Button variant="ghost" color="blue" size="xs" onClick={save}><Check size={16} /></Button>
+        <Button variant="ghost" color="red"  size="xs" onClick={() => setEditing(false)}><X size={16} /></Button>
       </div>
     )
   }
@@ -155,15 +151,9 @@ export default function ProfilePage() {
       {/* ── Nav ── */}
       <nav className="border-b-2 sticky top-0 z-30" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-4">
-          <button
-            onClick={() => navigate({ to: '/dashboard' })}
-            className="flex items-center gap-1.5 text-sm font-medium transition-colors"
-            style={{ color: 'var(--ink-faint)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-faint)'}
-          >
-            <ArrowLeft size={15} /> Dashboard
-          </button>
+          <Button variant="ghost" color="neutral" size="sm" icon={<ArrowLeft size={15} />} onClick={() => navigate({ to: '/dashboard' })}>
+            Dashboard
+          </Button>
           <span className="text-sm font-black text-ink ml-2">Profile</span>
           <div className="flex-1" />
         </div>
@@ -238,7 +228,7 @@ export default function ProfilePage() {
               </div>
             )}
 
-            <Button variant="danger" size="sm" fullWidth onClick={() => { logout(); navigate({ to: '/' }) }}>
+            <Button variant="solid" color="red" size="sm" fullWidth onClick={() => { logout(); navigate({ to: '/' }) }}>
               Log out
             </Button>
           </div>

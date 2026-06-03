@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -82,7 +82,7 @@ export default function ColorPickerStep({ step, onComplete }) {
         </div>
       </div>
 
-      <Button variant="action" fullWidth onClick={confirm}>
+      <Button variant="solid" color="blue" fullWidth onClick={confirm}>
         {step.action || "That's the color!"}
       </Button>
     </motion.div>

@@ -5,6 +5,7 @@ import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
 import { useAuthStore } from "@/stores/authStore";
 import { AVATARS, useProfileStore } from "@/stores/profileStore";
 import { useProgressStore } from "@/stores/progressStore";
+import { useThemeStore } from "@/stores/themeStore";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -20,8 +21,7 @@ import {
   User,
   Zap,
 } from "lucide-react";
-import { useThemeStore } from "@/stores/themeStore";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ── Adventures shown in the Learn tab ─────────────────────────────────────────
 const ADVENTURES_LIST = [
@@ -180,24 +180,25 @@ function JumpBackInCard({ ageGroup, xp }) {
 
         {/* Actions */}
         <div className="flex items-center gap-3 mt-1">
-          <button
+          <Button
+            variant="solid"
+            color="blue"
+            size="lg"
             onClick={(e) => {
               e.stopPropagation();
               navigate({ to: "/adventure" });
             }}
-            className="px-5 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
-            style={{
-              background: "linear-gradient(135deg,#2cbaff,#06a4f0)",
-            }}
           >
             {started ? "Continue Learning" : "Start Adventure"}
-          </button>
-          <button
-            className="text-sm font-medium transition-opacity hover:opacity-100"
+          </Button>
+          <Button
+            size="lg"
+            variant="link"
+            color="neutral"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
             View details
-          </button>
+          </Button>
         </div>
       </div>
     </motion.div>
@@ -541,7 +542,10 @@ function ProfileSidebar({
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
-            style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
+            style={{
+              background: "var(--accent-bg)",
+              border: "1px solid var(--accent-border)",
+            }}
           >
             <AvatarDisplay avatarId={profile.avatar} size={44} />
           </div>
@@ -579,18 +583,14 @@ function ProfileSidebar({
           ))}
         </div>
 
-        <button
+        <Button
+          variant="solid"
+          color="neutral"
+          fullWidth
           onClick={() => navigate({ to: "/profile" })}
-          className="w-full py-2 rounded-xl border-2 text-sm font-semibold transition-all active:scale-95"
-          style={{
-            borderColor: "var(--app-border)",
-            color: "var(--ink-muted)",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = '#2cbaff'; e.currentTarget.style.color = '#2cbaff' }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--app-border)'; e.currentTarget.style.color = 'var(--ink-muted)' }}
         >
           View profile
-        </button>
+        </Button>
       </div>
 
       {/* Builder Powers */}
@@ -641,13 +641,15 @@ function ProfileSidebar({
       )}
 
       {/* Log out */}
-      <button
+      <Button
+        variant="ghost"
+        color="red"
+        fullWidth
+        size="sm"
         onClick={onLogout}
-        className="text-xs font-medium text-center py-2 rounded-xl transition-colors hover:bg-red-500/10 hover:text-red-400"
-        style={{ color: "var(--ink-faint)" }}
       >
         Log out
-      </button>
+      </Button>
     </div>
   );
 }
@@ -661,7 +663,9 @@ function UserMenu({ profile, navigate, onLogout }) {
   // Close on outside click
   useEffect(() => {
     if (!open) return;
-    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
@@ -670,12 +674,18 @@ function UserMenu({ profile, navigate, onLogout }) {
     {
       icon: <User size={14} />,
       label: "View Profile",
-      onClick: () => { navigate({ to: "/profile" }); setOpen(false); },
+      onClick: () => {
+        navigate({ to: "/profile" });
+        setOpen(false);
+      },
     },
     {
       icon: dark ? <Sun size={14} /> : <Moon size={14} />,
       label: dark ? "Light Mode" : "Dark Mode",
-      onClick: () => { toggle(); setOpen(false); },
+      onClick: () => {
+        toggle();
+        setOpen(false);
+      },
     },
   ];
 
@@ -689,7 +699,10 @@ function UserMenu({ profile, navigate, onLogout }) {
       >
         <div
           className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
-          style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
+          style={{
+            background: "var(--accent-bg)",
+            border: "1px solid var(--accent-border)",
+          }}
         >
           <AvatarDisplay avatarId={profile.avatar} size={28} />
         </div>
@@ -716,49 +729,62 @@ function UserMenu({ profile, navigate, onLogout }) {
             {/* Header */}
             <div
               className="flex items-center gap-3 px-4 py-3"
-              style={{ borderBottom: "2px solid var(--app-border)", backgroundColor: "var(--app-raised)" }}
+              style={{
+                borderBottom: "2px solid var(--app-border)",
+                backgroundColor: "var(--app-raised)",
+              }}
             >
               <div
                 className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
-                style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
+                style={{
+                  background: "var(--accent-bg)",
+                  border: "1px solid var(--accent-border)",
+                }}
               >
                 <AvatarDisplay avatarId={profile.avatar} size={36} />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold text-ink truncate">{profile.builderName || "Builder"}</p>
-                <p className="text-xs text-muted truncate capitalize">{profile.ageGroup ?? "builder"}</p>
+                <p className="text-sm font-bold text-ink truncate">
+                  {profile.builderName || "Builder"}
+                </p>
+                <p className="text-xs text-muted truncate capitalize">
+                  {profile.ageGroup ?? "builder"}
+                </p>
               </div>
             </div>
 
             {/* Menu items */}
             <div className="py-1.5">
               {MENU.map((item) => (
-                <button
+                <Button
                   key={item.label}
+                  variant="ghost"
+                  color="neutral"
+                  fullWidth
+                  className="!justify-start px-4 py-2.5 rounded-none"
+                  icon={item.icon}
                   onClick={item.onClick}
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors text-left"
-                  style={{ color: "var(--ink-muted)" }}
-                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = "var(--app-raised)"; e.currentTarget.style.color = "var(--ink)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "var(--ink-muted)"; }}
                 >
-                  {item.icon}
                   {item.label}
-                </button>
+                </Button>
               ))}
             </div>
 
             {/* Logout */}
-            <div style={{ borderTop: "2px solid var(--app-border)" }} className="py-1.5">
-              <button
+            <div
+              style={{ borderTop: "2px solid var(--app-border)" }}
+              className="py-1.5"
+            >
+              <Button
+                variant="ghost"
+                color="red"
+                fullWidth
+                className="!justify-start px-4 py-2.5 rounded-none"
+                icon={<LogOut size={14} />}
                 onClick={onLogout}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-colors text-left"
-                style={{ color: "#f87171" }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = "rgba(248,113,113,0.08)"}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
               >
-                <LogOut size={14} />
                 Log out
-              </button>
+              </Button>
             </div>
           </motion.div>
         )}
@@ -819,25 +845,15 @@ export default function DashboardPage() {
           {/* Nav tabs */}
           <div className="hidden md:flex items-center gap-1">
             {TABS.map((tab) => (
-              <button
+              <Button
                 key={tab.id}
+                size="sm"
+                variant={activeTab === tab.id ? "soft" : "ghost"}
+                color={activeTab === tab.id ? "blue" : "neutral"}
                 onClick={() => setActiveTab(tab.id)}
-                className="px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-150"
-                style={
-                  activeTab === tab.id
-                    ? {
-                        backgroundColor: "rgba(44,186,255,0.12)",
-                        color: "#2cbaff",
-                        border: "2px solid var(--app-border)",
-                      }
-                    : {
-                        color: "var(--ink-muted)",
-                        border: "2px solid transparent",
-                      }
-                }
               >
                 {tab.label}
-              </button>
+              </Button>
             ))}
           </div>
 

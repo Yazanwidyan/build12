@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
@@ -51,10 +51,10 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         </div>
 
         <div className="flex flex-col gap-2 w-full">
-          <Button variant="action" fullWidth onClick={onOpenBuilder}>
+          <Button variant="solid" color="blue" fullWidth onClick={onOpenBuilder}>
             🔓 Open Website Builder
           </Button>
-          <Button variant="ghost" fullWidth onClick={onGoToDashboard}>
+          <Button variant="ghost" color="neutral" fullWidth onClick={onGoToDashboard}>
             Go to Dashboard
           </Button>
         </div>
@@ -95,16 +95,9 @@ export default function AdventurePage() {
       <div className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b-2 px-4 h-9 flex items-center gap-2"
            style={{ backgroundColor: 'rgba(var(--app-surface),0.85)', borderColor: 'var(--app-border)',
                     background: 'color-mix(in srgb, var(--app-surface) 85%, transparent)' }}>
-        <button
-          onClick={() => navigate({ to: '/dashboard' })}
-          className="flex items-center gap-1 text-xs transition-colors"
-          style={{ color: 'var(--ink-faint)' }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-faint)'}
-        >
-          <ArrowLeft size={12} />
+        <Button variant="ghost" color="neutral" size="xs" icon={<ArrowLeft size={12} />} onClick={() => navigate({ to: '/dashboard' })}>
           Dashboard
-        </button>
+        </Button>
         <span style={{ color: 'var(--app-border)' }} className="text-xs">|</span>
         <span className="text-xs font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Adventure</span>
         <div className="flex-1" />

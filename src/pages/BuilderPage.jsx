@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+﻿import { useNavigate } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 import { useProgressStore } from '@/stores/progressStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -21,7 +21,7 @@ export default function BuilderPage() {
         <p className="text-muted mb-6 max-w-sm text-sm">
           Complete the Website Adventure first to unlock the free-form builder!
         </p>
-        <Button variant="primary" onClick={() => navigate({ to: '/adventure' })}>
+        <Button variant="solid" color="blue" onClick={() => navigate({ to: '/adventure' })}>
           Go to Website Adventure
         </Button>
       </div>
@@ -36,16 +36,9 @@ export default function BuilderPage() {
         style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}
       >
       <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3">
-        <button
-          onClick={() => navigate({ to: '/dashboard' })}
-          className="flex items-center gap-1 text-sm transition-colors"
-          style={{ color: 'var(--ink-faint)' }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-faint)'}
-        >
-          <ArrowLeft size={14} />
+        <Button variant="ghost" color="neutral" size="sm" icon={<ArrowLeft size={14} />} onClick={() => navigate({ to: '/dashboard' })}>
           Dashboard
-        </button>
+        </Button>
         <span className="font-bold text-ink text-sm">Website Builder</span>
         <span
           className="text-xs rounded-full px-2 py-0.5 font-semibold"

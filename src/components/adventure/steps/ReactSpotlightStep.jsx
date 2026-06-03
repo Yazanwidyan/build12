@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -115,7 +115,7 @@ export default function ReactSpotlightStep({ step, onComplete }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Button variant="action" fullWidth onClick={onComplete}>
+            <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
               {step.action || 'Continue'}
             </Button>
           </motion.div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
@@ -47,15 +47,9 @@ export default function AuthPage({ mode = 'signup' }) {
     <div className="min-h-screen bg-app flex flex-col items-center justify-center p-4">
       {/* Top bar */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-        <button
-          onClick={() => navigate({ to: '/' })}
-          className="text-sm transition-colors"
-          style={{ color: 'var(--ink-faint)' }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-faint)'}
-        >
+        <Button variant="ghost" color="neutral" size="sm" onClick={() => navigate({ to: '/' })}>
           ← Home
-        </button>
+        </Button>
         <ThemeToggle />
       </div>
 
@@ -83,20 +77,16 @@ export default function AuthPage({ mode = 'signup' }) {
             <Input label="Email" type="email" placeholder="you@example.com" error={errors.email?.message} {...register('email')} />
             <Input label="Password" type="password" placeholder="••••••••" error={errors.password?.message} {...register('password')} />
             {error && <p className="text-sm text-red-400 text-center">{error}</p>}
-            <Button variant="action" fullWidth type="submit" disabled={isSubmitting}>
+            <Button variant="solid" color="blue" fullWidth type="submit" disabled={isSubmitting}>
               {isSignup ? 'Create account' : 'Log in'}
             </Button>
           </form>
 
           <p className="text-sm text-muted text-center mt-4">
             {isSignup ? 'Already have an account? ' : "Don't have an account? "}
-            <button
-              onClick={() => navigate({ to: isSignup ? '/login' : '/signup' })}
-              className="font-semibold transition-colors hover:opacity-80"
-              style={{ color: '#2cbaff' }}
-            >
+            <Button variant="link" color="blue" size="sm" onClick={() => navigate({ to: isSignup ? '/login' : '/signup' })}>
               {isSignup ? 'Log in' : 'Sign up free'}
-            </button>
+            </Button>
           </p>
         </div>
       </div>

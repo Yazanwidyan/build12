@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -62,7 +62,7 @@ export default function ReactGatewayStep({ step, onComplete }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.25 }}
       >
-        <Button variant="action" size="lg" fullWidth onClick={onComplete}>
+        <Button variant="solid" color="blue" size="lg" fullWidth onClick={onComplete}>
           {step.action || "Let's Go!"}
         </Button>
       </motion.div>

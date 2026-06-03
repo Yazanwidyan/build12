@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useProgressStore } from '@/stores/progressStore'
@@ -65,7 +65,7 @@ export default function ActCompleteStep({ step, onComplete }) {
           </motion.span>
         )}
 
-        <Button variant="action" fullWidth onClick={onComplete}>
+        <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
           🔓 Open Website Builder
         </Button>
       </motion.div>
@@ -112,7 +112,7 @@ export default function ActCompleteStep({ step, onComplete }) {
         </motion.span>
       )}
 
-      <Button variant="action" fullWidth onClick={onComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
         {step.action || 'Continue!'}
       </Button>
     </motion.div>

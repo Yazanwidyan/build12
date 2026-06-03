@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 import { useProgressStore } from '@/stores/progressStore'
@@ -51,7 +51,7 @@ export default function BuilderCard({ builder: b }) {
         </div>
         <span className="ml-auto text-sm font-bold" style={{ color: '#4ade80' }}>✓</span>
       </div>
-      <Button variant="primary" size="sm" fullWidth onClick={() => navigate({ to: b.route })}>
+      <Button variant="solid" color="blue" size="sm" fullWidth onClick={() => navigate({ to: b.route })}>
         Open Builder
       </Button>
     </motion.div>

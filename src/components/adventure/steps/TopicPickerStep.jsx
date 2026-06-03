@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAdventureStore } from '@/stores/adventureStore'
@@ -63,7 +63,7 @@ export default function TopicPickerStep({ step, onComplete }) {
         onKeyDown={(e) => e.key === 'Enter' && confirm()}
       />
 
-      <Button variant="action" fullWidth onClick={confirm} disabled={!active}>
+      <Button variant="solid" color="blue" fullWidth onClick={confirm} disabled={!active}>
         {step.action || "That's what it's about!"}
       </Button>
     </motion.div>
