@@ -275,8 +275,9 @@ function AIBuilderView() {
   return (
     <motion.div
       key="ai-builder"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.15 }}
       className="flex flex-col gap-8"
     >
       {/* Hero */}
@@ -388,8 +389,9 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
   return (
     <motion.div
       key="my-projects"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.15 }}
       className="flex flex-col gap-6"
     >
       <h2 className="text-xl font-black text-ink">My Projects</h2>
@@ -778,9 +780,10 @@ export default function DashboardPage() {
             {activeTab === "learn" && (
               <motion.div
                 key="learn"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
                 className="flex flex-col gap-8"
               >
                 {/* TEKI welcome */}
@@ -861,12 +864,7 @@ export default function DashboardPage() {
         </main>
 
         {/* ── Right sidebar ── */}
-        <motion.aside
-          initial={{ opacity: 0, x: 12 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.12 }}
-          className="w-72 shrink-0 hidden lg:block"
-        >
+        <aside className="w-72 shrink-0 hidden lg:block">
           <ProfileSidebar
             profile={profile}
             avatar={avatar}
@@ -878,7 +876,7 @@ export default function DashboardPage() {
             completedMissions={completedMissions}
             onLogout={handleLogout}
           />
-        </motion.aside>
+        </aside>
       </div>
     </div>
   );

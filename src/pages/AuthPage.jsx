@@ -59,11 +59,7 @@ export default function AuthPage({ mode = 'signup' }) {
         <ThemeToggle />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-sm"
-      >
+      <div className="w-full max-w-sm">
         {/* TEKI */}
         <div className="flex justify-center mb-6">
           <motion.div
@@ -103,7 +99,7 @@ export default function AuthPage({ mode = 'signup' }) {
             </button>
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

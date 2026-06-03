@@ -73,12 +73,7 @@ export default function LandingPage() {
       <main className="flex-1 flex flex-col items-center justify-center py-16 px-4 text-center">
         <div className="max-w-6xl mx-auto w-full flex flex-col items-center gap-16">
           {/* Hero block */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center gap-8 max-w-lg"
-          >
+          <div className="flex flex-col items-center gap-8 max-w-lg">
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{
@@ -111,31 +106,20 @@ export default function LandingPage() {
             </motion.div>
 
             <p className="text-xs text-faint">No experience needed · Ages 8+</p>
-          </motion.div>
+          </div>
 
           {/* Feature grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full"
-          >
-            {FEATURES.map((f, i) => (
-              <motion.div
-                key={f.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                className="card p-4 text-left"
-              >
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full">
+            {FEATURES.map((f) => (
+              <div key={f.label} className="card p-4 text-left">
                 <div className="text-2xl mb-2">{f.emoji}</div>
                 <h3 className="font-bold text-ink text-sm">{f.label}</h3>
                 <p className="text-xs text-muted mt-0.5 leading-relaxed">
                   {f.desc}
                 </p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </main>
 
