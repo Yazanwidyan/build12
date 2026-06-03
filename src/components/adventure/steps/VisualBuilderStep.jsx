@@ -7,21 +7,26 @@ import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
 const PRESET_COLORS = [
-  '#6366f1','#3b82f6','#10b981','#f43f5e','#f59e0b',
+  '#2cbaff','#fde047','#10b981','#f43f5e','#f59e0b',
   '#8b5cf6','#14b8a6','#ec4899','#0ea5e9','#f97316','#1e293b','#ffffff',
 ]
 
 function TagsField({ value = [], onChange, suggestions = [] }) {
   const [input, setInput] = useState('')
-  const add = (tag) => { const t = tag.trim(); if (t && !value.includes(t)) onChange([...value, t]); setInput('') }
+  const add    = (tag) => { const t = tag.trim(); if (t && !value.includes(t)) onChange([...value, t]); setInput('') }
   const remove = (tag) => onChange(value.filter((v) => v !== tag))
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-1.5">
         {value.map((tag) => (
-          <span key={tag} className="flex items-center gap-1 bg-teki-50 text-teki-700 border border-teki-200 rounded-lg px-2 py-0.5 text-xs font-medium">
+          <span
+            key={tag}
+            className="flex items-center gap-1 rounded-lg px-2 py-0.5 text-xs font-medium"
+            style={{ backgroundColor: 'var(--accent-bg)', border: '1px solid var(--accent-border)', color: 'var(--accent-light)' }}
+          >
             {tag}
-            <button onClick={() => remove(tag)} className="hover:text-red-500"><X size={9} /></button>
+            <button onClick={() => remove(tag)} className="hover:text-red-400 transition-colors"><X size={9} /></button>
           </span>
         ))}
       </div>
@@ -31,16 +36,31 @@ function TagsField({ value = [], onChange, suggestions = [] }) {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); add(input) } }}
           placeholder="Type and press Enter..."
-          className="flex-1 rounded-xl border border-gray-200 px-3 py-2 text-xs focus:border-teki-500 focus:outline-none focus:ring-2 focus:ring-teki-500/20"
+          className="input-base flex-1 text-xs"
         />
-        <button onClick={() => add(input)} className="p-2 text-teki-600 hover:bg-teki-50 rounded-xl border border-teki-200">
+        <button
+          onClick={() => add(input)}
+          className="p-2 rounded-xl border transition-colors"
+          style={{
+            borderColor: 'var(--accent-border)',
+            backgroundColor: 'var(--accent-bg)',
+            color: 'var(--accent)',
+          }}
+        >
           <Plus size={12} />
         </button>
       </div>
       <div className="flex flex-wrap gap-1">
         {suggestions.filter((s) => !value.includes(s)).slice(0, 5).map((s) => (
-          <button key={s} onClick={() => add(s)}
-            className="text-xs text-gray-400 border border-gray-200 rounded-lg px-2 py-0.5 hover:bg-gray-50">
+          <button
+            key={s}
+            onClick={() => add(s)}
+            className="text-xs rounded-lg px-2 py-0.5 transition-colors"
+            style={{
+              color: 'var(--ink-faint)',
+              border: '1px solid var(--app-border)',
+            }}
+          >
             + {s}
           </button>
         ))}
@@ -54,13 +74,24 @@ function ColorField({ value, onChange }) {
     <div className="flex flex-col gap-2">
       <div className="grid grid-cols-6 gap-1.5">
         {PRESET_COLORS.map((c) => (
-          <button key={c} onClick={() => onChange(c)}
-            style={{ background: c, border: value === c ? '2px solid #6366f1' : '2px solid transparent' }}
-            className="aspect-square rounded-lg shadow-sm hover:scale-110 transition-transform" />
+          <button
+            key={c}
+            onClick={() => onChange(c)}
+            style={{
+              background: c,
+              border: value === c ? '2px solid #2cbaff' : '2px solid transparent',
+            }}
+            className="aspect-square rounded-lg shadow-sm hover:scale-110 transition-transform"
+          />
         ))}
       </div>
-      <input type="color" value={value || '#6366f1'} onChange={(e) => onChange(e.target.value)}
-        className="h-8 w-full rounded-xl border border-gray-200 cursor-pointer p-0.5" />
+      <input
+        type="color"
+        value={value || '#2cbaff'}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-8 w-full rounded-xl cursor-pointer p-0.5"
+        style={{ border: '1.5px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
+      />
     </div>
   )
 }
@@ -69,9 +100,16 @@ function SelectField({ value, onChange, options, labels }) {
   return (
     <div className="flex gap-2 flex-wrap">
       {options.map((opt, i) => (
-        <button key={opt} onClick={() => onChange(opt)}
-          className={`px-3 py-1.5 rounded-xl text-xs border-2 font-medium transition-colors
-            ${value === opt ? 'border-teki-500 bg-teki-50 text-teki-700' : 'border-gray-200 text-gray-600 hover:border-teki-200'}`}>
+        <button
+          key={opt}
+          onClick={() => onChange(opt)}
+          className="px-3 py-1.5 rounded-xl text-xs font-semibold border-2 transition-all"
+          style={{
+            borderColor: value === opt ? '#2cbaff' : 'var(--app-border)',
+            backgroundColor: value === opt ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
+            color: value === opt ? '#2cbaff' : 'var(--ink-muted)',
+          }}
+        >
           {labels?.[i] ?? opt}
         </button>
       ))}
@@ -80,7 +118,7 @@ function SelectField({ value, onChange, options, labels }) {
 }
 
 export default function VisualBuilderStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
+  const speak   = useTekiStore((s) => s.speak)
   const adventure = useAdventureStore()
 
   const getInit = () => {
@@ -104,11 +142,8 @@ export default function VisualBuilderStep({ step, onComplete }) {
     setValues(newVals)
     const field = step.fields.find((f) => f.id === fieldId)
     if (!field) return
-    if (step.isStyleUpdate) {
-      adventure.updateStyles({ [field.storeSubKey]: val })
-    } else if (step.section) {
-      adventure.updateSection(step.section, { [field.storeSubKey]: val })
-    }
+    if (step.isStyleUpdate) adventure.updateStyles({ [field.storeSubKey]: val })
+    else if (step.section) adventure.updateSection(step.section, { [field.storeSubKey]: val })
   }
 
   const handleComplete = () => {
@@ -129,8 +164,9 @@ export default function VisualBuilderStep({ step, onComplete }) {
     >
       {step.fields?.map((field) => (
         <div key={field.id}>
-          <label className="text-xs font-semibold text-gray-600 block mb-1">
-            {field.label}{field.hint && <span className="font-normal text-gray-400"> — {field.hint}</span>}
+          <label className="text-xs font-semibold block mb-1" style={{ color: 'var(--ink-muted)' }}>
+            {field.label}
+            {field.hint && <span className="font-normal" style={{ color: 'var(--ink-faint)' }}> — {field.hint}</span>}
           </label>
 
           {field.type === 'text' && (

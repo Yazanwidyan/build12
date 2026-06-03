@@ -64,8 +64,8 @@ export default function CodeChallengeStep({ step, onComplete }) {
                 onChange={(e) => setAnswers((a) => ({ ...a, [bi]: e.target.value }))}
                 onKeyDown={(e) => e.key === 'Enter' && check()}
                 placeholder={ageGroup === 'young' ? step.blanks?.[bi]?.answer : '...'}
-                className="inline-block bg-teki-900 border-2 border-teki-500 rounded px-1.5 text-teki-200
-                           placeholder:text-teki-700 focus:outline-none w-16 text-center"
+                className="inline-block rounded px-1.5 focus:outline-none w-16 text-center"
+                style={{ backgroundColor: 'rgba(44,186,255,0.1)', border: '2px solid #2cbaff', color: '#7cd8ff' }}
                 style={{ fontFamily: 'inherit', fontSize: 'inherit' }}
                 autoFocus={bi === 0}
               />
@@ -81,8 +81,10 @@ export default function CodeChallengeStep({ step, onComplete }) {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className={`flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-semibold
-              ${result === 'correct' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'}`}
+            className="flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-semibold"
+            style={result === 'correct'
+              ? { backgroundColor: 'rgba(74,222,128,0.12)', color: '#4ade80', border: '1px solid rgba(74,222,128,0.3)' }
+              : { backgroundColor: 'rgba(248,113,113,0.12)', color: '#f87171', border: '1px solid rgba(248,113,113,0.3)' }}
           >
             {result === 'correct' ? <Check size={14} /> : <X size={14} />}
             {result === 'correct' ? 'Correct!' : 'Not quite — try again!'}
@@ -91,8 +93,8 @@ export default function CodeChallengeStep({ step, onComplete }) {
       </AnimatePresence>
 
       {explanation && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5">
-          <p className="text-xs text-amber-800 leading-relaxed">💡 {explanation}</p>
+        <div className="rounded-xl p-2.5" style={{ backgroundColor: 'rgba(253,224,71,0.1)', border: '1px solid rgba(253,224,71,0.25)' }}>
+          <p className="text-xs leading-relaxed" style={{ color: '#fde047' }}>💡 {explanation}</p>
         </div>
       )}
 

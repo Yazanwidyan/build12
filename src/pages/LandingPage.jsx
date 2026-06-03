@@ -3,6 +3,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useAuthStore } from '@/stores/authStore'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 
 const FEATURES = [
   { emoji: '🏗️', label: 'Build Real Things',  desc: 'Not exercises — actual websites, games, and apps.' },
@@ -18,11 +19,27 @@ export default function LandingPage() {
   const handleStart = () => navigate({ to: isAuthenticated ? '/dashboard' : '/signup' })
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-app flex flex-col">
       {/* Nav */}
-      <nav className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
-        <span className="text-xl font-black text-teki-600">HelloBuildIt</span>
-        <div className="flex gap-2">
+      <nav
+        className="px-6 py-3 flex items-center justify-between border-b sticky top-0 z-10 backdrop-blur-md"
+        style={{
+          backgroundColor: 'color-mix(in srgb, var(--app-surface) 90%, transparent)',
+          borderColor: 'var(--app-border)',
+          borderTop: '3px solid #2cbaff',
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-black text-white"
+            style={{ background: 'linear-gradient(135deg, #2cbaff, #06a4f0)' }}
+          >
+            H
+          </div>
+          <span className="text-lg font-black text-ink tracking-tight">HelloBuildIt</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {isAuthenticated ? (
             <Button size="sm" onClick={() => navigate({ to: '/dashboard' })}>Dashboard</Button>
           ) : (
@@ -50,23 +67,27 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="flex flex-col gap-4">
-            <h1 className="text-4xl font-black text-gray-900 leading-tight">
+            <h1 className="text-4xl font-black text-ink leading-tight">
               Build it.<br />
-              <span className="text-teki-600">Understand it.</span><br />
+              <span style={{ color: '#2cbaff' }}>Understand it.</span><br />
               Own it.
             </h1>
-            <p className="text-gray-500 text-lg leading-relaxed">
-              Learn to code by building real websites, games, and apps — guided by TEKI, your AI companion.
+            <p className="text-lg leading-relaxed text-muted">
+              Learn to code by building real websites, games, and apps —
+              guided by TEKI, your AI companion.
             </p>
           </div>
 
-          <Button variant="action" size="xl" onClick={handleStart}>
-            Start Building — it's free
-          </Button>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <Button variant="action" size="xl" onClick={handleStart}>
+              Start Building — it's free
+            </Button>
+          </motion.div>
 
-          <p className="text-xs text-gray-400">No experience needed · Ages 8+</p>
+          <p className="text-xs text-faint">No experience needed · Ages 8+</p>
         </motion.div>
 
+        {/* Feature cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,17 +100,20 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.1 }}
-              className="bg-gray-50 rounded-2xl p-4 text-left"
+              className="card p-4 text-left"
             >
               <div className="text-2xl mb-2">{f.emoji}</div>
-              <h3 className="font-bold text-gray-800 text-sm">{f.label}</h3>
-              <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{f.desc}</p>
+              <h3 className="font-bold text-ink text-sm">{f.label}</h3>
+              <p className="text-xs text-muted mt-0.5 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </motion.div>
       </main>
 
-      <footer className="py-6 text-center text-xs text-gray-400 border-t border-gray-100">
+      <footer
+        className="py-6 text-center text-xs border-t"
+        style={{ borderColor: 'var(--app-border)', color: 'var(--ink-faint)' }}
+      >
         © {new Date().getFullYear()} HelloBuildIt by HelloWorldKids
       </footer>
     </div>

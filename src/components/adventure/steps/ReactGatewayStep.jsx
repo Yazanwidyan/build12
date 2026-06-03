@@ -19,14 +19,14 @@ export default function ReactGatewayStep({ step, onComplete }) {
   }, [step.id])
 
   const chapterColors = [
-    'from-sky-500 to-indigo-500',
-    'from-violet-500 to-purple-600',
-    'from-teal-500 to-emerald-500',
-    'from-rose-500 to-pink-500',
-    'from-amber-400 to-orange-500',
-    'from-indigo-500 to-blue-600',
-    'from-cyan-500 to-teal-500',
-    'from-fuchsia-500 to-violet-600',
+    'from-teki-500 to-teki-700',
+    'from-teki-400 to-cyan-600',
+    'from-teki-500 to-emerald-500',
+    'from-gold-300 to-teki-500',
+    'from-teki-600 to-teki-400',
+    'from-gold-400 to-orange-500',
+    'from-teki-500 to-teal-500',
+    'from-gold-300 to-teki-600',
   ]
   const gradient = chapterColors[(step.chapterNumber - 1) % chapterColors.length]
 

@@ -39,7 +39,7 @@ export default function InputStep({ step, onComplete }) {
       className="flex flex-col gap-3"
     >
       {step.tekiHint && (
-        <p className="text-xs text-gray-400 italic">{step.tekiHint}</p>
+        <p className="text-xs italic" style={{ color: 'var(--ink-faint)' }}>{step.tekiHint}</p>
       )}
       <Input
         value={value}

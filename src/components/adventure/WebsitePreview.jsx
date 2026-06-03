@@ -5,48 +5,75 @@ import { useAdventureStore } from '@/stores/adventureStore'
 import { generateWebsiteHTML } from '@/engines/previewEngine'
 
 export default function WebsitePreview() {
-  const website    = useAdventureStore((s) => s.website)
-  const reactDemo  = useAdventureStore((s) => s.reactDemo)
+  const website   = useAdventureStore((s) => s.website)
+  const reactDemo = useAdventureStore((s) => s.reactDemo)
   const [viewport, setViewport] = useState('desktop')
 
-  const html = generateWebsiteHTML(website, reactDemo)
+  const html     = generateWebsiteHTML(website, reactDemo)
   const siteName = (website.name || 'mywebsite').toLowerCase().replace(/\s+/g, '')
 
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-full" style={{ backgroundColor: 'var(--app-bg)' }}>
+
       {/* Browser chrome */}
-      <div className="bg-gray-200 border-b border-gray-300 px-3 py-2 flex items-center gap-2 shrink-0">
+      <div
+        className="px-3 py-2 flex items-center gap-2 shrink-0"
+        style={{
+          backgroundColor: 'var(--app-surface)',
+          borderBottom: '1px solid var(--app-border)',
+        }}
+      >
+        {/* Traffic lights */}
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-400" />
           <div className="w-3 h-3 rounded-full bg-amber-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
         </div>
-        <div className="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-500 font-mono flex items-center gap-1 truncate">
-          <span className="text-green-600">🔒</span>
+
+        {/* URL bar */}
+        <div
+          className="flex-1 rounded-md px-3 py-1 text-xs font-mono flex items-center gap-1 truncate"
+          style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)', color: 'var(--ink-faint)' }}
+        >
+          <span style={{ color: '#4ade80' }}>🔒</span>
           <span className="truncate">{siteName}.mysite.com</span>
         </div>
+
+        {/* Viewport toggles */}
         <div className="flex gap-1">
-          <button
-            onClick={() => setViewport('desktop')}
-            className={`p-1 rounded transition-colors ${viewport === 'desktop' ? 'text-teki-600 bg-teki-100' : 'text-gray-400 hover:text-gray-600'}`}
-          >
-            <Monitor size={14} />
-          </button>
-          <button
-            onClick={() => setViewport('mobile')}
-            className={`p-1 rounded transition-colors ${viewport === 'mobile' ? 'text-teki-600 bg-teki-100' : 'text-gray-400 hover:text-gray-600'}`}
-          >
-            <Smartphone size={14} />
-          </button>
+          {[
+            { id: 'desktop', Icon: Monitor },
+            { id: 'mobile',  Icon: Smartphone },
+          ].map(({ id, Icon }) => (
+            <button
+              key={id}
+              onClick={() => setViewport(id)}
+              className="p-1.5 rounded-lg transition-all"
+              style={viewport === id
+                ? { backgroundColor: 'rgba(44,186,255,0.15)', color: '#2cbaff', border: '1px solid rgba(44,186,255,0.3)' }
+                : { backgroundColor: 'transparent', color: 'var(--ink-faint)', border: '1px solid transparent' }
+              }
+            >
+              <Icon size={14} />
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Preview */}
-      <div className="flex-1 overflow-hidden flex items-stretch justify-center bg-gray-300 p-2">
+      {/* Preview area */}
+      <div
+        className="flex-1 overflow-hidden flex items-stretch justify-center p-2"
+        style={{ backgroundColor: 'var(--app-line)' }}
+      >
         <motion.div
           layout
-          className="bg-white shadow-lg overflow-hidden rounded-sm flex flex-col"
-          style={{ width: viewport === 'mobile' ? 375 : '100%', maxWidth: viewport === 'mobile' ? 375 : '100%' }}
+          className="overflow-hidden rounded-sm flex flex-col"
+          style={{
+            width:    viewport === 'mobile' ? 375 : '100%',
+            maxWidth: viewport === 'mobile' ? 375 : '100%',
+            boxShadow: '0 2px 20px rgba(0,0,0,0.3)',
+            backgroundColor: '#ffffff',
+          }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           <iframe

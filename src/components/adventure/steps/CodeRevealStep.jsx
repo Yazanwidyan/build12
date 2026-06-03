@@ -57,8 +57,8 @@ export default function CodeRevealStep({ step, onComplete }) {
               <code>{code}</code>
             </pre>
             {explanation && (
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5">
-                <p className="text-xs text-amber-800 leading-relaxed">💡 {explanation}</p>
+              <div className="rounded-xl p-2.5" style={{ backgroundColor: 'rgba(253,224,71,0.1)', border: '1px solid rgba(253,224,71,0.25)' }}>
+                <p className="text-xs leading-relaxed" style={{ color: '#fde047' }}>💡 {explanation}</p>
               </div>
             )}
           </motion.div>

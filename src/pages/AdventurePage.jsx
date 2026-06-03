@@ -27,7 +27,8 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         initial={{ scale: 0.85, y: 30 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 220, damping: 22 }}
-        className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 max-w-sm w-full flex flex-col items-center gap-6 text-center"
+        className="rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-6 text-center"
+        style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)' }}
       >
         <motion.div
           animate={{ y: [0, -10, 0] }}
@@ -37,13 +38,13 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         </motion.div>
 
         <div>
-          <p className="text-xs font-semibold text-teki-500 uppercase tracking-widest mb-2">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#2cbaff' }}>
             Level Complete!
           </p>
-          <h2 className="text-2xl font-black text-gray-900 mb-2">
+          <h2 className="text-2xl font-black text-ink mb-2">
             {levelInfo.emoji} {levelInfo.label}
           </h2>
-          <p className="text-gray-500 text-sm leading-relaxed">
+          <p className="text-muted text-sm leading-relaxed">
             You finished all {levelInfo.totalActs} acts in your level.
             The Website Builder is now unlocked — build anything you imagine!
           </p>

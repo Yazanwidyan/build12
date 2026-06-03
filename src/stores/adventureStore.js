@@ -23,7 +23,7 @@ const DEFAULT_REACT_DEMO = {
 
 const DEFAULT_WEBSITE = {
   name: '',
-  color: '#6366f1',
+  color: '#2cbaff',
   topic: '',
   sections: {
     header: {
@@ -50,8 +50,8 @@ const DEFAULT_WEBSITE = {
     },
   },
   styles: {
-    primaryColor: '#6366f1',
-    secondaryColor: '#a5b4fc',
+    primaryColor: '#2cbaff',
+    secondaryColor: '#7cd8ff',
     backgroundColor: '#ffffff',
     textColor: '#111827',
     headingSize: '3xl',

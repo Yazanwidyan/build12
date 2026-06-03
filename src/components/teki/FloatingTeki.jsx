@@ -45,13 +45,14 @@ export default function FloatingTeki() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.88, y: 12 }}
               transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-              className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+              className="rounded-2xl shadow-2xl overflow-hidden"
+              style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)' }}
               style={{ width: 380 }}
             >
               {/* Title bar */}
               <div
                 className="flex items-center justify-between px-3 py-2 border-b border-gray-100"
-                style={{ background: levelInfo?.color ?? act?.color ?? '#4f46e5' }}
+                style={{ background: levelInfo?.color ?? act?.color ?? '#2cbaff' }}
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-[10px] font-bold text-white/70 uppercase tracking-wider shrink-0">
@@ -98,9 +99,10 @@ export default function FloatingTeki() {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="mx-3 mt-1 mb-2 bg-gray-50 rounded-xl border border-gray-100 px-4 py-3"
+                    className="mx-3 mt-1 mb-2 rounded-xl px-4 py-3"
+                    style={{ backgroundColor: 'var(--bubble-bg)', border: '1px solid var(--bubble-border)' }}
                   >
-                    <p className="text-sm text-gray-800 leading-relaxed">
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                       {shownText}
                       {isTyping && (
                         <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 align-middle animate-pulse" />

@@ -5,19 +5,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── Brand violet (same hue both themes) ───────────────────────────────
+        // ── Brand cyan-blue  #2CBAFF ──────────────────────────────────────────
         teki: {
-          50:  '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-          950: '#2e1065',
+          50:  '#f0f9ff',
+          100: '#e0f4ff',
+          200: '#b9e9ff',
+          300: '#7cd8ff',
+          400: '#38c8ff',
+          500: '#2cbaff',   // ← primary brand colour
+          600: '#06a4f0',
+          700: '#0284c7',
+          800: '#075985',
+          900: '#0c4a6e',
+          950: '#082f49',
+        },
+        // ── Secondary gold  #FDE047 ───────────────────────────────────────────
+        gold: {
+          50:  '#fefce8',
+          100: '#fef9c3',
+          200: '#fef08a',
+          300: '#fde047',   // ← main gold
+          400: '#facc15',
+          500: '#eab308',
+          600: '#ca8a04',
+          700: '#a16207',
+          800: '#854d0e',
+          900: '#713f12',
         },
         // ── Semantic tokens via CSS variables ─────────────────────────────────
         // Use these anywhere you want theme-aware colours.

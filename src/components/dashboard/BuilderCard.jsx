@@ -5,27 +5,33 @@ import { useProgressStore } from '@/stores/progressStore'
 import Button from '@/components/ui/Button'
 
 export const BUILDERS = [
-  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',  unlockAdventure: 'Website Adventure', route: '/builder' },
+  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',     unlockAdventure: 'Website Adventure', route: '/builder' },
   { id: 'game',    label: 'Game Builder',    emoji: '🎮', desc: 'Design and code games', unlockAdventure: 'Game Adventure' },
-  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',  unlockAdventure: 'Mobile Adventure' },
+  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',    unlockAdventure: 'Mobile Adventure' },
 ]
 
 export default function BuilderCard({ builder: b }) {
-  const navigate = useNavigate()
+  const navigate   = useNavigate()
   const isUnlocked = useProgressStore((s) => s.isBuilderUnlocked(b.id))
 
   if (!isUnlocked) {
     return (
-      <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 opacity-70">
+      <div
+        className="rounded-2xl p-5 opacity-60"
+        style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
+      >
         <div className="flex items-center gap-3 mb-3">
           <span className="text-3xl">{b.emoji}</span>
           <div>
-            <h3 className="font-bold text-gray-500 text-sm">{b.label}</h3>
-            <p className="text-xs text-gray-400">{b.desc}</p>
+            <h3 className="font-bold text-muted text-sm">{b.label}</h3>
+            <p className="text-xs text-faint">{b.desc}</p>
           </div>
-          <Lock size={16} className="ml-auto text-gray-400" />
+          <Lock size={16} className="ml-auto" style={{ color: 'var(--ink-faint)' }} />
         </div>
-        <div className="text-xs text-gray-500 bg-white/60 border border-gray-200 rounded-lg px-3 py-2 text-center">
+        <div
+          className="text-xs rounded-lg px-3 py-2 text-center font-medium"
+          style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--app-border)', color: 'var(--ink-faint)' }}
+        >
           Complete {b.unlockAdventure} to unlock
         </div>
       </div>
@@ -33,14 +39,17 @@ export default function BuilderCard({ builder: b }) {
   }
 
   return (
-    <motion.div whileHover={{ y: -2 }} className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+    <motion.div
+      whileHover={{ y: -2 }}
+      className="card-hover p-5"
+    >
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl">{b.emoji}</span>
         <div>
-          <h3 className="font-bold text-gray-800 text-sm">{b.label}</h3>
-          <p className="text-xs text-gray-500">{b.desc}</p>
+          <h3 className="font-bold text-ink text-sm">{b.label}</h3>
+          <p className="text-xs text-muted">{b.desc}</p>
         </div>
-        <span className="ml-auto text-green-500 font-bold text-sm">✓</span>
+        <span className="ml-auto text-sm font-bold" style={{ color: '#4ade80' }}>✓</span>
       </div>
       <Button variant="primary" size="sm" fullWidth onClick={() => navigate({ to: b.route })}>
         Open Builder

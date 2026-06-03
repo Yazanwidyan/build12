@@ -11,10 +11,9 @@ export default function ActCompleteStep({ step, onComplete }) {
   const { addXP, completeAct } = useProgressStore()
   const ageGroup = useProfileStore((s) => s.ageGroup) ?? 'young'
 
-  // Parse act number from step.actId (e.g. 'act3' → 3)
-  const actNumber   = parseInt(step.actId.replace('act', ''), 10)
-  const isLevelEnd  = isLastActForLevel(actNumber, ageGroup)
-  const levelInfo   = LEVEL_INFO[ageGroup]
+  const actNumber  = parseInt(step.actId.replace('act', ''), 10)
+  const isLevelEnd = isLastActForLevel(actNumber, ageGroup)
+  const levelInfo  = LEVEL_INFO[ageGroup]
 
   useEffect(() => {
     completeAct(step.actId)
@@ -22,11 +21,7 @@ export default function ActCompleteStep({ step, onComplete }) {
 
     if (isLevelEnd) {
       speak(
-        [
-          `${levelInfo?.label} — COMPLETE! 🎓`,
-          "You finished your entire level!",
-          "The Website Builder is now yours.",
-        ],
+        [`${levelInfo?.label} — COMPLETE! 🎓`, "You finished your entire level!", "The Website Builder is now yours."],
         { mood: 'proud' }
       )
     } else {
@@ -51,10 +46,10 @@ export default function ActCompleteStep({ step, onComplete }) {
         </motion.div>
 
         <div>
-          <p className="text-xs font-semibold text-teki-500 uppercase tracking-wider mb-1">
+          <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#2cbaff' }}>
             {levelInfo?.emoji} {levelInfo?.label} Complete!
           </p>
-          <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
+          <p className="text-sm text-muted leading-relaxed max-w-xs">
             You've finished every act in your level. The Website Builder is unlocked!
           </p>
         </div>
@@ -77,7 +72,6 @@ export default function ActCompleteStep({ step, onComplete }) {
     )
   }
 
-  // Normal act completion
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
@@ -100,8 +94,10 @@ export default function ActCompleteStep({ step, onComplete }) {
           transition={{ delay: 0.3 }}
           className="flex flex-col items-center gap-0.5"
         >
-          <p className="text-[10px] text-gray-400 uppercase tracking-wider">Builder Power Unlocked</p>
-          <p className="font-bold text-teki-700">{step.power.label}</p>
+          <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--ink-faint)' }}>
+            Builder Power Unlocked
+          </p>
+          <p className="font-bold" style={{ color: '#2cbaff' }}>{step.power.label}</p>
         </motion.div>
       )}
 

@@ -3,66 +3,44 @@ import { twMerge } from 'tailwind-merge'
 
 const cn = (...classes) => twMerge(clsx(classes))
 
-// All variant colours reference CSS variables so they auto-adapt to light/dark.
-const variants = {
-  // Solid accent — primary CTA
-  primary: [
-    'text-white font-semibold',
-    'bg-teki-600 dark:bg-teki-500',
-    'border border-teki-700 dark:border-teki-400',
-    'hover:bg-teki-700 dark:hover:bg-teki-600',
-    'active:scale-95',
-    'shadow-sm dark:shadow-glow-sm',
-  ].join(' '),
+// Inline-style approach for primary colours — avoids any Tailwind-cache surprises.
+const VARIANT_STYLES = {
+  primary: {
+    background: '#2cbaff',
+    color: '#fff',
+    border: '1px solid #06a4f0',
+    '--hover-bg': '#06a4f0',
+  },
+  action: {
+    background: '#2cbaff',
+    color: '#fff',
+    border: '1px solid rgba(6,164,240,0.7)',
+    boxShadow: '0 2px 12px rgba(44,186,255,0.35)',
+    '--hover-bg': '#06a4f0',
+  },
+  secondary: null,  // CSS-variable driven, handled via className
+  ghost: null,
+  danger: {
+    background: '#ef4444',
+    color: '#fff',
+    border: '1px solid #dc2626',
+    '--hover-bg': '#dc2626',
+  },
+  success: {
+    background: '#22c55e',
+    color: '#fff',
+    border: '1px solid #16a34a',
+    '--hover-bg': '#16a34a',
+  },
+}
 
-  // Same as primary — used as the main "action" button in missions
-  action: [
-    'text-white font-bold tracking-wide',
-    'bg-teki-600 dark:bg-teki-500',
-    'border border-teki-700/60 dark:border-teki-400/50',
-    'hover:bg-teki-700 dark:hover:bg-teki-600',
-    'active:scale-95',
-    'shadow-md dark:shadow-glow',
-  ].join(' '),
-
-  // Outlined — secondary action
-  secondary: [
-    'font-semibold',
-    'bg-transparent',
-    'border border-[var(--app-border)] hover:border-[var(--accent-border)]',
-    'text-[var(--ink)] hover:text-[var(--accent)]',
-    'hover:bg-[var(--accent-bg)]',
-    'active:scale-95',
-  ].join(' '),
-
-  // Ghost — tertiary, nav back buttons etc.
-  ghost: [
-    'font-medium',
-    'bg-transparent',
-    'border border-transparent',
-    'text-[var(--ink-muted)] hover:text-[var(--ink)]',
-    'hover:bg-[var(--app-raised)]',
-    'active:scale-95',
-  ].join(' '),
-
-  // Danger
-  danger: [
-    'text-white font-semibold',
-    'bg-red-600 dark:bg-red-500',
-    'border border-red-700 dark:border-red-400',
-    'hover:bg-red-700 dark:hover:bg-red-600',
-    'active:scale-95',
-  ].join(' '),
-
-  // Success
-  success: [
-    'text-white font-semibold',
-    'bg-emerald-600 dark:bg-emerald-500',
-    'border border-emerald-700 dark:border-emerald-400',
-    'hover:bg-emerald-700 dark:hover:bg-emerald-600',
-    'active:scale-95',
-    'dark:shadow-glow-green',
-  ].join(' '),
+const VARIANT_CLASSES = {
+  primary:   'font-semibold hover:opacity-90 active:scale-95',
+  action:    'font-bold tracking-wide hover:opacity-90 active:scale-95',
+  secondary: 'font-semibold bg-transparent border border-[var(--app-border)] text-[var(--ink)] hover:border-[var(--accent-border)] hover:text-[var(--accent)] hover:bg-[var(--accent-bg)] active:scale-95',
+  ghost:     'font-medium bg-transparent border border-transparent text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--app-raised)] active:scale-95',
+  danger:    'font-semibold hover:opacity-90 active:scale-95',
+  success:   'font-semibold hover:opacity-90 active:scale-95',
 }
 
 const sizes = {
@@ -79,21 +57,22 @@ export default function Button({
   className,
   disabled,
   fullWidth,
+  style,
   ...props
 }) {
   return (
     <button
       className={cn(
         'inline-flex items-center justify-center gap-2 font-sans',
-        'transition-all duration-150 cursor-pointer',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-teki-500 focus-visible:ring-offset-2',
-        'dark:focus-visible:ring-offset-[#0d1117]',
+        'transition-all duration-150 cursor-pointer select-none',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2cbaff] focus-visible:ring-offset-2',
         'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none disabled:active:scale-100',
-        variants[variant] ?? variants.primary,
+        VARIANT_CLASSES[variant] ?? VARIANT_CLASSES.primary,
         sizes[size] ?? sizes.md,
         fullWidth && 'w-full',
         className,
       )}
+      style={{ ...(VARIANT_STYLES[variant] ?? {}), ...style }}
       disabled={disabled}
       {...props}
     >

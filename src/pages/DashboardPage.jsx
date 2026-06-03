@@ -68,7 +68,7 @@ function JumpBackInCard({ ageGroup, xp }) {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, #0f2740 0%, #1a1066 35%, #2d1b69 60%, #0d4f4f 100%)',
+          background: 'linear-gradient(135deg, #071e36 0%, #0a3a5c 40%, #0c5a72 70%, #0d4f3c 100%)',
         }}
       />
       {/* Decorative stars */}
@@ -87,13 +87,13 @@ function JumpBackInCard({ ageGroup, xp }) {
       ))}
       {/* Floating shapes */}
       <div className="absolute right-12 top-6 w-24 h-24 rounded-full opacity-10"
-           style={{ background: 'radial-gradient(circle, #a78bfa, transparent)' }} />
+           style={{ background: 'radial-gradient(circle, #2cbaff, transparent)' }} />
       <div className="absolute right-36 bottom-4 w-16 h-16 rounded-full opacity-10"
-           style={{ background: 'radial-gradient(circle, #22d3ee, transparent)' }} />
+           style={{ background: 'radial-gradient(circle, #fde047, transparent)' }} />
       {/* Grid floor */}
       <div className="absolute bottom-0 left-0 right-0 h-16 opacity-10"
            style={{
-             backgroundImage: 'linear-gradient(rgba(167,139,250,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(167,139,250,0.5) 1px, transparent 1px)',
+             backgroundImage: 'linear-gradient(rgba(44,186,255,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(44,186,255,0.35) 1px, transparent 1px)',
              backgroundSize: '32px 32px',
              maskImage: 'linear-gradient(to top, black, transparent)',
            }} />
@@ -101,7 +101,7 @@ function JumpBackInCard({ ageGroup, xp }) {
       {/* Content overlay */}
       <div className="relative px-6 py-5 flex flex-col gap-3">
         {/* Label */}
-        <span className="section-label" style={{ color: 'rgba(167,139,250,0.8)' }}>ADVENTURE</span>
+        <span className="section-label" style={{ color: 'rgba(44,186,255,0.9)' }}>ADVENTURE</span>
 
         {/* Title */}
         <div>
@@ -128,8 +128,8 @@ function JumpBackInCard({ ageGroup, xp }) {
               style={{
                 background: pct === 100
                   ? 'linear-gradient(90deg,#4ade80,#22d3ee)'
-                  : 'linear-gradient(90deg,#7c3aed,#a78bfa)',
-                boxShadow: '0 0 8px rgba(167,139,250,0.6)',
+                  : 'linear-gradient(90deg,#2cbaff,#fde047)',
+                boxShadow: '0 0 8px rgba(44,186,255,0.6)',
               }}
             />
           </div>
@@ -140,7 +140,7 @@ function JumpBackInCard({ ageGroup, xp }) {
           <button
             onClick={(e) => { e.stopPropagation(); navigate({ to: '/adventure' }) }}
             className="px-5 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
-            style={{ background: 'linear-gradient(135deg,#7c3aed,#4f46e5)', boxShadow: '0 4px 16px rgba(124,58,237,0.5)' }}
+            style={{ background: 'linear-gradient(135deg,#2cbaff,#06a4f0)', boxShadow: '0 4px 16px rgba(44,186,255,0.45)' }}
           >
             {started ? 'Continue Learning' : 'Start Adventure'}
           </button>
@@ -331,14 +331,14 @@ export default function DashboardPage() {
         style={{
           backgroundColor: 'var(--app-surface)',
           borderColor: 'var(--app-border)',
-          borderTop: '3px solid var(--accent)',
+          borderTop: '3px solid #2cbaff',
         }}
       >
         {/* Logo */}
         <div className="flex items-center gap-2 shrink-0">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center text-base font-black text-white"
-            style={{ background: 'linear-gradient(135deg, var(--accent), #4f46e5)' }}
+            style={{ background: 'linear-gradient(135deg, #2cbaff, #06a4f0)' }}
           >
             H
           </div>
@@ -389,7 +389,7 @@ export default function DashboardPage() {
           </div>
           <button
             className="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95 hidden sm:block"
-            style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', boxShadow: '0 2px 8px rgba(245,158,11,0.4)' }}
+            style={{ background: 'linear-gradient(135deg, #fde047, #facc15)', color: '#1a1200', boxShadow: '0 2px 8px rgba(253,224,71,0.45)' }}
           >
             ⭐ {xp} XP
           </button>

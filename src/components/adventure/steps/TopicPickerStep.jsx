@@ -11,10 +11,10 @@ const TOPIC_EMOJIS = {
 }
 
 export default function TopicPickerStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
+  const speak   = useTekiStore((s) => s.speak)
   const adventure = useAdventureStore()
   const [selected, setSelected] = useState('')
-  const [custom, setCustom] = useState('')
+  const [custom, setCustom]     = useState('')
 
   useEffect(() => {
     speak(step.teki || 'What is your website about?', { mood: 'thinking' })
@@ -43,11 +43,12 @@ export default function TopicPickerStep({ step, onComplete }) {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => { setSelected(topic); setCustom('') }}
-            className={`flex flex-col items-center gap-0.5 p-2 rounded-xl border-2 text-xs font-medium transition-colors
-              ${selected === topic && !custom
-                ? 'border-teki-500 bg-teki-50 text-teki-700'
-                : 'border-gray-200 bg-white text-gray-600 hover:border-teki-200'
-              }`}
+            className="flex flex-col items-center gap-0.5 p-2 rounded-xl border-2 text-xs font-semibold transition-all"
+            style={{
+              borderColor: selected === topic && !custom ? '#2cbaff' : 'var(--app-border)',
+              backgroundColor: selected === topic && !custom ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
+              color: selected === topic && !custom ? '#2cbaff' : 'var(--ink-muted)',
+            }}
           >
             <span className="text-lg">{TOPIC_EMOJIS[topic] || '📌'}</span>
             <span className="leading-tight">{topic}</span>

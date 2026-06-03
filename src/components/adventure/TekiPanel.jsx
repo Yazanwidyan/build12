@@ -22,10 +22,10 @@ export default function TekiPanel() {
   const shownText = displayedText || currentMessage || ''
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col h-full" style={{ backgroundColor: 'var(--app-surface)' }}>
 
       {/* ── Mission strip ──────────────────────────────────────────── */}
-      <div className="shrink-0 px-4 py-2 border-b border-gray-100 flex items-center gap-3">
+      <div className="shrink-0 px-4 py-2 flex items-center gap-3" style={{ borderBottom: '1px solid var(--app-border)' }}>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 mb-0.5">
             {act && (
@@ -82,9 +82,10 @@ export default function TekiPanel() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                className="relative bg-teki-50 border border-teki-100 rounded-2xl rounded-tl-sm px-4 py-3"
+                className="relative rounded-2xl rounded-tl-sm px-4 py-3"
+                style={{ backgroundColor: 'var(--bubble-bg)', border: '1px solid var(--bubble-border)' }}
               >
-                <p className="text-sm text-gray-800 leading-relaxed">
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                   {shownText}
                   {isTyping && (
                     <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 animate-pulse align-middle" />

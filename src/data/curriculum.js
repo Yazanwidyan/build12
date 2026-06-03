@@ -20,7 +20,7 @@ export const ACTS = [
     number: 1,
     title: 'Bringing The Website To Life',
     tagline: 'From blueprint to reality',
-    color: '#6366f1',
+    color: '#2cbaff',
     missions: [
       // ── Mission 1 ─────────────────────────────────────────────────────────
       {
@@ -2114,7 +2114,7 @@ export const LEVEL_ACT_NUMBERS = {
 
 export const LEVEL_INFO = {
   young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3 },
-  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#6366f1', totalActs: 7 },
+  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#2cbaff', totalActs: 7 },
   senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 3 },
 }
 
