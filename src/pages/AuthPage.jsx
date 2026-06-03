@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,10 +22,28 @@ const loginSchema = z.object({
 
 export default function AuthPage({ mode = 'signup' }) {
   const navigate = useNavigate()
+  const { location } = useRouterState()
   const { signup, login } = useAuthStore()
   const profile = useProfileStore()
   const [error, setError] = useState('')
   const isSignup = mode === 'signup'
+
+  const navLink = (to, label) => {
+    const active = location.pathname === to
+    return (
+      <button
+        key={to}
+        onClick={() => navigate({ to })}
+        className="relative flex items-center px-3 text-base font-medium transition-colors"
+        style={{ color: active ? '#2cbaff' : 'var(--ink-muted)' }}
+        onMouseEnter={e => { if (!active) e.currentTarget.style.color = 'var(--ink)' }}
+        onMouseLeave={e => { if (!active) e.currentTarget.style.color = 'var(--ink-muted)' }}
+      >
+        {label}
+        {active && <span className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: '#2cbaff' }} />}
+      </button>
+    )
+  }
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(isSignup ? signupSchema : loginSchema),
@@ -44,14 +62,27 @@ export default function AuthPage({ mode = 'signup' }) {
   }
 
   return (
-    <div className="min-h-screen bg-app flex flex-col items-center justify-center p-4">
-      {/* Top bar */}
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-        <Button variant="ghost" color="neutral" size="sm" onClick={() => navigate({ to: '/' })}>
-          ← Home
-        </Button>
-        <ThemeToggle />
-      </div>
+    <div className="min-h-screen bg-app flex flex-col">
+      {/* Nav */}
+      <nav className="border-b-2 border-app-border bg-app sticky top-0 z-10 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
+          <button onClick={() => navigate({ to: '/' })} className="font-black text-2xl text-ink tracking-tighter shrink-0">HelloBuildIt</button>
+          <div className="hidden md:flex self-stretch items-stretch gap-1">
+            {navLink('/about',   'About')}
+            {navLink('/pricing', 'Pricing')}
+            {navLink('/contact', 'Contact')}
+          </div>
+          <div className="flex-1" />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button variant="ghost" color="neutral" size="sm" onClick={() => navigate({ to: isSignup ? '/login' : '/signup' })}>
+              {isSignup ? 'Log in' : 'Sign up'}
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      <div className="flex-1 flex flex-col items-center justify-center p-4">
 
       <div className="w-full max-w-sm">
         {/* TEKI */}
@@ -89,6 +120,7 @@ export default function AuthPage({ mode = 'signup' }) {
             </Button>
           </p>
         </div>
+      </div>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useAuthStore } from "@/stores/authStore";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, Trash2, Zap } from "lucide-react";
 
@@ -31,22 +31,41 @@ const FEATURES = [
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { location } = useRouterState();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
   const handleStart = () =>
     navigate({ to: isAuthenticated ? "/dashboard" : "/signup" });
 
+  const navLink = (to, label) => {
+    const active = location.pathname === to;
+    return (
+      <button
+        key={to}
+        onClick={() => navigate({ to })}
+        className="relative flex items-center px-3 text-base font-medium transition-colors"
+        style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
+        onMouseEnter={e => { if (!active) e.currentTarget.style.color = "var(--ink)" }}
+        onMouseLeave={e => { if (!active) e.currentTarget.style.color = "var(--ink-muted)" }}
+      >
+        {label}
+        {active && <span className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: "#2cbaff" }} />}
+      </button>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-app flex flex-col">
       {/* ── Nav ── */}
       <nav className="border-b-2 sticky border-app-border bg-app top-0 z-10 backdrop-blur-md">
-        <div className="max-w-6xl justify-between mx-auto px-6 h-[54px] flex items-center gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="font-black text-2xl text-ink tracking-tighter">
-              HelloBuildIt
-            </span>
+        <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
+          <span className="font-black text-2xl text-ink tracking-tighter shrink-0">HelloBuildIt</span>
+          <div className="hidden md:flex self-stretch items-stretch gap-1">
+            {navLink("/about",   "About")}
+            {navLink("/pricing", "Pricing")}
+            {navLink("/contact", "Contact")}
           </div>
+          <div className="flex-1" />
           <div className="flex items-center gap-2">
             <ThemeToggle />
             {isAuthenticated ? (

@@ -14,6 +14,9 @@ import AdventurePage from '@/pages/AdventurePage'
 import BuilderPage from '@/pages/BuilderPage'
 import ProfilePage from '@/pages/ProfilePage'
 import NotFoundPage from '@/pages/NotFoundPage'
+import AboutPage from '@/pages/AboutPage'
+import PricingPage from '@/pages/PricingPage'
+import ContactPage from '@/pages/ContactPage'
 
 import { useAuthStore } from '@/stores/authStore'
 import { useProfileStore } from '@/stores/profileStore'
@@ -53,6 +56,24 @@ const signupRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/signup',
   component: () => <AuthPage mode="signup" />,
+})
+
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/about',
+  component: AboutPage,
+})
+
+const pricingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/pricing',
+  component: PricingPage,
+})
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: ContactPage,
 })
 
 // ── Auth-required routes ────────────────────────────────────────────────────────
@@ -96,6 +117,9 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   signupRoute,
+  aboutRoute,
+  pricingRoute,
+  contactRoute,
   onboardingRoute,
   dashboardRoute,
   adventureRoute,
