@@ -71,7 +71,6 @@ function JumpBackInCard({ ageGroup, xp }) {
 
   return (
     <motion.div
-      whileHover={{ y: -2 }}
       onClick={() => navigate({ to: "/adventure" })}
       className="relative w-full rounded-2xl overflow-hidden cursor-pointer"
       style={{ minHeight: 200 }}
@@ -119,7 +118,7 @@ function JumpBackInCard({ ageGroup, xp }) {
       />
 
       {/* Content overlay */}
-      <div className="relative px-6 py-5 flex flex-col gap-3">
+      <div className="relative p-6 flex flex-col gap-3">
         {/* Label */}
         <span
           className="section-label"
@@ -190,14 +189,6 @@ function JumpBackInCard({ ageGroup, xp }) {
             }}
           >
             {started ? "Continue Learning" : "Start Adventure"}
-          </Button>
-          <Button
-            size="lg"
-            variant="link"
-            color="neutral"
-            style={{ color: "rgba(255,255,255,0.5)" }}
-          >
-            View details
           </Button>
         </div>
       </div>
@@ -562,14 +553,7 @@ function ProfileSidebar({
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-2 mb-4">
           {stats.map((s) => (
-            <div
-              key={s.label}
-              className="rounded-xl p-3"
-              style={{
-                background: "var(--app-raised)",
-                border: "2px solid var(--app-border)",
-              }}
-            >
+            <div key={s.label} className="rounded-xl p-3">
               <div className="flex items-center gap-1.5 mb-1">
                 {s.icon}
                 <span className="text-[11px] text-muted font-medium">
@@ -694,7 +678,7 @@ function UserMenu({ profile, navigate, onLogout }) {
       {/* Trigger */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 pl-2 ml-1 border-l-2 py-1 rounded-lg transition-colors hover:bg-raised"
+        className="flex items-center gap-2  py-1 rounded-lg transition-colors hover:bg-raised"
         style={{ borderColor: "var(--app-border)" }}
       >
         <div
@@ -833,28 +817,35 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-app">
       {/* ── Top nav ── */}
-      <nav className="sticky top-0 z-30 border-b-2 border-app-border">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-6">
+      <nav className="sticky top-0 z-30 border-b-2 bg-app border-app-border">
+        <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2 shrink-0">
-            <span className="font-black text-ink text-lg tracking-tight">
-              {`{ HelloBuildIt }`}
+            <span className="font-black text-2xl text-ink tracking-tighter">
+              HelloBuildIt
             </span>
           </div>
 
           {/* Nav tabs */}
-          <div className="hidden md:flex items-center gap-1">
-            {TABS.map((tab) => (
-              <Button
-                key={tab.id}
-                size="sm"
-                variant={activeTab === tab.id ? "soft" : "ghost"}
-                color={activeTab === tab.id ? "blue" : "neutral"}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </Button>
-            ))}
+          <div className="hidden md:flex self-stretch items-stretch gap-1">
+            {TABS.map((tab) => {
+              const active = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className="relative flex items-center px-3 text-base font-semibold transition-colors duration-150 rounded-none"
+                >
+                  {tab.label}
+                  {active && (
+                    <span
+                      className="absolute bottom-0 left-0 right-0 h-[1.5px]"
+                      style={{ background: "#2cbaff" }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex-1" />
