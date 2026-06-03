@@ -11,6 +11,7 @@ import WebsitePreview from '@/components/adventure/WebsitePreview'
 import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
 function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
@@ -91,18 +92,24 @@ export default function AdventurePage() {
     <div className="h-screen w-screen overflow-hidden relative">
 
       {/* ── Slim top bar ── */}
-      <div className="absolute top-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-sm border-b border-gray-200/60 px-4 h-9 flex items-center gap-2">
+      <div className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b px-4 h-9 flex items-center gap-2"
+           style={{ backgroundColor: 'rgba(var(--app-surface),0.85)', borderColor: 'var(--app-border)',
+                    background: 'color-mix(in srgb, var(--app-surface) 85%, transparent)' }}>
         <button
           onClick={() => navigate({ to: '/dashboard' })}
-          className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-700 transition-colors"
+          className="flex items-center gap-1 text-xs transition-colors"
+          style={{ color: 'var(--ink-faint)' }}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-faint)'}
         >
           <ArrowLeft size={12} />
           Dashboard
         </button>
-        <span className="text-gray-200 text-xs">|</span>
-        <span className="text-xs text-gray-500 font-medium">Website Adventure</span>
+        <span style={{ color: 'var(--app-border)' }} className="text-xs">|</span>
+        <span className="text-xs font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Adventure</span>
         <div className="flex-1" />
-        <span className="text-xs text-gray-400">
+        <ThemeToggle />
+        <span className="text-xs ml-1" style={{ color: 'var(--ink-faint)' }}>
           {profile.builderName} {avatar?.emoji}
         </span>
       </div>

@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 import { router } from '@/routes'
 import '@/styles/globals.css'
+import { useThemeStore } from '@/stores/themeStore'
+
+// Apply saved theme before first paint
+useThemeStore.getState().init()
 
 const queryClient = new QueryClient({
   defaultOptions: {

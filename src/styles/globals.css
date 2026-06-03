@@ -2,34 +2,351 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
-    margin: 0;
-    min-height: 100vh;
-  }
-  #root { min-height: 100vh; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { @apply bg-gray-100; }
-  ::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
-  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS  (CSS variables — swap by toggling .dark on <html>)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Light theme ─────────────────────────────────────────────────────────── */
+  --app-bg:      #f5f6fa;
+  --app-surface: #ffffff;
+  --app-raised:  #f0f2f8;
+  --app-border:  #e2e6f0;
+  --app-line:    #eaecf4;
+
+  --ink:         #0f172a;
+  --ink-muted:   #4a5578;
+  --ink-faint:   #9aa0b8;
+
+  --accent:           #7c3aed;
+  --accent-light:     #a78bfa;
+  --accent-bg:        rgba(124,58,237,0.08);
+  --accent-border:    rgba(124,58,237,0.25);
+
+  --glow-color:       rgba(124,58,237,0.18);
+  --glow-color-bright:rgba(124,58,237,0.38);
+
+  --dot-color:        rgba(124,58,237,0.08);
+
+  --shadow-card:      0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-card-hover:0 4px 16px rgba(0,0,0,0.1), 0 0 0 1px rgba(124,58,237,0.25);
+
+  --scrollbar-track:  #f0f2f8;
+  --scrollbar-thumb:  #d1d5e0;
+
+  --code-bg:    #f8f9fc;
+  --code-border:#e2e6f0;
+  --code-text:  #1e293b;
+
+  --bubble-bg:    #f0f2ff;
+  --bubble-border:#dde1f7;
+  --bubble-text:  #1e2a5e;
 }
 
+.dark {
+  /* ── Dark theme (Codedex-inspired) ───────────────────────────────────────── */
+  --app-bg:      #0d1117;
+  --app-surface: #161c2d;
+  --app-raised:  #1e2640;
+  --app-border:  #2a3347;
+  --app-line:    #1e2a3e;
+
+  --ink:         #f1f5f9;
+  --ink-muted:   #94a3b8;
+  --ink-faint:   #475569;
+
+  --accent:           #8b5cf6;
+  --accent-light:     #a78bfa;
+  --accent-bg:        rgba(139,92,246,0.14);
+  --accent-border:    rgba(139,92,246,0.35);
+
+  --glow-color:       rgba(139,92,246,0.28);
+  --glow-color-bright:rgba(139,92,246,0.55);
+
+  --dot-color:        rgba(139,92,246,0.13);
+
+  --shadow-card:      0 1px 3px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
+  --shadow-card-hover:0 4px 20px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.3);
+
+  --scrollbar-track:  #0d1117;
+  --scrollbar-thumb:  #2a3347;
+
+  --code-bg:    #0a0e17;
+  --code-border:#1e2a3e;
+  --code-text:  #e2e8f0;
+
+  --bubble-bg:    #1e2640;
+  --bubble-border:#2a3347;
+  --bubble-text:  #e2e8f0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   BASE LAYER
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--app-bg);
+    color: var(--ink);
+    margin: 0;
+    min-height: 100vh;
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 28px 28px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  #root { min-height: 100vh; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar          { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track    { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb    { background: var(--scrollbar-thumb); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-light); }
+
+  /* Selection */
+  ::selection { background: var(--accent-bg); color: var(--ink); }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+  /* Code */
+  code, pre, kbd, samp { font-family: 'JetBrains Mono', monospace; }
+
+  /* Input defaults */
+  input, textarea, select {
+    background-color: var(--app-raised);
+    color: var(--ink);
+    border-color: var(--app-border);
+  }
+  input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   COMPONENT CLASSES  (theme-aware via CSS variables)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
 @layer components {
-  .teki-bubble {
-    @apply relative bg-white rounded-2xl rounded-br-sm shadow-lg border border-gray-100 px-4 py-3 text-sm text-gray-800 leading-relaxed;
+
+  /* ── Cards ─────────────────────────────────────────────────────────────────── */
+  .card {
+    background-color: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
   }
+
+  .card-hover {
+    background-color: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .card-hover:hover {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* ── Mission card ──────────────────────────────────────────────────────────── */
   .mission-card {
-    @apply bg-white rounded-2xl border border-gray-100 shadow-sm;
+    background-color: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 14px;
   }
+
+  /* ── TEKI speech bubble ────────────────────────────────────────────────────── */
+  .teki-bubble {
+    background-color: var(--bubble-bg);
+    border: 1px solid var(--bubble-border);
+    border-radius: 18px 18px 18px 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--bubble-text);
+  }
+
+  /* ── Blueprint placeholder ─────────────────────────────────────────────────── */
   .blueprint-section {
-    @apply border-2 border-dashed border-gray-300 rounded-xl bg-gray-50
-           flex flex-col items-center justify-center text-gray-400 font-medium text-sm py-10;
+    background-color: var(--app-bg);
+    border: 2px dashed var(--app-border);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-faint);
+    padding: 2.5rem 1.5rem;
   }
+
+  /* ── XP badge ──────────────────────────────────────────────────────────────── */
   .xp-badge {
-    @apply inline-flex items-center gap-1 bg-amber-50 text-amber-700
-           border border-amber-200 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 999px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: rgba(251,191,36,0.1);
+    border: 1px solid rgba(251,191,36,0.3);
+    color: #f59e0b;
+    letter-spacing: 0.02em;
   }
+
+  /* ── Generic badge ─────────────────────────────────────────────────────────── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    background-color: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-light);
+  }
+
+  /* ── Glow pill (act label etc.) ────────────────────────────────────────────── */
+  .glow-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-color: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-light);
+  }
+
+  /* ── Code block ────────────────────────────────────────────────────────────── */
+  .code-block {
+    background-color: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.75rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--code-text);
+  }
+
+  /* ── Base input ────────────────────────────────────────────────────────────── */
+  .input-base {
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    background-color: var(--app-raised);
+    border: 1.5px solid var(--app-border);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    caret-color: var(--accent);
+  }
+  .input-base::placeholder { color: var(--ink-faint); }
+  .input-base:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow-color);
+  }
+
+  /* ── Progress ──────────────────────────────────────────────────────────────── */
+  .progress-track {
+    border-radius: 999px;
+    overflow: hidden;
+    background-color: var(--app-raised);
+    height: 6px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    box-shadow: 0 0 8px var(--glow-color);
+    transition: width 0.5s ease;
+  }
+
+  /* ── Nav link ──────────────────────────────────────────────────────────────── */
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .nav-link:hover {
+    background-color: var(--accent-bg);
+    color: var(--accent-light);
+  }
+  .nav-link.active {
+    background-color: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    color: var(--accent);
+  }
+
+  /* ── Section label ─────────────────────────────────────────────────────────── */
+  .section-label {
+    font-size: 0.625rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+  }
+
+  /* ── Divider ───────────────────────────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background-color: var(--app-border);
+    border: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   UTILITY EXTRAS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* Semantic background helpers */
+  .bg-app     { background-color: var(--app-bg);      }
+  .bg-surface { background-color: var(--app-surface);  }
+  .bg-raised  { background-color: var(--app-raised);   }
+
+  /* Semantic border */
+  .border-app { border-color: var(--app-border); }
+
+  /* Semantic text */
+  .text-ink       { color: var(--ink);       }
+  .text-muted     { color: var(--ink-muted); }
+  .text-faint     { color: var(--ink-faint); }
+  .text-accent    { color: var(--accent);    }
+
+  /* Dot grid helpers */
+  .dot-grid {
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Glow borders */
+  .border-glow { border-color: var(--accent-border); box-shadow: 0 0 0 3px var(--glow-color); }
+
+  /* Accent tinted surface */
+  .bg-accent-subtle { background-color: var(--accent-bg); }
 }
