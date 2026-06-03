@@ -9,7 +9,6 @@ import { getActsForLevel, LEVEL_INFO, ACTS } from '@/data/curriculum'
 import AvatarDisplay from '@/components/ui/AvatarDisplay'
 import { CharacterPixel, CharacterSpark } from '@/components/ui/BuilderCharacters'
 import Button from '@/components/ui/Button'
-import ThemeToggle from '@/components/ui/ThemeToggle'
 
 // ── Rank helpers ────────────────────────────────────────────────────────────────
 const RANKS = [
@@ -167,7 +166,6 @@ export default function ProfilePage() {
           </button>
           <span className="text-sm font-black text-ink ml-2">Profile</span>
           <div className="flex-1" />
-          <ThemeToggle />
         </div>
       </nav>
 

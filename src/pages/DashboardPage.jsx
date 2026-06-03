@@ -1,7 +1,6 @@
 import TekiCharacter from "@/components/teki/TekiCharacter";
 import AvatarDisplay from "@/components/ui/AvatarDisplay";
 import Button from "@/components/ui/Button";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
 import { useAuthStore } from "@/stores/authStore";
 import { AVATARS, useProfileStore } from "@/stores/profileStore";
@@ -12,12 +11,17 @@ import {
   Bell,
   ChevronRight,
   Lock,
+  LogOut,
+  Moon,
   Search,
   Star,
+  Sun,
   Trophy,
+  User,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
+import { useThemeStore } from "@/stores/themeStore";
+import { useState, useRef, useEffect } from "react";
 
 // ── Adventures shown in the Learn tab ─────────────────────────────────────────
 const ADVENTURES_LIST = [
@@ -650,6 +654,121 @@ function ProfileSidebar({
   );
 }
 
+// ── User menu (avatar dropdown) ────────────────────────────────────────────────
+function UserMenu({ profile, navigate, onLogout }) {
+  const [open, setOpen] = useState(false);
+  const { dark, toggle } = useThemeStore();
+  const ref = useRef(null);
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  const MENU = [
+    {
+      icon: <User size={14} />,
+      label: "View Profile",
+      onClick: () => { navigate({ to: "/profile" }); setOpen(false); },
+    },
+    {
+      icon: dark ? <Sun size={14} /> : <Moon size={14} />,
+      label: dark ? "Light Mode" : "Dark Mode",
+      onClick: () => { toggle(); setOpen(false); },
+    },
+  ];
+
+  return (
+    <div ref={ref} className="relative">
+      {/* Trigger */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 pl-2 ml-1 border-l py-1 rounded-lg transition-colors hover:bg-raised"
+        style={{ borderColor: "var(--app-border)" }}
+      >
+        <div
+          className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
+          style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
+        >
+          <AvatarDisplay avatarId={profile.avatar} size={28} />
+        </div>
+        <span className="text-sm font-semibold text-ink hidden sm:block pr-1">
+          {profile.builderName}
+        </span>
+      </button>
+
+      {/* Dropdown */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.12 }}
+            className="absolute right-0 top-full mt-2 w-52 rounded-2xl overflow-hidden z-50"
+            style={{
+              backgroundColor: "var(--app-surface)",
+              border: "1px solid var(--app-border)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="flex items-center gap-3 px-4 py-3"
+              style={{ borderBottom: "1px solid var(--app-border)", backgroundColor: "var(--app-raised)" }}
+            >
+              <div
+                className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
+                style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
+              >
+                <AvatarDisplay avatarId={profile.avatar} size={36} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-ink truncate">{profile.builderName || "Builder"}</p>
+                <p className="text-xs text-muted truncate capitalize">{profile.ageGroup ?? "builder"}</p>
+              </div>
+            </div>
+
+            {/* Menu items */}
+            <div className="py-1.5">
+              {MENU.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={item.onClick}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors text-left"
+                  style={{ color: "var(--ink-muted)" }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = "var(--app-raised)"; e.currentTarget.style.color = "var(--ink)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "var(--ink-muted)"; }}
+                >
+                  {item.icon}
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Logout */}
+            <div style={{ borderTop: "1px solid var(--app-border)" }} className="py-1.5">
+              <button
+                onClick={onLogout}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-colors text-left"
+                style={{ color: "#f87171" }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = "rgba(248,113,113,0.08)"}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
+              >
+                <LogOut size={14} />
+                Log out
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 const TABS = [
   { id: "learn", label: "Learn" },
   { id: "ai-builder", label: "AI Builder" },
@@ -728,43 +847,24 @@ export default function DashboardPage() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <button
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors hover:bg-raised"
-              style={{ color: "var(--ink-faint)" }}
-            >
-              <Search size={16} />
-            </button>
-            <button
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors hover:bg-raised"
-              style={{ color: "var(--ink-faint)" }}
-            >
-              <Bell size={16} />
-            </button>
-            <ThemeToggle />
-            <div
-              className="flex items-center gap-2 pl-2 ml-1 border-l"
-              style={{ borderColor: "var(--app-border)" }}
-            >
-              <div
-                className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center"
-                style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)" }}
-              >
-                <AvatarDisplay avatarId={profile.avatar} size={28} />
-              </div>
-              <span className="text-sm font-semibold text-ink hidden sm:block">
-                {profile.builderName}
-              </span>
-            </div>
-            <button
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95 hidden sm:block"
+            {/* XP pill */}
+            <span
+              className="px-3 py-1.5 rounded-lg text-xs font-bold hidden sm:block"
               style={{
                 background: "linear-gradient(135deg, #fde047, #facc15)",
                 color: "#1a1200",
-                boxShadow: "0 2px 8px rgba(253,224,71,0.45)",
+                boxShadow: "0 2px 8px rgba(253,224,71,0.35)",
               }}
             >
               ⭐ {xp} XP
-            </button>
+            </span>
+
+            {/* Avatar menu trigger */}
+            <UserMenu
+              profile={profile}
+              navigate={navigate}
+              onLogout={handleLogout}
+            />
           </div>
         </div>
       </nav>
