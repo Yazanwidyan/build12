@@ -1291,6 +1291,8 @@ document.querySelector('#genBtn').addEventListener('click', () => {
   },
 
   // ── ACT 9 ── Modern Builder Tools (React) ────────────────────────────────────
+  // 8 chapters, each taught ON the student's auto-generated website.
+  // Uses react-gateway / react-spotlight / react-concept / react-live-demo steps.
   {
     id: 'act9',
     number: 9,
@@ -1298,316 +1300,530 @@ document.querySelector('#genBtn').addEventListener('click', () => {
     tagline: 'React — the way professionals build',
     color: '#0ea5e9',
     missions: [
+
+      // ── Mission 21 ─ Chapter 1: Components ───────────────────────────────────
       {
         id: 'mission-21',
         number: 21,
         act: 9,
-        title: 'Reusable Pieces',
-        subtitle: 'React Components — create once, use everywhere',
+        title: "The Developer's Secret",
+        subtitle: 'React Components — build once, use everywhere',
         concept: 'components',
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'react-why',
-            type: 'teki-message',
-            mood: 'excited',
+            id: 'm21-gateway',
+            type: 'react-gateway',
+            chapterNumber: 1,
+            chapterTitle: 'Reusable Pieces',
+            chapterSubtitle: 'React Components',
             messages: [
-              "You know HTML, CSS, and JavaScript. That's AMAZING!",
-              "But professional builders use a tool called REACT.",
-              "React lets you create reusable PIECES — build a card once, use it 100 times!",
+              "Nice.",
+              "We have a real website.",
+              "But here's something interesting...",
+              "Professional developers don't build websites one piece at a time.",
+              "They use special tools.",
+              "Want to see them?",
             ],
-            action: "Tell me about React!",
+            mood: 'excited',
+            action: "Show Me",
           },
           {
-            id: 'react-component',
-            type: 'code-reveal',
-            teki: "In React, you create Components — reusable building blocks:",
+            id: 'm21-spotlight',
+            type: 'react-spotlight',
+            demoState: { mode: 'components', highlightButtons: true },
+            teki: "Look around your website.",
+            question: "Do you think developers built each button separately?",
+            options: [
+              { id: 'yes', label: 'Yes' },
+              { id: 'no',  label: 'No'  },
+            ],
+            tekiReaction: {
+              yes: { messages: ["Actually... nope. Let me show you the secret."], mood: 'thinking' },
+              no:  { messages: ["Exactly! Let me show you how."], mood: 'excited' },
+            },
+            action: "Show Me How",
+          },
+          {
+            id: 'm21-concept',
+            type: 'react-concept',
+            conceptType: 'blueprint-to-components',
+            teki: "They built ONE blueprint. Then copied it everywhere.",
+            codeReveal: '<Button />',
             language: 'jsx',
-            codeTemplate: `// Create the piece once
-function PetCard({ name, type, emoji }) {
-  return (
-    <div className="card">
-      <span>{emoji}</span>
-      <h3>{name}</h3>
-      <p>{type}</p>
-    </div>
-  );
+            explanation: {
+              young: "A Component is like a LEGO piece! Make one, snap it in 100 times!",
+              junior: "Components are reusable. Define once in code — use as many times as you want.",
+              senior: "React components are pure functions of their props. Define once, compose freely.",
+            },
+            action: "I love it!",
+          },
+          {
+            id: 'm21-demo',
+            type: 'react-live-demo',
+            demoType: 'button-style',
+            teki: "Try it. Change every button style at once.",
+            demoInit: { mode: 'components', highlightButtons: false },
+            options: [
+              { label: 'Rounded', value: 'rounded' },
+              { label: 'Pill',    value: 'pill'    },
+              { label: 'Square',  value: 'square'  },
+            ],
+            codeReveal: `function Button({ text }) {
+  return <button className="btn">{text}</button>;
 }
 
-// Use it as many times as you want!
-<PetCard name="Fluffy" type="Cat" emoji="🐱" />
-<PetCard name="Max" type="Dog" emoji="🐶" />
-<PetCard name="Luna" type="Rabbit" emoji="🐰" />`,
-            explanations: {
-              young: "A Component is like a LEGO piece! Make one pet card, then snap it in as many times as you need!",
-              junior: "Components are JavaScript functions that return HTML (called JSX). Props are the values you pass in, like function parameters.",
-              senior: "React components are pure functions: given the same props, they render the same output. Props flow downward — one-way data binding.",
+// Every button on the site uses this one component.`,
+            language: 'jsx',
+            successMessage: "See? ONE change. EVERY button updated.",
+            explanation: {
+              young: "One blueprint changed everything at once!",
+              junior: "Changing the Button component updates every button instantly — no manual edits.",
+              senior: "Centralising UI in a component means one change propagates everywhere. This is the core benefit of component-based architecture.",
             },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I love components!",
+            action: "Next Chapter!",
           },
         ],
       },
 
+      // ── Mission 22 ─ Chapter 2: Props ─────────────────────────────────────────
       {
         id: 'mission-22',
         number: 22,
         act: 9,
         title: 'Shape Shifters',
-        subtitle: 'Props make components flexible',
+        subtitle: 'Props — customize each piece',
         concept: 'props',
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'props-intro',
-            type: 'teki-message',
-            mood: 'happy',
+            id: 'm22-gateway',
+            type: 'react-gateway',
+            chapterNumber: 2,
+            chapterTitle: 'Shape Shifters',
+            chapterSubtitle: 'Props',
             messages: [
-              "A component without props is like a stamp that only prints one thing.",
-              "PROPS are the values you pass in to customize each piece!",
-              "Same component — completely different result.",
+              "What if the same blueprint could look different?",
             ],
-            action: "Show me props!",
+            mood: 'thinking',
+            action: "Show Me",
           },
           {
-            id: 'props-code',
-            type: 'code-reveal',
-            teki: "Props turn one component into many different things:",
+            id: 'm22-spotlight',
+            type: 'react-spotlight',
+            demoState: { mode: 'components', propShowcase: true, highlightButtons: false },
+            teki: "Same Button component — three different labels.",
+            highlightLabels: ['Adopt Now', 'Learn More', 'Contact Us'],
+            action: "Interesting!",
+          },
+          {
+            id: 'm22-demo',
+            type: 'react-live-demo',
+            demoType: 'text-editor',
+            teki: "Your turn. Change the button text.",
+            demoInit: { mode: 'props', propShowcase: false },
+            placeholder: "e.g. Join The Mission",
+            defaultValue: "Join The Mission",
+            codeReveal: `<Button text="{{value}}" />`,
             language: 'jsx',
-            codeTemplate: `function Header({ title, color }) {
-  return (
-    <header style={{ background: color }}>
-      <h1>{title}</h1>
-    </header>
-  );
-}
-
-// Same component, different output each time
-<Header title="{{name}}" color="{{primaryColor}}" />
-<Header title="My Blog" color="#f59e0b" />`,
-            explanations: {
-              young: "Props are like the settings on a toy! Same toy, different colors, different sounds — depending on what settings you put in!",
-              junior: "Props are passed like HTML attributes. Inside the component, you destructure them in the parameter: { title, color }.",
-              senior: "Destructuring props in the parameter is idiomatic React. Use TypeScript interfaces or PropTypes for type safety in real projects.",
+            successMessage: "Same blueprint. Different information.",
+            explanation: {
+              young: "Props are like instructions you give each piece! Same toy, different label.",
+              junior: "Props let you pass data into a component. Each instance can display different content.",
+              senior: "Props are immutable from the child's perspective. The parent owns the data — the child just renders it.",
             },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "Props are powerful!",
+            action: "Next Chapter!",
           },
         ],
       },
 
+      // ── Mission 23 ─ Chapter 3: State ─────────────────────────────────────────
       {
         id: 'mission-23',
         number: 23,
         act: 9,
-        title: 'Memory Crystals',
-        subtitle: 'State — the website remembers',
+        title: 'Website Memory',
+        subtitle: 'State — the site remembers your choices',
         concept: 'state',
         xp: 220,
         badge: null,
         steps: [
           {
-            id: 'state-intro',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: 'm23-gateway',
+            type: 'react-gateway',
+            chapterNumber: 3,
+            chapterTitle: 'Website Memory',
+            chapterSubtitle: 'State',
             messages: [
-              "Remember variables? They stored data.",
-              "But in React, there's something SPECIAL called STATE.",
-              "When state changes — the page automatically updates!",
+              "Your website has a theme switcher now.",
+              "Click Dark Mode and watch what happens.",
             ],
-            action: "Magic!",
+            mood: 'thinking',
+            action: "Okay",
           },
           {
-            id: 'state-code',
-            type: 'code-reveal',
-            teki: "useState gives a component its own memory crystal:",
+            id: 'm23-state-demo',
+            type: 'react-live-demo',
+            demoType: 'theme-toggle',
+            demoInit: { mode: 'state', showThemeBar: true },
+            teki: "Click Dark Mode!",
+            options: [
+              { label: 'Light Mode', value: false },
+              { label: 'Dark Mode',  value: true  },
+            ],
+            action: "Interesting!",
+          },
+          {
+            id: 'm23-teki',
+            type: 'teki-message',
+            mood: 'amazed',
+            messages: [
+              "Interesting...",
+              "The website remembered your choice.",
+            ],
+            action: "How does it do that?",
+          },
+          {
+            id: 'm23-setting-demo',
+            type: 'react-live-demo',
+            demoType: 'add-setting',
+            demoInit: { mode: 'state' },
+            teki: "Mission: Add another setting to your website.",
+            options: [
+              { label: 'Theme',     value: 'theme',    icon: '🎨' },
+              { label: 'Font Size', value: 'fontSize',  icon: '📏' },
+              { label: 'Hero Text', value: 'heroText',  icon: '✏️' },
+            ],
+            codeReveal: `const [theme, setTheme] = useState('light');
+
+// When user clicks:
+setTheme('dark');  // ← triggers re-render automatically`,
             language: 'jsx',
-            codeTemplate: `import { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);  // memory crystal!
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Add
-      </button>
-    </div>
-  );
-}`,
-            explanations: {
-              young: "useState is a memory crystal! count is what it remembers. setCount changes the memory. And React updates the screen automatically!",
-              junior: "useState(0) creates a state with default 0. It returns [current value, setter function]. Calling setCount triggers a re-render.",
-              senior: "useState is a React Hook. State updates are asynchronous and batched. For derived state, compute in the render — don't duplicate.",
+            successMessage: "This is website memory. Developers call it State.",
+            explanation: {
+              young: "useState is a memory crystal! It remembers things and updates the screen when changed!",
+              junior: "useState(initial) returns [value, setter]. Calling the setter triggers a re-render with the new value.",
+              senior: "useState is a React Hook. State updates are batched and asynchronous. Avoid duplicating state that can be derived.",
             },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "State is incredible!",
+            action: "Next Chapter!",
           },
         ],
       },
 
+      // ── Mission 24 ─ Chapter 4: Events ────────────────────────────────────────
       {
         id: 'mission-24',
         number: 24,
         act: 9,
-        title: 'Action Signals',
-        subtitle: 'React events',
+        title: 'Teaching Actions',
+        subtitle: 'Events — buttons that actually do things',
         concept: 'react-events',
         xp: 180,
         badge: null,
         steps: [
           {
-            id: 'react-events-intro',
-            type: 'teki-message',
+            id: 'm24-gateway',
+            type: 'react-gateway',
+            chapterNumber: 4,
+            chapterTitle: 'Teaching Actions',
+            chapterSubtitle: 'Events',
+            messages: [],
             mood: 'happy',
-            messages: [
-              "In HTML, you used addEventListener.",
-              "In React, events are RIGHT in the component — cleaner and simpler!",
-            ],
-            action: "Show me!",
+            action: "Let's See",
           },
           {
-            id: 'react-events-code',
-            type: 'code-reveal',
-            teki: "React events go directly on JSX elements:",
-            language: 'jsx',
-            codeTemplate: `function WelcomeButton() {
-  const handleClick = () => {
-    alert("Welcome to {{name}}! 🎉");
-  };
+            id: 'm24-dead-button',
+            type: 'react-spotlight',
+            demoState: { mode: 'events', showDeadButton: true, eventAction: null },
+            teki: 'The hero button says "Explore". Click it in the preview. Nothing happens.',
+            action: "Nothing happened...",
+          },
+          {
+            id: 'm24-teki',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Let's teach it what to do.",
+            ],
+            action: "How?",
+          },
+          {
+            id: 'm24-event-demo',
+            type: 'react-live-demo',
+            demoType: 'event-picker',
+            teki: "Choose what the button should do:",
+            demoInit: { mode: 'events' },
+            options: [
+              { label: 'Show Message', value: 'message',     icon: '💬' },
+              { label: 'Open Popup',   value: 'popup',       icon: '📋' },
+              { label: 'Change Text',  value: 'text-change', icon: '✏️' },
+            ],
+            codeReveal: `<button onClick={handleClick}>
+  Explore
+</button>
 
-  return (
-    <button onClick={handleClick}>
-      Click me!
-    </button>
-  );
-}`,
-            explanations: {
-              young: "onClick is like a tiny sensor on the button. When it's clicked, it calls handleClick — your instructions!",
-              junior: "onClick={handleClick} attaches a handler. Note: no (), just the function name — passing it, not calling it.",
-              senior: "Synthetic events in React wrap native events. Use onClick, onChange, onSubmit etc. Always pass the function reference, not the call result.",
+// onClick fires every time the button is clicked.`,
+            language: 'jsx',
+            successMessage: "The button knows what to do now!",
+            explanation: {
+              young: "onClick is like a tiny sensor! When clicked, it runs your instructions!",
+              junior: "onClick={handler} attaches a click listener. Pass the function name — don't call it with ().",
+              senior: "React synthetic events wrap native DOM events. Use onClick, onChange, onSubmit. Pass references, not invocations.",
             },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "Much cleaner!",
+            action: "Next Chapter!",
           },
         ],
       },
 
+      // ── Mission 25 ─ Chapter 5: map() ─────────────────────────────────────────
       {
         id: 'mission-25',
         number: 25,
         act: 9,
-        title: 'Repeating Factory',
-        subtitle: 'Render lists with map()',
+        title: 'Automatic Factories',
+        subtitle: 'map() — one instruction, many results',
         concept: 'list-rendering',
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'map-intro',
-            type: 'teki-message',
+            id: 'm25-gateway',
+            type: 'react-gateway',
+            chapterNumber: 5,
+            chapterTitle: 'Automatic Factories',
+            chapterSubtitle: 'map()',
+            messages: [],
             mood: 'excited',
-            messages: [
-              "Remember forEach loops?",
-              "React has something even better for creating lists.",
-              "The .map() method turns an array into JSX elements!",
-            ],
-            action: "Show me map()!",
+            action: "Show Me",
           },
           {
-            id: 'map-code',
-            type: 'code-reveal',
-            teki: "map() transforms each item into a component:",
-            language: 'jsx',
-            codeTemplate: `const pets = [
-  { id: 1, name: "Fluffy", emoji: "🐱" },
-  { id: 2, name: "Max",    emoji: "🐶" },
-  { id: 3, name: "Luna",   emoji: "🐰" },
-];
-
-function PetGallery() {
-  return (
-    <div className="gallery">
-      {pets.map((pet) => (
-        <PetCard key={pet.id} name={pet.name} emoji={pet.emoji} />
-      ))}
-    </div>
-  );
-}`,
-            explanations: {
-              young: "map() is like a magic factory! Give it a list of pet data, it gives back a list of beautiful pet cards!",
-              junior: "map() transforms each array item. The 'key' prop is required — it helps React track which item is which when the list updates.",
-              senior: "key must be stable and unique (prefer IDs over indices). map() inside JSX must return JSX. Consider extracting to a variable for clarity.",
+            id: 'm25-gallery-show',
+            type: 'react-spotlight',
+            demoState: {
+              mode: 'map',
+              showPets: true,
+              pets: ['Buddy 🐶', 'Whiskers 🐱', 'Hopscotch 🐰'],
             },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "The factory runs!",
+            teki: "Look — a pet gallery just appeared on your website!",
+            action: "Cool!",
+          },
+          {
+            id: 'm25-teki',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Imagine adding 100 pets manually.",
+              "That's 100 separate blocks of code.",
+              "Nightmare, right?",
+            ],
+            action: "Yeah...",
+          },
+          {
+            id: 'm25-add-pet',
+            type: 'react-live-demo',
+            demoType: 'add-pet',
+            teki: "Add a new pet. Watch the gallery update automatically.",
+            demoInit: { mode: 'map', showPets: true, pets: ['Buddy 🐶', 'Whiskers 🐱', 'Hopscotch 🐰'] },
+            codeReveal: `const pets = ["Buddy", "Whiskers", "Hopscotch", /* new pet */];
+
+// ONE instruction creates ALL the cards:
+pets.map((pet) => (
+  <PetCard key={pet} name={pet} />
+))`,
+            language: 'jsx',
+            successMessage: "One instruction. Many cards.",
+            explanation: {
+              young: "map() is a magic factory! Give it a list, it makes a card for EACH one!",
+              junior: "map() transforms every array item. Add one pet to the array — one new card appears instantly.",
+              senior: "map() in JSX returns a list of elements. Each needs a stable key prop for efficient reconciliation.",
+            },
+            action: "Next Chapter!",
           },
         ],
       },
 
+      // ── Mission 26 ─ Chapter 6: Conditional Rendering ────────────────────────
       {
         id: 'mission-26',
         number: 26,
         act: 9,
-        title: 'Portal Network',
-        subtitle: 'Routing — multiple pages',
+        title: 'Smart Decisions',
+        subtitle: 'Conditional Rendering — show the right thing',
+        concept: 'conditional-rendering',
+        xp: 200,
+        badge: null,
+        steps: [
+          {
+            id: 'm26-gateway',
+            type: 'react-gateway',
+            chapterNumber: 6,
+            chapterTitle: 'Smart Decisions',
+            chapterSubtitle: 'Conditional Rendering',
+            messages: [],
+            mood: 'thinking',
+            action: "Got it",
+          },
+          {
+            id: 'm26-spotlight',
+            type: 'react-spotlight',
+            demoState: { mode: 'conditional', showConditional: true, userType: null },
+            teki: 'Your website shows "Welcome, Visitor!" to everyone. But what if it could be smarter?',
+            action: "What if...?",
+          },
+          {
+            id: 'm26-demo',
+            type: 'react-live-demo',
+            demoType: 'user-type',
+            teki: "Choose who's visiting. Watch the message change.",
+            demoInit: { mode: 'conditional', showConditional: true },
+            options: [
+              { label: 'Kid',     value: 'kid',     icon: '🧒' },
+              { label: 'Parent',  value: 'parent',  icon: '👩' },
+              { label: 'Teacher', value: 'teacher', icon: '👩‍🏫' },
+            ],
+            codeReveal: `{isKid
+  ? <p>Hey future builder! 🎉</p>
+  : isParent
+  ? <p>Explore our resources! 👩‍👧</p>
+  : <p>Welcome, Educator! 👩‍🏫</p>
+}`,
+            language: 'jsx',
+            successMessage: "Different visitors, different experience!",
+            explanation: {
+              young: "IF kid → this message. IF parent → that message. The website chooses!",
+              junior: "The ternary operator condition ? A : B renders different JSX based on a condition.",
+              senior: "Conditional rendering in JSX uses &&, ternary, or extracted variables. Prefer early returns for complex branching.",
+            },
+            action: "Next Chapter!",
+          },
+        ],
+      },
+
+      // ── Mission 27 ─ Chapter 7: Routing ───────────────────────────────────────
+      {
+        id: 'mission-27',
+        number: 27,
+        act: 9,
+        title: 'Multiple Rooms',
+        subtitle: 'Routing — connect your pages',
         concept: 'routing',
         xp: 220,
         badge: { id: 'react-builder', label: 'React Builder', emoji: '🧩' },
         steps: [
           {
-            id: 'routing-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: 'm27-gateway',
+            type: 'react-gateway',
+            chapterNumber: 7,
+            chapterTitle: 'Multiple Rooms',
+            chapterSubtitle: 'Routing',
             messages: [
-              "Your website has one page. Real websites have MANY!",
-              "Routing creates a 'portal network' between pages.",
-              "Click a link → teleport to a different page — without reloading!",
+              "Your website has rooms.",
+              "Home, About, Gallery, Contact.",
+              "But they need doors.",
             ],
-            action: "Build the portals!",
+            mood: 'thinking',
+            action: "Connect Them!",
           },
           {
-            id: 'routing-code',
-            type: 'code-reveal',
-            teki: "Here's how routing works with TanStack Router:",
-            language: 'jsx',
-            codeTemplate: `// Define your pages
-function HomePage() {
-  return <h1>Welcome to {{name}}!</h1>;
-}
+            id: 'm27-demo',
+            type: 'react-live-demo',
+            demoType: 'connect-routes',
+            teki: "Connect your pages — click each nav link to activate it.",
+            demoInit: { mode: 'routing', pagesConnected: false, connectedRoutes: [] },
+            codeReveal: `import { Link, Route } from '@tanstack/react-router';
 
-function AboutPage() {
-  return <h1>About {{name}}</h1>;
-}
-
-// Link between them
-import { Link } from '@tanstack/react-router';
-
+// Navigation link
 <Link to="/about">About</Link>
-<Link to="/">Home</Link>`,
-            explanations: {
-              young: "Link is like a door between rooms! Click it and you're in a different room — no waiting, no loading!",
-              junior: "React Router handles navigation in a SPA (Single Page App). <Link> creates links. The URL changes but the page doesn't reload.",
-              senior: "Client-side routing intercepts navigation events. TanStack Router features type-safe routes, loaders, and search params. No full page reload.",
+
+// Page definition
+<Route path="/about" component={AboutPage} />`,
+            language: 'jsx',
+            successMessage: "Your pages are connected!",
+            explanation: {
+              young: "Links are like doors between rooms! Click one and you're in a new room instantly!",
+              junior: "React Router's <Link> navigates without reloading. <Route> defines which component to show for each URL.",
+              senior: "Client-side routing intercepts navigation. TanStack Router offers type-safe routes with loaders and search params.",
             },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "Portals connected!",
+            action: "Next Chapter!",
+          },
+        ],
+      },
+
+      // ── Mission 28 ─ Chapter 8: Props + State Together ────────────────────────
+      {
+        id: 'mission-28',
+        number: 28,
+        act: 9,
+        title: 'Sharing Information',
+        subtitle: 'Props + State — the full picture',
+        concept: 'props-state',
+        xp: 250,
+        badge: { id: 'react-master', label: 'React Master', emoji: '⚛️' },
+        steps: [
+          {
+            id: 'm28-gateway',
+            type: 'react-gateway',
+            chapterNumber: 8,
+            chapterTitle: 'Sharing Information',
+            chapterSubtitle: 'Props + State Together',
+            messages: [
+              "Final chapter.",
+              "Everything comes together now.",
+              "Build a Theme Selector that updates your ENTIRE website.",
+            ],
+            mood: 'excited',
+            action: "Build It",
+          },
+          {
+            id: 'm28-demo',
+            type: 'react-live-demo',
+            demoType: 'theme-selector',
+            teki: "Pick a theme. Watch the entire website update.",
+            demoInit: { mode: 'theme-selector', showThemeSelector: true },
+            options: [
+              { label: 'Ocean',  value: '#0ea5e9', icon: '🌊' },
+              { label: 'Forest', value: '#10b981', icon: '🌿' },
+              { label: 'Sunset', value: '#f59e0b', icon: '🌅' },
+              { label: 'Royal',  value: '#8b5cf6', icon: '👑' },
+            ],
+            codeReveal: `// Parent holds the state
+const [theme, setTheme] = useState('ocean');
+
+// Props flow down to every child
+<Header theme={theme} />
+<Hero   theme={theme} />
+<Footer theme={theme} />`,
+            language: 'jsx',
+            successMessage: "Props + State working together!",
+            explanation: {
+              young: "The parent remembers the theme and tells ALL its children what to use!",
+              junior: "Parent component holds state. That state is passed to children as props — any change flows instantly.",
+              senior: "Unidirectional data flow: state lives in the nearest common ancestor and propagates downward via props. For deeper sharing, use Context or a state manager.",
+            },
+            action: "Amazing!",
+          },
+          {
+            id: 'm28-concept',
+            type: 'react-concept',
+            conceptType: 'props-state-flow',
+            teki: "Here's how Parent and Child components share information:",
+            action: "I understand it all!",
           },
           {
             id: 'act9-complete',
             type: 'act-complete',
             actId: 'act9',
             title: 'ACT 9 Complete!',
-            message: "You know React! Components, props, state, events, lists, routing — all mastered!",
-            power: { label: 'React Builder', emoji: '🧩' },
-            xpBonus: 300,
+            message: "You know React! Components, props, state, events, map, conditional rendering, routing, and data flow. You build like a pro.",
+            power: { label: 'React Master', emoji: '⚛️' },
+            xpBonus: 400,
             action: "Connect to the world!",
           },
         ],
       },
+
     ],
   },
 
@@ -1620,8 +1836,8 @@ import { Link } from '@tanstack/react-router';
     color: '#14b8a6',
     missions: [
       {
-        id: 'mission-27',
-        number: 27,
+        id: 'mission-29',
+        number: 29,
         act: 10,
         title: 'Data Portal',
         subtitle: 'APIs bring live data in',
@@ -1670,8 +1886,8 @@ function CatFact() {
       },
 
       {
-        id: 'mission-28',
-        number: 28,
+        id: 'mission-30',
+        number: 30,
         act: 10,
         title: 'Live Content',
         subtitle: 'Display real data beautifully',
@@ -1750,7 +1966,7 @@ function CatFact() {
     missions: [
       {
         id: 'challenge-1',
-        number: 29,
+        number: 31,
         act: 11,
         title: 'Pet Website',
         subtitle: 'Build a pet-themed website',
@@ -1774,7 +1990,7 @@ function CatFact() {
       },
       {
         id: 'challenge-2',
-        number: 30,
+        number: 32,
         act: 11,
         title: 'School Website',
         subtitle: 'Design a school website',
@@ -1797,7 +2013,7 @@ function CatFact() {
       },
       {
         id: 'challenge-3',
-        number: 31,
+        number: 33,
         act: 11,
         title: 'Space Explorer Website',
         subtitle: 'Build an out-of-this-world site',
@@ -1820,7 +2036,7 @@ function CatFact() {
       },
       {
         id: 'challenge-4',
-        number: 32,
+        number: 34,
         act: 11,
         title: 'Portfolio Website',
         subtitle: 'Showcase your work to the world',
@@ -1843,7 +2059,7 @@ function CatFact() {
       },
       {
         id: 'challenge-5',
-        number: 33,
+        number: 35,
         act: 11,
         title: 'Open Creation Challenge',
         subtitle: 'Build anything you can imagine',

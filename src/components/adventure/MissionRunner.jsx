@@ -8,17 +8,26 @@ import ObservationStep from './steps/ObservationStep'
 import CodeRevealStep from './steps/CodeRevealStep'
 import CodeChallengeStep from './steps/CodeChallengeStep'
 import ActCompleteStep from './steps/ActCompleteStep'
+import ReactGatewayStep from './steps/ReactGatewayStep'
+import ReactSpotlightStep from './steps/ReactSpotlightStep'
+import ReactConceptStep from './steps/ReactConceptStep'
+import ReactLiveDemoStep from './steps/ReactLiveDemoStep'
 
 const STEP_COMPONENTS = {
-  'teki-message':   TekiMessageStep,
-  'input':          InputStep,
-  'color-picker':   ColorPickerStep,
-  'topic-picker':   TopicPickerStep,
-  'visual-builder': VisualBuilderStep,
-  'observation':    ObservationStep,
-  'code-reveal':    CodeRevealStep,
-  'code-challenge': CodeChallengeStep,
-  'act-complete':   ActCompleteStep,
+  'teki-message':      TekiMessageStep,
+  'input':             InputStep,
+  'color-picker':      ColorPickerStep,
+  'topic-picker':      TopicPickerStep,
+  'visual-builder':    VisualBuilderStep,
+  'observation':       ObservationStep,
+  'code-reveal':       CodeRevealStep,
+  'code-challenge':    CodeChallengeStep,
+  'act-complete':      ActCompleteStep,
+  // ── React-path (Act 9+) ──
+  'react-gateway':     ReactGatewayStep,
+  'react-spotlight':   ReactSpotlightStep,
+  'react-concept':     ReactConceptStep,
+  'react-live-demo':   ReactLiveDemoStep,
 }
 
 export default function MissionRunner({ step, stepIndex, onComplete }) {

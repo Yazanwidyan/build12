@@ -5,10 +5,11 @@ import { useAdventureStore } from '@/stores/adventureStore'
 import { generateWebsiteHTML } from '@/engines/previewEngine'
 
 export default function WebsitePreview() {
-  const website = useAdventureStore((s) => s.website)
+  const website    = useAdventureStore((s) => s.website)
+  const reactDemo  = useAdventureStore((s) => s.reactDemo)
   const [viewport, setViewport] = useState('desktop')
 
-  const html = generateWebsiteHTML(website)
+  const html = generateWebsiteHTML(website, reactDemo)
   const siteName = (website.name || 'mywebsite').toLowerCase().replace(/\s+/g, '')
 
   return (

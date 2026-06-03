@@ -1,6 +1,26 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+const DEFAULT_REACT_DEMO = {
+  mode: null,               // 'components' | 'props' | 'state' | 'events' | 'map' | 'conditional' | 'routing' | 'theme-selector'
+  highlightButtons: false,  // pulse-ring animation on all buttons
+  propShowcase: false,      // show 3 differently-labelled buttons in hero area
+  showThemeBar: false,      // dark/light toggle bar
+  darkMode: false,          // dark background overlay
+  heroBtnText: null,        // hero button text override (null = use website default)
+  eventAction: null,        // null | 'message' | 'popup' | 'text-change'
+  showDeadButton: false,    // show hero button that deliberately does nothing
+  showPets: false,          // show pet gallery section
+  pets: [],                 // pet strings for gallery
+  showConditional: false,   // show conditional welcome section
+  userType: null,           // null | 'kid' | 'parent' | 'teacher'
+  pagesConnected: false,    // nav links become real anchor links
+  connectedRoutes: [],      // which route names are active
+  showThemeSelector: false, // show inline theme-color selector row
+  themeColor: null,         // primary color override
+  activeSettingDemo: null,  // which setting is being demonstrated
+}
+
 const DEFAULT_WEBSITE = {
   name: '',
   color: '#6366f1',
@@ -51,6 +71,7 @@ export const useAdventureStore = create(
       currentMissionNumber: 1,
       currentStepIndex: 0,
       website: { ...DEFAULT_WEBSITE },
+      reactDemo: { ...DEFAULT_REACT_DEMO },
       actCelebrating: null,
       levelComplete: false,
 
@@ -163,6 +184,11 @@ export const useAdventureStore = create(
         },
       })),
 
+      setReactDemo: (patch) => set((s) => ({
+        reactDemo: { ...s.reactDemo, ...patch },
+      })),
+      resetReactDemo: () => set({ reactDemo: { ...DEFAULT_REACT_DEMO } }),
+
       setCelebrating: (actId) => set({ actCelebrating: actId }),
       clearCelebrating: () => set({ actCelebrating: null }),
 
@@ -171,6 +197,7 @@ export const useAdventureStore = create(
         currentMissionNumber: 1,
         currentStepIndex: 0,
         website: { ...DEFAULT_WEBSITE },
+        reactDemo: { ...DEFAULT_REACT_DEMO },
         actCelebrating: null,
       }),
     }),
