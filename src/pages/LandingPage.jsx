@@ -4,6 +4,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useAuthStore } from "@/stores/authStore";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { Star, Zap, ArrowRight, Trash2 } from "lucide-react";
 
 const FEATURES = [
   {
@@ -122,6 +123,72 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
+
+      {/* ── Button showcase ── */}
+      <section className="max-w-6xl mx-auto px-6 py-16 w-full flex flex-col gap-12">
+        <div>
+          <p className="section-label mb-1">Design System</p>
+          <h2 className="text-2xl font-black text-ink">Button Components</h2>
+        </div>
+
+        {/* Variants × Colors */}
+        {[
+          { variant: 'solid',   label: 'Solid'   },
+          { variant: 'outline', label: 'Outline' },
+          { variant: 'soft',    label: 'Soft'    },
+          { variant: 'ghost',   label: 'Ghost'   },
+          { variant: 'link',    label: 'Link'    },
+        ].map(({ variant, label }) => (
+          <div key={variant} className="flex flex-col gap-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">{label}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              {['blue', 'green', 'red', 'yellow', 'purple', 'neutral'].map((color) => (
+                <Button key={color} variant={variant} color={color} size="md">
+                  {color.charAt(0).toUpperCase() + color.slice(1)}
+                </Button>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* Sizes */}
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">Sizes</p>
+          <div className="flex flex-wrap items-center gap-3">
+            {[
+              { size: 'xs', label: 'Extra Small' },
+              { size: 'sm', label: 'Small'       },
+              { size: 'md', label: 'Medium'      },
+              { size: 'lg', label: 'Large'       },
+              { size: 'xl', label: 'Extra Large' },
+            ].map(({ size, label }) => (
+              <Button key={size} variant="solid" color="blue" size={size}>{label}</Button>
+            ))}
+          </div>
+        </div>
+
+        {/* With icons */}
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">With Icons</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="solid"   color="blue"   icon={<Star size={14} />}>Favourite</Button>
+            <Button variant="solid"   color="green"  icon={<Zap size={14} />}>Power Up</Button>
+            <Button variant="outline" color="purple" iconRight={<ArrowRight size={14} />}>Continue</Button>
+            <Button variant="soft"    color="red"    icon={<Trash2 size={14} />}>Delete</Button>
+          </div>
+        </div>
+
+        {/* States */}
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted font-mono">States</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="solid"   color="blue"    >Default</Button>
+            <Button variant="solid"   color="blue"    disabled>Disabled</Button>
+            <Button variant="solid"   color="blue"    loading>Loading</Button>
+            <Button variant="outline" color="neutral" fullWidth>Full Width</Button>
+          </div>
+        </div>
+      </section>
 
       {/* ── Footer ── */}
       <footer
