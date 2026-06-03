@@ -8,7 +8,7 @@
 
 :root {
   /* ── Light theme ─────────────────────────────────────────────────────────── */
-  --app-bg:      #f5f6fa;
+  --app-bg:      #ffffff;
   --app-surface: #ffffff;
   --app-raised:  #f0f2f8;
   --app-border:  #e2e6f0;
@@ -38,14 +38,14 @@
   --code-border:#e2e6f0;
   --code-text:  #1e293b;
 
-  --bubble-bg:    #f0f2ff;
+  --bubble-bg:    #F1F5F9;
   --bubble-border:#dde1f7;
   --bubble-text:  #1e2a5e;
 }
 
 .dark {
   /* ── Dark theme (Codedex-inspired) ───────────────────────────────────────── */
-  --app-bg:      #0d1117;
+  --app-bg:      #161c2d;
   --app-surface: #161c2d;
   --app-raised:  #1e2640;
   --app-border:  #2a3347;

@@ -32,9 +32,10 @@ export default function BuilderPage() {
     <div className="h-screen flex flex-col overflow-hidden bg-app">
       {/* Nav */}
       <header
-        className="border-b px-4 py-2 flex items-center gap-3 shrink-0"
+        className="border-b shrink-0"
         style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}
       >
+      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3">
         <button
           onClick={() => navigate({ to: '/dashboard' })}
           className="flex items-center gap-1 text-sm transition-colors"
@@ -54,6 +55,7 @@ export default function BuilderPage() {
         </span>
         <div className="flex-1" />
         <ThemeToggle />
+      </div>
       </header>
 
       <div className="flex-1 flex min-h-0">

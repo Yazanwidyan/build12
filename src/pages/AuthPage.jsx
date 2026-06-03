@@ -12,7 +12,6 @@ import Input from '@/components/ui/Input'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 
 const signupSchema = z.object({
-  name:     z.string().min(2, 'Name must be at least 2 characters'),
   email:    z.string().email('Please enter a valid email'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 })
@@ -35,7 +34,7 @@ export default function AuthPage({ mode = 'signup' }) {
   const onSubmit = (data) => {
     setError('')
     if (isSignup) {
-      signup(data.email, data.password, data.name)
+      signup(data.email, data.password)
       navigate({ to: '/onboarding' })
     } else {
       const r = login(data.email, data.password)
@@ -85,9 +84,6 @@ export default function AuthPage({ mode = 'signup' }) {
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            {isSignup && (
-              <Input label="Your name" placeholder="Alex" error={errors.name?.message} {...register('name')} />
-            )}
             <Input label="Email" type="email" placeholder="you@example.com" error={errors.email?.message} {...register('email')} />
             <Input label="Password" type="password" placeholder="••••••••" error={errors.password?.message} {...register('password')} />
             {error && <p className="text-sm text-red-400 text-center">{error}</p>}
