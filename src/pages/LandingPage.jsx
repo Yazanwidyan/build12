@@ -38,19 +38,11 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-app flex flex-col">
       {/* ── Nav ── */}
-      <nav className="border-b sticky top-0 z-10 backdrop-blur-md">
+      <nav className="border-b sticky border-app-border top-0 z-10 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-black text-white"
-              style={{
-                background: "linear-gradient(135deg, #2cbaff, #06a4f0)",
-              }}
-            >
-              H
-            </div>
-            <span className="text-lg font-black text-ink tracking-tight">
-              HelloBuildIt
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="font-black text-ink text-base tracking-tight">
+              {`{ HelloBuildIt }`}
             </span>
           </div>
           <div className="flex items-center gap-2">
