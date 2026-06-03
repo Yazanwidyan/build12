@@ -1,7 +1,7 @@
 ﻿import Button from "@/components/ui/Button";
+import Header from "@/components/ui/Header";
 import Input from "@/components/ui/Input";
-import ThemeToggle from "@/components/ui/ThemeToggle";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Mail, MessageSquare, BookOpen } from "lucide-react";
 import { useState } from "react";
@@ -11,44 +11,6 @@ const CONTACT_OPTIONS = [
   { icon: <MessageSquare size={20}/>, title: "General enquiries", desc: "Questions about the platform", color: "#22c55e" },
   { icon: <BookOpen size={20} />,    title: "Curriculum & edu",  desc: "For schools and educators",   color: "#8b5cf6"  },
 ];
-
-function PublicNav() {
-  const navigate = useNavigate();
-  const { location } = useRouterState();
-  const path = location.pathname;
-  const navLink = (to, label) => {
-    const active = path === to;
-    return (
-      <button
-        onClick={() => navigate({ to })}
-        className="relative flex items-center px-3 text-base font-medium transition-colors"
-        style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
-        onMouseEnter={e => { if (!active) e.currentTarget.style.color = "var(--ink)" }}
-        onMouseLeave={e => { if (!active) e.currentTarget.style.color = "var(--ink-muted)" }}
-      >
-        {label}
-        {active && <span className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: "#2cbaff" }} />}
-      </button>
-    );
-  };
-  return (
-    <nav className="border-b-2 border-app-border bg-app sticky top-0 z-10 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
-        <button onClick={() => navigate({ to: "/" })} className="font-black text-2xl text-ink tracking-tighter shrink-0">HelloBuildIt</button>
-        <div className="hidden md:flex self-stretch items-stretch gap-1">
-          {navLink("/about",   "About")}
-          {navLink("/pricing", "Pricing")}
-          {navLink("/contact", "Contact")}
-        </div>
-        <div className="flex-1" />
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button size="sm" onClick={() => navigate({ to: "/signup" })}>Get Started</Button>
-        </div>
-      </div>
-    </nav>
-  );
-}
 
 export default function ContactPage() {
   const [form, setForm]       = useState({ name: "", email: "", subject: "", message: "" });
@@ -66,7 +28,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-app flex flex-col">
-      <PublicNav />
+      <Header />
 
       <main className="flex-1 max-w-6xl mx-auto px-6 py-16 w-full flex flex-col gap-16">
 

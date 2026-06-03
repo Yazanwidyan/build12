@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <nav className="border-b-2 border-app-border bg-app sticky top-0 z-10 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
-        <span className="font-black text-2xl text-ink tracking-tighter shrink-0">HelloBuildIt</span>
+        <button onClick={() => navigate({ to: "/" })} className="font-black text-2xl text-ink tracking-tighter shrink-0">HelloBuildIt</button>
         <div className="hidden md:flex self-stretch items-stretch gap-1">
           {navLink("/about", "About")}
           {navLink("/pricing", "Pricing")}
