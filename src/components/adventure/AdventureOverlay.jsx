@@ -7,7 +7,7 @@ const SECTION_H = {
   hero:   { built: 360, unbuilt: 180 },
   footer: { built: 80,  unbuilt: 100 },
 };
-const IFRAME_TOP = 54;  // browser chrome height within the preview panel
+const IFRAME_TOP = 90;
 
 const SECTION_META = {
   header: { label: "Header",       color: "#2cbaff" },
@@ -37,7 +37,7 @@ export default function AdventureOverlay() {
   const zone  = highlightSection ? ZONES[highlightSection] : null;
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-[25]">
+    <div className="fixed inset-0 pointer-events-none z-[25]">
       <AnimatePresence>
         {zone && (
           <motion.div

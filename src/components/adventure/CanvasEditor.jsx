@@ -10,8 +10,7 @@ const SECTION_H = {
   footer: { built: 80,  unbuilt: 100 },
 };
 
-// Distance from the preview panel top to the iframe content (browser chrome height)
-const IFRAME_TOP = 54;
+const IFRAME_TOP = 90;
 
 function getSectionTop(sections, sectionKey) {
   let top = IFRAME_TOP;
@@ -160,7 +159,7 @@ export default function CanvasEditor() {
   const sectionTop = getSectionTop(sections, canvasInput.section);
 
   return (
-    <div className="absolute inset-0 z-[30] pointer-events-none">
+    <div className="fixed inset-0 z-[30] pointer-events-none" style={{ right: 380 }}>
       <AnimatePresence mode="wait">
         <CanvasInput
           key={currentStep.id}
