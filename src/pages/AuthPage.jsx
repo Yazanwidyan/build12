@@ -87,7 +87,7 @@ export default function AuthPage({ mode = "signup" }) {
               />
               {/* Left tail — fill layer */}
               <div
-                className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
+                className="absolute -left-[8px] top-1/2 -translate-y-1/2 w-0 h-0"
                 style={{
                   borderTop: "9px solid transparent",
                   borderBottom: "9px solid transparent",

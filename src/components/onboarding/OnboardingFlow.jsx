@@ -122,7 +122,7 @@ function OnboardingShell({
                     }}
                   />
                   <div
-                    className="absolute left-1/2 -top-[10px] -translate-x-1/2 w-0 h-0"
+                    className="absolute left-1/2 -top-[8px] -translate-x-1/2 w-0 h-0"
                     style={{
                       borderLeft: "9px solid transparent",
                       borderRight: "9px solid transparent",
@@ -174,7 +174,7 @@ function OnboardingShell({
                     }}
                   />
                   <div
-                    className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
+                    className="absolute -left-[8px] top-1/2 -translate-y-1/2 w-0 h-0"
                     style={{
                       borderTop: "9px solid transparent",
                       borderBottom: "9px solid transparent",
@@ -244,7 +244,7 @@ export default function OnboardingFlow() {
     if (step >= 3 && profile.ageGroup) {
       adventure.startAdventure("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/adventure" });
+      navigate({ to: "/journey-start" });
     }
   };
 
@@ -263,7 +263,7 @@ export default function OnboardingFlow() {
     } else {
       adventure.startAdventure("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/adventure" });
+      navigate({ to: "/journey-start" });
     }
   };
 
@@ -282,7 +282,7 @@ export default function OnboardingFlow() {
     const firstMission = getMissionsForLevel("senior")[0]?.number ?? 21;
     adventure.startAdventure("website", firstMission);
     profile.completeOnboarding();
-    navigate({ to: "/adventure" });
+    navigate({ to: "/journey-start" });
   };
 
   // ── Step 0: Hello ──────────────────────────────────────────────────────────
@@ -314,8 +314,18 @@ export default function OnboardingFlow() {
       >
         <div className="grid grid-cols-2 gap-4">
           {[
-            { id: "pixel", label: "Pixel", desc: "The techy builder",    Char: CharacterPixel },
-            { id: "spark", label: "Spark", desc: "The creative builder", Char: CharacterSpark },
+            {
+              id: "pixel",
+              label: "Pixel",
+              desc: "The techy builder",
+              Char: CharacterPixel,
+            },
+            {
+              id: "spark",
+              label: "Spark",
+              desc: "The creative builder",
+              Char: CharacterSpark,
+            },
           ].map(({ id, label, desc, Char }) => {
             const selected = profile.avatar === id;
             return (
@@ -327,7 +337,9 @@ export default function OnboardingFlow() {
                 className="flex flex-col items-center gap-3 py-5 px-4 rounded-2xl border-2 transition-all"
                 style={{
                   borderColor: selected ? "#2cbaff" : "var(--app-border)",
-                  backgroundColor: selected ? "rgba(44,186,255,0.06)" : "var(--app-raised)",
+                  backgroundColor: selected
+                    ? "rgba(44,186,255,0.06)"
+                    : "var(--app-raised)",
                 }}
               >
                 <Char size={88} selected={selected} />
@@ -335,7 +347,14 @@ export default function OnboardingFlow() {
                   <p className="font-bold text-ink text-base">{label}</p>
                   <p className="text-sm text-muted mt-0.5">{desc}</p>
                 </div>
-                {selected && <span className="text-sm font-bold" style={{ color: "#2cbaff" }}>Selected ✓</span>}
+                {selected && (
+                  <span
+                    className="text-sm font-bold"
+                    style={{ color: "#2cbaff" }}
+                  >
+                    Selected ✓
+                  </span>
+                )}
               </motion.button>
             );
           })}
@@ -345,7 +364,8 @@ export default function OnboardingFlow() {
 
   // ── Step 2: Builder name (with selected character) ─────────────────────────
   if (step === 2) {
-    const SelectedChar = profile.avatar === "pixel" ? CharacterPixel : CharacterSpark;
+    const SelectedChar =
+      profile.avatar === "pixel" ? CharacterPixel : CharacterSpark;
     return (
       <OnboardingShell
         step={2}
@@ -361,7 +381,10 @@ export default function OnboardingFlow() {
           <SelectedChar size={90} selected />
           <Input
             value={name}
-            onChange={(e) => { setName(e.target.value); setNameError(""); }}
+            onChange={(e) => {
+              setName(e.target.value);
+              setNameError("");
+            }}
             placeholder="Your builder name..."
             error={nameError}
             onKeyDown={(e) => e.key === "Enter" && submitName()}
