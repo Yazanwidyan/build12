@@ -1,6 +1,7 @@
 ﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import AvatarDisplay from "@/components/ui/AvatarDisplay";
 import Button from "@/components/ui/Button";
+import LogoCube from "@/components/ui/logos/LogoCube";
 import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
 import { useAuthStore } from "@/stores/authStore";
 import { AVATARS, useProfileStore } from "@/stores/profileStore";
@@ -820,11 +821,16 @@ export default function DashboardPage() {
       <nav className="sticky top-0 z-30 border-b-2 bg-app border-app-border">
         <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="font-black text-2xl text-ink tracking-tighter">
+          <button
+            onClick={() => navigate({ to: "/" })}
+            className="flex items-center gap-1 shrink-0"
+          >
+            <LogoCube size={28} />
+
+            <span className="font-black text-[1.35rem] text-ink tracking-tighter shrink-0">
               HelloBuildIt
             </span>
-          </div>
+          </button>
 
           {/* Nav tabs */}
           <div className="hidden md:flex self-stretch items-stretch gap-1">
@@ -834,12 +840,20 @@ export default function DashboardPage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className="relative flex items-center px-3 text-base font-semibold transition-colors duration-150 rounded-none"
+                  className="relative flex items-center px-3 text-base font-semibold transition-colors"
+                  style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
+                  onMouseEnter={(e) => {
+                    if (!active) e.currentTarget.style.color = "var(--ink)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active)
+                      e.currentTarget.style.color = "var(--ink-muted)";
+                  }}
                 >
                   {tab.label}
                   {active && (
                     <span
-                      className="absolute bottom-0 left-0 right-0 h-[1.5px]"
+                      className="absolute bottom-0 left-0 right-0 h-[1px]"
                       style={{ background: "#2cbaff" }}
                     />
                   )}

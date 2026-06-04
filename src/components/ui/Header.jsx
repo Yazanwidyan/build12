@@ -21,7 +21,7 @@ export default function Header() {
       <button
         key={to}
         onClick={() => navigate({ to })}
-        className="relative flex items-center px-3 text-sm font-bold transition-colors"
+        className="relative flex items-center px-3  font-semibold transition-colors"
         style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
         onMouseEnter={(e) => {
           if (!active) e.currentTarget.style.color = "var(--ink)";
@@ -33,7 +33,7 @@ export default function Header() {
         {label}
         {active && (
           <span
-            className="absolute bottom-0 left-0 right-0 h-[3px]"
+            className="absolute bottom-0 left-0 right-0 h-[1px]"
             style={{ background: "#2cbaff" }}
           />
         )}
@@ -44,10 +44,12 @@ export default function Header() {
   return (
     <nav className="border-b-2 border-app-border bg-app sticky top-0 z-10 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
-        <button onClick={() => navigate({ to: "/" })} className="flex items-center gap-1 shrink-0">
-          {LOGOS.map(({ L, label }) => (
-            <L key={label} />
-          ))}
+        <button
+          onClick={() => navigate({ to: "/" })}
+          className="flex items-center gap-1 shrink-0"
+        >
+          <LogoCube size={28} />
+
           <span className="font-black text-[1.35rem] text-ink tracking-tighter shrink-0">
             HelloBuildIt
           </span>
@@ -67,7 +69,12 @@ export default function Header() {
           ) : (
             <>
               {location.pathname !== "/login" && (
-                <Button variant="ghost" color="neutral" size="sm" onClick={() => navigate({ to: "/login" })}>
+                <Button
+                  variant="ghost"
+                  color="neutral"
+                  size="sm"
+                  onClick={() => navigate({ to: "/login" })}
+                >
                   Log in
                 </Button>
               )}
