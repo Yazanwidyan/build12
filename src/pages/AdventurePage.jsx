@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
@@ -15,6 +15,8 @@ import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+
+const TEKI_PANEL_W = 380
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
 function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
@@ -68,12 +70,11 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
 
 // ── Main adventure page ────────────────────────────────────────────────────────
 export default function AdventurePage() {
-  const navigate    = useNavigate()
-  const adventure   = useAdventureStore()
-  const profile     = useProfileStore()
-  const progress    = useProgressStore()
-  const speak       = useTekiStore((s) => s.speak)
-  const ageGroup    = profile.ageGroup ?? 'young'
+  const navigate  = useNavigate()
+  const adventure = useAdventureStore()
+  const profile   = useProfileStore()
+  const speak     = useTekiStore((s) => s.speak)
+  const ageGroup  = profile.ageGroup ?? 'young'
 
   const introDone = useAdventureStore((s) => !!(s.website?.name))
 
@@ -95,12 +96,11 @@ export default function AdventurePage() {
   if (!adventure.currentAdventure) return null
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative">
+    <div className="h-screen w-screen overflow-hidden flex flex-col relative">
 
-      {/* ── Slim top bar ── */}
-      <div className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b-2 px-4 h-9 flex items-center gap-2"
-           style={{ backgroundColor: 'rgba(var(--app-surface),0.85)', borderColor: 'var(--app-border)',
-                    background: 'color-mix(in srgb, var(--app-surface) 85%, transparent)' }}>
+      {/* ── Top bar ── */}
+      <div className="shrink-0 z-30 border-b-2 px-4 h-9 flex items-center gap-2"
+           style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-border)' }}>
         <Button variant="ghost" color="neutral" size="xs" icon={<ArrowLeft size={12} />} onClick={() => navigate({ to: '/dashboard' })}>
           Dashboard
         </Button>
@@ -113,19 +113,23 @@ export default function AdventurePage() {
         </span>
       </div>
 
-      {/* ── Full-screen website preview ── */}
-      <div className="absolute inset-0 pt-9">
-        <WebsitePreview />
+      {/* ── Body row ── */}
+      <div className="flex flex-1 min-h-0">
+
+        {/* Left: website preview (fills remaining width) */}
+        <div className="flex-1 relative overflow-hidden min-w-0">
+          <WebsitePreview />
+          {introDone && <AdventureOverlay />}
+          {introDone && <CanvasEditor />}
+        </div>
+
+        {/* Right: TEKI sidebar */}
+        <div className="relative shrink-0 overflow-hidden"
+             style={{ width: TEKI_PANEL_W, borderLeft: '2px solid var(--app-border)', backgroundColor: 'var(--app-bg)' }}>
+          {introDone && <FloatingTeki />}
+        </div>
+
       </div>
-
-      {/* ── Section highlight + TEKI overlay ── */}
-      {introDone && <AdventureOverlay />}
-
-      {/* ── Inline canvas editor ── */}
-      {introDone && <CanvasEditor />}
-
-      {/* ── Floating TEKI (mission driver) ── */}
-      {introDone && <FloatingTeki />}
 
       {/* ── Adventure intro overlay ── */}
       {!introDone && <AdventureIntro onDone={() => {}} />}

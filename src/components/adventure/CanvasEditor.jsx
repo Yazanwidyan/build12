@@ -10,8 +10,8 @@ const SECTION_H = {
   footer: { built: 80,  unbuilt: 100 },
 };
 
-// Distance from adventure page top to the iframe content
-const IFRAME_TOP = 90;
+// Distance from the preview panel top to the iframe content (browser chrome height)
+const IFRAME_TOP = 54;
 
 function getSectionTop(sections, sectionKey) {
   let top = IFRAME_TOP;
@@ -160,7 +160,7 @@ export default function CanvasEditor() {
   const sectionTop = getSectionTop(sections, canvasInput.section);
 
   return (
-    <div className="fixed inset-0 z-[30] pointer-events-none" style={{ right: 400 }}>
+    <div className="absolute inset-0 z-[30] pointer-events-none">
       <AnimatePresence mode="wait">
         <CanvasInput
           key={currentStep.id}

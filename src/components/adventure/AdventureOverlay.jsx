@@ -7,7 +7,7 @@ const SECTION_H = {
   hero:   { built: 360, unbuilt: 180 },
   footer: { built: 80,  unbuilt: 100 },
 };
-const IFRAME_TOP = 90;
+const IFRAME_TOP = 54;  // browser chrome height within the preview panel
 
 const SECTION_META = {
   header: { label: "Header",       color: "#2cbaff" },
@@ -27,7 +27,6 @@ function buildZones(sections) {
 }
 
 const DIM = "rgba(0,0,0,0.45)";
-const PANEL_W = 400; // width reserved for FloatingTeki panel
 
 export default function AdventureOverlay() {
   const highlightSection  = useTekiStore((s) => s.highlightSection);
@@ -38,7 +37,7 @@ export default function AdventureOverlay() {
   const zone  = highlightSection ? ZONES[highlightSection] : null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[25]">
+    <div className="absolute inset-0 pointer-events-none z-[25]">
       <AnimatePresence>
         {zone && (
           <motion.div
@@ -54,14 +53,12 @@ export default function AdventureOverlay() {
             <div className="absolute left-0 right-0" style={{ top: 0, height: zone.top, background: DIM }} />
             {/* Below zone */}
             <div className="absolute left-0 right-0" style={{ top: zone.top + zone.height, bottom: 0, background: DIM }} />
-            {/* Right of zone (FloatingTeki panel area) */}
-            <div className="absolute" style={{ top: zone.top, height: zone.height, right: 0, width: PANEL_W, background: DIM }} />
 
-            {/* ── Glowing border — static, only opacity pulses ── */}
+            {/* ── Glowing border ── */}
             <div
               className="absolute"
               style={{
-                top: zone.top, left: 0, right: PANEL_W, height: zone.height,
+                top: zone.top, left: 0, right: 0, height: zone.height,
                 border: `2px solid ${zone.color}`,
                 borderRadius: 8,
               }}
