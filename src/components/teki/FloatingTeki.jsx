@@ -15,12 +15,28 @@ const SECTION_H = {
 const IFRAME_TOP  = 90;   // top bar (36px) + browser chrome (~54px)
 const DEFAULT_TOP = 250;  // resting position when no section is highlighted
 
-function getSectionCenter(key, sections) {
+// offsetTop of each canvas-input field within its section (mirrors CanvasEditor FIELD_CONFIGS)
+const FIELD_OFFSET_TOP = {
+  'header-title':     18,
+  'header-nav':       18,
+  'hero-headline':    52,
+  'hero-subtext':    116,
+  'hero-button':     168,
+  'footer-copyright': 20,
+  'footer-links':     52,
+};
+
+function getSectionTop(key, sections) {
   let top = IFRAME_TOP;
-  if (key !== "header") top += sections.header.built ? 62 : 116;
-  if (key === "footer")  top += sections.hero.built  ? 360 : 180;
-  const h = SECTION_H[key];
-  return top + (sections[key].built ? h.built : h.unbuilt) / 2;
+  if (key === 'header') return top;
+  top += sections.header.built ? SECTION_H.header.built : SECTION_H.header.unbuilt;
+  if (key === 'hero') return top;
+  top += sections.hero.built ? SECTION_H.hero.built : SECTION_H.hero.unbuilt;
+  return top;
+}
+
+function getSectionCenter(key, sections) {
+  return getSectionTop(key, sections) + (sections[key].built ? SECTION_H[key].built : SECTION_H[key].unbuilt) / 2;
 }
 
 const FLOAT = {
@@ -50,8 +66,17 @@ export default function FloatingTeki() {
       hero:   { built: heroBuilt },
       footer: { built: footerBuilt },
     };
+
+    // For canvas-input steps, align Teki with the specific field being edited
+    if (currentStep?.type === 'canvas-input' && currentStep?.canvasInput?.fieldKey) {
+      const { fieldKey, section } = currentStep.canvasInput;
+      const sTop    = getSectionTop(section, sections);
+      const fOffset = FIELD_OFFSET_TOP[fieldKey] ?? 18;
+      return Math.max(44, sTop + fOffset);
+    }
+
     return Math.max(44, getSectionCenter(highlightSection, sections) - 36);
-  }, [highlightSection, headerBuilt, heroBuilt, footerBuilt]);
+  }, [highlightSection, headerBuilt, heroBuilt, footerBuilt, currentStep?.id]);
 
   const effectiveTop = travelTop ?? DEFAULT_TOP;
 
