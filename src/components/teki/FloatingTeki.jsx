@@ -47,8 +47,7 @@ export default function FloatingTeki() {
               exit={{ opacity: 0, scale: 0.88, y: 12 }}
               transition={{ type: 'spring', stiffness: 380, damping: 28 }}
               className="rounded-2xl shadow-2xl overflow-hidden"
-              style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)' }}
-              style={{ width: 380 }}
+              style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)', width: 380 }}
             >
               {/* Title bar */}
               <div
