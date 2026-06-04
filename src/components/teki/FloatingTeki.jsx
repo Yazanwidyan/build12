@@ -1,4 +1,4 @@
-﻿import { useState, useRef } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Minus } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
@@ -10,7 +10,23 @@ import MissionRunner from '@/components/adventure/MissionRunner'
 import Button from '@/components/ui/Button'
 
 export default function FloatingTeki() {
-  const { currentMessage, displayedText, isTyping, mood } = useTekiStore()
+  const { currentMessage, displayedText, isTyping, mood, setDisplayedText, messageTyped } = useTekiStore()
+
+  // Typewriter — advances through the message queue
+  useEffect(() => {
+    if (!isTyping || !currentMessage) return
+    let i = 0
+    setDisplayedText('')
+    const iv = setInterval(() => {
+      i++
+      setDisplayedText(currentMessage.slice(0, i))
+      if (i >= currentMessage.length) {
+        clearInterval(iv)
+        setTimeout(messageTyped, 900)
+      }
+    }, 22)
+    return () => clearInterval(iv)
+  }, [currentMessage, isTyping])
   const { currentMission, currentStep, currentStepIndex, totalSteps, advanceStep, progressPercent, ageGroup } = useMissionEngine()
   const xp = useProgressStore((s) => s.xp)
   const completedActs = useProgressStore((s) => s.completedActs)
