@@ -8,8 +8,6 @@ export default function CanvasInputStep({ step, onComplete }) {
   const speak          = useTekiStore((s) => s.speak);
   const setHighlight   = useTekiStore((s) => s.setHighlight);
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
-  const setGenerating  = useTekiStore((s) => s.setGenerating);
-  const clearGenerating = useTekiStore((s) => s.clearGenerating);
   const adventure      = useAdventureStore();
 
   useEffect(() => {
@@ -20,19 +18,19 @@ export default function CanvasInputStep({ step, onComplete }) {
   }, [step.id]);
 
   const handleDone = () => {
-    const buildSection = step.buildSectionOnComplete;
-    if (buildSection) {
-      setGenerating(buildSection);
-      const content = adventure.website.sections[buildSection]?.content || {};
-      setTimeout(() => {
-        adventure.buildSection(buildSection, content);
-        clearGenerating();
-        speak("Amazing! Look at that! 🎉", { mood: "excited" });
-        setTimeout(onComplete, 700);
-      }, 1800);
-      return;
+    // Always build the section instantly with current content so the preview updates immediately
+    const section = step.canvasInput?.section;
+    if (section) {
+      adventure.buildSection(section, adventure.website.sections[section]?.content || {});
     }
-    onComplete();
+
+    // Final step for this section — celebrate then advance
+    if (step.buildSectionOnComplete) {
+      speak("Amazing! Look at that! 🎉", { mood: "excited" });
+      setTimeout(onComplete, 700);
+    } else {
+      onComplete();
+    }
   };
 
   return (
