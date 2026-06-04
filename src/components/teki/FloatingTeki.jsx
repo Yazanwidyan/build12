@@ -71,9 +71,9 @@ export default function FloatingTeki() {
       setDisplayedText(currentMessage.slice(0, i));
       if (i >= currentMessage.length) {
         clearInterval(iv);
-        setTimeout(messageTyped, 900);
+        setTimeout(messageTyped, 400);
       }
-    }, 22);
+    }, 14);
     return () => clearInterval(iv);
   }, [currentMessage, isTyping]);
 

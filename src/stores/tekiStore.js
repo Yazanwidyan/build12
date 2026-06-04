@@ -45,7 +45,7 @@ export const useTekiStore = create((set, get) => ({
           choices: isNextLast ? choices : [],
           onChoice: isNextLast ? onChoice : null,
         })
-      }, 800)
+      }, 400)
     }
   },
 
