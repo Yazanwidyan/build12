@@ -55,6 +55,14 @@ export const useTekiStore = create((set, get) => ({
 
   clearChoices: () => set({ choices: [], onChoice: null }),
 
+  // Section highlight / AI-generation state
+  highlightSection: null,   // 'header' | 'hero' | 'footer' | null
+  generatingSection: null,  // same — shown with sweep animation
+  setHighlight: (section) => set({ highlightSection: section }),
+  clearHighlight: () => set({ highlightSection: null }),
+  setGenerating: (section) => set({ generatingSection: section, highlightSection: section }),
+  clearGenerating: () => set({ generatingSection: null, highlightSection: null }),
+
   setMood: (mood) => set({ mood }),
 
   setVisible: (isVisible) => set({ isVisible }),

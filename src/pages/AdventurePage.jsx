@@ -8,6 +8,8 @@ import { useProgressStore } from '@/stores/progressStore'
 import { useTekiStore } from '@/stores/tekiStore'
 import { LEVEL_INFO } from '@/data/curriculum'
 import AdventureIntro from '@/components/adventure/AdventureIntro'
+import AdventureOverlay from '@/components/adventure/AdventureOverlay'
+import CanvasEditor from '@/components/adventure/CanvasEditor'
 import WebsitePreview from '@/components/adventure/WebsitePreview'
 import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
@@ -115,6 +117,12 @@ export default function AdventurePage() {
       <div className="absolute inset-0 pt-9">
         <WebsitePreview />
       </div>
+
+      {/* ── Section highlight + TEKI overlay ── */}
+      {introDone && <AdventureOverlay />}
+
+      {/* ── Inline canvas editor ── */}
+      {introDone && <CanvasEditor />}
 
       {/* ── Floating TEKI (mission driver) ── */}
       {introDone && <FloatingTeki />}

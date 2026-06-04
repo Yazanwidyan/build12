@@ -8,6 +8,7 @@ import ObservationStep from './steps/ObservationStep'
 import CodeRevealStep from './steps/CodeRevealStep'
 import CodeChallengeStep from './steps/CodeChallengeStep'
 import ActCompleteStep from './steps/ActCompleteStep'
+import CanvasInputStep from './steps/CanvasInputStep'
 import ReactGatewayStep from './steps/ReactGatewayStep'
 import ReactSpotlightStep from './steps/ReactSpotlightStep'
 import ReactConceptStep from './steps/ReactConceptStep'
@@ -23,6 +24,7 @@ const STEP_COMPONENTS = {
   'code-reveal':       CodeRevealStep,
   'code-challenge':    CodeChallengeStep,
   'act-complete':      ActCompleteStep,
+  'canvas-input':      CanvasInputStep,
   // ── React-path (Act 9+) ──
   'react-gateway':     ReactGatewayStep,
   'react-spotlight':   ReactSpotlightStep,

@@ -118,7 +118,11 @@ function SelectField({ value, onChange, options, labels }) {
 }
 
 export default function VisualBuilderStep({ step, onComplete }) {
-  const speak   = useTekiStore((s) => s.speak)
+  const speak          = useTekiStore((s) => s.speak)
+  const setHighlight   = useTekiStore((s) => s.setHighlight)
+  const setGenerating  = useTekiStore((s) => s.setGenerating)
+  const clearGenerating = useTekiStore((s) => s.clearGenerating)
+  const clearHighlight = useTekiStore((s) => s.clearHighlight)
   const adventure = useAdventureStore()
 
   const getInit = () => {
@@ -135,6 +139,8 @@ export default function VisualBuilderStep({ step, onComplete }) {
 
   useEffect(() => {
     speak(step.teki || 'Customize this section!', { mood: 'happy' })
+    if (step.section) setHighlight(step.section)
+    else clearHighlight()
   }, [step.id])
 
   const setField = (fieldId, val) => {
@@ -150,7 +156,14 @@ export default function VisualBuilderStep({ step, onComplete }) {
     if (step.section && !step.isStyleUpdate) {
       const content = {}
       for (const f of step.fields) content[f.storeSubKey] = values[f.id]
-      adventure.buildSection(step.section, content)
+      setGenerating(step.section)
+      setTimeout(() => {
+        adventure.buildSection(step.section, content)
+        clearGenerating()
+        speak('Looking great! 🎉', { mood: 'excited' })
+        setTimeout(onComplete, 600)
+      }, 1800)
+      return
     }
     speak('Looking great! 🎉', { mood: 'excited' })
     setTimeout(onComplete, 500)

@@ -5,10 +5,15 @@ import Blueprint from '@/components/adventure/Blueprint'
 import Button from '@/components/ui/Button'
 
 export default function ObservationStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
+  const speak        = useTekiStore((s) => s.speak)
+  const setHighlight = useTekiStore((s) => s.setHighlight)
+  const clearHighlight = useTekiStore((s) => s.clearHighlight)
 
   useEffect(() => {
     speak(step.tekiMessages || [step.teki], { mood: step.mood || 'excited' })
+    const hl = step.highlight || step.highlightSection
+    if (hl) setHighlight(hl)
+    else clearHighlight()
   }, [step.id])
 
   return (

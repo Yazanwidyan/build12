@@ -5,10 +5,15 @@ import Button from '@/components/ui/Button'
 
 // TEKI speaks the messages in the bubble — this just renders the "continue" button.
 export default function TekiMessageStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
+  const speak        = useTekiStore((s) => s.speak)
+  const setHighlight = useTekiStore((s) => s.setHighlight)
+  const clearHighlight = useTekiStore((s) => s.clearHighlight)
 
   useEffect(() => {
     speak(step.messages || [step.teki], { mood: step.mood || 'happy' })
+    const hl = step.highlight || step.highlightSection
+    if (hl) setHighlight(hl)
+    else clearHighlight()
   }, [step.id])
 
   return (
