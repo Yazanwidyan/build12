@@ -7,6 +7,7 @@ import { useProfileStore } from '@/stores/profileStore'
 import { useProgressStore } from '@/stores/progressStore'
 import { useTekiStore } from '@/stores/tekiStore'
 import { LEVEL_INFO } from '@/data/curriculum'
+import AdventureIntro from '@/components/adventure/AdventureIntro'
 import WebsitePreview from '@/components/adventure/WebsitePreview'
 import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
@@ -72,11 +73,14 @@ export default function AdventurePage() {
   const speak       = useTekiStore((s) => s.speak)
   const ageGroup    = profile.ageGroup ?? 'young'
 
+  const introDone = useAdventureStore((s) => !!(s.website?.name))
+
   useEffect(() => {
     if (!adventure.currentAdventure) navigate({ to: '/onboarding' })
   }, [adventure.currentAdventure])
 
   useEffect(() => {
+    if (!introDone) return
     const { currentMessage } = useTekiStore.getState()
     if (!currentMessage) {
       speak(
@@ -84,7 +88,7 @@ export default function AdventurePage() {
         { mood: 'excited' }
       )
     }
-  }, [])
+  }, [introDone])
 
   if (!adventure.currentAdventure) return null
 
@@ -113,7 +117,10 @@ export default function AdventurePage() {
       </div>
 
       {/* ── Floating TEKI (mission driver) ── */}
-      <FloatingTeki />
+      {introDone && <FloatingTeki />}
+
+      {/* ── Adventure intro overlay ── */}
+      {!introDone && <AdventureIntro onDone={() => {}} />}
 
       {/* ── Level complete overlay ── */}
       {adventure.levelComplete && (
