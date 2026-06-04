@@ -14,6 +14,7 @@ import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import { WebsiteLayoutProvider } from '@/contexts/WebsiteLayoutContext'
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
 function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
@@ -93,6 +94,7 @@ export default function AdventurePage() {
   if (!adventure.currentAdventure) return null
 
   return (
+    <WebsiteLayoutProvider>
     <div className="h-screen w-screen overflow-hidden relative">
 
       {/* ── Slim top bar ── */}
@@ -136,5 +138,6 @@ export default function AdventurePage() {
         />
       )}
     </div>
+    </WebsiteLayoutProvider>
   )
 }

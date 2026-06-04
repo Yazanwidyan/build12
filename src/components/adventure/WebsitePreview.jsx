@@ -1,14 +1,16 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Monitor, Smartphone } from 'lucide-react'
 import { useAdventureStore } from '@/stores/adventureStore'
 import { generateWebsiteHTML } from '@/engines/previewEngine'
+import { useWebsiteLayout } from '@/contexts/WebsiteLayoutContext'
 import Button from '@/components/ui/Button'
 
 export default function WebsitePreview() {
-  const website   = useAdventureStore((s) => s.website)
-  const reactDemo = useAdventureStore((s) => s.reactDemo)
+  const website    = useAdventureStore((s) => s.website)
+  const reactDemo  = useAdventureStore((s) => s.reactDemo)
   const [viewport, setViewport] = useState('desktop')
+  const { iframeRef } = useWebsiteLayout()
 
   const html     = generateWebsiteHTML(website, reactDemo)
   const siteName = (website.name || 'mywebsite').toLowerCase().replace(/\s+/g, '')
@@ -69,13 +71,14 @@ export default function WebsitePreview() {
           className="overflow-hidden rounded-sm flex flex-col"
           style={{
             width:    viewport === 'mobile' ? 375 : '100%',
-            maxWidth: viewport === 'mobile' ? 375 : '100%',
+            maxWidth: viewport === 'mobile' ? 375 : 1280,
             boxShadow: '0 2px 20px rgba(0,0,0,0.3)',
             backgroundColor: '#ffffff',
           }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           <iframe
+            ref={iframeRef}
             srcDoc={html}
             className="w-full flex-1 border-0 block"
             title="Website Preview"

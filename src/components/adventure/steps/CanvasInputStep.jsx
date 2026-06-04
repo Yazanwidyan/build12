@@ -18,19 +18,16 @@ export default function CanvasInputStep({ step, onComplete }) {
   }, [step.id]);
 
   const handleDone = () => {
-    // Always build the section instantly with current content so the preview updates immediately
-    const section = step.canvasInput?.section;
-    if (section) {
-      adventure.buildSection(section, adventure.website.sections[section]?.content || {});
-    }
-
-    // Final step for this section — celebrate then advance
+    // Build the section on the final canvas step for this section, then advance.
+    // Advance happens immediately so the overlay disappears before the built HTML renders.
+    // The observation step that follows handles the celebration.
     if (step.buildSectionOnComplete) {
-      speak("Amazing! Look at that! 🎉", { mood: "excited" });
-      setTimeout(onComplete, 700);
-    } else {
-      onComplete();
+      adventure.buildSection(
+        step.buildSectionOnComplete,
+        adventure.website.sections[step.buildSectionOnComplete]?.content || {}
+      );
     }
+    onComplete();
   };
 
   return (

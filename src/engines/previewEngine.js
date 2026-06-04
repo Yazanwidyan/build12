@@ -54,7 +54,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     : `<div style="border:2px dashed #d1d5db;background:#f9fafb;padding:5rem 2rem;text-align:center;color:#9ca3af;font-size:0.875rem;">⬜ Hero Section — Not Built Yet</div>`
 
   const footerHTML = footer.built ? `
-    <footer style="background:${demo.darkMode ? '#020617' : effectiveText};color:white;padding:2rem;text-align:center;margin-top:auto;">
+    <footer style="background:${demo.darkMode ? '#020617' : effectiveText};color:white;padding:2rem;text-align:center;">
       <p style="margin:0 0 0.75rem;font-size:0.875rem;opacity:0.7;">${footer.content.copyright || `© ${new Date().getFullYear()} ${name}`}</p>
       <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
         ${(footer.content.links || []).map((link) =>
@@ -94,11 +94,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       font-family:${fontFamily === 'serif' ? 'Georgia,serif' : fontFamily === 'monospace' ? "'Courier New',monospace" : 'system-ui,sans-serif'};
       background:${effectiveBg};
       color:${effectiveText};
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
     }
-    main{flex:1}
     a{color:inherit}
     button{cursor:pointer}
     ${darkModeTransition}
