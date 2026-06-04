@@ -59,9 +59,11 @@ const STEPS = [
 ];
 
 export default function AdventureIntro({ onDone }) {
-  const { builderName } = useProfileStore();
+  const { builderName, ageGroup } = useProfileStore();
   const { setWebsiteName, setWebsiteColor, setWebsiteTopic } =
     useAdventureStore();
+
+  const isYoung = ageGroup === 'young';
 
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -89,7 +91,16 @@ export default function AdventureIntro({ onDone }) {
     onDone();
   };
 
+  // Under-11: skip name/color/topic, use auto defaults
+  const handleStartYoung = () => {
+    setWebsiteName(builderName ? `${builderName}'s Website` : 'My Website');
+    setWebsiteColor('#2cbaff');
+    setWebsiteTopic('General');
+    onDone();
+  };
+
   const canFinish = topic || custom.trim();
+  const visibleSteps = isYoung ? STEPS.slice(0, 1) : STEPS;
 
   return (
     <motion.div
@@ -199,9 +210,9 @@ export default function AdventureIntro({ onDone }) {
                   color="blue"
                   size="lg"
                   fullWidth
-                  onClick={next}
+                  onClick={isYoung ? handleStartYoung : next}
                 >
-                  Let's set up my website!
+                  {isYoung ? 'Start My Adventure! 🚀' : "Let's set up my website!"}
                 </Button>
               </motion.div>
             )}
@@ -370,7 +381,7 @@ export default function AdventureIntro({ onDone }) {
 
         {/* Step dots */}
         <div className="flex items-center justify-center gap-2">
-          {STEPS.map((_, i) => (
+          {visibleSteps.map((_, i) => (
             <div
               key={i}
               className="rounded-full transition-all"

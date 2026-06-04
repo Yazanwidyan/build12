@@ -4,7 +4,7 @@ import { useAdventureStore } from "@/stores/adventureStore";
 import { useProgressStore } from "@/stores/progressStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import { motion } from "framer-motion";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import TekiCharacter from "./TekiCharacter";
 
 const SECTION_H = {
@@ -38,7 +38,8 @@ export default function FloatingTeki() {
   const footerBuilt    = useAdventureStore((s) => s.website.sections.footer.built);
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
-  const xp = useProgressStore((s) => s.xp);
+  const xp             = useProgressStore((s) => s.xp);
+  const constraintsRef = useRef(null);
 
   const shownText = displayedText || currentMessage || "";
 
@@ -81,9 +82,17 @@ export default function FloatingTeki() {
   }, [currentMessage, isTyping]);
 
   return (
+    <>
+      <div ref={constraintsRef} className="fixed inset-0 pointer-events-none z-40" />
+
     <motion.div
+      drag
+      dragConstraints={constraintsRef}
+      dragElastic={0.06}
+      dragMomentum={false}
       className="fixed z-50 flex items-start gap-2 select-none"
-      style={{ right: 20 }}
+      style={{ right: 20, cursor: 'grab' }}
+      whileDrag={{ cursor: 'grabbing' }}
       initial={{ opacity: 0, x: 30, top: effectiveTop }}
       animate={{ opacity: 1, x: 0, top: effectiveTop }}
       transition={{
@@ -165,5 +174,6 @@ export default function FloatingTeki() {
         </span>
       </div>
     </motion.div>
+    </>
   );
 }
