@@ -2,8 +2,8 @@
 // All three overlay/editor/teki components import from here — never duplicate these values.
 
 export const SECTION_H = {
-  header: { built: 62,  unbuilt: 116 },
-  hero:   { built: 320, unbuilt: 180 },
+  header: { built: 62,  unbuilt: 62  },  // unbuilt matches built — no size jump
+  hero:   { built: 320, unbuilt: 320 },  // unbuilt matches built — no size jump
   footer: { built: 110, unbuilt: 100 },
 };
 

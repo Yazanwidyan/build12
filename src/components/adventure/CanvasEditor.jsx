@@ -4,28 +4,42 @@ import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef } from "react";
 
+// ── Field pixel widths ─────────────────────────────────────────────────────────
+// These are the pixel caps from `min(Xpx, Y%)` in the width values below.
+// Used to compute exact `left` positions without CSS transform (which conflicts
+// with Framer Motion's own transform system).
+const PIXEL_WIDTHS = {
+  "header-title":     260,
+  "header-nav":       260,
+  "hero-headline":    520,
+  "hero-subtext":     440,
+  "hero-button":      180,
+  "footer-copyright": 380,
+  "footer-links":     340,
+};
+
 // ── Field configs ──────────────────────────────────────────────────────────────
-// `align`  : "start" = left side of iframe, "end" = right side, "center" = iframe center
-// `insetX` : pixels inward from the aligned edge (matches the section's CSS padding)
-// `offsetTop` : pixels from the section's top (matches where the element sits in the built HTML)
+// `align`    : "start" | "center" | "end" — relative to iframe bounds
+// `insetX`   : pixels inward from the aligned edge (matches CSS section padding)
+// `offsetTop`: pixels from the section top
 const FIELD_CONFIGS = {
   "header-title": {
-    align: "start", insetX: 32,  // header padding-left: 2rem = 32px
-    offsetTop: 16,               // header padding-top: 1rem = 16px
+    align: "start", insetX: 32,
+    offsetTop: 12,
     width: "min(260px,38%)",
     style: {
-      fontSize: "1.2rem", fontWeight: 800, color: "white",
-      background: "rgba(255,255,255,0.15)", border: "2px dashed rgba(255,255,255,0.7)",
+      fontSize: "1.1rem", fontWeight: 800, color: "#1e293b",
+      background: "rgba(255,255,255,0.92)", border: "2px dashed #2cbaff",
       borderRadius: 6, padding: "4px 12px", outline: "none",
     },
   },
   "header-nav": {
-    align: "end", insetX: 32,   // header padding-right: 2rem = 32px
-    offsetTop: 16,
+    align: "end", insetX: 32,
+    offsetTop: 12,
     width: "min(260px,35%)",
     style: {
-      fontSize: "0.875rem", color: "white",
-      background: "rgba(255,255,255,0.12)", border: "2px dashed rgba(255,255,255,0.6)",
+      fontSize: "0.875rem", color: "#1e293b",
+      background: "rgba(255,255,255,0.92)", border: "2px dashed #2cbaff",
       borderRadius: 6, padding: "4px 12px", outline: "none", textAlign: "right",
     },
     hint: "Home, About, Contact…",
@@ -33,53 +47,53 @@ const FIELD_CONFIGS = {
   },
   "hero-headline": {
     align: "center",
-    offsetTop: 52,              // within unbuilt hero (180px): upper third
+    offsetTop: 105,               // within 320px unbuilt hero (centered content area)
     width: "min(520px,62%)",
     style: {
       fontSize: "1.7rem", fontWeight: 800, textAlign: "center",
-      color: "#111827", background: "rgba(255,255,255,0.88)",
+      color: "#111827", background: "rgba(255,255,255,0.92)",
       border: "2.5px dashed #2cbaff", borderRadius: 10, padding: "8px 16px", outline: "none",
     },
   },
   "hero-subtext": {
     align: "center",
-    offsetTop: 108,             // middle of unbuilt hero
+    offsetTop: 170,               // below headline in the 320px section
     width: "min(440px,54%)",
     style: {
       fontSize: "1rem", textAlign: "center", color: "#374151",
-      background: "rgba(255,255,255,0.85)", border: "2px dashed #2cbaff",
+      background: "rgba(255,255,255,0.9)", border: "2px dashed #2cbaff",
       borderRadius: 8, padding: "6px 14px", outline: "none",
     },
   },
   "hero-button": {
     align: "center",
-    offsetTop: 148,             // near bottom of unbuilt hero (155 - some breathing room)
+    offsetTop: 228,               // below subtext in the 320px section
     width: "min(180px,26%)",
     style: {
       fontSize: "0.9rem", fontWeight: 700, textAlign: "center",
-      color: "white", background: "rgba(44,186,255,0.8)",
+      color: "white", background: "rgba(44,186,255,0.85)",
       border: "2px dashed rgba(44,186,255,1)", borderRadius: 8,
       padding: "10px 20px", outline: "none",
     },
   },
   "footer-copyright": {
     align: "center",
-    offsetTop: 32,              // footer padding-top: 2rem = 32px
+    offsetTop: 32,
     width: "min(380px,52%)",
     style: {
       fontSize: "0.875rem", textAlign: "center",
-      color: "rgba(255,255,255,0.8)", background: "rgba(255,255,255,0.1)",
-      border: "1px dashed rgba(255,255,255,0.5)", borderRadius: 6,
+      color: "rgba(255,255,255,0.85)", background: "rgba(255,255,255,0.1)",
+      border: "1px dashed rgba(255,255,255,0.55)", borderRadius: 6,
       padding: "4px 12px", outline: "none",
     },
   },
   "footer-links": {
     align: "center",
-    offsetTop: 64,              // footer: 32px padding + ~12px first line + ~20px gap
+    offsetTop: 68,
     width: "min(340px,48%)",
     style: {
       fontSize: "0.8rem", textAlign: "center",
-      color: "rgba(255,255,255,0.65)", background: "rgba(255,255,255,0.08)",
+      color: "rgba(255,255,255,0.7)", background: "rgba(255,255,255,0.08)",
       border: "1px dashed rgba(255,255,255,0.4)", borderRadius: 6,
       padding: "4px 12px", outline: "none",
     },
@@ -90,10 +104,11 @@ const FIELD_CONFIGS = {
 
 // ── Single canvas input field ──────────────────────────────────────────────────
 function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
-  const adventure  = useAdventureStore();
+  const adventure      = useAdventureStore();
   const { iframeRect } = useWebsiteLayout();
-  const cfg = FIELD_CONFIGS[fieldKey];
-  const inputRef = useRef(null);
+  const cfg       = FIELD_CONFIGS[fieldKey];
+  const inputRef  = useRef(null);
+  const pixelWidth = PIXEL_WIDTHS[fieldKey] ?? 300;
 
   const getRaw = () => {
     const val = adventure.website.sections[canvasInput.section]?.content[canvasInput.storeKey];
@@ -107,31 +122,29 @@ function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
 
   useEffect(() => { setTimeout(() => inputRef.current?.focus(), 120); }, [fieldKey]);
 
-  // ── Horizontal position relative to measured iframe ──────────────────────────
-  const posStyle = {};
+  // ── Compute exact pixel left — no CSS transform (conflicts with Framer Motion) ──
+  let leftPx;
   if (cfg.align === "center") {
-    posStyle.left = iframeRect.left + iframeRect.width / 2;
-    posStyle.transform = "translateX(-50%)";
+    leftPx = iframeRect.left + iframeRect.width / 2 - pixelWidth / 2;
   } else if (cfg.align === "start") {
-    posStyle.left = iframeRect.left + cfg.insetX;
+    leftPx = iframeRect.left + cfg.insetX;
   } else {
-    // "end": anchor to iframe right edge, offset inward
-    posStyle.left = iframeRect.right - cfg.insetX;
-    posStyle.transform = "translateX(-100%)";
+    // "end"
+    leftPx = iframeRect.right - cfg.insetX - pixelWidth;
   }
 
   return (
     <motion.div
       key={fieldKey}
-      initial={{ opacity: 0, y: -8, scale: 0.95 }}
+      initial={{ opacity: 0, y: -6, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -8, scale: 0.95 }}
+      exit={{ opacity: 0, y: -6, scale: 0.97 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
       style={{
         position: "absolute",
         top: sectionTop + cfg.offsetTop,
+        left: leftPx,
         width: cfg.width,
-        ...posStyle,
       }}
       className="pointer-events-auto"
     >

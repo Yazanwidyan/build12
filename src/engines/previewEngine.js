@@ -40,7 +40,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
         }).join('')}
       </nav>
     </header>`
-    : `<div style="border:2px dashed #d1d5db;background:#f9fafb;padding:3rem 2rem;text-align:center;color:#9ca3af;font-size:0.875rem;">⬜ Header — Not Built Yet</div>`
+    : `<div style="border:2px dashed #d1d5db;background:#f9fafb;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;min-height:62px;color:#c0c8d4;font-size:0.875rem;"><span>⬜ Site Name</span><span>Home · About · Contact</span></div>`
 
   // Hero button — with event demo support
   const heroBtn = hero.content.buttonText || heroBtnText ? buildHeroButton(heroBtnText, buttonColor, btnRadius, demo, name) : ''
@@ -51,7 +51,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       <p style="color:${effectiveText}99;font-size:1rem;margin:0;max-width:480px;line-height:1.6;">${hero.content.subtext || ''}</p>
       ${heroBtn}
     </section>`
-    : `<div style="border:2px dashed #d1d5db;background:#f9fafb;padding:5rem 2rem;text-align:center;color:#9ca3af;font-size:0.875rem;">⬜ Hero Section — Not Built Yet</div>`
+    : `<div style="border:2px dashed #d1d5db;background:#f9fafb;min-height:320px;display:flex;align-items:center;justify-content:center;color:#c0c8d4;font-size:0.875rem;">⬜ Hero Section — Not Built Yet</div>`
 
   const footerHTML = footer.built ? `
     <footer style="background:${demo.darkMode ? '#020617' : effectiveText};color:white;padding:2rem;text-align:center;">

@@ -24,7 +24,8 @@ export function WebsiteLayoutProvider({ children }) {
     setIframeRect({ top: r.top, left: r.left, width: r.width, right: r.right });
   }, []);
 
-  // Re-measure on window resize or when the iframe element changes.
+  // Re-measure whenever the iframe element changes size (layout animation settling,
+  // viewport toggle, window resize) using ResizeObserver + window resize fallback.
   useEffect(() => {
     if (!iframeEl) return;
     const measure = () => {
@@ -34,8 +35,13 @@ export function WebsiteLayoutProvider({ children }) {
         return { top: r.top, left: r.left, width: r.width, right: r.right };
       });
     };
+    const ro = new ResizeObserver(measure);
+    ro.observe(iframeEl);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [iframeEl]);
 
   const sectionBounds = useMemo(
