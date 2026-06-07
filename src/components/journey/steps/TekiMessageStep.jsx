@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import Button from '@/components/ui/Button'
 
-// TEKI speaks the messages in the bubble — this just renders the "continue" button.
 export default function TekiMessageStep({ step, onComplete }) {
-  const speak        = useTekiStore((s) => s.speak)
-  const setHighlight = useTekiStore((s) => s.setHighlight)
+  const speak          = useTekiStore((s) => s.speak)
+  const setHighlight   = useTekiStore((s) => s.setHighlight)
   const clearHighlight = useTekiStore((s) => s.clearHighlight)
+  const isTyping       = useTekiStore((s) => s.isTyping)
 
   useEffect(() => {
     speak(step.messages || [step.teki], { mood: step.mood || 'happy' })
@@ -15,6 +15,15 @@ export default function TekiMessageStep({ step, onComplete }) {
     if (hl) setHighlight(hl)
     else clearHighlight()
   }, [step.id])
+
+  // Auto-advance once the message finishes — no button needed
+  useEffect(() => {
+    if (!step.autoAdvance || isTyping) return
+    const t = setTimeout(onComplete, step.autoAdvanceDelay ?? 2200)
+    return () => clearTimeout(t)
+  }, [step.autoAdvance, isTyping])
+
+  if (step.autoAdvance) return null
 
   return (
     <motion.div

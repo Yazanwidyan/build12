@@ -142,7 +142,7 @@ export default function JourneyPage() {
         </AnimatePresence>
 
         {/* ── Main card ── */}
-        <div className="flex-1 p-3 flex flex-col overflow-hidden min-w-0">
+        <div className="flex-1 p-6 flex flex-col overflow-hidden min-w-0">
           <div
             className="flex-1 flex flex-col overflow-hidden rounded-2xl"
             style={{

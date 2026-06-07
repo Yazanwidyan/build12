@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 
 export default function ObservationStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak);
-  const setHighlight = useTekiStore((s) => s.setHighlight);
+  const speak          = useTekiStore((s) => s.speak);
+  const setHighlight   = useTekiStore((s) => s.setHighlight);
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
+  const isTyping       = useTekiStore((s) => s.isTyping);
 
   useEffect(() => {
     speak(step.tekiMessages || [step.teki], { mood: step.mood || "excited" });
@@ -15,6 +16,14 @@ export default function ObservationStep({ step, onComplete }) {
     if (hl) setHighlight(hl);
     else clearHighlight();
   }, [step.id]);
+
+  useEffect(() => {
+    if (!step.autoAdvance || isTyping) return;
+    const t = setTimeout(onComplete, step.autoAdvanceDelay ?? 2200);
+    return () => clearTimeout(t);
+  }, [step.autoAdvance, isTyping]);
+
+  if (step.autoAdvance) return null;
 
   return (
     <motion.div

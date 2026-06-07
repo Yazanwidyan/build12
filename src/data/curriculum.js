@@ -41,7 +41,7 @@ export const ACTS = [
               "Your website is empty! Let's build the 3 blocks every site needs: Header, Hero, and Footer. 🔨",
             ],
             showBlueprint: true,
-            action: "Let's build it!",
+            autoAdvance: true,
           },
         ],
       },
@@ -65,7 +65,7 @@ export const ACTS = [
             messages: [
               "Every website needs a HEADER — the sign that tells visitors where they are!",
             ],
-            action: "Tell me more!",
+            autoAdvance: true,
           },
           {
             id: 'header-explain',
@@ -75,7 +75,7 @@ export const ACTS = [
             messages: [
               "A header shows your site name and navigation links at the very top of every page.",
             ],
-            action: "I'm ready to build!",
+            autoAdvance: true,
           },
           {
             id: 'canvas-header-title',
@@ -115,7 +115,7 @@ export const ACTS = [
               "Your website has an entrance now! 🎉",
             ],
             highlightSection: 'header',
-            action: "Awesome!",
+            autoAdvance: true,
           },
           {
             id: 'header-code-reveal',
@@ -135,7 +135,7 @@ export const ACTS = [
               senior: "<header> is a semantic HTML5 element. <h1> is the top-level heading — there should only be one per page.",
             },
             ageExposure: { young: 'read-only', junior: 'read-only', senior: 'read-only' },
-            action: "Got it!",
+            autoAdvance: true,
           },
         ],
       },
@@ -159,7 +159,7 @@ export const ACTS = [
             messages: [
               "The HERO section is visitors' very first impression — let's make it unforgettable!",
             ],
-            action: "Let's build it!",
+            autoAdvance: true,
           },
           {
             id: 'canvas-hero-headline',
@@ -212,7 +212,7 @@ export const ACTS = [
               "Now THAT'S a first impression! ✨",
             ],
             highlightSection: 'hero',
-            action: "It looks great!",
+            autoAdvance: true,
           },
           {
             id: 'hero-code-reveal',
@@ -254,7 +254,7 @@ export const ACTS = [
             messages: [
               "The FOOTER is the last thing visitors see — copyright info and useful links.",
             ],
-            action: "Build the footer!",
+            autoAdvance: true,
           },
           {
             id: 'canvas-footer-copyright',
@@ -294,7 +294,7 @@ export const ACTS = [
               "YOU DID IT! 🏆 Header, Hero, Footer — a complete website structure!",
             ],
             highlightSection: null,
-            action: "What's next?",
+            autoAdvance: true,
           },
           {
             id: 'act1-complete',
@@ -337,7 +337,7 @@ export const ACTS = [
             messages: [
               "Colors tell a story before visitors read a word — red feels urgent, blue feels calm. Pick yours!",
             ],
-            action: "I never thought of that!",
+            autoAdvance: true,
           },
           {
             id: 'color-design',
@@ -359,7 +359,7 @@ export const ACTS = [
             tekiMessages: [
               "See how the whole feeling changed? That's the power of color! 🎨",
             ],
-            action: "Amazing!",
+            autoAdvance: true,
           },
           {
             id: 'color-code-reveal',
@@ -403,7 +403,7 @@ header {
             messages: [
               "TYPOGRAPHY is the art of arranging text — big text = important, small text = details.",
             ],
-            action: "Teach me!",
+            autoAdvance: true,
           },
           {
             id: 'type-design',
@@ -424,7 +424,7 @@ header {
             tekiMessages: [
               "Different fonts, different feelings — modern feels clean, classic feels trustworthy.",
             ],
-            action: "Got it!",
+            autoAdvance: true,
           },
         ],
       },
@@ -447,7 +447,7 @@ header {
             messages: [
               "Buttons are INVITATIONS — their style affects whether visitors click!",
             ],
-            action: "Let's make buttons!",
+            autoAdvance: true,
           },
           {
             id: 'button-design',
@@ -468,7 +468,7 @@ header {
             tekiMessages: [
               "Header, hero, footer — all styled! Your website looks great. ✨",
             ],
-            action: "There's a language?",
+            autoAdvance: true,
           },
           {
             id: 'act2-complete',
@@ -511,7 +511,7 @@ header {
             messages: [
               "Websites speak HTML — instructions wrapped in < > brackets. Let's learn it!",
             ],
-            action: "Show me!",
+            autoAdvance: true,
           },
           {
             id: 'html-h1',
@@ -594,7 +594,7 @@ header {
             messages: [
               "HTML organizes content into boxes called div and section — like rooms in a house.",
             ],
-            action: "Show me the boxes!",
+            autoAdvance: true,
           },
           {
             id: 'org-code',
@@ -681,7 +681,7 @@ header {
             messages: [
               "VARIABLES are secret boxes that store information your website can remember!",
             ],
-            action: "Secret boxes! Tell me more!",
+            autoAdvance: true,
           },
           {
             id: 'var-code',
@@ -736,7 +736,7 @@ let visitorCount = 0;`,
             messages: [
               "Now let's USE variables — change one and the whole website updates automatically!",
             ],
-            action: "Show me!",
+            autoAdvance: true,
           },
           {
             id: 'dynamic-code',
@@ -795,7 +795,7 @@ document.querySelector('h1').textContent = greeting;`,
             messages: [
               "What if your website could DECIDE what to show? IF statements make that happen!",
             ],
-            action: "How does it decide?",
+            autoAdvance: true,
           },
           {
             id: 'cond-code',
@@ -862,7 +862,7 @@ if (visitorName === "Alex") {
             messages: [
               "Let's add a smart greeting that checks the time and greets visitors perfectly!",
             ],
-            action: "Let's do it!",
+            autoAdvance: true,
           },
           {
             id: 'smart-code',
@@ -929,7 +929,7 @@ document.querySelector('#greeting').textContent = greeting;`,
             messages: [
               "Let's give your button MAGIC — when clicked, something happens. That's an EVENT!",
             ],
-            action: "Magic time!",
+            autoAdvance: true,
           },
           {
             id: 'event-code',
@@ -969,7 +969,7 @@ btn.addEventListener('click', function() {
             messages: [
               "Websites can listen too — input fields let visitors type and your site responds!",
             ],
-            action: "Let them speak!",
+            autoAdvance: true,
           },
           {
             id: 'input-code',
@@ -1016,7 +1016,7 @@ document.querySelector('#greetBtn').addEventListener('click', () => {
             messages: [
               "Challenge! 🎯 Build a click counter using variables, events, and DOM updates.",
             ],
-            action: "I'm ready!",
+            autoAdvance: true,
           },
           {
             id: 'counter-code',
@@ -1077,7 +1077,7 @@ document.querySelector('#addBtn').addEventListener('click', () => {
             messages: [
               "ARRAYS hold a list of items in one variable — perfect for a pet gallery!",
             ],
-            action: "Show me a list!",
+            autoAdvance: true,
           },
           {
             id: 'array-code',
@@ -1120,7 +1120,7 @@ console.log(pets.length);  // 4`,
             messages: [
               "LOOPS do repetitive work for you — one instruction runs for every item in the list!",
             ],
-            action: "Show me loops!",
+            autoAdvance: true,
           },
           {
             id: 'loop-code',
@@ -1182,7 +1182,7 @@ pets.forEach(function(pet) {
             messages: [
               "FUNCTIONS are saved tools — write once, use everywhere!",
             ],
-            action: "Build the tools!",
+            autoAdvance: true,
           },
           {
             id: 'func-code',
@@ -1225,7 +1225,7 @@ greetVisitor("Jordan");  // "Welcome to {{name}}, Jordan! 👋"`,
             messages: [
               "Challenge! Build a random pet name generator using an array, a function, and an event.",
             ],
-            action: "Build it!",
+            autoAdvance: true,
           },
           {
             id: 'namegen-code',
@@ -1460,7 +1460,7 @@ document.querySelector('#genBtn').addEventListener('click', () => {
               "Interesting...",
               "The website remembered your choice.",
             ],
-            action: "How does it do that?",
+            autoAdvance: true,
           },
           {
             id: 'm23-setting-demo',
@@ -1524,7 +1524,7 @@ setTheme('dark');  // ← triggers re-render automatically`,
             messages: [
               "Let's teach it what to do.",
             ],
-            action: "How?",
+            autoAdvance: true,
           },
           {
             id: 'm24-event-demo',
@@ -1595,7 +1595,7 @@ setTheme('dark');  // ← triggers re-render automatically`,
               "That's 100 separate blocks of code.",
               "Nightmare, right?",
             ],
-            action: "Yeah...",
+            autoAdvance: true,
           },
           {
             id: 'm25-add-pet',
@@ -1779,7 +1779,7 @@ const [theme, setTheme] = useState('ocean');
               junior: "Parent component holds state. That state is passed to children as props — any change flows instantly.",
               senior: "Unidirectional data flow: state lives in the nearest common ancestor and propagates downward via props. For deeper sharing, use Context or a state manager.",
             },
-            action: "Amazing!",
+            autoAdvance: true,
           },
           {
             id: 'm28-concept',
@@ -1831,7 +1831,7 @@ const [theme, setTheme] = useState('ocean');
               "Weather, news, cat facts, dog photos — all available via APIs.",
               "API = a door to someone else's data!",
             ],
-            action: "Open the door!",
+            autoAdvance: true,
           },
           {
             id: 'api-code',
@@ -1880,7 +1880,7 @@ function CatFact() {
               "Getting data is one thing. DISPLAYING it beautifully is another!",
               "Let's show live data from an API in your website.",
             ],
-            action: "Show me!",
+            autoAdvance: true,
           },
           {
             id: 'live-code',
