@@ -1,4 +1,4 @@
-import { CharacterPixel, CharacterSpark } from "@/components/ui/BuilderCharacters";
+import TekiCharacter from "@/components/teki/TekiCharacter";
 import { useProfileStore } from "@/stores/profileStore";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -6,10 +6,8 @@ import { useEffect, useState } from "react";
 
 export default function JourneyStartPage() {
   const navigate = useNavigate();
-  const { builderName, avatar } = useProfileStore();
+  const { builderName } = useProfileStore();
   const [visible, setVisible] = useState(true);
-
-  const SelectedChar = avatar === "pixel" ? CharacterPixel : CharacterSpark;
 
   useEffect(() => {
     const fadeOut  = setTimeout(() => setVisible(false), 2800);
@@ -45,7 +43,7 @@ export default function JourneyStartPage() {
                 animate={{ y: [0, -18, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <SelectedChar size={200} selected />
+                <TekiCharacter size={200} mood="excited" />
               </motion.div>
             </motion.div>
 

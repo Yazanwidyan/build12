@@ -1,12 +1,7 @@
-﻿import AvatarDisplay from "@/components/ui/AvatarDisplay";
-import {
-  CharacterPixel,
-  CharacterSpark,
-} from "@/components/ui/BuilderCharacters";
-import Button from "@/components/ui/Button";
+﻿import Button from "@/components/ui/Button";
 import { ACTS, LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
 import { useAuthStore } from "@/stores/authStore";
-import { AGE_GROUPS, AVATARS, useProfileStore } from "@/stores/profileStore";
+import { AGE_GROUPS, useProfileStore } from "@/stores/profileStore";
 import { useProgressStore } from "@/stores/progressStore";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -108,34 +103,6 @@ function EditableName({ name, onSave }) {
   );
 }
 
-// ── Avatar picker ────────────────────────────────────────────────────────────────
-function AvatarPicker({ current, onSelect }) {
-  return (
-    <div className="grid grid-cols-2 gap-3">
-      {[
-        { id: "pixel", Char: CharacterPixel },
-        { id: "spark", Char: CharacterSpark },
-      ].map(({ id, Char }) => (
-        <motion.button
-          key={id}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          onClick={() => onSelect(id)}
-          className="flex flex-col items-center gap-2 py-4 rounded-2xl border-2 transition-all"
-          style={{
-            borderColor: "var(--app-border)",
-            backgroundColor:
-              current === id ? "rgba(44,186,255,0.07)" : "var(--app-raised)",
-          }}
-        >
-          <Char size={72} selected={current === id} />
-          <span className="text-sm font-bold text-ink capitalize">{id}</span>
-        </motion.button>
-      ))}
-    </div>
-  );
-}
-
 // ── Act progress row ─────────────────────────────────────────────────────────────
 function ActProgressRow({ act, done }) {
   return (
@@ -195,7 +162,6 @@ export default function ProfilePage() {
     : 100;
 
   const ageLabel = AGE_GROUPS.find((g) => g.id === ageGroup)?.label ?? ageGroup;
-  const [editingAvatar, setEditingAvatar] = useState(false);
 
   return (
     <div className="min-h-screen bg-app">
@@ -225,44 +191,8 @@ export default function ProfilePage() {
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
         {/* ── Left column ── */}
         <aside className="w-full lg:w-72 shrink-0 flex flex-col gap-5">
-          {/* Avatar card */}
+          {/* Profile card */}
           <div className="card p-6 flex flex-col items-center gap-4 text-center">
-            <div className="relative">
-              <div
-                className="w-28 h-28 rounded-2xl overflow-hidden flex items-center justify-center"
-                style={{
-                  background: "var(--accent-bg)",
-                  border: "2px solid var(--app-border)",
-                }}
-              >
-                <AvatarDisplay avatarId={profile.avatar} size={108} />
-              </div>
-              <button
-                onClick={() => setEditingAvatar((v) => !v)}
-                className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center shadow-lg transition-colors"
-                style={{ background: "#2cbaff", color: "white" }}
-              >
-                <Edit2 size={12} />
-              </button>
-            </div>
-
-            {/* Avatar picker (inline toggle) */}
-            {editingAvatar && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="w-full"
-              >
-                <AvatarPicker
-                  current={profile.avatar}
-                  onSelect={(id) => {
-                    profile.setAvatar(id);
-                    setEditingAvatar(false);
-                  }}
-                />
-              </motion.div>
-            )}
-
             <EditableName
               name={profile.builderName || "Builder"}
               onSave={profile.setBuilderName}

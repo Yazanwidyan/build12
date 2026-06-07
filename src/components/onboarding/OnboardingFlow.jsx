@@ -1,13 +1,9 @@
 ﻿import TekiCharacter from "@/components/teki/TekiCharacter";
-import {
-  CharacterPixel,
-  CharacterSpark,
-} from "@/components/ui/BuilderCharacters";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { getMissionsForLevel } from "@/data/curriculum";
 import { useAdventureStore } from "@/stores/adventureStore";
-import { AGE_GROUPS, AVATARS, useProfileStore } from "@/stores/profileStore";
+import { AGE_GROUPS, useProfileStore } from "@/stores/profileStore";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -36,8 +32,8 @@ const TOPIC_OPTIONS = [
   "Fashion",
 ];
 
-const TOTAL_STEPS = 5; // non-senior
-const SENIOR_STEPS = 6;
+const TOTAL_STEPS = 4; // non-senior
+const SENIOR_STEPS = 5;
 
 // ── Shared layout wrapper ──────────────────────────────────────────────────────
 // Top bar (progress + skip), centered TEKI, wide speech bubble, content, big button
@@ -299,107 +295,38 @@ export default function OnboardingFlow() {
       />
     );
 
-  // ── Step 1: Avatar ─────────────────────────────────────────────────────────
+  // ── Step 1: Builder name ──────────────────────────────────────────────────
   if (step === 1)
     return (
       <OnboardingShell
         step={1}
         totalSteps={totalSteps}
         onBack={back}
-        tekiMood="excited"
-        bubble="First things first — pick your builder style!"
-        action="Continue"
-        onAction={next}
-        actionDisabled={!profile.avatar}
-      >
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            {
-              id: "pixel",
-              label: "Pixel",
-              desc: "The techy builder",
-              Char: CharacterPixel,
-            },
-            {
-              id: "spark",
-              label: "Spark",
-              desc: "The creative builder",
-              Char: CharacterSpark,
-            },
-          ].map(({ id, label, desc, Char }) => {
-            const selected = profile.avatar === id;
-            return (
-              <motion.button
-                key={id}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => profile.setAvatar(id)}
-                className="flex flex-col items-center gap-3 py-5 px-4 rounded-2xl border-2 transition-all"
-                style={{
-                  borderColor: selected ? "#2cbaff" : "var(--app-border)",
-                  backgroundColor: selected
-                    ? "rgba(44,186,255,0.06)"
-                    : "var(--app-raised)",
-                }}
-              >
-                <Char size={88} selected={selected} />
-                <div className="text-center">
-                  <p className="font-bold text-ink text-base">{label}</p>
-                  <p className="text-sm text-muted mt-0.5">{desc}</p>
-                </div>
-                {selected && (
-                  <span
-                    className="text-sm font-bold"
-                    style={{ color: "#2cbaff" }}
-                  >
-                    Selected ✓
-                  </span>
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
-      </OnboardingShell>
-    );
-
-  // ── Step 2: Builder name (with selected character) ─────────────────────────
-  if (step === 2) {
-    const SelectedChar =
-      profile.avatar === "pixel" ? CharacterPixel : CharacterSpark;
-    return (
-      <OnboardingShell
-        step={2}
-        totalSteps={totalSteps}
-        onBack={back}
         tekiMood="happy"
-        bubble="Nice choice! Now, what should I call you, builder?"
+        bubble="What should I call you, builder?"
         action="Continue"
         onAction={submitName}
         actionDisabled={name.trim().length < 2}
       >
-        <div className="flex flex-col items-center gap-4">
-          <SelectedChar size={90} selected />
-          <Input
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-              setNameError("");
-            }}
-            placeholder="Your builder name..."
-            error={nameError}
-            onKeyDown={(e) => e.key === "Enter" && submitName()}
-            autoFocus
-          />
-        </div>
+        <Input
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setNameError("");
+          }}
+          placeholder="Your builder name..."
+          error={nameError}
+          onKeyDown={(e) => e.key === "Enter" && submitName()}
+          autoFocus
+        />
       </OnboardingShell>
     );
-  }
 
-  // ── Step 3: Age group ──────────────────────────────────────────────────────
-  if (step === 3)
+  // ── Step 2: Age group ──────────────────────────────────────────────────────
+  if (step === 2)
     return (
       <OnboardingShell
-        step={3}
+        step={2}
         totalSteps={totalSteps}
         onBack={back}
         tekiMood="thinking"
@@ -443,11 +370,11 @@ export default function OnboardingFlow() {
       </OnboardingShell>
     );
 
-  // ── Step 4: Choose adventure ────────────────────────────────────────────────
-  if (step === 4)
+  // ── Step 3: Choose adventure ────────────────────────────────────────────────
+  if (step === 3)
     return (
       <OnboardingShell
-        step={4}
+        step={3}
         totalSteps={totalSteps}
         onBack={back}
         onSkip={skip}
@@ -506,11 +433,11 @@ export default function OnboardingFlow() {
       </OnboardingShell>
     );
 
-  // ── Step 5 (SENIOR): Website setup ─────────────────────────────────────────
-  if (step === 5 && isSenior)
+  // ── Step 4 (SENIOR): Website setup ─────────────────────────────────────────
+  if (step === 4 && isSenior)
     return (
       <OnboardingShell
-        step={5}
+        step={4}
         totalSteps={totalSteps}
         onBack={back}
         tekiMood="excited"

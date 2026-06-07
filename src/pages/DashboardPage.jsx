@@ -1,10 +1,9 @@
 ﻿import TekiCharacter from "@/components/teki/TekiCharacter";
-import AvatarDisplay from "@/components/ui/AvatarDisplay";
 import Button from "@/components/ui/Button";
 import LogoCube from "@/components/ui/logos/LogoCube";
 import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
 import { useAuthStore } from "@/stores/authStore";
-import { AVATARS, useProfileStore } from "@/stores/profileStore";
+import { useProfileStore } from "@/stores/profileStore";
 import { useProgressStore } from "@/stores/progressStore";
 import { useThemeStore } from "@/stores/themeStore";
 import { useNavigate } from "@tanstack/react-router";
@@ -533,13 +532,13 @@ function ProfileSidebar({
       <div className="card p-5">
         <div className="flex items-center gap-3 mb-4">
           <div
-            className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
+            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
             style={{
               background: "var(--accent-bg)",
               border: "1px solid var(--accent-border)",
             }}
           >
-            <AvatarDisplay avatarId={profile.avatar} size={44} />
+            <User size={22} style={{ color: "var(--accent)" }} />
           </div>
           <div className="min-w-0">
             <p className="font-bold text-ink truncate">
@@ -683,13 +682,13 @@ function UserMenu({ profile, navigate, onLogout }) {
         style={{ borderColor: "var(--app-border)" }}
       >
         <div
-          className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
+          className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
           style={{
             background: "var(--accent-bg)",
             border: "1px solid var(--accent-border)",
           }}
         >
-          <AvatarDisplay avatarId={profile.avatar} size={28} />
+          <User size={14} style={{ color: "var(--accent)" }} />
         </div>
         <span className="text-base font-semibold text-ink hidden sm:block pr-1">
           {profile.builderName}
@@ -720,13 +719,13 @@ function UserMenu({ profile, navigate, onLogout }) {
               }}
             >
               <div
-                className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shrink-0"
+                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{
                   background: "var(--accent-bg)",
                   border: "1px solid var(--accent-border)",
                 }}
               >
-                <AvatarDisplay avatarId={profile.avatar} size={36} />
+                <User size={18} style={{ color: "var(--accent)" }} />
               </div>
               <div className="min-w-0">
                 <p className="text-base font-bold text-ink truncate">
@@ -797,7 +796,6 @@ export default function DashboardPage() {
     completedMissions,
     isBuilderUnlocked,
   } = useProgressStore();
-  const avatar = AVATARS.find((a) => a.id === profile.avatar);
   const ageGroup = profile.ageGroup ?? "young";
   const levelInfo = LEVEL_INFO[ageGroup] ?? LEVEL_INFO.young;
   const [activeTab, setActiveTab] = useState("learn");

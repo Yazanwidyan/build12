@@ -1,11 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-export const AVATARS = [
-  { id: 'pixel', label: 'Pixel',  desc: 'The techy builder'   },
-  { id: 'spark', label: 'Spark',  desc: 'The creative builder' },
-]
-
 export const AGE_GROUPS = [
   { id: 'young',  label: 'Young Builder',    range: 'Under 11',  codeExposure: 'visual'  },
   { id: 'junior', label: 'Junior Creator',   range: '11 – 14',   codeExposure: 'guided'  },
@@ -25,7 +20,6 @@ export const useProfileStore = create(
       ...defaultProfile,
 
       setBuilderName: (name) => set({ builderName: name }),
-      setAvatar: (avatarId) => set({ avatar: avatarId }),
       setAgeGroup: (groupId) => set({ ageGroup: groupId }),
       completeOnboarding: () => set({ onboardingComplete: true }),
       reset: () => set(defaultProfile),
