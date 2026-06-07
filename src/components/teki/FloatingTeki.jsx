@@ -13,7 +13,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 import TekiCharacter from "./TekiCharacter";
 
-const DEFAULT_TOP = 250;
+const DEFAULT_TOP = typeof window !== "undefined" ? window.innerHeight - 200 : 600;
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },
@@ -99,7 +99,7 @@ export default function FloatingTeki() {
         className="fixed z-50 flex flex-col gap-1 select-none"
         style={{
           top: 0,
-          right: 20,
+          left: 20,
           width: 350,
           x: posX,
           y: posY,

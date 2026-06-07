@@ -14,7 +14,7 @@ import { useProfileStore } from "@/stores/profileStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ScrollText } from "lucide-react";
+import { ScrollText, X } from "lucide-react";
 import { useEffect } from "react";
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
@@ -120,58 +120,20 @@ export default function JourneyPage() {
 
   return (
     <WebsiteLayoutProvider>
-      <div className="h-screen w-screen overflow-hidden relative">
-        {/* ── Slim top bar ── */}
-        <div
-          className="absolute top-0 left-0 right-0 z-30 backdrop-blur-md border-b-2 px-4 h-9 flex items-center gap-2"
-          style={{
-            background:
-              "color-mix(in srgb, var(--app-surface) 85%, transparent)",
-            borderColor: "var(--app-border)",
-          }}
-        >
-          <Button
-            variant="ghost"
-            color="neutral"
-            size="xs"
-            icon={<ArrowLeft size={12} />}
-            onClick={() => navigate({ to: "/dashboard" })}
-          >
-            Dashboard
-          </Button>
-          <span style={{ color: "var(--app-border)" }} className="text-sm">
-            |
-          </span>
-          <span
-            className="text-sm font-semibold"
-            style={{ color: "var(--ink-muted)" }}
-          >
-            Website Journey
-          </span>
-          <div className="flex-1" />
-        </div>
-
-        {/* ── Website preview — shrinks left when log panel is open ── */}
-        <div
-          className="absolute inset-0 pt-9"
-          style={{
-            left: logPanelOpen ? LOG_WIDTH : 0,
-            transition: "left 0.28s cubic-bezier(0.4,0,0.2,1)",
-          }}
-        >
-          <WebsitePreview />
-        </div>
-
-        {/* ── Log panel — slides in from left ── */}
-        <AnimatePresence>
+      <div
+        className="h-screen w-screen overflow-hidden flex"
+        style={{ backgroundColor: "var(--app-raised)" }}
+      >
+        {/* ── Log panel — flex child, slides in from left ── */}
+        <AnimatePresence initial={false}>
           {logPanelOpen && (
             <motion.div
               key="log-panel"
-              className="fixed z-[28]"
-              style={{ top: 36, left: 0, bottom: 0, width: LOG_WIDTH }}
-              initial={{ x: -LOG_WIDTH }}
-              animate={{ x: 0 }}
-              exit={{ x: -LOG_WIDTH }}
+              className="h-full shrink-0 overflow-hidden z-[28]"
+              style={{ width: LOG_WIDTH }}
+              initial={{ width: 0 }}
+              animate={{ width: LOG_WIDTH }}
+              exit={{ width: 0 }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
             >
               <JourneyLog />
@@ -179,11 +141,80 @@ export default function JourneyPage() {
           )}
         </AnimatePresence>
 
-        {/* ── Section highlight overlay ── */}
-        {introDone && <JourneyOverlay />}
+        {/* ── Main card ── */}
+        <div className="flex-1 p-3 flex flex-col overflow-hidden min-w-0">
+          <div
+            className="flex-1 flex flex-col overflow-hidden rounded-2xl"
+            style={{
+              backgroundColor: "var(--app-surface)",
+              border: "1.5px solid var(--app-border)",
+              boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+            }}
+          >
+            {/* Top bar — inside the card */}
+            <div
+              className="h-9 shrink-0 flex items-center gap-2 px-3 border-b"
+              style={{ borderColor: "var(--app-border)" }}
+            >
+              <Button
+                variant="ghost"
+                color="neutral"
+                size="xs"
+                icon={<X size={14} />}
+                onClick={() => navigate({ to: "/dashboard" })}
+              />
+              <div className="flex-1" />
 
-        {/* ── Inline canvas editor ── */}
-        {introDone && <CanvasEditor />}
+              {/* Log toggle */}
+              <button
+                onClick={toggleLogPanel}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
+                style={{
+                  background: logPanelOpen
+                    ? "rgba(59,130,246,0.15)"
+                    : "transparent",
+                  border: `1px solid ${logPanelOpen ? "rgba(59,130,246,0.4)" : "var(--app-border)"}`,
+                  color: logPanelOpen ? "#3b82f6" : "var(--ink-muted)",
+                }}
+              >
+                <ScrollText size={12} />
+                Log
+                {logCount > 0 && (
+                  <span
+                    className="rounded-full w-4 h-4 flex items-center justify-center text-[9px] font-black"
+                    style={{
+                      background: logPanelOpen
+                        ? "#3b82f6"
+                        : "var(--app-raised)",
+                      color: logPanelOpen ? "#fff" : "var(--ink-muted)",
+                    }}
+                  >
+                    {logCount > 99 ? "99" : logCount}
+                  </span>
+                )}
+              </button>
+
+              <ThemeToggle />
+              <span
+                className="text-xs ml-1"
+                style={{ color: "var(--ink-faint)" }}
+              >
+                {profile.builderName}
+              </span>
+            </div>
+
+            {/* Website preview iframe */}
+            <div className="flex-1 overflow-hidden relative">
+              <WebsitePreview />
+
+              {/* ── Section highlight overlay ── */}
+              {introDone && <JourneyOverlay />}
+
+              {/* ── Inline canvas editor ── */}
+              {introDone && <CanvasEditor />}
+            </div>
+          </div>
+        </div>
 
         {/* ── Floating TEKI (mission driver) ── */}
         {introDone && <FloatingTeki />}
