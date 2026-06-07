@@ -1,4 +1,4 @@
-// Single source of truth for section height constants and positioning utilities.
+﻿// Single source of truth for section height constants and positioning utilities.
 // All three overlay/editor/teki components import from here — never duplicate these values.
 
 export const SECTION_H = {
@@ -8,7 +8,7 @@ export const SECTION_H = {
 };
 
 export const SECTION_META = {
-  header: { label: "Header",       color: "#2cbaff" },
+  header: { label: "Header",       color: "#3b82f6" },
   hero:   { label: "Hero Section", color: "#8b5cf6" },
   footer: { label: "Footer",       color: "#10b981" },
 };

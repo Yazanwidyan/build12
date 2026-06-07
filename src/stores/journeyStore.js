@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+﻿import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 const DEFAULT_REACT_DEMO = {
@@ -23,7 +23,7 @@ const DEFAULT_REACT_DEMO = {
 
 const DEFAULT_WEBSITE = {
   name: '',
-  color: '#2cbaff',
+  color: '#3b82f6',
   topic: '',
   sections: {
     header: {
@@ -50,8 +50,8 @@ const DEFAULT_WEBSITE = {
     },
   },
   styles: {
-    primaryColor: '#2cbaff',
-    secondaryColor: '#7cd8ff',
+    primaryColor: '#3b82f6',
+    secondaryColor: '#93c5fd',
     backgroundColor: '#ffffff',
     textColor: '#111827',
     headingSize: '3xl',

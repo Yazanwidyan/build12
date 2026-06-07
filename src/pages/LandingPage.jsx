@@ -1,4 +1,4 @@
-import TekiCharacter from "@/components/teki/TekiCharacter";
+﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import Button from "@/components/ui/Button";
 import Header from "@/components/ui/Header";
 import { useAuthStore } from "@/stores/authStore";
@@ -123,7 +123,7 @@ function HeroDark() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 40%,rgba(44,186,255,0.08) 0%,rgba(44,186,255,0.03) 45%,transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 40%,rgba(59,130,246,0.08) 0%,rgba(59,130,246,0.03) 45%,transparent 70%)",
         }}
       />
 
@@ -141,7 +141,7 @@ function HeroDark() {
             borderRadius: "50%",
             background:
               "radial-gradient(circle at 35% 35%,rgba(80,100,200,0.18),rgba(40,60,160,0.08) 50%,transparent 70%)",
-            border: "1px solid rgba(44,186,255,0.08)",
+            border: "1px solid rgba(59,130,246,0.08)",
           }}
         />
       </motion.div>
@@ -158,7 +158,7 @@ function HeroDark() {
             y1={`${STARS[a].y}%`}
             x2={`${STARS[b].x}%`}
             y2={`${STARS[b].y}%`}
-            stroke="rgba(44,186,255,0.6)"
+            stroke="rgba(59,130,246,0.6)"
             strokeWidth="0.5"
           />
         ))}
@@ -186,7 +186,7 @@ function HeroDark() {
         style={{
           height: 1,
           background:
-            "linear-gradient(90deg,transparent,rgba(44,186,255,0.2) 40%,rgba(44,186,255,0.2) 60%,transparent)",
+            "linear-gradient(90deg,transparent,rgba(59,130,246,0.2) 40%,rgba(59,130,246,0.2) 60%,transparent)",
         }}
         animate={{ top: ["0%", "100%"] }}
         transition={{
@@ -210,7 +210,7 @@ export default function LandingPage() {
   const txt = "#f1f5f9";
   const sub = "rgba(255,255,255,0.5)";
   const dim = "rgba(255,255,255,0.35)";
-  const div = "1px solid rgba(44,186,255,0.15)";
+  const div = "1px solid rgba(59,130,246,0.15)";
 
   return (
     <div className="min-h-screen bg-app flex flex-col">
@@ -306,7 +306,7 @@ export default function LandingPage() {
               style={{
                 width: 320,
                 height: 320,
-                border: "1px dashed rgba(44,186,255,0.25)",
+                border: "1px dashed rgba(59,130,246,0.25)",
                 borderRadius: "50%",
               }}
             >
@@ -319,7 +319,7 @@ export default function LandingPage() {
                   width: 8,
                   height: 8,
                   borderRadius: "50%",
-                  background: "#2cbaff",
+                  background: "#3b82f6",
                 }}
               />
             </motion.div>
@@ -332,7 +332,7 @@ export default function LandingPage() {
               style={{
                 width: 230,
                 height: 230,
-                border: "1px dashed rgba(44,186,255,0.15)",
+                border: "1px dashed rgba(59,130,246,0.15)",
                 borderRadius: "50%",
               }}
             >
@@ -345,7 +345,7 @@ export default function LandingPage() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: "rgba(44,186,255,0.7)",
+                  background: "rgba(59,130,246,0.7)",
                 }}
               />
             </motion.div>
@@ -358,7 +358,7 @@ export default function LandingPage() {
                 height: 180,
                 borderRadius: "50%",
                 background:
-                  "radial-gradient(circle,rgba(44,186,255,0.2) 0%,transparent 70%)",
+                  "radial-gradient(circle,rgba(59,130,246,0.2) 0%,transparent 70%)",
                 filter: "blur(14px)",
               }}
             />

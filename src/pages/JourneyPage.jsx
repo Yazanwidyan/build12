@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
@@ -41,7 +41,7 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         </motion.div>
 
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: '#2cbaff' }}>
+          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: '#3b82f6' }}>
             Level Complete!
           </p>
           <h2 className="text-3xl font-black text-ink mb-2">

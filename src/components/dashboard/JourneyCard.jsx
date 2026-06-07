@@ -11,7 +11,7 @@ export const JOURNEYS = [
     label: "Website Journey",
     emoji: "🌐",
     desc: "Build a real website",
-    color: "#2cbaff",
+    color: "#3b82f6",
     active: true,
     route: "/journey",
   },

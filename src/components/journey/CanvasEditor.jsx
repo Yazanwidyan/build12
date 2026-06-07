@@ -29,7 +29,7 @@ const FIELD_CONFIGS = {
     width: "min(260px,38%)",
     style: {
       fontSize: "1.1rem", fontWeight: 800, color: "#1e293b",
-      background: "rgba(255,255,255,0.92)", border: "2px dashed #2cbaff",
+      background: "rgba(255,255,255,0.92)", border: "2px dashed #3b82f6",
       borderRadius: 6, padding: "4px 12px", outline: "none",
     },
   },
@@ -39,7 +39,7 @@ const FIELD_CONFIGS = {
     width: "min(260px,35%)",
     style: {
       fontSize: "0.875rem", color: "#1e293b",
-      background: "rgba(255,255,255,0.92)", border: "2px dashed #2cbaff",
+      background: "rgba(255,255,255,0.92)", border: "2px dashed #3b82f6",
       borderRadius: 6, padding: "4px 12px", outline: "none", textAlign: "right",
     },
     hint: "Home, About, Contact…",
@@ -52,7 +52,7 @@ const FIELD_CONFIGS = {
     style: {
       fontSize: "1.7rem", fontWeight: 800, textAlign: "center",
       color: "#111827", background: "rgba(255,255,255,0.92)",
-      border: "2.5px dashed #2cbaff", borderRadius: 10, padding: "8px 16px", outline: "none",
+      border: "2.5px dashed #3b82f6", borderRadius: 10, padding: "8px 16px", outline: "none",
     },
   },
   "hero-subtext": {
@@ -61,7 +61,7 @@ const FIELD_CONFIGS = {
     width: "min(440px,54%)",
     style: {
       fontSize: "1rem", textAlign: "center", color: "#374151",
-      background: "rgba(255,255,255,0.9)", border: "2px dashed #2cbaff",
+      background: "rgba(255,255,255,0.9)", border: "2px dashed #3b82f6",
       borderRadius: 8, padding: "6px 14px", outline: "none",
     },
   },
@@ -71,8 +71,8 @@ const FIELD_CONFIGS = {
     width: "min(180px,26%)",
     style: {
       fontSize: "0.9rem", fontWeight: 700, textAlign: "center",
-      color: "white", background: "rgba(44,186,255,0.85)",
-      border: "2px dashed rgba(44,186,255,1)", borderRadius: 8,
+      color: "white", background: "rgba(59,130,246,0.85)",
+      border: "2px dashed rgba(59,130,246,1)", borderRadius: 8,
       padding: "10px 20px", outline: "none",
     },
   },
@@ -151,7 +151,7 @@ function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
       {/* Pulse ring */}
       <motion.div
         className="absolute inset-0 rounded-lg"
-        animate={{ boxShadow: ["0 0 0 0 rgba(44,186,255,0.4)", "0 0 0 8px rgba(44,186,255,0)", "0 0 0 0 rgba(44,186,255,0)"] }}
+        animate={{ boxShadow: ["0 0 0 0 rgba(59,130,246,0.4)", "0 0 0 8px rgba(59,130,246,0)", "0 0 0 0 rgba(59,130,246,0)"] }}
         transition={{ duration: 1.8, repeat: Infinity }}
       />
 
@@ -170,7 +170,7 @@ function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
         style={{
           position: "absolute", top: -22, left: 4,
           fontSize: 10, fontWeight: 700, textTransform: "uppercase",
-          letterSpacing: "0.12em", color: "#2cbaff", whiteSpace: "nowrap",
+          letterSpacing: "0.12em", color: "#3b82f6", whiteSpace: "nowrap",
         }}
       >
         ✏ {canvasInput.label || fieldKey.replace(/-/g, " ")}

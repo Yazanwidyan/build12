@@ -29,7 +29,7 @@ const PLANS = [
     price: "$9",
     period: "per month",
     desc: "Unlock every journey and get priority TEKI support.",
-    color: "#2cbaff",
+    color: "#3b82f6",
     features: [
       "Everything in Free",
       "Game Journey (coming soon)",
@@ -97,12 +97,12 @@ export default function PricingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               className="card p-8 flex flex-col gap-6 relative"
-              style={plan.highlight ? { borderColor: "#2cbaff" } : {}}
+              style={plan.highlight ? { borderColor: "#3b82f6" } : {}}
             >
               {plan.highlight && (
                 <span
                   className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-sm font-bold"
-                  style={{ background: "#2cbaff", color: "#fff" }}
+                  style={{ background: "#3b82f6", color: "#fff" }}
                 >
                   Most Popular
                 </span>
@@ -128,11 +128,11 @@ export default function PricingPage() {
                   <div key={f} className="flex items-center gap-3">
                     <div
                       className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                      style={{ background: "rgba(44,186,255,0.15)" }}
+                      style={{ background: "rgba(59,130,246,0.15)" }}
                     >
                       <Check
                         size={11}
-                        style={{ color: "#2cbaff" }}
+                        style={{ color: "#3b82f6" }}
                         strokeWidth={3}
                       />
                     </div>

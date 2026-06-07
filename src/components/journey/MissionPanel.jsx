@@ -48,7 +48,7 @@ export default function MissionPanel() {
           <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--app-raised)' }}>
             <motion.div
               className="h-full rounded-full"
-              style={{ background: act?.color ?? '#2cbaff' }}
+              style={{ background: act?.color ?? '#3b82f6' }}
               animate={{ width: `${progressPercent}%` }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
             />

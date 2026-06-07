@@ -5,7 +5,7 @@ import { useJourneyStore } from '@/stores/journeyStore'
 import Button from '@/components/ui/Button'
 
 const PRESET_COLORS = [
-  { label: 'Sky Blue',   value: '#2cbaff' },
+  { label: 'Sky Blue',   value: '#3b82f6' },
   { label: 'Gold',       value: '#fde047' },
   { label: 'Emerald',    value: '#10b981' },
   { label: 'Rose',       value: '#f43f5e' },
@@ -22,7 +22,7 @@ const PRESET_COLORS = [
 export default function ColorPickerStep({ step, onComplete }) {
   const speak   = useTekiStore((s) => s.speak)
   const journey = useJourneyStore()
-  const [selected, setSelected] = useState(journey.website.color || '#2cbaff')
+  const [selected, setSelected] = useState(journey.website.color || '#3b82f6')
 
   useEffect(() => {
     speak(step.teki || 'Pick your main color!', { mood: 'excited' })

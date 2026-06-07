@@ -29,9 +29,9 @@ export default function ObservationStep({ step, onComplete }) {
           transition={{ delay: 0.15, type: "spring" }}
           className="rounded-xl px-4 py-2.5 text-base font-semibold text-center"
           style={{
-            backgroundColor: "rgba(44,186,255,0.1)",
-            border: "1px solid rgba(44,186,255,0.3)",
-            color: "#2cbaff",
+            backgroundColor: "rgba(59,130,246,0.1)",
+            border: "1px solid rgba(59,130,246,0.3)",
+            color: "#3b82f6",
           }}
         >
           ✅{" "}

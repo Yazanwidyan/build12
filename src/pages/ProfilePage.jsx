@@ -22,7 +22,7 @@ const RANKS = [
   { label: "Bronze", min: 0, color: "#cd7f32", next: 500 },
   { label: "Silver", min: 500, color: "#94a3b8", next: 1500 },
   { label: "Gold", min: 1500, color: "#fde047", next: 3000 },
-  { label: "Platinum", min: 3000, color: "#7cd8ff", next: 6000 },
+  { label: "Platinum", min: 3000, color: "#93c5fd", next: 6000 },
   { label: "Diamond", min: 6000, color: "#a78bfa", next: null },
 ];
 function getRank(xp) {
@@ -256,7 +256,7 @@ export default function ProfilePage() {
             <p className="section-label mb-1">Quick Stats</p>
             {[
               { label: "Total XP", value: xp, color: "#fde047" },
-              { label: "Level", value: level, color: "#2cbaff" },
+              { label: "Level", value: level, color: "#3b82f6" },
               {
                 label: "Missions Done",
                 value: completedMissions.length,
@@ -321,7 +321,7 @@ export default function ProfilePage() {
               icon={<Shield size={16} />}
               label="Acts Done"
               value={completedActs.length}
-              accent="#2cbaff"
+              accent="#3b82f6"
             />
           </div>
 

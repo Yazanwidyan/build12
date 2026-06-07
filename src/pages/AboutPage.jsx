@@ -64,7 +64,7 @@ export default function AboutPage() {
           <p className="section-label">Our Mission</p>
           <p className="text-3xl font-black text-ink leading-snug max-w-3xl mx-auto">
             To make coding education feel like a{" "}
-            <span style={{ color: "#2cbaff" }}>journey</span>, not a lecture.
+            <span style={{ color: "#3b82f6" }}>journey</span>, not a lecture.
           </p>
           <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
             We designed every mission and act to produce something
@@ -115,7 +115,7 @@ export default function AboutPage() {
         {/* CTA */}
         <section
           className="card p-10 flex flex-col items-center gap-4 text-center"
-          style={{ borderColor: "rgba(44,186,255,0.35)" }}
+          style={{ borderColor: "rgba(59,130,246,0.35)" }}
         >
           <h2 className="text-3xl font-black text-ink">
             Ready to start building?

@@ -108,7 +108,7 @@ export default function FloatingTeki() {
                 {shownText}
                 {isTyping && (
                   <span className="inline-block w-0.5 h-3.5 ml-0.5 align-middle animate-pulse"
-                    style={{ background: "#2cbaff" }} />
+                    style={{ background: "#3b82f6" }} />
                 )}
               </div>
             </div>

@@ -46,7 +46,7 @@ export default function ActCompleteStep({ step, onComplete }) {
         </motion.div>
 
         <div>
-          <p className="text-sm font-bold uppercase tracking-wider mb-1" style={{ color: '#2cbaff' }}>
+          <p className="text-sm font-bold uppercase tracking-wider mb-1" style={{ color: '#3b82f6' }}>
             {levelInfo?.emoji} {levelInfo?.label} Complete!
           </p>
           <p className="text-base text-muted leading-relaxed max-w-xs">
@@ -97,7 +97,7 @@ export default function ActCompleteStep({ step, onComplete }) {
           <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--ink-faint)' }}>
             Builder Power Unlocked
           </p>
-          <p className="font-bold" style={{ color: '#2cbaff' }}>{step.power.label}</p>
+          <p className="font-bold" style={{ color: '#3b82f6' }}>{step.power.label}</p>
         </motion.div>
       )}
 

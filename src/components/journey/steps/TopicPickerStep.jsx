@@ -45,9 +45,9 @@ export default function TopicPickerStep({ step, onComplete }) {
             onClick={() => { setSelected(topic); setCustom('') }}
             className="flex flex-col items-center gap-0.5 p-2 rounded-xl border-2 text-sm font-semibold transition-all"
             style={{
-              borderColor: selected === topic && !custom ? '#2cbaff' : 'var(--app-border)',
-              backgroundColor: selected === topic && !custom ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
-              color: selected === topic && !custom ? '#2cbaff' : 'var(--ink-muted)',
+              borderColor: selected === topic && !custom ? '#3b82f6' : 'var(--app-border)',
+              backgroundColor: selected === topic && !custom ? 'rgba(59,130,246,0.1)' : 'var(--app-raised)',
+              color: selected === topic && !custom ? '#3b82f6' : 'var(--ink-muted)',
             }}
           >
             <span className="text-xl">{TOPIC_EMOJIS[topic] || '📌'}</span>

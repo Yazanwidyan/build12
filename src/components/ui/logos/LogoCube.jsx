@@ -1,4 +1,4 @@
-export default function LogoCube({ size = 32 }) {
+﻿export default function LogoCube({ size = 32 }) {
   return (
     <svg
       width={size}
@@ -11,7 +11,7 @@ export default function LogoCube({ size = 32 }) {
       {/* Top face */}
       <polygon points="16,2 6,8 16,14 26,8" fill="#7ddcff" />
       {/* Left face */}
-      <polygon points="6,8 6,22 16,28 16,14" fill="#2cbaff" />
+      <polygon points="6,8 6,22 16,28 16,14" fill="#3b82f6" />
       {/* Right face */}
       <polygon points="16,14 16,28 26,22 26,8" fill="#0e8ec0" />
       {/* Cube edge lines */}

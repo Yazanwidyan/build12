@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const PRESET_COLORS = [
-  { label: "Sky", value: "#2cbaff" },
+  { label: "Sky", value: "#3b82f6" },
   { label: "Gold", value: "#fde047" },
   { label: "Emerald", value: "#10b981" },
   { label: "Rose", value: "#f43f5e" },
@@ -68,7 +68,7 @@ export default function JourneyIntro({ onDone }) {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [nameErr, setNameErr] = useState("");
-  const [color, setColor] = useState("#2cbaff");
+  const [color, setColor] = useState("#3b82f6");
   const [topic, setTopic] = useState("");
   const [custom, setCustom] = useState("");
 
@@ -94,7 +94,7 @@ export default function JourneyIntro({ onDone }) {
   // Under-11: skip name/color/topic, use auto defaults
   const handleStartYoung = () => {
     setWebsiteName(builderName ? `${builderName}'s Website` : 'My Website');
-    setWebsiteColor('#2cbaff');
+    setWebsiteColor('#3b82f6');
     setWebsiteTopic('General');
     onDone();
   };
@@ -337,15 +337,15 @@ export default function JourneyIntro({ onDone }) {
                       style={{
                         borderColor:
                           topic === t && !custom
-                            ? "#2cbaff"
+                            ? "#3b82f6"
                             : "var(--app-border)",
                         backgroundColor:
                           topic === t && !custom
-                            ? "rgba(44,186,255,0.1)"
+                            ? "rgba(59,130,246,0.1)"
                             : "var(--app-raised)",
                         color:
                           topic === t && !custom
-                            ? "#2cbaff"
+                            ? "#3b82f6"
                             : "var(--ink-muted)",
                       }}
                     >
@@ -389,7 +389,7 @@ export default function JourneyIntro({ onDone }) {
                 width: i === step ? 20 : 6,
                 height: 6,
                 backgroundColor:
-                  i === step ? "#2cbaff" : "rgba(255,255,255,0.2)",
+                  i === step ? "#3b82f6" : "rgba(255,255,255,0.2)",
               }}
             />
           ))}

@@ -11,7 +11,7 @@ const CONTACT_OPTIONS = [
     icon: <Mail size={20} />,
     title: "Email us",
     desc: "hello@helloworldkids.org",
-    color: "#2cbaff",
+    color: "#3b82f6",
   },
   {
     icon: <MessageSquare size={20} />,

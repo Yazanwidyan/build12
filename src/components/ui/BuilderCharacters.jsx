@@ -1,8 +1,8 @@
-// Two simple SVG builder characters for the onboarding avatar picker.
+﻿// Two simple SVG builder characters for the onboarding avatar picker.
 
 // ── Character A: "Pixel" — the techy builder ───────────────────────────────────
 export function CharacterPixel({ size = 96, selected = false }) {
-  const accent = selected ? '#2cbaff' : '#64748b'
+  const accent = selected ? '#3b82f6' : '#64748b'
   return (
     <svg
       width={size}
@@ -16,7 +16,7 @@ export function CharacterPixel({ size = 96, selected = false }) {
       <rect x="22" y="46" width="36" height="26" rx="8" fill={selected ? '#0a3a5c' : '#1e2640'} />
 
       {/* Shirt stripe */}
-      <rect x="22" y="54" width="36" height="4" fill={selected ? '#2cbaff' : '#2a3347'} />
+      <rect x="22" y="54" width="36" height="4" fill={selected ? '#3b82f6' : '#2a3347'} />
 
       {/* Neck */}
       <rect x="33" y="42" width="14" height="6" rx="2" fill={selected ? '#f9d5a7' : '#f5c7a9'} />

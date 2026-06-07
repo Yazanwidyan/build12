@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+﻿import Button from "@/components/ui/Button";
 import LogoCube from "@/components/ui/logos/LogoCube";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useAuthStore } from "@/stores/authStore";
@@ -29,7 +29,7 @@ export default function Header({ overlay = false }) {
         className="relative flex items-center px-3 font-semibold transition-colors"
         style={{
           color: active
-            ? "#2cbaff"
+            ? "#3b82f6"
             : onDark
               ? "rgba(255,255,255,0.7)"
               : "var(--ink-muted)",
@@ -49,7 +49,7 @@ export default function Header({ overlay = false }) {
         {active && (
           <span
             className="absolute bottom-0 left-0 right-0 h-[1px]"
-            style={{ background: "#2cbaff" }}
+            style={{ background: "#3b82f6" }}
           />
         )}
       </button>

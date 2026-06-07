@@ -7,7 +7,7 @@ import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
 const PRESET_COLORS = [
-  '#2cbaff','#fde047','#10b981','#f43f5e','#f59e0b',
+  '#3b82f6','#fde047','#10b981','#f43f5e','#f59e0b',
   '#8b5cf6','#14b8a6','#ec4899','#0ea5e9','#f97316','#1e293b','#ffffff',
 ]
 
@@ -79,7 +79,7 @@ function ColorField({ value, onChange }) {
             onClick={() => onChange(c)}
             style={{
               background: c,
-              border: value === c ? '2px solid #2cbaff' : '2px solid transparent',
+              border: value === c ? '2px solid #3b82f6' : '2px solid transparent',
             }}
             className="aspect-square rounded-lg shadow-sm hover:scale-110 transition-transform"
           />
@@ -87,7 +87,7 @@ function ColorField({ value, onChange }) {
       </div>
       <input
         type="color"
-        value={value || '#2cbaff'}
+        value={value || '#3b82f6'}
         onChange={(e) => onChange(e.target.value)}
         className="h-8 w-full rounded-xl cursor-pointer p-0.5"
         style={{ border: '2px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
@@ -105,9 +105,9 @@ function SelectField({ value, onChange, options, labels }) {
           onClick={() => onChange(opt)}
           className="px-3 py-1.5 rounded-xl text-sm font-semibold border-2 transition-all"
           style={{
-            borderColor: value === opt ? '#2cbaff' : 'var(--app-border)',
-            backgroundColor: value === opt ? 'rgba(44,186,255,0.1)' : 'var(--app-raised)',
-            color: value === opt ? '#2cbaff' : 'var(--ink-muted)',
+            borderColor: value === opt ? '#3b82f6' : 'var(--app-border)',
+            backgroundColor: value === opt ? 'rgba(59,130,246,0.1)' : 'var(--app-raised)',
+            color: value === opt ? '#3b82f6' : 'var(--ink-muted)',
           }}
         >
           {labels?.[i] ?? opt}

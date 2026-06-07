@@ -30,7 +30,7 @@ const JOURNEYS_LIST = [
     label: "Website Journey",
     desc: "Build a real website from blueprint to live site.",
     emoji: "🌐",
-    color: "#2cbaff",
+    color: "#3b82f6",
     gradient: "linear-gradient(135deg, #071e36 0%, #0a3a5c 60%, #0c5a72 100%)",
     route: "/journey",
     active: true,
@@ -100,7 +100,7 @@ function JumpBackInCard({ ageGroup, xp }) {
       {/* Floating shapes */}
       <div
         className="absolute right-12 top-6 w-24 h-24 rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #2cbaff, transparent)" }}
+        style={{ background: "radial-gradient(circle, #3b82f6, transparent)" }}
       />
       <div
         className="absolute right-36 bottom-4 w-16 h-16 rounded-full opacity-10"
@@ -111,7 +111,7 @@ function JumpBackInCard({ ageGroup, xp }) {
         className="absolute bottom-0 left-0 right-0 h-16 opacity-10"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(44,186,255,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(44,186,255,0.35) 1px, transparent 1px)",
+            "linear-gradient(rgba(59,130,246,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.35) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
           maskImage: "linear-gradient(to top, black, transparent)",
         }}
@@ -163,7 +163,7 @@ function JumpBackInCard({ ageGroup, xp }) {
                 background:
                   pct === 100
                     ? "linear-gradient(90deg,#4ade80,#22d3ee)"
-                    : "linear-gradient(90deg,#2cbaff,#fde047)",
+                    : "linear-gradient(90deg,#3b82f6,#fde047)",
               }}
             />
           </div>
@@ -334,7 +334,7 @@ function AIBuilderView() {
             emoji: "🔍",
             label: "Smart Suggestions",
             desc: "Real-time hints and completions as you build.",
-            color: "#2cbaff",
+            color: "#3b82f6",
           },
           {
             emoji: "💬",
@@ -831,7 +831,7 @@ export default function DashboardPage() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className="relative flex items-center px-3 text-base font-semibold transition-colors"
-                  style={{ color: active ? "#2cbaff" : "var(--ink-muted)" }}
+                  style={{ color: active ? "#3b82f6" : "var(--ink-muted)" }}
                   onMouseEnter={(e) => {
                     if (!active) e.currentTarget.style.color = "var(--ink)";
                   }}
@@ -844,7 +844,7 @@ export default function DashboardPage() {
                   {active && (
                     <span
                       className="absolute bottom-0 left-0 right-0 h-[1px]"
-                      style={{ background: "#2cbaff" }}
+                      style={{ background: "#3b82f6" }}
                     />
                   )}
                 </button>

@@ -65,7 +65,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
                 onKeyDown={(e) => e.key === 'Enter' && check()}
                 placeholder={ageGroup === 'young' ? step.blanks?.[bi]?.answer : '...'}
                 className="inline-block rounded px-1.5 focus:outline-none w-16 text-center"
-                style={{ backgroundColor: 'rgba(44,186,255,0.1)', border: '2px solid #2cbaff', color: '#7cd8ff' }}
+                style={{ backgroundColor: 'rgba(59,130,246,0.1)', border: '2px solid #3b82f6', color: '#93c5fd' }}
                 style={{ fontFamily: 'inherit', fontSize: 'inherit' }}
                 autoFocus={bi === 0}
               />

@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const PRESET_COLORS = [
-  { label: "Sky", value: "#2cbaff" },
+  { label: "Sky", value: "#3b82f6" },
   { label: "Gold", value: "#fde047" },
   { label: "Emerald", value: "#10b981" },
   { label: "Rose", value: "#f43f5e" },
@@ -236,7 +236,7 @@ export default function OnboardingFlow() {
   const [nameError, setNameError] = useState("");
 
   const [siteName, setSiteName] = useState("");
-  const [siteColor, setSiteColor] = useState("#2cbaff");
+  const [siteColor, setSiteColor] = useState("#3b82f6");
   const [siteTopic, setSiteTopic] = useState("");
   const [siteTopicCustom, setSiteTopicCustom] = useState("");
   const [siteNameError, setSiteNameError] = useState("");
@@ -357,10 +357,10 @@ export default function OnboardingFlow() {
               className="flex items-center justify-between p-4 rounded-2xl border-2 text-left transition-all"
               style={{
                 borderColor:
-                  profile.ageGroup === g.id ? "#2cbaff" : "var(--app-border)",
+                  profile.ageGroup === g.id ? "#3b82f6" : "var(--app-border)",
                 backgroundColor:
                   profile.ageGroup === g.id
-                    ? "rgba(44,186,255,0.08)"
+                    ? "rgba(59,130,246,0.08)"
                     : "var(--app-raised)",
               }}
             >
@@ -370,7 +370,7 @@ export default function OnboardingFlow() {
               </div>
               {profile.ageGroup === g.id && (
                 <span
-                  style={{ color: "#2cbaff" }}
+                  style={{ color: "#3b82f6" }}
                   className="font-black text-xl"
                 >
                   ✓
@@ -404,8 +404,8 @@ export default function OnboardingFlow() {
           <div
             className="flex items-center gap-4 p-4 rounded-2xl border-2"
             style={{
-              borderColor: "#2cbaff",
-              backgroundColor: "rgba(44,186,255,0.08)",
+              borderColor: "#3b82f6",
+              backgroundColor: "rgba(59,130,246,0.08)",
             }}
           >
             <span className="text-4xl">🌐</span>
@@ -417,7 +417,7 @@ export default function OnboardingFlow() {
                   : "Build a real website from blueprint to live site"}
               </p>
             </div>
-            <span className="ml-auto font-bold" style={{ color: "#2cbaff" }}>
+            <span className="ml-auto font-bold" style={{ color: "#3b82f6" }}>
               ✓
             </span>
           </div>
@@ -521,15 +521,15 @@ export default function OnboardingFlow() {
                   style={{
                     borderColor:
                       siteTopic === t && !siteTopicCustom
-                        ? "#2cbaff"
+                        ? "#3b82f6"
                         : "var(--app-border)",
                     backgroundColor:
                       siteTopic === t && !siteTopicCustom
-                        ? "rgba(44,186,255,0.1)"
+                        ? "rgba(59,130,246,0.1)"
                         : "var(--app-raised)",
                     color:
                       siteTopic === t && !siteTopicCustom
-                        ? "#2cbaff"
+                        ? "#3b82f6"
                         : "var(--ink-muted)",
                   }}
                 >

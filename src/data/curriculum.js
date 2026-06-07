@@ -1,4 +1,4 @@
-// ─── Curriculum — HelloBuildIt Website Journey ────────────────────────────────
+﻿// ─── Curriculum — HelloBuildIt Website Journey ────────────────────────────────
 // Each mission drives the journey engine. Steps are rendered by MissionRunner.
 //
 // Step types:
@@ -20,7 +20,7 @@ export const ACTS = [
     number: 1,
     title: 'Bringing The Website To Life',
     tagline: 'From blueprint to reality',
-    color: '#2cbaff',
+    color: '#3b82f6',
     missions: [
       // ── Mission 1 ─────────────────────────────────────────────────────────
       {
@@ -2091,7 +2091,7 @@ export const LEVEL_ACT_NUMBERS = {
 
 export const LEVEL_INFO = {
   young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3 },
-  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#2cbaff', totalActs: 7 },
+  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#3b82f6', totalActs: 7 },
   senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 3 },
 }
 
