@@ -47,10 +47,22 @@ const PLANS = [
 ];
 
 const FAQS = [
-  { q: "Is the free plan really free?",            a: "Yes — no credit card required. The full Website Adventure and all 50+ missions are completely free forever." },
-  { q: "When does Pro launch?",                    a: "Pro is coming soon. Sign up for free now and you'll be the first to know when it's available." },
-  { q: "Is HelloBuildIt safe for kids?",           a: "Absolutely. We don't collect unnecessary data, there's no social feed, and all content is age-appropriate for 8–18." },
-  { q: "What do I need to get started?",           a: "Just a browser. No installs, no downloads, no prior coding knowledge needed." },
+  {
+    q: "Is the free plan really free?",
+    a: "Yes — no credit card required. The full Website Adventure and all 50+ missions are completely free forever.",
+  },
+  {
+    q: "When does Pro launch?",
+    a: "Pro is coming soon. Sign up for free now and you'll be the first to know when it's available.",
+  },
+  {
+    q: "Is HelloBuildIt safe for kids?",
+    a: "Absolutely. We don't collect unnecessary data, there's no social feed, and all content is age-appropriate for 8–18.",
+  },
+  {
+    q: "What do I need to get started?",
+    a: "Just a browser. No installs, no downloads, no prior coding knowledge needed.",
+  },
 ];
 
 export default function PricingPage() {
@@ -60,8 +72,7 @@ export default function PricingPage() {
     <div className="min-h-screen bg-app flex flex-col">
       <Header />
 
-      <main className="flex-1 max-w-6xl mx-auto px-6 py-16 w-full flex flex-col gap-20">
-
+      <main className="flex-1 max-w-7xl mx-auto px-6 py-16 w-full flex flex-col gap-20">
         {/* Header */}
         <motion.section
           initial={{ opacity: 0, y: 16 }}
@@ -69,8 +80,12 @@ export default function PricingPage() {
           transition={{ duration: 0.4 }}
           className="text-center flex flex-col gap-3"
         >
-          <h1 className="text-5xl font-black text-ink">Simple, honest pricing</h1>
-          <p className="text-xl text-muted max-w-lg mx-auto">Start for free. Upgrade when you're ready for more adventures.</p>
+          <h1 className="text-5xl font-black text-ink">
+            Simple, honest pricing
+          </h1>
+          <p className="text-xl text-muted max-w-lg mx-auto">
+            Start for free. Upgrade when you're ready for more adventures.
+          </p>
         </motion.section>
 
         {/* Plans */}
@@ -94,10 +109,16 @@ export default function PricingPage() {
               )}
 
               <div className="flex flex-col gap-1">
-                <p className="text-base font-bold text-muted uppercase tracking-widest">{plan.name}</p>
+                <p className="text-base font-bold text-muted uppercase tracking-widest">
+                  {plan.name}
+                </p>
                 <div className="flex items-end gap-1">
-                  <span className="text-5xl font-black text-ink">{plan.price}</span>
-                  <span className="text-base text-muted mb-2">/ {plan.period}</span>
+                  <span className="text-5xl font-black text-ink">
+                    {plan.price}
+                  </span>
+                  <span className="text-base text-muted mb-2">
+                    / {plan.period}
+                  </span>
                 </div>
                 <p className="text-base text-muted">{plan.desc}</p>
               </div>
@@ -105,8 +126,15 @@ export default function PricingPage() {
               <div className="flex flex-col gap-3">
                 {plan.features.map((f) => (
                   <div key={f} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(44,186,255,0.15)" }}>
-                      <Check size={11} style={{ color: "#2cbaff" }} strokeWidth={3} />
+                    <div
+                      className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(44,186,255,0.15)" }}
+                    >
+                      <Check
+                        size={11}
+                        style={{ color: "#2cbaff" }}
+                        strokeWidth={3}
+                      />
                     </div>
                     <span className="text-base text-ink">{f}</span>
                   </div>
@@ -129,7 +157,9 @@ export default function PricingPage() {
 
         {/* FAQ */}
         <section className="flex flex-col gap-6 max-w-2xl mx-auto w-full">
-          <h2 className="text-3xl font-black text-ink text-center">Frequently asked</h2>
+          <h2 className="text-3xl font-black text-ink text-center">
+            Frequently asked
+          </h2>
           <div className="flex flex-col gap-3">
             {FAQS.map((faq, i) => (
               <motion.div
@@ -145,10 +175,12 @@ export default function PricingPage() {
             ))}
           </div>
         </section>
-
       </main>
 
-      <footer className="py-6 text-center text-sm border-t-2" style={{ borderColor: "var(--app-border)", color: "var(--ink-faint)" }}>
+      <footer
+        className="py-6 text-center text-sm border-t-2"
+        style={{ borderColor: "var(--app-border)", color: "var(--ink-faint)" }}
+      >
         © {new Date().getFullYear()} HelloBuildIt by HelloWorldKids
       </footer>
     </div>

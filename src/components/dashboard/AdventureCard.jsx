@@ -1,27 +1,52 @@
-﻿import { motion } from 'framer-motion'
-import { useNavigate } from '@tanstack/react-router'
-import { useProgressStore } from '@/stores/progressStore'
-import { useProfileStore } from '@/stores/profileStore'
-import { getActsForLevel, LEVEL_INFO } from '@/data/curriculum'
-import Button from '@/components/ui/Button'
+﻿import Button from "@/components/ui/Button";
+import { LEVEL_INFO, getActsForLevel } from "@/data/curriculum";
+import { useProfileStore } from "@/stores/profileStore";
+import { useProgressStore } from "@/stores/progressStore";
+import { useNavigate } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 
 export const ADVENTURES = [
-  { id: 'website', label: 'Website Adventure', emoji: '🌐', desc: 'Build a real website', color: '#2cbaff', active: true,  route: '/adventure' },
-  { id: 'game',    label: 'Game Adventure',    emoji: '🎮', desc: 'Design a game',        color: '#10b981', active: false },
-  { id: 'mobile',  label: 'Mobile Adventure',  emoji: '📱', desc: 'Build a mobile app',   color: '#f59e0b', active: false },
-]
+  {
+    id: "website",
+    label: "Website Adventure",
+    emoji: "🌐",
+    desc: "Build a real website",
+    color: "#2cbaff",
+    active: true,
+    route: "/adventure",
+  },
+  {
+    id: "game",
+    label: "Game Adventure",
+    emoji: "🎮",
+    desc: "Design a game",
+    color: "#10b981",
+    active: false,
+  },
+  {
+    id: "mobile",
+    label: "Mobile Adventure",
+    emoji: "📱",
+    desc: "Build a mobile app",
+    color: "#f59e0b",
+    active: false,
+  },
+];
 
 export default function AdventureCard({ adventure: adv }) {
-  const navigate          = useNavigate()
-  const completedActs     = useProgressStore((s) => s.completedActs)
-  const completedMissions = useProgressStore((s) => s.completedMissions)
-  const ageGroup          = useProfileStore((s) => s.ageGroup) ?? 'young'
+  const navigate = useNavigate();
+  const completedActs = useProgressStore((s) => s.completedActs);
+  const completedMissions = useProgressStore((s) => s.completedMissions);
+  const ageGroup = useProfileStore((s) => s.ageGroup) ?? "young";
 
   if (!adv.active) {
     return (
       <div
         className="rounded-2xl p-5 opacity-50"
-        style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--app-border)' }}
+        style={{
+          backgroundColor: "var(--app-raised)",
+          border: "1px solid var(--app-border)",
+        }}
       >
         <div className="flex items-center gap-3 mb-3">
           <span className="text-4xl">{adv.emoji}</span>
@@ -32,19 +57,25 @@ export default function AdventureCard({ adventure: adv }) {
         </div>
         <div
           className="text-sm rounded-lg px-3 py-1.5 text-center font-semibold"
-          style={{ backgroundColor: 'var(--app-border)', color: 'var(--ink-faint)' }}
+          style={{
+            backgroundColor: "var(--app-border)",
+            color: "var(--ink-faint)",
+          }}
         >
           Coming Soon
         </div>
       </div>
-    )
+    );
   }
 
-  const levelActs = getActsForLevel(ageGroup)
-  const levelInfo = LEVEL_INFO[ageGroup]
-  const doneActs  = completedActs.filter((id) => levelActs.some((a) => a.id === id)).length
-  const pct       = levelActs.length > 0 ? Math.round((doneActs / levelActs.length) * 100) : 0
-  const started   = completedMissions.length > 0
+  const levelActs = getActsForLevel(ageGroup);
+  const levelInfo = LEVEL_INFO[ageGroup];
+  const doneActs = completedActs.filter((id) =>
+    levelActs.some((a) => a.id === id),
+  ).length;
+  const pct =
+    levelActs.length > 0 ? Math.round((doneActs / levelActs.length) * 100) : 0;
+  const started = completedMissions.length > 0;
 
   return (
     <motion.div
@@ -60,8 +91,14 @@ export default function AdventureCard({ adventure: adv }) {
         </div>
       </div>
       <div className="mb-3">
-        <div className="flex justify-between text-sm mb-1" style={{ color: 'var(--ink-faint)' }}>
-          <span>{levelInfo?.emoji} {doneActs}/{levelActs.length} acts · {levelInfo?.label}</span>
+        <div
+          className="flex justify-between text-sm mb-1"
+          style={{ color: "var(--ink-faint)" }}
+        >
+          <span>
+            {levelInfo?.emoji} {doneActs}/{levelActs.length} acts ·{" "}
+            {levelInfo?.label}
+          </span>
           <span className="font-mono font-bold">{pct}%</span>
         </div>
         <div className="progress-track">
@@ -69,13 +106,22 @@ export default function AdventureCard({ adventure: adv }) {
             className="progress-fill"
             initial={{ width: 0 }}
             animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           />
         </div>
       </div>
-      <Button variant="solid" color="blue" size="sm" fullWidth onClick={(e) => { e.stopPropagation(); navigate({ to: adv.route }) }}>
-        {started ? 'Continue Adventure' : 'Start Adventure'}
+      <Button
+        variant="solid"
+        color="blue"
+        size="sm"
+        fullWidth
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate({ to: adv.route });
+        }}
+      >
+        {started ? "Continue Learning" : "Start Learning"}
       </Button>
     </motion.div>
-  )
+  );
 }

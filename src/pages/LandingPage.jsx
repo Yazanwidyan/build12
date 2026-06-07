@@ -33,8 +33,6 @@ const BUILD_TAGS = [
   { label: "Websites", emoji: "🌐" },
   { label: "Games", emoji: "🎮" },
   { label: "Mobile Apps", emoji: "📱" },
-  { label: "AI Builder", emoji: "🤖" },
-  { label: "Adventures", emoji: "🚀" },
 ];
 
 // Pre-seeded constellation stars
@@ -216,17 +214,17 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-app flex flex-col">
-      <Header />
+      <Header overlay />
 
       {/* ── Hero ── */}
       <section
         className="relative overflow-hidden flex items-center justify-center"
-        style={{ minHeight: "92vh" }}
+        style={{ minHeight: "100vh" }}
       >
         <HeroDark />
 
         {/* ── Content ── */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center gap-12 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center gap-12 py-20">
           {/* Left — text */}
           <div className="flex-1 flex flex-col gap-7 items-start text-left">
             {/* Headline */}
@@ -237,9 +235,7 @@ export default function LandingPage() {
               className="text-6xl font-black leading-[1.05] tracking-tight"
               style={{ color: txt }}
             >
-              Stop scrolling.
-              <br />
-              <span style={{ color: "#2cbaff" }}>Start building.</span>
+              Build Apps with AI and Grow Your Development Skills <br />
             </motion.h1>
 
             {/* Description */}
@@ -250,9 +246,8 @@ export default function LandingPage() {
               className="text-base leading-relaxed max-w-md"
               style={{ color: sub }}
             >
-              Turn screen time into creation time. Build real websites, games,
-              and apps — guided every step by TEKI, your AI companion.
-              No experience needed.
+              Create real-world projects with AI assistance while gaining the
+              coding skills to build independently.
             </motion.p>
 
             {/* Build tags */}
@@ -290,33 +285,8 @@ export default function LandingPage() {
                 iconRight={<ArrowRight size={17} />}
                 onClick={handleStart}
               >
-                Start Your Adventure
+                Get started for Free
               </Button>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.36 }}
-              className="flex items-center gap-8 pt-4"
-              style={{ borderTop: div }}
-            >
-              {[
-                { value: "50+", label: "Missions" },
-                { value: "3", label: "Adventures" },
-                { value: "8–18", label: "Ages" },
-                { value: "AI", label: "Builder" },
-              ].map((s) => (
-                <div key={s.label} className="flex flex-col">
-                  <span className="text-2xl font-black" style={{ color: txt }}>
-                    {s.value}
-                  </span>
-                  <span className="text-sm" style={{ color: dim }}>
-                    {s.label}
-                  </span>
-                </div>
-              ))}
             </motion.div>
           </div>
 
@@ -405,7 +375,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── Features ── */}
-      <section className="max-w-6xl mx-auto px-6 py-16 w-full">
+      <section className="max-w-7xl mx-auto px-6 py-16 w-full">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {FEATURES.map((f, i) => (
             <motion.div
@@ -432,7 +402,7 @@ export default function LandingPage() {
         className="py-6 text-center text-sm border-t-2"
         style={{ borderColor: "var(--app-border)", color: "var(--ink-faint)" }}
       >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           © {new Date().getFullYear()} HelloBuildIt by HelloWorldKids
         </div>
       </footer>

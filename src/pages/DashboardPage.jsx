@@ -189,7 +189,7 @@ function JumpBackInCard({ ageGroup, xp }) {
               navigate({ to: "/adventure" });
             }}
           >
-            {started ? "Continue Learning" : "Start Adventure"}
+            {started ? "Continue Learning" : "Start Learning"}
           </Button>
         </div>
       </div>
@@ -819,7 +819,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-app">
       {/* ── Top nav ── */}
       <nav className="sticky top-0 z-30 border-b-2 bg-app border-app-border">
-        <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-6 h-[54px] flex items-center gap-6">
           {/* Logo */}
           <button
             onClick={() => navigate({ to: "/" })}
@@ -888,7 +888,7 @@ export default function DashboardPage() {
       </nav>
 
       {/* ── Page body ── */}
-      <div className="max-w-6xl mx-auto px-6 py-8 flex gap-8 items-start">
+      <div className="max-w-7xl mx-auto px-6 py-8 flex gap-8 items-start">
         {/* ── Main column ── */}
         <main className="flex-1 min-w-0 flex flex-col gap-8">
           <AnimatePresence mode="wait">
