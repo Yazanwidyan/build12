@@ -77,15 +77,16 @@ export default function AuthPage({ mode = "signup" }) {
             {/* Speech bubble with left-pointing tail */}
             <div className="relative flex-1">
               {/* Left tail — border layer */}
-              
+
               {/* Left tail — fill layer */}
-              
+
               <div
                 className="w-full rounded-2xl px-4 py-3 text-sm leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
                   border: "1px solid var(--bubble-border)",
-                  borderRadius: 20,                  boxShadow: "var(--bubble-shadow)",                  color: "var(--bubble-text)",
+                  borderRadius: 20,
+                  boxShadow: "var(--bubble-shadow)",
                 }}
               >
                 {isSignup

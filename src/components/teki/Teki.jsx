@@ -37,16 +37,16 @@ export default function Teki() {
             key={currentMessage}
             className="pointer-events-auto"
             style={{ maxWidth: 280 }}
-            initial={{ opacity: 0, y: 14, scale: 0.96 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{
-              opacity: 1, y: 0, scale: 1,
+              opacity: 1, y: 0,
               boxShadow: [
                 "0 0 28px 8px rgba(99,102,241,0.55)",
                 "0 2px 12px rgba(99,102,241,0.10)",
               ],
             }}
-            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-            transition={{ duration: 0.38, ease: "easeOut" }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="teki-bubble mb-1">
               <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>

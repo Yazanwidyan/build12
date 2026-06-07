@@ -22,25 +22,6 @@ export default function ObservationStep({ step, onComplete }) {
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col gap-3"
     >
-      {step.highlightSection && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15, type: "spring" }}
-          className="rounded-xl px-4 py-2.5 text-base font-semibold text-center"
-          style={{
-            backgroundColor: "rgba(59,130,246,0.1)",
-            border: "1px solid rgba(59,130,246,0.3)",
-            color: "#3b82f6",
-          }}
-        >
-          ✅{" "}
-          {step.highlightSection.charAt(0).toUpperCase() +
-            step.highlightSection.slice(1)}{" "}
-          built!
-        </motion.div>
-      )}
-
       <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
         {step.action || "Continue"}
       </Button>

@@ -910,11 +910,10 @@ export default function DashboardPage() {
                     style={{
                       backgroundColor: "var(--bubble-bg)",
                       border: "1px solid var(--bubble-border)",
-                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
+                      borderRadius: 20,
+                      boxShadow: "var(--bubble-shadow)",
                     }}
                   >
-                    
-                    
                     {welcomeMsg}
                   </div>
                 </div>

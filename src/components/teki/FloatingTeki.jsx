@@ -110,18 +110,17 @@ export default function FloatingTeki() {
             <motion.div
               key={currentMessage}
               className="relative pointer-events-auto"
-              initial={{ opacity: 0, y: 10, scale: 0.97 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{
                 opacity: 1,
                 y: 0,
-                scale: 1,
                 boxShadow: [
                   "0 0 28px 8px rgba(99,102,241,0.55)",
                   "0 2px 12px rgba(99,102,241,0.10)",
                 ],
               }}
-              exit={{ opacity: 0, y: 6, scale: 0.97 }}
-              transition={{ duration: 0.38, ease: "easeOut" }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
                 className="px-4 py-3 text-sm leading-relaxed"
@@ -130,7 +129,6 @@ export default function FloatingTeki() {
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   borderBottomLeftRadius: 0,
-                  color: "var(--bubble-text)",
                 }}
               >
                 {currentMessage}
@@ -145,9 +143,6 @@ export default function FloatingTeki() {
             <motion.div {...FLOAT}>
               <TekiCharacter size={72} mood={mood} />
             </motion.div>
-            <span className="text-xs font-bold" style={{ color: "#fbbf24" }}>
-              ⭐ {xp}
-            </span>
           </div>
 
           <div
@@ -160,11 +155,13 @@ export default function FloatingTeki() {
             }}
             onPointerDown={(e) => e.stopPropagation()}
           >
-            <MissionRunner
-              step={currentStep}
-              stepIndex={currentStepIndex}
-              onComplete={advanceStep}
-            />
+            <div className="p-4">
+              <MissionRunner
+                step={currentStep}
+                stepIndex={currentStepIndex}
+                onComplete={advanceStep}
+              />
+            </div>
           </div>
         </div>
       </motion.div>

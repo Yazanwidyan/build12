@@ -63,7 +63,7 @@ export default function JourneyIntro({ onDone }) {
   const { setWebsiteName, setWebsiteColor, setWebsiteTopic } =
     useJourneyStore();
 
-  const isYoung = ageGroup === 'young';
+  const isYoung = ageGroup === "young";
 
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -93,9 +93,9 @@ export default function JourneyIntro({ onDone }) {
 
   // Under-11: skip name/color/topic, use auto defaults
   const handleStartYoung = () => {
-    setWebsiteName(builderName ? `${builderName}'s Website` : 'My Website');
-    setWebsiteColor('#3b82f6');
-    setWebsiteTopic('General');
+    setWebsiteName(builderName ? `${builderName}'s Website` : "My Website");
+    setWebsiteColor("#3b82f6");
+    setWebsiteTopic("General");
     onDone();
   };
 
@@ -145,14 +145,13 @@ export default function JourneyIntro({ onDone }) {
               />
             </motion.div>
             <div className="relative flex-1">
-              
-              
               <div
                 className="w-full rounded-2xl px-5 py-3 text-sm leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
                   border: "1px solid var(--bubble-border)",
-                  borderRadius: 20,                  boxShadow: "var(--bubble-shadow)",                  color: "var(--bubble-text)",
+                  borderRadius: 20,
+                  boxShadow: "var(--bubble-shadow)",
                 }}
               >
                 {STEPS[step].bubble}
@@ -198,7 +197,7 @@ export default function JourneyIntro({ onDone }) {
                   fullWidth
                   onClick={isYoung ? handleStartYoung : next}
                 >
-                  {isYoung ? 'Start Building! 🚀' : "Let's set up my website!"}
+                  {isYoung ? "Start Building! 🚀" : "Let's set up my website!"}
                 </Button>
               </motion.div>
             )}

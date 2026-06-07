@@ -111,14 +111,13 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative w-full"
                 >
-                  
-                  
                   <div
                     className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
                       border: "1px solid var(--bubble-border)",
-                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
+                      borderRadius: 20,
+                      boxShadow: "var(--bubble-shadow)",
                     }}
                   >
                     {bubble}
@@ -149,14 +148,14 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative flex-1"
                 >
-                  
-                  
                   <div
                     className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
                       border: "1px solid var(--bubble-border)",
-                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
+                      borderRadius: 20,
+                      borderBottomLeftRadius: 0,
+                      boxShadow: "var(--bubble-shadow)",
                     }}
                   >
                     {bubble}
