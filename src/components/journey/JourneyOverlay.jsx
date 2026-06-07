@@ -1,10 +1,10 @@
-import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
+﻿import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { useTekiStore } from "@/stores/tekiStore";
 import { AnimatePresence, motion } from "framer-motion";
 
 const DIM = "rgba(0,0,0,0.45)";
 
-export default function AdventureOverlay() {
+export default function JourneyOverlay() {
   const highlightSection  = useTekiStore((s) => s.highlightSection);
   const generatingSection = useTekiStore((s) => s.generatingSection);
   const { sectionBounds, iframeRect } = useWebsiteLayout();

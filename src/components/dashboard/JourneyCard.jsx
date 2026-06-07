@@ -5,19 +5,19 @@ import { useProgressStore } from "@/stores/progressStore";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-export const ADVENTURES = [
+export const JOURNEYS = [
   {
     id: "website",
-    label: "Website",
+    label: "Website Journey",
     emoji: "🌐",
     desc: "Build a real website",
     color: "#2cbaff",
     active: true,
-    route: "/adventure",
+    route: "/journey",
   },
   {
     id: "game",
-    label: "Game",
+    label: "Game Journey",
     emoji: "🎮",
     desc: "Design a game",
     color: "#10b981",
@@ -25,7 +25,7 @@ export const ADVENTURES = [
   },
   {
     id: "mobile",
-    label: "Mobile",
+    label: "Mobile Journey",
     emoji: "📱",
     desc: "Build a mobile app",
     color: "#f59e0b",
@@ -33,7 +33,7 @@ export const ADVENTURES = [
   },
 ];
 
-export default function AdventureCard({ adventure: adv }) {
+export default function JourneyCard({ journey: adv }) {
   const navigate = useNavigate();
   const completedActs = useProgressStore((s) => s.completedActs);
   const completedMissions = useProgressStore((s) => s.completedMissions);

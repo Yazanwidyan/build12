@@ -1,9 +1,9 @@
-﻿import WebsitePreview from "@/components/adventure/WebsitePreview";
+import WebsitePreview from "@/components/journey/WebsitePreview";
 import Teki from "@/components/teki/Teki";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { useAdventureStore } from "@/stores/adventureStore";
+import { useJourneyStore } from "@/stores/journeyStore";
 import { useProgressStore } from "@/stores/progressStore";
 import { useNavigate } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
@@ -11,7 +11,7 @@ import { ArrowLeft } from "lucide-react";
 export default function BuilderPage() {
   const navigate = useNavigate();
   const isUnlocked = useProgressStore((s) => s.isBuilderUnlocked("website"));
-  const adventure = useAdventureStore();
+  const journey = useJourneyStore();
 
   if (!isUnlocked) {
     return (
@@ -19,14 +19,14 @@ export default function BuilderPage() {
         <span className="text-7xl mb-4">🔒</span>
         <h2 className="text-2xl font-black text-ink mb-2">Builder Locked</h2>
         <p className="text-muted mb-6 max-w-sm text-base">
-          Complete the Website path first to unlock the free-form builder!
+          Complete the Website Journey first to unlock the free-form builder!
         </p>
         <Button
           variant="solid"
           color="blue"
-          onClick={() => navigate({ to: "/adventure" })}
+          onClick={() => navigate({ to: "/journey" })}
         >
-          Go to Website
+          Go to Website Journey
         </Button>
       </div>
     );
@@ -87,8 +87,8 @@ export default function BuilderPage() {
           <div className="flex flex-col gap-3">
             <Input
               label="Site Name"
-              value={adventure.website.name}
-              onChange={(e) => adventure.setWebsiteName(e.target.value)}
+              value={journey.website.name}
+              onChange={(e) => journey.setWebsiteName(e.target.value)}
               placeholder="My Website"
             />
 
@@ -101,8 +101,8 @@ export default function BuilderPage() {
               </label>
               <input
                 type="color"
-                value={adventure.website.color}
-                onChange={(e) => adventure.setWebsiteColor(e.target.value)}
+                value={journey.website.color}
+                onChange={(e) => journey.setWebsiteColor(e.target.value)}
                 className="h-10 w-full rounded-xl cursor-pointer p-0.5"
                 style={{
                   border: "2px solid var(--app-border)",
@@ -118,9 +118,9 @@ export default function BuilderPage() {
             <h4 className="section-label mb-2">Header</h4>
             <Input
               label="Title"
-              value={adventure.website.sections.header.content.title}
+              value={journey.website.sections.header.content.title}
               onChange={(e) =>
-                adventure.updateSection("header", { title: e.target.value })
+                journey.updateSection("header", { title: e.target.value })
               }
               placeholder="My Website"
             />
@@ -130,25 +130,25 @@ export default function BuilderPage() {
             <h4 className="section-label">Hero</h4>
             <Input
               label="Headline"
-              value={adventure.website.sections.hero.content.headline}
+              value={journey.website.sections.hero.content.headline}
               onChange={(e) =>
-                adventure.updateSection("hero", { headline: e.target.value })
+                journey.updateSection("hero", { headline: e.target.value })
               }
               placeholder="Welcome!"
             />
             <Input
               label="Subtext"
-              value={adventure.website.sections.hero.content.subtext}
+              value={journey.website.sections.hero.content.subtext}
               onChange={(e) =>
-                adventure.updateSection("hero", { subtext: e.target.value })
+                journey.updateSection("hero", { subtext: e.target.value })
               }
               placeholder="Short description"
             />
             <Input
               label="Button Text"
-              value={adventure.website.sections.hero.content.buttonText}
+              value={journey.website.sections.hero.content.buttonText}
               onChange={(e) =>
-                adventure.updateSection("hero", { buttonText: e.target.value })
+                journey.updateSection("hero", { buttonText: e.target.value })
               }
               placeholder="Explore"
             />
@@ -158,9 +158,9 @@ export default function BuilderPage() {
             <h4 className="section-label mb-2">Footer</h4>
             <Input
               label="Copyright"
-              value={adventure.website.sections.footer.content.copyright}
+              value={journey.website.sections.footer.content.copyright}
               onChange={(e) =>
-                adventure.updateSection("footer", { copyright: e.target.value })
+                journey.updateSection("footer", { copyright: e.target.value })
               }
               placeholder="© 2024 My Website"
             />

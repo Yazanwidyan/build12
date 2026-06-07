@@ -1,4 +1,4 @@
-import { useAdventureStore } from '@/stores/adventureStore'
+﻿import { useJourneyStore } from '@/stores/journeyStore'
 import { useProgressStore } from '@/stores/progressStore'
 import { useProfileStore } from '@/stores/profileStore'
 import {
@@ -9,14 +9,14 @@ import {
 } from '@/data/curriculum'
 
 export function useMissionEngine() {
-  const adventure  = useAdventureStore()
+  const journey  = useJourneyStore()
   const progress   = useProgressStore()
   const ageGroup   = useProfileStore((s) => s.ageGroup) ?? 'young'
 
-  const currentMission = getMissionByNumber(adventure.currentMissionNumber)
-  const currentStep    = currentMission?.steps[adventure.currentStepIndex] ?? null
+  const currentMission = getMissionByNumber(journey.currentMissionNumber)
+  const currentStep    = currentMission?.steps[journey.currentStepIndex] ?? null
   const totalSteps     = currentMission?.steps.length ?? 0
-  const isLastStep     = adventure.currentStepIndex >= totalSteps - 1
+  const isLastStep     = journey.currentStepIndex >= totalSteps - 1
 
   // All missions the user's level should go through, in order
   const levelMissions    = getMissionsForLevel(ageGroup)
@@ -29,14 +29,14 @@ export function useMissionEngine() {
 
   // Step-level progress within the current mission
   const stepProgressPercent = totalSteps > 0
-    ? Math.round((adventure.currentStepIndex / totalSteps) * 100)
+    ? Math.round((journey.currentStepIndex / totalSteps) * 100)
     : 0
 
   function advanceStep() {
     if (isLastStep) {
       completeMission()
     } else {
-      adventure.advanceStep()
+      journey.advanceStep()
     }
   }
 
@@ -60,7 +60,7 @@ export function useMissionEngine() {
       // Is this the LAST act for the user's level? → level complete
       if (isLastActForLevel(mission.act, ageGroup)) {
         progress.completeLevel(ageGroup)
-        adventure.setLevelComplete()
+        journey.setLevelComplete()
         return // stop — don't advance to next mission
       }
     }
@@ -70,7 +70,7 @@ export function useMissionEngine() {
     const nextLevelMission    = levelMissions[currentIndexInLevel + 1]
 
     if (nextLevelMission) {
-      adventure.setMission(nextLevelMission.number)
+      journey.setMission(nextLevelMission.number)
     }
     // If no next level mission and we somehow get here, level is done
   }
@@ -78,7 +78,7 @@ export function useMissionEngine() {
   return {
     currentMission,
     currentStep,
-    currentStepIndex:  adventure.currentStepIndex,
+    currentStepIndex:  journey.currentStepIndex,
     totalSteps,
     isLastStep,
     advanceStep,

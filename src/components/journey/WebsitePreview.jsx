@@ -1,14 +1,14 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Monitor, Smartphone } from 'lucide-react'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import { generateWebsiteHTML } from '@/engines/previewEngine'
 import { useWebsiteLayout } from '@/contexts/WebsiteLayoutContext'
 import Button from '@/components/ui/Button'
 
 export default function WebsitePreview() {
-  const website    = useAdventureStore((s) => s.website)
-  const reactDemo  = useAdventureStore((s) => s.reactDemo)
+  const website    = useJourneyStore((s) => s.website)
+  const reactDemo  = useJourneyStore((s) => s.reactDemo)
   const [viewport, setViewport] = useState('desktop')
   const { iframeRef } = useWebsiteLayout()
 

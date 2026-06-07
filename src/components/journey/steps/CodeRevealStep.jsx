@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Code2 } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import { useAgeConfig, getExplanation, getCodeExposure } from '@/engines/ageEngine'
 import { interpolateCode } from '@/engines/previewEngine'
 import Button from '@/components/ui/Button'
@@ -16,7 +16,7 @@ const LANG_COLORS = {
 
 export default function CodeRevealStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak)
-  const website = useAdventureStore((s) => s.website)
+  const website = useJourneyStore((s) => s.website)
   const { ageGroup } = useAgeConfig()
   const [revealed, setRevealed] = useState(false)
 

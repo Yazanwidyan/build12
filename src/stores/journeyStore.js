@@ -64,10 +64,10 @@ const DEFAULT_WEBSITE = {
   hasAPI: false,
 }
 
-export const useAdventureStore = create(
+export const useJourneyStore = create(
   persist(
     (set, get) => ({
-      currentAdventure: null,
+      currentJourney: null,
       currentMissionNumber: 1,
       currentStepIndex: 0,
       website: { ...DEFAULT_WEBSITE },
@@ -76,8 +76,8 @@ export const useAdventureStore = create(
       levelComplete: false,
 
       // startMissionNumber lets senior users begin at mission 21 (first React mission)
-      startAdventure: (adventureId, startMissionNumber = 1) => set({
-        currentAdventure: adventureId,
+      startJourney: (journeyId, startMissionNumber = 1) => set({
+        currentJourney: journeyId,
         currentMissionNumber: startMissionNumber,
         currentStepIndex: 0,
         levelComplete: false,
@@ -86,7 +86,7 @@ export const useAdventureStore = create(
       setLevelComplete: () => set({ levelComplete: true }),
 
       // Builds the full website from scratch — used for senior users so they
-      // arrive at the adventure with a complete site ready to learn React on.
+      // arrive at the journey with a complete site ready to learn React on.
       autoGenerateWebsite: (name, color, topic) => set((s) => ({
         website: {
           ...s.website,
@@ -193,7 +193,7 @@ export const useAdventureStore = create(
       clearCelebrating: () => set({ actCelebrating: null }),
 
       reset: () => set({
-        currentAdventure: null,
+        currentJourney: null,
         currentMissionNumber: 1,
         currentStepIndex: 0,
         website: { ...DEFAULT_WEBSITE },
@@ -201,6 +201,6 @@ export const useAdventureStore = create(
         actCelebrating: null,
       }),
     }),
-    { name: 'hbi-adventure' }
+    { name: 'hbi-journey' }
   )
 )

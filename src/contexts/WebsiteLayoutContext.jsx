@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { useAdventureStore } from "@/stores/adventureStore";
+import { useJourneyStore } from "@/stores/journeyStore";
 import { buildSectionBounds } from "@/lib/sectionLayout";
 
 const WebsiteLayoutContext = createContext(null);
@@ -11,10 +11,10 @@ export function WebsiteLayoutProvider({ children }) {
   const [iframeEl, setIframeEl] = useState(null);
   const [iframeRect, setIframeRect] = useState(FALLBACK_RECT);
 
-  const headerBuilt = useAdventureStore((s) => s.website.sections.header.built);
-  const heroBuilt   = useAdventureStore((s) => s.website.sections.hero.built);
-  const footerBuilt = useAdventureStore((s) => s.website.sections.footer.built);
-  const sections    = useAdventureStore((s) => s.website.sections);
+  const headerBuilt = useJourneyStore((s) => s.website.sections.header.built);
+  const heroBuilt   = useJourneyStore((s) => s.website.sections.hero.built);
+  const footerBuilt = useJourneyStore((s) => s.website.sections.footer.built);
+  const sections    = useJourneyStore((s) => s.website.sections);
 
   // Callback ref: fires synchronously when the iframe mounts/unmounts.
   const iframeRef = useCallback((el) => {

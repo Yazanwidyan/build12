@@ -1,4 +1,4 @@
-﻿import { useAdventureStore } from "@/stores/adventureStore";
+﻿import { useJourneyStore } from "@/stores/journeyStore";
 import { motion } from "framer-motion";
 
 const SECTIONS = [
@@ -18,7 +18,7 @@ const SECTIONS = [
 ];
 
 export default function Blueprint() {
-  const website = useAdventureStore((s) => s.website);
+  const website = useJourneyStore((s) => s.website);
   const built = SECTIONS.filter((s) => website.sections[s.key]?.built).length;
 
   return (

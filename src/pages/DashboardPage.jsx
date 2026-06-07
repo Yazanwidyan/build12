@@ -23,21 +23,21 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-// ── Adventures shown in the Learn tab ─────────────────────────────────────────
-const ADVENTURES_LIST = [
+// ── Journeys shown in the Learn tab ───────────────────────────────────────────
+const JOURNEYS_LIST = [
   {
     id: "website",
-    label: "Website",
+    label: "Website Journey",
     desc: "Build a real website from blueprint to live site.",
     emoji: "🌐",
     color: "#2cbaff",
     gradient: "linear-gradient(135deg, #071e36 0%, #0a3a5c 60%, #0c5a72 100%)",
-    route: "/adventure",
+    route: "/journey",
     active: true,
   },
   {
     id: "game",
-    label: "Game",
+    label: "Game Journey",
     desc: "Design and code your own game from scratch.",
     emoji: "🎮",
     color: "#10b981",
@@ -46,7 +46,7 @@ const ADVENTURES_LIST = [
   },
   {
     id: "mobile",
-    label: "Mobile",
+    label: "Mobile Journey",
     desc: "Build and ship a real mobile app.",
     emoji: "📱",
     color: "#f59e0b",
@@ -55,7 +55,7 @@ const ADVENTURES_LIST = [
   },
 ];
 
-// ── Hero adventure banner ──────────────────────────────────────────────────────
+// ── Hero journey banner ──────────────────────────────────────────────────────
 function JumpBackInCard({ ageGroup, xp }) {
   const navigate = useNavigate();
   const completedActs = useProgressStore((s) => s.completedActs);
@@ -71,7 +71,7 @@ function JumpBackInCard({ ageGroup, xp }) {
 
   return (
     <motion.div
-      onClick={() => navigate({ to: "/adventure" })}
+      onClick={() => navigate({ to: "/journey" })}
       className="relative w-full rounded-2xl overflow-hidden cursor-pointer"
       style={{ minHeight: 200 }}
     >
@@ -122,7 +122,7 @@ function JumpBackInCard({ ageGroup, xp }) {
         {/* Title */}
         <div>
           <h3 className="text-3xl font-black text-white leading-tight">
-            Website
+            Website Journey
           </h3>
           <p
             className="text-base mt-0.5"
@@ -177,7 +177,7 @@ function JumpBackInCard({ ageGroup, xp }) {
             size="lg"
             onClick={(e) => {
               e.stopPropagation();
-              navigate({ to: "/adventure" });
+              navigate({ to: "/journey" });
             }}
           >
             {started ? "Continue Learning" : "Start Learning"}
@@ -188,8 +188,8 @@ function JumpBackInCard({ ageGroup, xp }) {
   );
 }
 
-// ── Adventure card used in the Learn tab's "Explore" grid ─────────────────────
-function AdventureExploreCard({ item }) {
+// ── Journey card used in the Learn tab's "Explore" grid ───────────────────────
+function JourneyExploreCard({ item }) {
   const navigate = useNavigate();
   const locked = item.soon;
 
@@ -941,14 +941,14 @@ export default function DashboardPage() {
                   <JumpBackInCard ageGroup={ageGroup} xp={xp} />
                 </section>
 
-                {/* Explore adventures */}
+                {/* Explore journeys */}
                 <section>
                   <h2 className="text-2xl font-black text-ink mb-4">
                     Explore more
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {ADVENTURES_LIST.map((item) => (
-                      <AdventureExploreCard key={item.id} item={item} />
+                    {JOURNEYS_LIST.map((item) => (
+                      <JourneyExploreCard key={item.id} item={item} />
                     ))}
                   </div>
                 </section>

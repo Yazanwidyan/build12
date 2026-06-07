@@ -5,9 +5,9 @@ import { useProgressStore } from '@/stores/progressStore'
 import Button from '@/components/ui/Button'
 
 export const BUILDERS = [
-  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',     unlockAdventure: 'Website', route: '/builder' },
-  { id: 'game',    label: 'Game Builder',    emoji: '🎮', desc: 'Design and code games', unlockAdventure: 'Game' },
-  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',    unlockAdventure: 'Mobile' },
+  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',     unlockJourney: 'Website Journey', route: '/builder' },
+  { id: 'game',    label: 'Game Builder',    emoji: '🎮', desc: 'Design and code games', unlockJourney: 'Game Journey' },
+  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',    unlockJourney: 'Mobile Journey' },
 ]
 
 export default function BuilderCard({ builder: b }) {
@@ -32,7 +32,7 @@ export default function BuilderCard({ builder: b }) {
           className="text-sm rounded-lg px-3 py-2 text-center font-medium"
           style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)', color: 'var(--ink-faint)' }}
         >
-          Complete {b.unlockAdventure} to unlock
+          Complete {b.unlockJourney} to unlock
         </div>
       </div>
     )

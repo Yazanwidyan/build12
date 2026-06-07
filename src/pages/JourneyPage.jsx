@@ -2,14 +2,14 @@ import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import { useProfileStore } from '@/stores/profileStore'
 import { useTekiStore } from '@/stores/tekiStore'
 import { LEVEL_INFO } from '@/data/curriculum'
-import AdventureIntro from '@/components/adventure/AdventureIntro'
-import AdventureOverlay from '@/components/adventure/AdventureOverlay'
-import CanvasEditor from '@/components/adventure/CanvasEditor'
-import WebsitePreview from '@/components/adventure/WebsitePreview'
+import JourneyIntro from '@/components/journey/JourneyIntro'
+import JourneyOverlay from '@/components/journey/JourneyOverlay'
+import CanvasEditor from '@/components/journey/CanvasEditor'
+import WebsitePreview from '@/components/journey/WebsitePreview'
 import FloatingTeki from '@/components/teki/FloatingTeki'
 import TekiCharacter from '@/components/teki/TekiCharacter'
 import Button from '@/components/ui/Button'
@@ -66,19 +66,19 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
   )
 }
 
-// ── Main adventure page ────────────────────────────────────────────────────────
-export default function AdventurePage() {
+// ── Main journey page ──────────────────────────────────────────────────────────
+export default function JourneyPage() {
   const navigate  = useNavigate()
-  const adventure = useAdventureStore()
+  const journey   = useJourneyStore()
   const profile   = useProfileStore()
   const speak     = useTekiStore((s) => s.speak)
   const ageGroup  = profile.ageGroup ?? 'young'
 
-  const introDone = useAdventureStore((s) => !!(s.website?.name))
+  const introDone = useJourneyStore((s) => !!(s.website?.name))
 
   useEffect(() => {
-    if (!adventure.currentAdventure) navigate({ to: '/onboarding' })
-  }, [adventure.currentAdventure])
+    if (!journey.currentJourney) navigate({ to: '/onboarding' })
+  }, [journey.currentJourney])
 
   useEffect(() => {
     if (!introDone) return
@@ -91,7 +91,7 @@ export default function AdventurePage() {
     }
   }, [introDone])
 
-  if (!adventure.currentAdventure) return null
+  if (!journey.currentJourney) return null
 
   return (
     <WebsiteLayoutProvider>
@@ -104,7 +104,7 @@ export default function AdventurePage() {
           Dashboard
         </Button>
         <span style={{ color: 'var(--app-border)' }} className="text-sm">|</span>
-        <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website</span>
+        <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Journey</span>
         <div className="flex-1" />
         <ThemeToggle />
         <span className="text-sm ml-1" style={{ color: 'var(--ink-faint)' }}>
@@ -118,7 +118,7 @@ export default function AdventurePage() {
       </div>
 
       {/* ── Section highlight overlay ── */}
-      {introDone && <AdventureOverlay />}
+      {introDone && <JourneyOverlay />}
 
       {/* ── Inline canvas editor ── */}
       {introDone && <CanvasEditor />}
@@ -126,11 +126,11 @@ export default function AdventurePage() {
       {/* ── Floating TEKI (mission driver) ── */}
       {introDone && <FloatingTeki />}
 
-      {/* ── Adventure intro overlay ── */}
-      {!introDone && <AdventureIntro onDone={() => {}} />}
+      {/* ── Journey intro overlay ── */}
+      {!introDone && <JourneyIntro onDone={() => {}} />}
 
       {/* ── Level complete overlay ── */}
-      {adventure.levelComplete && (
+      {journey.levelComplete && (
         <LevelCompleteScreen
           ageGroup={ageGroup}
           onGoToDashboard={() => navigate({ to: '/dashboard' })}

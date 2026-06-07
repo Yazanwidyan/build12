@@ -1,5 +1,5 @@
 // ─── Preview Engine ───────────────────────────────────────────────────────────
-// Generates live HTML/CSS for the website preview iframe from the adventure state.
+// Generates live HTML/CSS for the website preview iframe from the journey state.
 // `reactDemo` is the optional overlay state for Act 9 interactive chapters.
 // ──────────────────────────────────────────────────────────────────────────────
 

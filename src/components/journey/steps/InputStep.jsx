@@ -1,13 +1,13 @@
 ﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
 export default function InputStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak)
-  const adventure = useAdventureStore()
+  const journey = useJourneyStore()
   const [value, setValue] = useState('')
   const [error, setError] = useState('')
 
@@ -24,8 +24,8 @@ export default function InputStep({ step, onComplete }) {
     }
 
     switch (step.storeKey) {
-      case 'websiteName':  adventure.setWebsiteName(value.trim()); break
-      case 'websiteTopic': adventure.setWebsiteTopic(value.trim()); break
+      case 'websiteName':  journey.setWebsiteName(value.trim()); break
+      case 'websiteTopic': journey.setWebsiteTopic(value.trim()); break
     }
 
     speak(`"${value.trim()}" — love it! ✨`, { mood: 'excited' })

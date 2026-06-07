@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import { useAgeConfig } from '@/engines/ageEngine'
 import Button from '@/components/ui/Button'
 
@@ -44,10 +44,10 @@ function CodePanel({ step, value, explanation }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 export default function ReactLiveDemoStep({ step, onComplete }) {
   const speak        = useTekiStore((s) => s.speak)
-  const setReactDemo = useAdventureStore((s) => s.setReactDemo)
-  const reactDemo    = useAdventureStore((s) => s.reactDemo)
-  const updateStyles = useAdventureStore((s) => s.updateStyles)
-  const updateSection = useAdventureStore((s) => s.updateSection)
+  const setReactDemo = useJourneyStore((s) => s.setReactDemo)
+  const reactDemo    = useJourneyStore((s) => s.reactDemo)
+  const updateStyles = useJourneyStore((s) => s.updateStyles)
+  const updateSection = useJourneyStore((s) => s.updateSection)
   const { ageGroup } = useAgeConfig()
 
   const [selected, setSelected]     = useState(null)

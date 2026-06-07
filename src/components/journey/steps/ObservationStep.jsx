@@ -1,4 +1,4 @@
-﻿import Blueprint from "@/components/adventure/Blueprint";
+﻿import Blueprint from "@/components/journey/Blueprint";
 import Button from "@/components/ui/Button";
 import { useTekiStore } from "@/stores/tekiStore";
 import { motion } from "framer-motion";

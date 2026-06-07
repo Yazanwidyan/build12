@@ -1,5 +1,5 @@
 // ─── Teki Engine ──────────────────────────────────────────────────────────────
-// Provides helpers for triggering TEKI dialogue from mission/adventure code.
+// Provides helpers for triggering TEKI dialogue from mission/journey code.
 // ──────────────────────────────────────────────────────────────────────────────
 
 import { useTekiStore } from '@/stores/tekiStore'

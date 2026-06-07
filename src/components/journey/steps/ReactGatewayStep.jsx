@@ -1,14 +1,14 @@
 ﻿import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Button from '@/components/ui/Button'
 
 // Chapter "gateway" screen — shown at the start of each React chapter.
 // Displays a chapter card (number + title) and TEKI speaks the intro messages.
 export default function ReactGatewayStep({ step, onComplete }) {
   const speak        = useTekiStore((s) => s.speak)
-  const resetReactDemo = useAdventureStore((s) => s.resetReactDemo)
+  const resetReactDemo = useJourneyStore((s) => s.resetReactDemo)
 
   useEffect(() => {
     // Reset demo overlay when entering a new chapter

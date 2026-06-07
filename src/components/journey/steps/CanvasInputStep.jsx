@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTekiStore } from "@/stores/tekiStore";
-import { useAdventureStore } from "@/stores/adventureStore";
+import { useJourneyStore } from "@/stores/journeyStore";
 import Button from "@/components/ui/Button";
 
 export default function CanvasInputStep({ step, onComplete }) {
   const speak          = useTekiStore((s) => s.speak);
   const setHighlight   = useTekiStore((s) => s.setHighlight);
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
-  const adventure      = useAdventureStore();
+  const journey      = useJourneyStore();
 
   useEffect(() => {
     speak(step.teki || "Click on the website and type!", { mood: "excited" });
@@ -22,9 +22,9 @@ export default function CanvasInputStep({ step, onComplete }) {
     // Advance happens immediately so the overlay disappears before the built HTML renders.
     // The observation step that follows handles the celebration.
     if (step.buildSectionOnComplete) {
-      adventure.buildSection(
+      journey.buildSection(
         step.buildSectionOnComplete,
-        adventure.website.sections[step.buildSectionOnComplete]?.content || {}
+        journey.website.sections[step.buildSectionOnComplete]?.content || {}
       );
     }
     onComplete();

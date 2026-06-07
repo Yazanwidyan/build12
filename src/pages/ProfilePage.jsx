@@ -383,7 +383,7 @@ export default function ProfilePage() {
             </div>
           )}
 
-          {/* ── Adventure progress ── */}
+          {/* ── Journey progress ── */}
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
               <p className="section-label">Progress</p>

@@ -12,7 +12,7 @@ const PLANS = [
     desc: "Everything you need to start building.",
     color: "var(--app-border)",
     features: [
-      "Website (full access)",
+      "Website Journey (full access)",
       "TEKI AI companion",
       "50+ guided missions",
       "XP & badge system",
@@ -28,12 +28,12 @@ const PLANS = [
     name: "Pro",
     price: "$9",
     period: "per month",
-    desc: "Unlock every path and get priority TEKI support.",
+    desc: "Unlock every journey and get priority TEKI support.",
     color: "#2cbaff",
     features: [
       "Everything in Free",
-      "Game (coming soon)",
-      "Mobile (coming soon)",
+      "Game Journey (coming soon)",
+      "Mobile Journey (coming soon)",
       "Priority TEKI responses",
       "Parent progress dashboard",
       "Certificate of completion",
@@ -49,7 +49,7 @@ const PLANS = [
 const FAQS = [
   {
     q: "Is the free plan really free?",
-    a: "Yes — no credit card required. The full Website path and all 50+ missions are completely free forever.",
+    a: "Yes — no credit card required. The full Website Journey and all 50+ missions are completely free forever.",
   },
   {
     q: "When does Pro launch?",

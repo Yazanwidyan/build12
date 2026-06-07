@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { Plus, X } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
@@ -123,14 +123,14 @@ export default function VisualBuilderStep({ step, onComplete }) {
   const setGenerating  = useTekiStore((s) => s.setGenerating)
   const clearGenerating = useTekiStore((s) => s.clearGenerating)
   const clearHighlight = useTekiStore((s) => s.clearHighlight)
-  const adventure = useAdventureStore()
+  const journey = useJourneyStore()
 
   const getInit = () => {
     const vals = {}
     for (const f of step.fields || []) {
       vals[f.id] = step.isStyleUpdate
-        ? adventure.website.styles[f.storeSubKey] || ''
-        : adventure.website.sections[step.section]?.content[f.storeSubKey] ?? ''
+        ? journey.website.styles[f.storeSubKey] || ''
+        : journey.website.sections[step.section]?.content[f.storeSubKey] ?? ''
     }
     return vals
   }
@@ -148,8 +148,8 @@ export default function VisualBuilderStep({ step, onComplete }) {
     setValues(newVals)
     const field = step.fields.find((f) => f.id === fieldId)
     if (!field) return
-    if (step.isStyleUpdate) adventure.updateStyles({ [field.storeSubKey]: val })
-    else if (step.section) adventure.updateSection(step.section, { [field.storeSubKey]: val })
+    if (step.isStyleUpdate) journey.updateStyles({ [field.storeSubKey]: val })
+    else if (step.section) journey.updateSection(step.section, { [field.storeSubKey]: val })
   }
 
   const handleComplete = () => {
@@ -158,7 +158,7 @@ export default function VisualBuilderStep({ step, onComplete }) {
       for (const f of step.fields) content[f.storeSubKey] = values[f.id]
       setGenerating(step.section)
       setTimeout(() => {
-        adventure.buildSection(step.section, content)
+        journey.buildSection(step.section, content)
         clearGenerating()
         speak('Looking great! 🎉', { mood: 'excited' })
         setTimeout(onComplete, 600)

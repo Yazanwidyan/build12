@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { getMissionsForLevel } from "@/data/curriculum";
-import { useAdventureStore } from "@/stores/adventureStore";
+import { useJourneyStore } from "@/stores/journeyStore";
 import { AGE_GROUPS, useProfileStore } from "@/stores/profileStore";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -56,7 +56,7 @@ function OnboardingShell({
     <div className="min-h-screen bg-app flex flex-col">
       {/* ── Progress bar + Back + Skip ── */}
       {step > 0 && (
-        <div className="w-full max-w-3xl mx-auto flex items-center gap-4 pt-5">
+        <div className="w-full max-w-2xl mx-auto flex items-center gap-4 pt-5">
           {onBack ? (
             <Button variant="ghost" color="neutral" size="sm" onClick={onBack}>
               ← Back
@@ -229,7 +229,7 @@ function OnboardingShell({
 export default function OnboardingFlow() {
   const navigate = useNavigate();
   const profile = useProfileStore();
-  const adventure = useAdventureStore();
+  const journey = useJourneyStore();
 
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -250,9 +250,9 @@ export default function OnboardingFlow() {
   const skip = () => {
     // Skip only makes sense after choosing age group
     if (step >= 3 && profile.ageGroup) {
-      adventure.startAdventure("website", 1);
+      journey.startJourney("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/adventure" });
+      navigate({ to: "/journey" });
     }
   };
 
@@ -265,13 +265,13 @@ export default function OnboardingFlow() {
     next();
   };
 
-  const selectAdventure = () => {
+  const selectJourney = () => {
     if (isSenior) {
       next();
     } else {
-      adventure.startAdventure("website", 1);
+      journey.startJourney("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/adventure" });
+      navigate({ to: "/journey" });
     }
   };
 
@@ -286,11 +286,11 @@ export default function OnboardingFlow() {
       setSiteNameError("Pick a topic first");
       return;
     }
-    adventure.autoGenerateWebsite(finalName, siteColor, finalTopic);
+    journey.autoGenerateWebsite(finalName, siteColor, finalTopic);
     const firstMission = getMissionsForLevel("senior")[0]?.number ?? 21;
-    adventure.startAdventure("website", firstMission);
+    journey.startJourney("website", firstMission);
     profile.completeOnboarding();
-    navigate({ to: "/adventure" });
+    navigate({ to: "/journey" });
   };
 
   // ── Step 0: Hello ──────────────────────────────────────────────────────────
@@ -382,7 +382,7 @@ export default function OnboardingFlow() {
       </OnboardingShell>
     );
 
-  // ── Step 3: Choose adventure ────────────────────────────────────────────────
+  // ── Step 3: Choose journey ────────────────────────────────────────────────
   if (step === 3)
     return (
       <OnboardingShell
@@ -397,10 +397,10 @@ export default function OnboardingFlow() {
             : "Amazing! Let's start building. Pick one!"
         }
         action={isSenior ? "Set Up My Website →" : "Start Building"}
-        onAction={selectAdventure}
+        onAction={selectJourney}
       >
         <div className="flex flex-col gap-2">
-          {/* Website adventure (active) */}
+          {/* Website journey (active) */}
           <div
             className="flex items-center gap-4 p-4 rounded-2xl border-2"
             style={{
@@ -410,7 +410,7 @@ export default function OnboardingFlow() {
           >
             <span className="text-4xl">🌐</span>
             <div>
-              <p className="font-bold text-ink text-base">Website</p>
+              <p className="font-bold text-ink text-base">Website Journey</p>
               <p className="text-sm text-muted mt-0.5">
                 {isSenior
                   ? "Auto-generate your site, then dive into React"
@@ -423,8 +423,8 @@ export default function OnboardingFlow() {
           </div>
           {/* Coming soon */}
           {[
-            { emoji: "🎮", label: "Game" },
-            { emoji: "📱", label: "Mobile" },
+            { emoji: "🎮", label: "Game Journey" },
+            { emoji: "📱", label: "Mobile Journey" },
           ].map((a) => (
             <div
               key={a.label}

@@ -1,4 +1,4 @@
-import MissionRunner from "@/components/adventure/MissionRunner";
+﻿import MissionRunner from "@/components/journey/MissionRunner";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { useProgressStore } from "@/stores/progressStore";

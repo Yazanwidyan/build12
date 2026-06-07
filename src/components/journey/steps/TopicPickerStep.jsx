@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
@@ -12,7 +12,7 @@ const TOPIC_EMOJIS = {
 
 export default function TopicPickerStep({ step, onComplete }) {
   const speak   = useTekiStore((s) => s.speak)
-  const adventure = useAdventureStore()
+  const journey = useJourneyStore()
   const [selected, setSelected] = useState('')
   const [custom, setCustom]     = useState('')
 
@@ -25,7 +25,7 @@ export default function TopicPickerStep({ step, onComplete }) {
   const confirm = () => {
     if (!active) return
     const topic = custom.trim() || selected
-    adventure.setWebsiteTopic(topic)
+    journey.setWebsiteTopic(topic)
     speak(`${topic}? That's going to be amazing! 🌟`, { mood: 'excited' })
     setTimeout(onComplete, 700)
   }

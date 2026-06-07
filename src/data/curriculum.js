@@ -1,9 +1,9 @@
-// ─── Curriculum — HelloBuildIt Website Adventure ──────────────────────────────
-// Each mission drives the adventure engine. Steps are rendered by MissionRunner.
+// ─── Curriculum — HelloBuildIt Website Journey ────────────────────────────────
+// Each mission drives the journey engine. Steps are rendered by MissionRunner.
 //
 // Step types:
 //   teki-message   — TEKI speaks, user taps action button to continue
-//   input          — text input saved to adventure store
+//   input          — text input saved to journey store
 //   color-picker   — color swatch picker
 //   topic-picker   — grid of topic chips + custom input
 //   visual-builder — form that live-updates the website preview

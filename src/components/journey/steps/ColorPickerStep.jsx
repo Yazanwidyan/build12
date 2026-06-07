@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Button from '@/components/ui/Button'
 
 const PRESET_COLORS = [
@@ -21,8 +21,8 @@ const PRESET_COLORS = [
 
 export default function ColorPickerStep({ step, onComplete }) {
   const speak   = useTekiStore((s) => s.speak)
-  const adventure = useAdventureStore()
-  const [selected, setSelected] = useState(adventure.website.color || '#2cbaff')
+  const journey = useJourneyStore()
+  const [selected, setSelected] = useState(journey.website.color || '#2cbaff')
 
   useEffect(() => {
     speak(step.teki || 'Pick your main color!', { mood: 'excited' })
@@ -30,7 +30,7 @@ export default function ColorPickerStep({ step, onComplete }) {
 
   const pick = (color) => {
     setSelected(color)
-    adventure.setWebsiteColor(color)
+    journey.setWebsiteColor(color)
   }
 
   const confirm = () => {

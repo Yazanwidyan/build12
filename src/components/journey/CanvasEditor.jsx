@@ -1,4 +1,4 @@
-import { useAdventureStore } from "@/stores/adventureStore";
+﻿import { useJourneyStore } from "@/stores/journeyStore";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -104,20 +104,20 @@ const FIELD_CONFIGS = {
 
 // ── Single canvas input field ──────────────────────────────────────────────────
 function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
-  const adventure      = useAdventureStore();
+  const journey      = useJourneyStore();
   const { iframeRect } = useWebsiteLayout();
   const cfg       = FIELD_CONFIGS[fieldKey];
   const inputRef  = useRef(null);
   const pixelWidth = PIXEL_WIDTHS[fieldKey] ?? 300;
 
   const getRaw = () => {
-    const val = adventure.website.sections[canvasInput.section]?.content[canvasInput.storeKey];
+    const val = journey.website.sections[canvasInput.section]?.content[canvasInput.storeKey];
     return Array.isArray(val) ? val.join(", ") : (val || "");
   };
 
   const handleChange = (raw) => {
     const parsed = cfg.isArray ? raw.split(",").map((s) => s.trim()).filter(Boolean) : raw;
-    adventure.updateSection(canvasInput.section, { [canvasInput.storeKey]: parsed });
+    journey.updateSection(canvasInput.section, { [canvasInput.storeKey]: parsed });
   };
 
   useEffect(() => { setTimeout(() => inputRef.current?.focus(), 120); }, [fieldKey]);

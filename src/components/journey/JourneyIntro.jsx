@@ -1,7 +1,7 @@
-import TekiCharacter from "@/components/teki/TekiCharacter";
+﻿import TekiCharacter from "@/components/teki/TekiCharacter";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { useAdventureStore } from "@/stores/adventureStore";
+import { useJourneyStore } from "@/stores/journeyStore";
 import { useProfileStore } from "@/stores/profileStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -43,7 +43,7 @@ const HOW_IT_WORKS = [
   },
   {
     emoji: "🌐",
-    label: "Launch",
+    label: "Journey",
     desc: "Complete all acts to ship a real live website.",
   },
 ];
@@ -58,10 +58,10 @@ const STEPS = [
   { bubble: "What's your website about? This shapes your whole project!" },
 ];
 
-export default function AdventureIntro({ onDone }) {
+export default function JourneyIntro({ onDone }) {
   const { builderName, ageGroup } = useProfileStore();
   const { setWebsiteName, setWebsiteColor, setWebsiteTopic } =
-    useAdventureStore();
+    useJourneyStore();
 
   const isYoung = ageGroup === 'young';
 

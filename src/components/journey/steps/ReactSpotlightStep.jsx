@@ -1,14 +1,14 @@
 ﻿import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
-import { useAdventureStore } from '@/stores/adventureStore'
+import { useJourneyStore } from '@/stores/journeyStore'
 import Button from '@/components/ui/Button'
 
 // Spotlight step: TEKI points to elements on the website preview.
 // Optionally asks a yes/no question and reacts to the answer.
 export default function ReactSpotlightStep({ step, onComplete }) {
   const speak        = useTekiStore((s) => s.speak)
-  const setReactDemo = useAdventureStore((s) => s.setReactDemo)
+  const setReactDemo = useJourneyStore((s) => s.setReactDemo)
   const [answeredWith, setAnsweredWith] = useState(null)
   const [ready, setReady]               = useState(!step.question)
 
