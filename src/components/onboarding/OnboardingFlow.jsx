@@ -111,22 +111,8 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative w-full"
                 >
-                  <div
-                    className="absolute left-1/2 -top-3 -translate-x-1/2 w-0 h-0"
-                    style={{
-                      borderLeft: "10px solid transparent",
-                      borderRight: "10px solid transparent",
-                      borderBottom: "12px solid var(--bubble-border)",
-                    }}
-                  />
-                  <div
-                    className="absolute left-1/2 -top-[8px] -translate-x-1/2 w-0 h-0"
-                    style={{
-                      borderLeft: "9px solid transparent",
-                      borderRight: "9px solid transparent",
-                      borderBottom: "11px solid var(--bubble-bg)",
-                    }}
-                  />
+                  
+                  
                   <div
                     className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed"
                     style={{
@@ -163,22 +149,8 @@ function OnboardingShell({
                   transition={{ duration: 0.2 }}
                   className="relative flex-1"
                 >
-                  <div
-                    className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
-                    style={{
-                      borderTop: "10px solid transparent",
-                      borderBottom: "10px solid transparent",
-                      borderRight: "12px solid var(--bubble-border)",
-                    }}
-                  />
-                  <div
-                    className="absolute -left-[8px] top-1/2 -translate-y-1/2 w-0 h-0"
-                    style={{
-                      borderTop: "9px solid transparent",
-                      borderBottom: "9px solid transparent",
-                      borderRight: "11px solid var(--bubble-bg)",
-                    }}
-                  />
+                  
+                  
                   <div
                     className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed"
                     style={{

@@ -1,52 +1,22 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import TekiCharacter from './TekiCharacter'
 
-const TYPING_SPEED = 28 // ms per character
+const FADE_MS = 420
 
 export default function Teki() {
   const {
-    currentMessage,
-    displayedText,
-    isTyping,
-    choices,
-    onChoice,
-    mood,
-    isVisible,
-    isBubbleOpen,
-    setDisplayedText,
-    messageTyped,
-    openBubble,
-    closeBubble,
+    currentMessage, isTyping, choices, onChoice,
+    mood, isVisible, isBubbleOpen,
+    messageTyped, openBubble, closeBubble,
   } = useTekiStore()
 
-  const intervalRef = useRef(null)
-  const [charIndex, setCharIndex] = useState(0)
-
-  // Typing animation
+  // After the fade completes, advance the message queue
   useEffect(() => {
     if (!currentMessage || !isTyping) return
-
-    setCharIndex(0)
-    setDisplayedText('')
-
-    intervalRef.current = setInterval(() => {
-      setCharIndex((prev) => {
-        const next = prev + 1
-        const slice = currentMessage.slice(0, next)
-        setDisplayedText(slice)
-
-        if (next >= currentMessage.length) {
-          clearInterval(intervalRef.current)
-          setTimeout(() => messageTyped(), 300)
-        }
-
-        return next
-      })
-    }, TYPING_SPEED)
-
-    return () => clearInterval(intervalRef.current)
+    const t = setTimeout(messageTyped, FADE_MS)
+    return () => clearTimeout(t)
   }, [currentMessage, isTyping])
 
   const handleChoice = (choice) => {
@@ -54,30 +24,33 @@ export default function Teki() {
     useTekiStore.getState().clearChoices()
   }
 
-  const showBubble = isBubbleOpen && (currentMessage || displayedText)
+  const showBubble = isBubbleOpen && currentMessage
 
   if (!isVisible) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 pointer-events-none">
       {/* Speech bubble */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {showBubble && (
           <motion.div
-            initial={{ opacity: 0, y: 12, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+            key={currentMessage}
             className="pointer-events-auto"
             style={{ maxWidth: 280 }}
+            initial={{ opacity: 0, y: 14, scale: 0.96 }}
+            animate={{
+              opacity: 1, y: 0, scale: 1,
+              boxShadow: [
+                "0 0 28px 8px rgba(99,102,241,0.55)",
+                "0 2px 12px rgba(99,102,241,0.10)",
+              ],
+            }}
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.38, ease: "easeOut" }}
           >
-            {/* Message bubble */}
             <div className="teki-bubble mb-1">
               <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
-                {displayedText || currentMessage}
-                {isTyping && (
-                  <span className="inline-block w-0.5 h-3.5 ml-0.5 animate-pulse align-middle" style={{ background: 'var(--bubble-text)' }} />
-                )}
+                {currentMessage}
               </p>
             </div>
 
@@ -94,8 +67,12 @@ export default function Teki() {
                     <button
                       key={choice.value ?? choice.label}
                       onClick={() => handleChoice(choice)}
-                      className="bg-white border border-teki-200 text-teki-700 rounded-xl px-3 py-1.5 text-sm font-medium
-                                 hover:bg-teki-50 hover:border-teki-400 active:bg-teki-100 transition-colors shadow-sm"
+                      className="rounded-xl px-3 py-1.5 text-sm font-semibold transition-colors"
+                      style={{
+                        background: 'var(--bubble-bg)',
+                        border: '1px solid var(--bubble-border)',
+                        color: 'var(--bubble-text)',
+                      }}
                     >
                       {choice.label}
                     </button>
@@ -107,7 +84,7 @@ export default function Teki() {
         )}
       </AnimatePresence>
 
-      {/* TEKI body — clicking toggles the bubble */}
+      {/* Teki body */}
       <motion.button
         animate={{ y: [0, -5, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -116,8 +93,6 @@ export default function Teki() {
         aria-label="Toggle TEKI"
       >
         <TekiCharacter size={72} mood={mood} />
-
-        {/* Notification dot */}
         {!isBubbleOpen && currentMessage && (
           <span className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse" />
         )}

@@ -906,29 +906,15 @@ export default function DashboardPage() {
                     <TekiCharacter size={76} mood="excited" />
                   </motion.div>
                   <div
-                    className="relative mt-2 rounded-2xl rounded-tl-sm px-4 py-3 text-base leading-relaxed max-w-sm"
+                    className="relative mt-2 rounded-2xl px-4 py-3 text-base leading-relaxed max-w-sm"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
                       border: "1px solid var(--bubble-border)",
                       borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
                     }}
                   >
-                    <span
-                      className="absolute -left-2 top-3 w-0 h-0"
-                      style={{
-                        borderTop: "6px solid transparent",
-                        borderBottom: "6px solid transparent",
-                        borderRight: "8px solid var(--bubble-border)",
-                      }}
-                    />
-                    <span
-                      className="absolute -left-1.5 top-3 w-0 h-0"
-                      style={{
-                        borderTop: "6px solid transparent",
-                        borderBottom: "6px solid transparent",
-                        borderRight: "8px solid var(--bubble-bg)",
-                      }}
-                    />
+                    
+                    
                     {welcomeMsg}
                   </div>
                 </div>

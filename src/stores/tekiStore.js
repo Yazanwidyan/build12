@@ -7,7 +7,6 @@ export const useTekiStore = create((set, get) => ({
   // ── Message queue ──────────────────────────────────────────────────────────
   queue: [],
   currentMessage: '',
-  displayedText: '',
   isTyping: false,
   choices: [],
   onChoice: null,
@@ -22,7 +21,6 @@ export const useTekiStore = create((set, get) => ({
     set((s) => ({
       queue: q,
       currentMessage: q[0],
-      displayedText: '',
       isTyping: true,
       choices: q.length === 1 ? choices : [],
       onChoice: q.length === 1 ? onChoice : null,
@@ -44,7 +42,6 @@ export const useTekiStore = create((set, get) => ({
         const isNextLast = idx + 1 === queue.length - 1
         set({
           currentMessage: next,
-          displayedText: '',
           isTyping: true,
           choices: isNextLast ? choices : [],
           onChoice: isNextLast ? onChoice : null,
@@ -53,7 +50,6 @@ export const useTekiStore = create((set, get) => ({
     }
   },
 
-  setDisplayedText: (text) => set({ displayedText: text }),
   setChoices: (choices, onChoice) => set({ choices, onChoice }),
   clearChoices: () => set({ choices: [], onChoice: null }),
 

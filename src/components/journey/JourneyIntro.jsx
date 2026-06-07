@@ -145,22 +145,8 @@ export default function JourneyIntro({ onDone }) {
               />
             </motion.div>
             <div className="relative flex-1">
-              <div
-                className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
-                style={{
-                  borderTop: "10px solid transparent",
-                  borderBottom: "10px solid transparent",
-                  borderRight: "12px solid var(--bubble-border)",
-                }}
-              />
-              <div
-                className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-0 h-0"
-                style={{
-                  borderTop: "9px solid transparent",
-                  borderBottom: "9px solid transparent",
-                  borderRight: "11px solid var(--bubble-bg)",
-                }}
-              />
+              
+              
               <div
                 className="w-full rounded-2xl px-5 py-3 text-sm leading-relaxed"
                 style={{

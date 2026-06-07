@@ -82,7 +82,7 @@ export default function TekiPanel() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                className="relative rounded-2xl rounded-tl-sm px-4 py-3"
+                className="relative rounded-2xl px-4 py-3"
                 style={{ backgroundColor: 'var(--bubble-bg)', border: '1px solid var(--bubble-border)', borderRadius: 20, boxShadow: "var(--bubble-shadow)" }}
               >
                 <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>

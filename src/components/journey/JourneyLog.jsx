@@ -22,7 +22,7 @@ function MessageEntry({ entry }) {
         style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)' }}>
         <TekiCharacter size={14} mood="happy" />
       </div>
-      <div className="flex-1 rounded-xl rounded-tl-none px-3 py-2 text-sm leading-relaxed"
+      <div className="flex-1 rounded-xl px-3 py-2 text-sm leading-relaxed"
         style={{ background: 'var(--app-raised)', border: '1px solid var(--app-border)', color: 'var(--ink-muted)' }}>
         {entry.text}
       </div>

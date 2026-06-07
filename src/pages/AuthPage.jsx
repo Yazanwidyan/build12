@@ -77,23 +77,9 @@ export default function AuthPage({ mode = "signup" }) {
             {/* Speech bubble with left-pointing tail */}
             <div className="relative flex-1">
               {/* Left tail — border layer */}
-              <div
-                className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0"
-                style={{
-                  borderTop: "10px solid transparent",
-                  borderBottom: "10px solid transparent",
-                  borderRight: "12px solid var(--bubble-border)",
-                }}
-              />
+              
               {/* Left tail — fill layer */}
-              <div
-                className="absolute -left-[8px] top-1/2 -translate-y-1/2 w-0 h-0"
-                style={{
-                  borderTop: "9px solid transparent",
-                  borderBottom: "9px solid transparent",
-                  borderRight: "11px solid var(--bubble-bg)",
-                }}
-              />
+              
               <div
                 className="w-full rounded-2xl px-4 py-3 text-sm leading-relaxed"
                 style={{
