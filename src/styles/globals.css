@@ -34,9 +34,10 @@
   --code-border:#e2e8f0;
   --code-text:  #1e293b;
 
-  --bubble-bg:    #F1F5F9;
-  --bubble-border:#dde1f7;
-  --bubble-text:  #1e2a5e;
+  --bubble-bg:    #f0f4ff;
+  --bubble-border:#d8dff5;
+  --bubble-text:  #6366f1;
+  --bubble-shadow: 0 2px 12px rgba(99,102,241,0.10);
 }
 
 .dark {
@@ -66,9 +67,10 @@
   --code-border:#1e2a3e;
   --code-text:  #e2e8f0;
 
-  --bubble-bg:    #1e2640;
-  --bubble-border:#2a3347;
-  --bubble-text:  #e2e8f0;
+  --bubble-bg:    #1e2247;
+  --bubble-border:#3040a0;
+  --bubble-text:  #a5b4fc;
+  --bubble-shadow: 0 2px 14px rgba(0,0,0,0.30);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
@@ -152,12 +154,13 @@
   /* ── TEKI speech bubble ────────────────────────────────────────────────────── */
   .teki-bubble {
     background-color: var(--bubble-bg);
-    border: 2px solid var(--app-border);
-    border-radius: 18px 18px 18px 4px;
+    border: 1px solid var(--bubble-border);
+    border-radius: 20px;
     padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    line-height: 1.65;
     color: var(--bubble-text);
+    box-shadow: var(--bubble-shadow);
   }
 
   /* ── Blueprint placeholder ─────────────────────────────────────────────────── */

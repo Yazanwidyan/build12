@@ -25,7 +25,7 @@ export default function TekiPanel() {
     <div className="flex flex-col h-full" style={{ backgroundColor: 'var(--app-surface)' }}>
 
       {/* ── Mission strip ──────────────────────────────────────────── */}
-      <div className="shrink-0 px-4 py-2 flex items-center gap-3" style={{ borderBottom: '2px solid var(--app-border)' }}>
+      <div className="shrink-0 px-4 py-2 flex items-center gap-3" style={{ borderBottom: '1px solid var(--bubble-border)' }}>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 mb-0.5">
             {act && (
@@ -83,12 +83,12 @@ export default function TekiPanel() {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                 className="relative rounded-2xl rounded-tl-sm px-4 py-3"
-                style={{ backgroundColor: 'var(--bubble-bg)', border: '2px solid var(--app-border)' }}
+                style={{ backgroundColor: 'var(--bubble-bg)', border: '1px solid var(--bubble-border)', borderRadius: 20, boxShadow: "var(--bubble-shadow)" }}
               >
                 <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                   {shownText}
                   {isTyping && (
-                    <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 animate-pulse align-middle" />
+                    <span className="inline-block w-0.5 h-3.5 ml-0.5 animate-pulse align-middle" style={{ background: 'var(--bubble-text)' }} />
                   )}
                 </p>
               </motion.div>

@@ -15,8 +15,10 @@ const LANG_COLORS = {
 }
 
 export default function CodeRevealStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
-  const website = useJourneyStore((s) => s.website)
+  const speak      = useTekiStore((s) => s.speak)
+  const logCode    = useTekiStore((s) => s.logCode)
+  const openLogPanel = useTekiStore((s) => s.openLogPanel)
+  const website    = useJourneyStore((s) => s.website)
   const { ageGroup } = useAgeConfig()
   const [revealed, setRevealed] = useState(false)
 
@@ -35,29 +37,26 @@ export default function CodeRevealStep({ step, onComplete }) {
       className="flex flex-col gap-3"
     >
       {!revealed ? (
-        <Button variant="outline" color="blue" fullWidth icon={<Code2 size={16} />} onClick={() => setRevealed(true)}>
+        <Button
+          variant="outline" color="blue" fullWidth icon={<Code2 size={16} />}
+          onClick={() => {
+            setRevealed(true)
+            logCode({ language: step.language, code, explanation, label: step.language })
+            openLogPanel()
+          }}
+        >
           Show me the code!
         </Button>
       ) : (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            className="flex flex-col gap-2"
-          >
-            <span className={`self-start text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${langColor}`}>
-              {step.language}
-            </span>
-            <pre className="bg-gray-900 text-gray-100 rounded-xl p-3 text-sm leading-relaxed overflow-x-auto">
-              <code>{code}</code>
-            </pre>
-            {explanation && (
-              <div className="rounded-xl p-2.5" style={{ backgroundColor: 'rgba(253,224,71,0.1)', border: '1px solid rgba(253,224,71,0.25)' }}>
-                <p className="text-sm leading-relaxed" style={{ color: '#fde047' }}>💡 {explanation}</p>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold"
+          style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.3)', color: '#3b82f6' }}
+        >
+          <Code2 size={12} />
+          Code added to Journey Log ←
+        </motion.div>
       )}
 
       <Button variant="solid" color="blue" fullWidth onClick={onComplete}>

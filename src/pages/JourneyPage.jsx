@@ -1,13 +1,14 @@
 ﻿import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { motion } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, ScrollText } from 'lucide-react'
 import { useJourneyStore } from '@/stores/journeyStore'
 import { useProfileStore } from '@/stores/profileStore'
 import { useTekiStore } from '@/stores/tekiStore'
 import { LEVEL_INFO } from '@/data/curriculum'
 import JourneyIntro from '@/components/journey/JourneyIntro'
 import JourneyOverlay from '@/components/journey/JourneyOverlay'
+import JourneyLog from '@/components/journey/JourneyLog'
 import CanvasEditor from '@/components/journey/CanvasEditor'
 import WebsitePreview from '@/components/journey/WebsitePreview'
 import FloatingTeki from '@/components/teki/FloatingTeki'
@@ -31,7 +32,7 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 220, damping: 22 }}
         className="rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-6 text-center"
-        style={{ backgroundColor: 'var(--app-surface)', border: '2px solid var(--app-border)' }}
+        style={{ backgroundColor: 'var(--app-surface)', border: '1px solid var(--bubble-border)' }}
       >
         <motion.div
           animate={{ y: [0, -10, 0] }}
@@ -66,13 +67,18 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
   )
 }
 
+const LOG_WIDTH = 300
+
 // ── Main journey page ──────────────────────────────────────────────────────────
 export default function JourneyPage() {
-  const navigate  = useNavigate()
-  const journey   = useJourneyStore()
-  const profile   = useProfileStore()
-  const speak     = useTekiStore((s) => s.speak)
-  const ageGroup  = profile.ageGroup ?? 'young'
+  const navigate       = useNavigate()
+  const journey        = useJourneyStore()
+  const profile        = useProfileStore()
+  const speak          = useTekiStore((s) => s.speak)
+  const logPanelOpen   = useTekiStore((s) => s.logPanelOpen)
+  const toggleLogPanel = useTekiStore((s) => s.toggleLogPanel)
+  const logCount       = useTekiStore((s) => s.log.length)
+  const ageGroup       = profile.ageGroup ?? 'young'
 
   const introDone = useJourneyStore((s) => !!(s.website?.name))
 
@@ -106,16 +112,60 @@ export default function JourneyPage() {
         <span style={{ color: 'var(--app-border)' }} className="text-sm">|</span>
         <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Journey</span>
         <div className="flex-1" />
+
+        {/* Log toggle */}
+        <button
+          onClick={toggleLogPanel}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
+          style={{
+            background: logPanelOpen ? 'rgba(59,130,246,0.15)' : 'transparent',
+            border: `1px solid ${logPanelOpen ? 'rgba(59,130,246,0.4)' : 'var(--app-border)'}`,
+            color: logPanelOpen ? '#3b82f6' : 'var(--ink-muted)',
+          }}
+        >
+          <ScrollText size={12} />
+          Log
+          {logCount > 0 && (
+            <span className="rounded-full w-4 h-4 flex items-center justify-center text-[9px] font-black"
+              style={{ background: logPanelOpen ? '#3b82f6' : 'var(--app-raised)', color: logPanelOpen ? '#fff' : 'var(--ink-muted)' }}>
+              {logCount > 99 ? '99' : logCount}
+            </span>
+          )}
+        </button>
+
         <ThemeToggle />
         <span className="text-sm ml-1" style={{ color: 'var(--ink-faint)' }}>
           {profile.builderName}
         </span>
       </div>
 
-      {/* ── Full-screen website preview ── */}
-      <div className="absolute inset-0 pt-9">
+      {/* ── Website preview — shrinks left when log panel is open ── */}
+      <div
+        className="absolute inset-0 pt-9"
+        style={{
+          left: logPanelOpen ? LOG_WIDTH : 0,
+          transition: 'left 0.28s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
         <WebsitePreview />
       </div>
+
+      {/* ── Log panel — slides in from left ── */}
+      <AnimatePresence>
+        {logPanelOpen && (
+          <motion.div
+            key="log-panel"
+            className="fixed z-[28]"
+            style={{ top: 36, left: 0, bottom: 0, width: LOG_WIDTH }}
+            initial={{ x: -LOG_WIDTH }}
+            animate={{ x: 0 }}
+            exit={{ x: -LOG_WIDTH }}
+            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+          >
+            <JourneyLog />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Section highlight overlay ── */}
       {introDone && <JourneyOverlay />}

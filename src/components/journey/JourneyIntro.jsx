@@ -150,7 +150,7 @@ export default function JourneyIntro({ onDone }) {
                 style={{
                   borderTop: "10px solid transparent",
                   borderBottom: "10px solid transparent",
-                  borderRight: "12px solid var(--app-border)",
+                  borderRight: "12px solid var(--bubble-border)",
                 }}
               />
               <div
@@ -162,11 +162,11 @@ export default function JourneyIntro({ onDone }) {
                 }}
               />
               <div
-                className="w-full rounded-2xl px-5 py-3 text-sm leading-relaxed font-mono"
+                className="w-full rounded-2xl px-5 py-3 text-sm leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
-                  border: "2px solid var(--app-border)",
-                  color: "var(--bubble-text)",
+                  border: "1px solid var(--bubble-border)",
+                  borderRadius: 20,                  boxShadow: "var(--bubble-shadow)",                  color: "var(--bubble-text)",
                 }}
               >
                 {STEPS[step].bubble}
@@ -194,7 +194,7 @@ export default function JourneyIntro({ onDone }) {
                       className="flex items-start gap-3 p-3 rounded-xl"
                       style={{
                         background: "var(--app-raised)",
-                        border: "1px solid var(--app-border)",
+                        border: "1px solid var(--bubble-border)",
                       }}
                     >
                       <span className="text-2xl shrink-0">{h.emoji}</span>
@@ -284,7 +284,7 @@ export default function JourneyIntro({ onDone }) {
                   onChange={(e) => setColor(e.target.value)}
                   className="h-9 w-full rounded-xl cursor-pointer p-0.5"
                   style={{
-                    border: "2px solid var(--app-border)",
+                    border: "2px solid var(--bubble-border)",
                     backgroundColor: "var(--app-raised)",
                   }}
                 />
@@ -293,7 +293,7 @@ export default function JourneyIntro({ onDone }) {
                   className="flex items-center gap-3 p-3 rounded-xl"
                   style={{
                     background: "var(--app-raised)",
-                    border: "1px solid var(--app-border)",
+                    border: "1px solid var(--bubble-border)",
                   }}
                 >
                   <div

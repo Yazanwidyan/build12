@@ -1,7 +1,10 @@
 import { create } from 'zustand'
 
+let _logId = 0
+const nextId = () => ++_logId
+
 export const useTekiStore = create((set, get) => ({
-  // Message queue
+  // ── Message queue ──────────────────────────────────────────────────────────
   queue: [],
   currentMessage: '',
   displayedText: '',
@@ -14,7 +17,9 @@ export const useTekiStore = create((set, get) => ({
 
   speak: (messages, { choices = [], onChoice = null, mood = 'happy' } = {}) => {
     const q = Array.isArray(messages) ? messages : [messages]
-    set({
+    // Auto-log every message spoken
+    const newEntries = q.map((text) => ({ id: nextId(), type: 'message', text }))
+    set((s) => ({
       queue: q,
       currentMessage: q[0],
       displayedText: '',
@@ -22,10 +27,10 @@ export const useTekiStore = create((set, get) => ({
       choices: q.length === 1 ? choices : [],
       onChoice: q.length === 1 ? onChoice : null,
       mood,
-    })
+      log: [...s.log, ...newEntries],
+    }))
   },
 
-  // Called by the typing animation when one message finishes
   messageTyped: () => {
     const { queue, currentMessage, choices, onChoice } = get()
     const idx = queue.indexOf(currentMessage)
@@ -34,7 +39,6 @@ export const useTekiStore = create((set, get) => ({
     if (isLast) {
       set({ isTyping: false })
     } else {
-      // Pause then show next
       setTimeout(() => {
         const next = queue[idx + 1]
         const isNextLast = idx + 1 === queue.length - 1
@@ -50,23 +54,42 @@ export const useTekiStore = create((set, get) => ({
   },
 
   setDisplayedText: (text) => set({ displayedText: text }),
-
   setChoices: (choices, onChoice) => set({ choices, onChoice }),
-
   clearChoices: () => set({ choices: [], onChoice: null }),
 
-  // Section highlight / AI-generation state
-  highlightSection: null,   // 'header' | 'hero' | 'footer' | null
-  generatingSection: null,  // same — shown with sweep animation
+  // ── Section highlight / AI-generation state ────────────────────────────────
+  highlightSection: null,
+  generatingSection: null,
   setHighlight: (section) => set({ highlightSection: section }),
   clearHighlight: () => set({ highlightSection: null }),
   setGenerating: (section) => set({ generatingSection: section, highlightSection: section }),
   clearGenerating: () => set({ generatingSection: null, highlightSection: null }),
 
   setMood: (mood) => set({ mood }),
-
   setVisible: (isVisible) => set({ isVisible }),
-
   openBubble: () => set({ isBubbleOpen: true }),
   closeBubble: () => set({ isBubbleOpen: false }),
+
+  // ── Journey Log ────────────────────────────────────────────────────────────
+  log: [],
+  logPanelOpen: false,
+
+  logCode: ({ language, code, explanation, label }) =>
+    set((s) => ({
+      log: [
+        ...s.log,
+        { id: nextId(), type: 'code', language, code, explanation: explanation || null, label: label || language },
+      ],
+    })),
+
+  logHint: (text) =>
+    set((s) => ({
+      log: [...s.log, { id: nextId(), type: 'hint', text }],
+    })),
+
+  clearLog: () => set({ log: [] }),
+
+  toggleLogPanel: () => set((s) => ({ logPanelOpen: !s.logPanelOpen })),
+  openLogPanel:   () => set({ logPanelOpen: true }),
+  closeLogPanel:  () => set({ logPanelOpen: false }),
 }))

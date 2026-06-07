@@ -82,7 +82,7 @@ export default function AuthPage({ mode = "signup" }) {
                 style={{
                   borderTop: "10px solid transparent",
                   borderBottom: "10px solid transparent",
-                  borderRight: "12px solid var(--app-border)",
+                  borderRight: "12px solid var(--bubble-border)",
                 }}
               />
               {/* Left tail — fill layer */}
@@ -95,11 +95,11 @@ export default function AuthPage({ mode = "signup" }) {
                 }}
               />
               <div
-                className="w-full rounded-2xl px-4 py-3 text-sm leading-relaxed font-mono"
+                className="w-full rounded-2xl px-4 py-3 text-sm leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
-                  border: "2px solid var(--app-border)",
-                  color: "var(--bubble-text)",
+                  border: "1px solid var(--bubble-border)",
+                  borderRadius: 20,                  boxShadow: "var(--bubble-shadow)",                  color: "var(--bubble-text)",
                 }}
               >
                 {isSignup

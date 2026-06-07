@@ -73,10 +73,10 @@ export default function Teki() {
           >
             {/* Message bubble */}
             <div className="teki-bubble mb-1">
-              <p className="text-base leading-relaxed text-gray-800">
+              <p className="text-base leading-relaxed" style={{ color: 'var(--bubble-text)' }}>
                 {displayedText || currentMessage}
                 {isTyping && (
-                  <span className="inline-block w-0.5 h-3.5 bg-teki-500 ml-0.5 animate-pulse align-middle" />
+                  <span className="inline-block w-0.5 h-3.5 ml-0.5 animate-pulse align-middle" style={{ background: 'var(--bubble-text)' }} />
                 )}
               </p>
             </div>

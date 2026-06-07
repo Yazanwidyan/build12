@@ -96,8 +96,8 @@ export default function FloatingTeki() {
         {/* Speech bubble — above Teki */}
         {shownText && (
           <div className="relative pointer-events-auto">
-            <div className="rounded-2xl px-4 py-3 text-sm leading-relaxed font-mono shadow-lg"
-              style={{ backgroundColor: "var(--bubble-bg)", border: "2px solid var(--app-border)", color: "var(--bubble-text)" }}>
+            <div className="px-4 py-3 text-sm leading-relaxed"
+              style={{ backgroundColor: "var(--bubble-bg)", border: "1px solid var(--bubble-border)", borderRadius: 20, boxShadow: "var(--bubble-shadow)", color: "var(--bubble-text)" }}>
               {shownText}
               {isTyping && (
                 <span className="inline-block w-0.5 h-3.5 ml-0.5 align-middle animate-pulse"
@@ -106,7 +106,7 @@ export default function FloatingTeki() {
             </div>
             {/* Downward arrow pointing toward Teki below */}
             <div className="absolute -bottom-[13px] left-[24px] w-0 h-0"
-              style={{ borderLeft: "12px solid transparent", borderRight: "12px solid transparent", borderTop: "13px solid var(--app-border)" }} />
+              style={{ borderLeft: "12px solid transparent", borderRight: "12px solid transparent", borderTop: "13px solid var(--bubble-border)" }} />
             <div className="absolute -bottom-[10px] left-[26px] w-0 h-0"
               style={{ borderLeft: "10px solid transparent", borderRight: "10px solid transparent", borderTop: "10px solid var(--bubble-bg)" }} />
           </div>

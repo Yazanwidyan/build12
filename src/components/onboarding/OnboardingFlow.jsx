@@ -116,7 +116,7 @@ function OnboardingShell({
                     style={{
                       borderLeft: "10px solid transparent",
                       borderRight: "10px solid transparent",
-                      borderBottom: "12px solid var(--app-border)",
+                      borderBottom: "12px solid var(--bubble-border)",
                     }}
                   />
                   <div
@@ -128,11 +128,11 @@ function OnboardingShell({
                     }}
                   />
                   <div
-                    className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed font-mono"
+                    className="w-full rounded-2xl px-6 py-4 text-base leading-relaxed"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
-                      border: "2px solid var(--app-border)",
-                      color: "var(--bubble-text)",
+                      border: "1px solid var(--bubble-border)",
+                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
                     }}
                   >
                     {bubble}
@@ -168,7 +168,7 @@ function OnboardingShell({
                     style={{
                       borderTop: "10px solid transparent",
                       borderBottom: "10px solid transparent",
-                      borderRight: "12px solid var(--app-border)",
+                      borderRight: "12px solid var(--bubble-border)",
                     }}
                   />
                   <div
@@ -180,11 +180,11 @@ function OnboardingShell({
                     }}
                   />
                   <div
-                    className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed font-mono"
+                    className="w-full rounded-2xl px-5 py-4 text-base leading-relaxed"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
-                      border: "2px solid var(--app-border)",
-                      color: "var(--bubble-text)",
+                      border: "1px solid var(--bubble-border)",
+                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
                     }}
                   >
                     {bubble}
@@ -501,7 +501,7 @@ export default function OnboardingFlow() {
               onChange={(e) => setSiteColor(e.target.value)}
               className="h-8 w-full rounded-xl cursor-pointer p-0.5"
               style={{
-                border: "2px solid var(--app-border)",
+                border: "2px solid var(--bubble-border)",
                 backgroundColor: "var(--app-raised)",
               }}
             />

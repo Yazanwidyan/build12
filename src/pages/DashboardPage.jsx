@@ -909,8 +909,8 @@ export default function DashboardPage() {
                     className="relative mt-2 rounded-2xl rounded-tl-sm px-4 py-3 text-base leading-relaxed max-w-sm"
                     style={{
                       backgroundColor: "var(--bubble-bg)",
-                      border: "2px solid var(--app-border)",
-                      color: "var(--bubble-text)",
+                      border: "1px solid var(--bubble-border)",
+                      borderRadius: 20,                      boxShadow: "var(--bubble-shadow)",                      color: "var(--bubble-text)",
                     }}
                   >
                     <span

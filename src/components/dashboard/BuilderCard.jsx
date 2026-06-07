@@ -18,7 +18,7 @@ export default function BuilderCard({ builder: b }) {
     return (
       <div
         className="rounded-2xl p-5 opacity-60"
-        style={{ backgroundColor: 'var(--app-raised)', border: '2px solid var(--app-border)' }}
+        style={{ backgroundColor: 'var(--app-raised)', border: '1px solid var(--bubble-border)' }}
       >
         <div className="flex items-center gap-3 mb-3">
           <span className="text-4xl">{b.emoji}</span>
