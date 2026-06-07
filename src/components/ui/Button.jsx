@@ -64,11 +64,11 @@ const SIZES = {
 
 // ── Legacy variant name → new API ─────────────────────────────────────────────
 const LEGACY = {
-  primary:   { variant: "solid",   color: "blue"    },
-  action:    { variant: "solid",   color: "blue"    },
+  primary: { variant: "solid", color: "blue" },
+  action: { variant: "solid", color: "blue" },
   secondary: { variant: "outline", color: "neutral" },
-  danger:    { variant: "solid",   color: "red"     },
-  success:   { variant: "solid",   color: "green"   },
+  danger: { variant: "solid", color: "red" },
+  success: { variant: "solid", color: "green" },
 };
 
 // ── Style builder ──────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ function buildStyle(variant, color, t) {
           background: "var(--ink)",
           color: "var(--app-bg)",
           border: "2px solid var(--ink)",
-          boxShadow: "4px 4px 0px var(--app-border)",
+          boxShadow: "0px 0px 0px var(--app-border)",
           "--tw-translate-x": "0px",
           "--tw-translate-y": "0px",
         };
@@ -117,7 +117,7 @@ function buildStyle(variant, color, t) {
         background: t.base,
         color: "#fff",
         border: `2px solid ${t.border}`,
-        boxShadow: `4px 4px 0px ${t.shadow}`,
+        boxShadow: `0px 4px 0px ${t.shadow}`,
       };
     case "outline":
       return {
@@ -185,13 +185,11 @@ export default function Button({
         // Solid: shadow collapses + shift on press (press-in effect)
         isSolid && [
           "hover:brightness-[1.06]",
-          "active:translate-x-[4px] active:translate-y-[4px] active:[box-shadow:0_0_0_transparent]",
+          "active:translate-x-[0px] active:translate-y-[4px] active:[box-shadow:0_0_0_transparent]",
         ],
 
-        !isSolid && !isLink && [
-          "hover:bg-[var(--btn-hover)]",
-          "active:scale-[0.96]",
-        ],
+        !isSolid &&
+          !isLink && ["hover:bg-[var(--btn-hover)]", "active:scale-[0.96]"],
 
         isLink && "hover:underline underline-offset-2",
 
@@ -204,9 +202,24 @@ export default function Button({
       {...props}
     >
       {loading ? (
-        <svg className="animate-spin h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        <svg
+          className="animate-spin h-4 w-4 shrink-0"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+          />
         </svg>
       ) : (
         icon && <span className="shrink-0">{icon}</span>

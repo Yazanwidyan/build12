@@ -118,6 +118,9 @@ function OnboardingShell({
                       border: "1px solid var(--bubble-border)",
                       borderRadius: 20,
                       boxShadow: "var(--bubble-shadow)",
+                      color: "var(--ink-muted)",
+                      fontWeight: 500,
+                      fontSize: 16,
                     }}
                   >
                     {bubble}
@@ -156,6 +159,9 @@ function OnboardingShell({
                       borderRadius: 20,
                       borderBottomLeftRadius: 0,
                       boxShadow: "var(--bubble-shadow)",
+                      color: "var(--ink-muted)",
+                      fontWeight: 500,
+                      fontSize: 16,
                     }}
                   >
                     {bubble}

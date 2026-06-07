@@ -24,8 +24,14 @@ const FLOAT = {
 const FADE_MS = 420;
 
 export default function FloatingTeki() {
-  const { currentMessage, isTyping, mood, messageTyped, highlightSection } =
-    useTekiStore();
+  const {
+    currentMessage,
+    isTyping,
+    mood,
+    messageTyped,
+    highlightSection,
+    toggleLogPanel,
+  } = useTekiStore();
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
   const xp = useProgressStore((s) => s.xp);
@@ -129,6 +135,9 @@ export default function FloatingTeki() {
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   borderBottomLeftRadius: 0,
+                  color: "var(--ink-muted)",
+                  fontWeight: 500,
+                  fontSize: 16,
                 }}
               >
                 {currentMessage}
@@ -140,9 +149,18 @@ export default function FloatingTeki() {
         {/* Bottom row: Teki + actions */}
         <div className="flex items-start gap-3 mt-1">
           <div className="flex flex-col items-center gap-1 shrink-0">
-            <motion.div {...FLOAT}>
+            <motion.button
+              {...FLOAT}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleLogPanel();
+              }}
+              className="pointer-events-auto focus:outline-none"
+              title="Toggle Journey Log"
+              onPointerDown={(e) => e.stopPropagation()}
+            >
               <TekiCharacter size={72} mood={mood} />
-            </motion.div>
+            </motion.button>
           </div>
 
           <div

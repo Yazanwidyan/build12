@@ -152,6 +152,9 @@ export default function JourneyIntro({ onDone }) {
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   boxShadow: "var(--bubble-shadow)",
+                  color: "var(--ink-muted)",
+                  fontWeight: 500,
+                  fontSize: 16,
                 }}
               >
                 {STEPS[step].bubble}
