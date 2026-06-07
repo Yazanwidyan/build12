@@ -164,9 +164,9 @@ export default function FloatingTeki() {
           </div>
 
           <div
-            className="pointer-events-auto overflow-hidden flex-1 min-w-0"
+            className="pointer-events-auto overflow-y-auto flex-1 min-w-0"
             style={{
-              maxHeight: isTyping ? 0 : "42vh",
+              maxHeight: isTyping ? 0 : "52vh",
               opacity: isTyping ? 0 : 1,
               transition: "opacity 0.2s, max-height 0.25s",
               pointerEvents: isTyping ? "none" : "auto",

@@ -1,7 +1,9 @@
-﻿import CanvasEditor from "@/components/journey/CanvasEditor";
+﻿import ActProgress from "@/components/journey/ActProgress";
+import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
 import JourneyLog from "@/components/journey/JourneyLog";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
+import QuizOverlay from "@/components/journey/QuizOverlay";
 import WebsitePreview from "@/components/journey/WebsitePreview";
 import FloatingTeki from "@/components/teki/FloatingTeki";
 import TekiCharacter from "@/components/teki/TekiCharacter";
@@ -151,6 +153,9 @@ export default function JourneyPage() {
               boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
             }}
           >
+            {/* Act progress bar */}
+            {introDone && <ActProgress />}
+
             {/* Top bar — inside the card */}
             <div
               className="h-9 shrink-0 flex items-center gap-2 px-3 border-b"
@@ -218,6 +223,9 @@ export default function JourneyPage() {
 
         {/* ── Floating TEKI (mission driver) ── */}
         {introDone && <FloatingTeki />}
+
+        {/* ── Quiz overlay ── */}
+        <QuizOverlay />
 
         {/* ── Journey intro overlay ── */}
         {!introDone && <JourneyIntro onDone={() => {}} />}

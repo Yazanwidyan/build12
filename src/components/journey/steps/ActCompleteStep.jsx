@@ -3,17 +3,20 @@ import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useProgressStore } from '@/stores/progressStore'
 import { useProfileStore } from '@/stores/profileStore'
-import { isLastActForLevel, LEVEL_INFO } from '@/data/curriculum'
+import { isLastActForLevel, LEVEL_INFO, ACTS } from '@/data/curriculum'
+import { useQuizStore } from '@/stores/quizStore'
 import Button from '@/components/ui/Button'
 
 export default function ActCompleteStep({ step, onComplete }) {
   const speak    = useTekiStore((s) => s.speak)
   const { addXP, completeAct } = useProgressStore()
   const ageGroup = useProfileStore((s) => s.ageGroup) ?? 'young'
+  const openQuiz = useQuizStore((s) => s.openQuiz)
 
   const actNumber  = parseInt(step.actId.replace('act', ''), 10)
   const isLevelEnd = isLastActForLevel(actNumber, ageGroup)
   const levelInfo  = LEVEL_INFO[ageGroup]
+  const actData    = ACTS.find((a) => a.id === step.actId)
 
   useEffect(() => {
     completeAct(step.actId)
@@ -28,6 +31,14 @@ export default function ActCompleteStep({ step, onComplete }) {
       speak([`${step.title}! 🏆`, step.message], { mood: 'proud' })
     }
   }, [step.id])
+
+  const handleContinue = () => {
+    if (actData?.quiz?.length) {
+      openQuiz(actData.id, actData.title, actData.emoji, actData.quiz, onComplete)
+    } else {
+      onComplete()
+    }
+  }
 
   if (isLevelEnd) {
     return (
@@ -65,7 +76,7 @@ export default function ActCompleteStep({ step, onComplete }) {
           </motion.span>
         )}
 
-        <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
+        <Button variant="solid" color="blue" fullWidth onClick={handleContinue}>
           🔓 Open Website Builder
         </Button>
       </motion.div>
@@ -112,7 +123,7 @@ export default function ActCompleteStep({ step, onComplete }) {
         </motion.span>
       )}
 
-      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
+      <Button variant="solid" color="blue" fullWidth onClick={handleContinue}>
         {step.action || 'Continue!'}
       </Button>
     </motion.div>
