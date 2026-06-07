@@ -173,7 +173,7 @@ export default function ProfilePage() {
           borderColor: "var(--app-border)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center gap-4">
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-4">
           <Button
             variant="ghost"
             color="neutral"
@@ -188,7 +188,7 @@ export default function ProfilePage() {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
+      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
         {/* ── Left column ── */}
         <aside className="w-full lg:w-72 shrink-0 flex flex-col gap-5">
           {/* Profile card */}
@@ -386,7 +386,7 @@ export default function ProfilePage() {
           {/* ── Adventure progress ── */}
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
-              <p className="section-label">Adventure Progress</p>
+              <p className="section-label">Progress</p>
               <span className="text-sm font-semibold text-muted">
                 {completedActs.length} / {levelActs.length} acts
               </span>

@@ -5,9 +5,9 @@ import { useProgressStore } from '@/stores/progressStore'
 import Button from '@/components/ui/Button'
 
 export const BUILDERS = [
-  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',     unlockAdventure: 'Website Adventure', route: '/builder' },
-  { id: 'game',    label: 'Game Builder',    emoji: '🎮', desc: 'Design and code games', unlockAdventure: 'Game Adventure' },
-  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',    unlockAdventure: 'Mobile Adventure' },
+  { id: 'website', label: 'Website Builder', emoji: '🌐', desc: 'Build any website',     unlockAdventure: 'Website', route: '/builder' },
+  { id: 'game',    label: 'Game Builder',    emoji: '🎮', desc: 'Design and code games', unlockAdventure: 'Game' },
+  { id: 'mobile',  label: 'Mobile Builder',  emoji: '📱', desc: 'Create mobile apps',    unlockAdventure: 'Mobile' },
 ]
 
 export default function BuilderCard({ builder: b }) {

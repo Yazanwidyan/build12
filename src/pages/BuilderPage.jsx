@@ -19,14 +19,14 @@ export default function BuilderPage() {
         <span className="text-7xl mb-4">🔒</span>
         <h2 className="text-2xl font-black text-ink mb-2">Builder Locked</h2>
         <p className="text-muted mb-6 max-w-sm text-base">
-          Complete the Website Adventure first to unlock the free-form builder!
+          Complete the Website path first to unlock the free-form builder!
         </p>
         <Button
           variant="solid"
           color="blue"
           onClick={() => navigate({ to: "/adventure" })}
         >
-          Go to Website Adventure
+          Go to Website
         </Button>
       </div>
     );

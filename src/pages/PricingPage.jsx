@@ -9,10 +9,10 @@ const PLANS = [
     name: "Free",
     price: "$0",
     period: "forever",
-    desc: "Everything you need to start your first adventure.",
+    desc: "Everything you need to start building.",
     color: "var(--app-border)",
     features: [
-      "Website Adventure (full access)",
+      "Website (full access)",
       "TEKI AI companion",
       "50+ guided missions",
       "XP & badge system",
@@ -28,12 +28,12 @@ const PLANS = [
     name: "Pro",
     price: "$9",
     period: "per month",
-    desc: "Unlock every adventure and get priority TEKI support.",
+    desc: "Unlock every path and get priority TEKI support.",
     color: "#2cbaff",
     features: [
       "Everything in Free",
-      "Game Adventure (coming soon)",
-      "Mobile Adventure (coming soon)",
+      "Game (coming soon)",
+      "Mobile (coming soon)",
       "Priority TEKI responses",
       "Parent progress dashboard",
       "Certificate of completion",
@@ -49,7 +49,7 @@ const PLANS = [
 const FAQS = [
   {
     q: "Is the free plan really free?",
-    a: "Yes — no credit card required. The full Website Adventure and all 50+ missions are completely free forever.",
+    a: "Yes — no credit card required. The full Website path and all 50+ missions are completely free forever.",
   },
   {
     q: "When does Pro launch?",
@@ -84,7 +84,7 @@ export default function PricingPage() {
             Simple, honest pricing
           </h1>
           <p className="text-xl text-muted max-w-lg mx-auto">
-            Start for free. Upgrade when you're ready for more adventures.
+            Start for free. Upgrade when you're ready for more.
           </p>
         </motion.section>
 

@@ -25,7 +25,7 @@ const FEATURES = [
   {
     emoji: "🔓",
     label: "Unlock As You Go",
-    desc: "Earn builder powers as you complete adventures.",
+    desc: "Earn builder powers as you level up.",
   },
 ];
 

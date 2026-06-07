@@ -30,7 +30,7 @@ export const TEKI_SCRIPTS = {
   actComplete: (actTitle) => [
     `ACT COMPLETE! 🏆`,
     `You finished "${actTitle}"!`,
-    "The next adventure awaits...",
+    "Keep building!",
   ],
 
   codeRevealPrompt: "Want to see what builders write to create this?",

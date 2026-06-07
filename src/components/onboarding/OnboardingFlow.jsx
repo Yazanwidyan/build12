@@ -55,38 +55,40 @@ function OnboardingShell({
   return (
     <div className="min-h-screen bg-app flex flex-col">
       {/* ── Progress bar + Back + Skip ── */}
-      <div className="w-full max-w-2xl mx-auto flex items-center gap-4 pt-5">
-        {onBack ? (
-          <Button variant="ghost" color="neutral" size="sm" onClick={onBack}>
-            ← Back
-          </Button>
-        ) : (
-          <div className="w-[64px]" />
-        )}
-        <div
-          className="flex-1 h-2 rounded-full overflow-hidden"
-          style={{ backgroundColor: "var(--app-raised)" }}
-        >
-          <motion.div
-            className="h-full rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            style={{ background: "#22c55e" }}
-          />
+      {step > 0 && (
+        <div className="w-full max-w-3xl mx-auto flex items-center gap-4 pt-5">
+          {onBack ? (
+            <Button variant="ghost" color="neutral" size="sm" onClick={onBack}>
+              ← Back
+            </Button>
+          ) : (
+            <div className="w-[64px]" />
+          )}
+          <div
+            className="flex-1 h-2 rounded-full overflow-hidden"
+            style={{ backgroundColor: "var(--app-raised)" }}
+          >
+            <motion.div
+              className="h-full rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${pct}%` }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              style={{ background: "#22c55e" }}
+            />
+          </div>
+          {onSkip ? (
+            <Button variant="ghost" color="neutral" size="sm" onClick={onSkip}>
+              Skip
+            </Button>
+          ) : (
+            <div className="w-[64px]" />
+          )}
         </div>
-        {onSkip ? (
-          <Button variant="ghost" color="neutral" size="sm" onClick={onSkip}>
-            Skip
-          </Button>
-        ) : (
-          <div className="w-[64px]" />
-        )}
-      </div>
+      )}
 
       {/* ── Main content ── */}
-      <div className="flex-1 flex flex-col items-center px-6 py-8">
-        <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+      <div className="flex-1 flex flex-col items-center px-6 py-8 pb-28 justify-center">
+        <div className="w-full max-w-2xl flex flex-col items-center  gap-6">
           {tekiTop ? (
             /* ── Top layout: big TEKI above, upward tail bubble below ── */
             <>
@@ -194,21 +196,31 @@ function OnboardingShell({
 
           {/* Step-specific content */}
           {children && <div className="w-full">{children}</div>}
-
-          {/* Action button */}
-          {action && (
-            <Button
-              variant="solid"
-              color="blue"
-              size="lg"
-              disabled={actionDisabled}
-              onClick={onAction}
-            >
-              {action}
-            </Button>
-          )}
         </div>
       </div>
+
+      {/* ── Bottom CTA ── */}
+      {action && (
+        <div
+          className="fixed bottom-0 left-0 right-0 flex justify-center px-6 pb-8 pt-4"
+          style={{
+            background:
+              "linear-gradient(to top, var(--app-bg) 70%, transparent)",
+          }}
+        >
+          <Button
+            variant="solid"
+            color="blue"
+            size="lg"
+            fullWidth
+            disabled={actionDisabled}
+            onClick={onAction}
+            className="max-w-sm"
+          >
+            {action}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
@@ -240,7 +252,7 @@ export default function OnboardingFlow() {
     if (step >= 3 && profile.ageGroup) {
       adventure.startAdventure("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/journey-start" });
+      navigate({ to: "/adventure" });
     }
   };
 
@@ -259,7 +271,7 @@ export default function OnboardingFlow() {
     } else {
       adventure.startAdventure("website", 1);
       profile.completeOnboarding();
-      navigate({ to: "/journey-start" });
+      navigate({ to: "/adventure" });
     }
   };
 
@@ -278,7 +290,7 @@ export default function OnboardingFlow() {
     const firstMission = getMissionsForLevel("senior")[0]?.number ?? 21;
     adventure.startAdventure("website", firstMission);
     profile.completeOnboarding();
-    navigate({ to: "/journey-start" });
+    navigate({ to: "/adventure" });
   };
 
   // ── Step 0: Hello ──────────────────────────────────────────────────────────
@@ -382,9 +394,9 @@ export default function OnboardingFlow() {
         bubble={
           isSenior
             ? "Since you're 15+, I've prepared a special React path just for you!"
-            : "Amazing! Let's start your first adventure. Pick one!"
+            : "Amazing! Let's start building. Pick one!"
         }
-        action={isSenior ? "Set Up My Website →" : "Start Website Adventure"}
+        action={isSenior ? "Set Up My Website →" : "Start Building"}
         onAction={selectAdventure}
       >
         <div className="flex flex-col gap-2">
@@ -398,7 +410,7 @@ export default function OnboardingFlow() {
           >
             <span className="text-4xl">🌐</span>
             <div>
-              <p className="font-bold text-ink text-base">Website Adventure</p>
+              <p className="font-bold text-ink text-base">Website</p>
               <p className="text-sm text-muted mt-0.5">
                 {isSenior
                   ? "Auto-generate your site, then dive into React"
@@ -411,8 +423,8 @@ export default function OnboardingFlow() {
           </div>
           {/* Coming soon */}
           {[
-            { emoji: "🎮", label: "Game Adventure" },
-            { emoji: "📱", label: "Mobile Adventure" },
+            { emoji: "🎮", label: "Game" },
+            { emoji: "📱", label: "Mobile" },
           ].map((a) => (
             <div
               key={a.label}

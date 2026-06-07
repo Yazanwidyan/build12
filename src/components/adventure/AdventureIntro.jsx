@@ -43,7 +43,7 @@ const HOW_IT_WORKS = [
   },
   {
     emoji: "🌐",
-    label: "Adventure",
+    label: "Launch",
     desc: "Complete all acts to ship a real live website.",
   },
 ];
@@ -51,11 +51,11 @@ const HOW_IT_WORKS = [
 const STEPS = [
   {
     bubble:
-      "Welcome, future builder! I'm TEKI — your coding companion for this adventure. 🚀 Here's how it works:",
+      "Welcome, future builder! I'm TEKI — your coding companion. 🚀 Here's how it works:",
   },
   { bubble: "What's your website called? Pick something you love!" },
   { bubble: "Pick a color that feels like you — this becomes your brand!" },
-  { bubble: "What's your website about? This shapes your whole adventure!" },
+  { bubble: "What's your website about? This shapes your whole project!" },
 ];
 
 export default function AdventureIntro({ onDone }) {
@@ -212,7 +212,7 @@ export default function AdventureIntro({ onDone }) {
                   fullWidth
                   onClick={isYoung ? handleStartYoung : next}
                 >
-                  {isYoung ? 'Start My Adventure! 🚀' : "Let's set up my website!"}
+                  {isYoung ? 'Start Building! 🚀' : "Let's set up my website!"}
                 </Button>
               </motion.div>
             )}
@@ -372,7 +372,7 @@ export default function AdventureIntro({ onDone }) {
                   onClick={handleDone}
                   disabled={!canFinish}
                 >
-                  Start My Adventure! 🚀
+                  Start Building! 🚀
                 </Button>
               </motion.div>
             )}

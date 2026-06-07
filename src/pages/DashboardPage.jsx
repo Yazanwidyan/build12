@@ -27,7 +27,7 @@ import { useEffect, useRef, useState } from "react";
 const ADVENTURES_LIST = [
   {
     id: "website",
-    label: "Website Adventure",
+    label: "Website",
     desc: "Build a real website from blueprint to live site.",
     emoji: "🌐",
     color: "#2cbaff",
@@ -37,7 +37,7 @@ const ADVENTURES_LIST = [
   },
   {
     id: "game",
-    label: "Game Adventure",
+    label: "Game",
     desc: "Design and code your own game from scratch.",
     emoji: "🎮",
     color: "#10b981",
@@ -46,7 +46,7 @@ const ADVENTURES_LIST = [
   },
   {
     id: "mobile",
-    label: "Mobile Adventure",
+    label: "Mobile",
     desc: "Build and ship a real mobile app.",
     emoji: "📱",
     color: "#f59e0b",
@@ -119,18 +119,10 @@ function JumpBackInCard({ ageGroup, xp }) {
 
       {/* Content overlay */}
       <div className="relative p-6 flex flex-col gap-3">
-        {/* Label */}
-        <span
-          className="section-label"
-          style={{ color: "rgba(44,186,255,0.9)" }}
-        >
-          ADVENTURE
-        </span>
-
         {/* Title */}
         <div>
           <h3 className="text-3xl font-black text-white leading-tight">
-            Website Adventure
+            Website
           </h3>
           <p
             className="text-base mt-0.5"
@@ -396,7 +388,7 @@ function MyProjectsView({ completedMissions, earnedBadges, builderPowers }) {
           <span className="text-6xl opacity-40">📁</span>
           <p className="font-bold text-ink">No projects yet</p>
           <p className="text-base text-muted max-w-xs">
-            Complete adventures and build things — they'll appear here as your
+            Complete missions and build things — they'll appear here as your
             portfolio grows.
           </p>
         </div>
@@ -817,7 +809,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-app">
       {/* ── Top nav ── */}
       <nav className="sticky top-0 z-30 border-b-2 bg-app border-app-border">
-        <div className="max-w-7xl mx-auto px-6 h-[54px] flex items-center gap-6">
+        <div className="max-w-6xl mx-auto px-6 h-[54px] flex items-center gap-6">
           {/* Logo */}
           <button
             onClick={() => navigate({ to: "/" })}
@@ -886,7 +878,7 @@ export default function DashboardPage() {
       </nav>
 
       {/* ── Page body ── */}
-      <div className="max-w-7xl mx-auto px-6 py-8 flex gap-8 items-start">
+      <div className="max-w-6xl mx-auto px-6 py-8 flex gap-8 items-start">
         {/* ── Main column ── */}
         <main className="flex-1 min-w-0 flex flex-col gap-8">
           <AnimatePresence mode="wait">

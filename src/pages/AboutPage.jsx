@@ -28,7 +28,7 @@ const VALUES = [
   {
     emoji: "🚀",
     title: "Real-World Skills",
-    desc: "Every adventure produces something real — a deployed website, a working game, a live mobile app.",
+    desc: "Every project produces something real — a deployed website, a working game, a live mobile app.",
   },
 ];
 
@@ -63,11 +63,11 @@ export default function AboutPage() {
         <section className="card p-10 flex flex-col gap-4 text-center">
           <p className="section-label">Our Mission</p>
           <p className="text-3xl font-black text-ink leading-snug max-w-3xl mx-auto">
-            To make coding education feel like an{" "}
-            <span style={{ color: "#2cbaff" }}>adventure</span>, not a lecture.
+            To make coding education feel like a{" "}
+            <span style={{ color: "#2cbaff" }}>journey</span>, not a lecture.
           </p>
           <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-            We designed every mission, act, and adventure to produce something
+            We designed every mission and act to produce something
             tangible — so builders feel the thrill of shipping real work from
             day one.
           </p>
@@ -121,7 +121,7 @@ export default function AboutPage() {
             Ready to start building?
           </h2>
           <p className="text-lg text-muted">
-            Join thousands of young builders on their first coding adventure.
+            Join thousands of young builders on their coding journey.
           </p>
           <Button
             variant="solid"

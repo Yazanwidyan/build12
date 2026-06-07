@@ -104,7 +104,7 @@ export default function AdventurePage() {
           Dashboard
         </Button>
         <span style={{ color: 'var(--app-border)' }} className="text-sm">|</span>
-        <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website Adventure</span>
+        <span className="text-sm font-semibold" style={{ color: 'var(--ink-muted)' }}>Website</span>
         <div className="flex-1" />
         <ThemeToggle />
         <span className="text-sm ml-1" style={{ color: 'var(--ink-faint)' }}>

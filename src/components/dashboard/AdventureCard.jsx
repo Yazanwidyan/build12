@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export const ADVENTURES = [
   {
     id: "website",
-    label: "Website Adventure",
+    label: "Website",
     emoji: "🌐",
     desc: "Build a real website",
     color: "#2cbaff",
@@ -17,7 +17,7 @@ export const ADVENTURES = [
   },
   {
     id: "game",
-    label: "Game Adventure",
+    label: "Game",
     emoji: "🎮",
     desc: "Design a game",
     color: "#10b981",
@@ -25,7 +25,7 @@ export const ADVENTURES = [
   },
   {
     id: "mobile",
-    label: "Mobile Adventure",
+    label: "Mobile",
     emoji: "📱",
     desc: "Build a mobile app",
     color: "#f59e0b",

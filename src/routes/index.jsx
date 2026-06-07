@@ -11,7 +11,6 @@ import AuthPage from '@/pages/AuthPage'
 import OnboardingPage from '@/pages/OnboardingPage'
 import DashboardPage from '@/pages/DashboardPage'
 import AdventurePage from '@/pages/AdventurePage'
-import JourneyStartPage from '@/pages/JourneyStartPage'
 import BuilderPage from '@/pages/BuilderPage'
 import ProfilePage from '@/pages/ProfilePage'
 import NotFoundPage from '@/pages/NotFoundPage'
@@ -92,13 +91,6 @@ const dashboardRoute = createRoute({
   component: DashboardPage,
 })
 
-const journeyStartRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/journey-start',
-  beforeLoad: requireOnboarding,
-  component: JourneyStartPage,
-})
-
 const adventureRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/adventure',
@@ -129,7 +121,6 @@ const routeTree = rootRoute.addChildren([
   pricingRoute,
   contactRoute,
   onboardingRoute,
-  journeyStartRoute,
   dashboardRoute,
   adventureRoute,
   builderRoute,
