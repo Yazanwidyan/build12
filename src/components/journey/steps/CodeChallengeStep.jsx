@@ -5,7 +5,7 @@ import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
 import { useAgeConfig, getExplanation } from '@/engines/ageEngine'
 import { interpolateCode } from '@/engines/previewEngine'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 export default function CodeChallengeStep({ step, onComplete }) {
   const speak              = useTekiStore((s) => s.speak)
@@ -14,13 +14,20 @@ export default function CodeChallengeStep({ step, onComplete }) {
   const styledSection      = useJourneyStore((s) => s.styledSection)
   const enableInteractivity = useJourneyStore((s) => s.enableInteractivity)
   const { ageGroup } = useAgeConfig()
+  const { setStepAction } = useStepAction()
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
   const [attempts, setAttempts] = useState(0)
 
   useEffect(() => {
     speak(step.teki || 'Your turn!', { mood: 'thinking' })
+    setStepAction({ label: step.action || 'Check my answer!', onClick: () => check() })
   }, [step.id])
+
+  // Re-register so the action closure always sees the latest answers/attempts
+  useEffect(() => {
+    setStepAction({ label: step.action || 'Check my answer!', onClick: () => check() })
+  }, [answers, attempts])
 
   const explanation = getExplanation(step, ageGroup)
   const code = interpolateCode(step.code, website)
@@ -107,9 +114,6 @@ export default function CodeChallengeStep({ step, onComplete }) {
         </div>
       )}
 
-      <Button variant="solid" color="blue" fullWidth onClick={check}>
-        {step.action || 'Check my answer!'}
-      </Button>
     </motion.div>
   )
 }

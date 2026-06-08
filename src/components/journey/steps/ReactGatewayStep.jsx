@@ -2,20 +2,21 @@
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 // Chapter "gateway" screen — shown at the start of each React chapter.
 // Displays a chapter card (number + title) and TEKI speaks the intro messages.
 export default function ReactGatewayStep({ step, onComplete }) {
   const speak        = useTekiStore((s) => s.speak)
   const resetReactDemo = useJourneyStore((s) => s.resetReactDemo)
+  const { setStepAction } = useStepAction()
 
   useEffect(() => {
-    // Reset demo overlay when entering a new chapter
     resetReactDemo()
     if (step.messages?.length) {
       speak(step.messages, { mood: step.mood || 'excited' })
     }
+    setStepAction({ label: step.action || "Let's Go!", onClick: onComplete })
   }, [step.id])
 
   const chapterColors = [
@@ -56,16 +57,6 @@ export default function ReactGatewayStep({ step, onComplete }) {
         )}
       </motion.div>
 
-      {/* Continue button */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.25 }}
-      >
-        <Button variant="solid" color="blue" size="lg" fullWidth onClick={onComplete}>
-          {step.action || "Let's Go!"}
-        </Button>
-      </motion.div>
     </motion.div>
   )
 }

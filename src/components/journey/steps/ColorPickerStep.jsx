@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 const PRESET_COLORS = [
   { label: 'Sky Blue',   value: '#3b82f6' },
@@ -22,20 +22,22 @@ const PRESET_COLORS = [
 export default function ColorPickerStep({ step, onComplete }) {
   const speak   = useTekiStore((s) => s.speak)
   const journey = useJourneyStore()
+  const { setStepAction } = useStepAction()
   const [selected, setSelected] = useState(journey.website.color || '#3b82f6')
+
+  const confirm = () => {
+    speak('Perfect color! 🎨', { mood: 'excited' })
+    setTimeout(onComplete, 500)
+  }
 
   useEffect(() => {
     speak(step.teki || 'Pick your main color!', { mood: 'excited' })
+    setStepAction({ label: step.action || "That's the color!", onClick: confirm })
   }, [step.id])
 
   const pick = (color) => {
     setSelected(color)
     journey.setWebsiteColor(color)
-  }
-
-  const confirm = () => {
-    speak('Perfect color! 🎨', { mood: 'excited' })
-    setTimeout(onComplete, 500)
   }
 
   return (
@@ -82,9 +84,6 @@ export default function ColorPickerStep({ step, onComplete }) {
         </div>
       </div>
 
-      <Button variant="solid" color="blue" fullWidth onClick={confirm}>
-        {step.action || "That's the color!"}
-      </Button>
     </motion.div>
   )
 }

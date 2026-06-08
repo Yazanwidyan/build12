@@ -5,18 +5,27 @@ import { useProgressStore } from '@/stores/progressStore'
 import { useProfileStore } from '@/stores/profileStore'
 import { isLastActForLevel, LEVEL_INFO, ACTS } from '@/data/curriculum'
 import { useQuizStore } from '@/stores/quizStore'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 export default function ActCompleteStep({ step, onComplete }) {
   const speak    = useTekiStore((s) => s.speak)
   const { addXP, completeAct } = useProgressStore()
   const ageGroup = useProfileStore((s) => s.ageGroup) ?? 'young'
   const openQuiz = useQuizStore((s) => s.openQuiz)
+  const { setStepAction } = useStepAction()
 
   const actNumber  = parseInt(step.actId.replace('act', ''), 10)
   const isLevelEnd = isLastActForLevel(actNumber, ageGroup)
   const levelInfo  = LEVEL_INFO[ageGroup]
   const actData    = ACTS.find((a) => a.id === step.actId)
+
+  const handleContinue = () => {
+    if (actData?.quiz?.length) {
+      openQuiz(actData.id, actData.title, actData.emoji, actData.quiz, onComplete)
+    } else {
+      onComplete()
+    }
+  }
 
   useEffect(() => {
     completeAct(step.actId)
@@ -27,18 +36,12 @@ export default function ActCompleteStep({ step, onComplete }) {
         [`${levelInfo?.label} — COMPLETE! 🎓`, "You finished your entire level!", "The Website Builder is now yours."],
         { mood: 'proud' }
       )
+      setStepAction({ label: '🔓 Open Website Builder', onClick: handleContinue })
     } else {
       speak([`${step.title}! 🏆`, step.message], { mood: 'proud' })
+      setStepAction({ label: step.action || 'Continue!', onClick: handleContinue })
     }
   }, [step.id])
-
-  const handleContinue = () => {
-    if (actData?.quiz?.length) {
-      openQuiz(actData.id, actData.title, actData.emoji, actData.quiz, onComplete)
-    } else {
-      onComplete()
-    }
-  }
 
   if (isLevelEnd) {
     return (
@@ -55,7 +58,6 @@ export default function ActCompleteStep({ step, onComplete }) {
         >
           🎓
         </motion.div>
-
         <div>
           <p className="text-sm font-bold uppercase tracking-wider mb-1" style={{ color: '#3b82f6' }}>
             {levelInfo?.emoji} {levelInfo?.label} Complete!
@@ -64,21 +66,11 @@ export default function ActCompleteStep({ step, onComplete }) {
             You've finished every act in your level. The Website Builder is unlocked!
           </p>
         </div>
-
         {step.xpBonus && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="xp-badge"
-          >
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="xp-badge">
             ⭐ +{step.xpBonus} XP bonus!
           </motion.span>
         )}
-
-        <Button variant="solid" color="blue" fullWidth onClick={handleContinue}>
-          🔓 Open Website Builder
-        </Button>
       </motion.div>
     )
   }
@@ -99,10 +91,7 @@ export default function ActCompleteStep({ step, onComplete }) {
       </motion.div>
 
       {step.power && (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
           className="flex flex-col items-center gap-0.5"
         >
           <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--ink-faint)' }}>
@@ -113,19 +102,10 @@ export default function ActCompleteStep({ step, onComplete }) {
       )}
 
       {step.xpBonus && (
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="xp-badge"
-        >
+        <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="xp-badge">
           ⭐ +{step.xpBonus} XP bonus!
         </motion.span>
       )}
-
-      <Button variant="solid" color="blue" fullWidth onClick={handleContinue}>
-        {step.action || 'Continue!'}
-      </Button>
     </motion.div>
   )
 }

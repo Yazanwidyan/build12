@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
 import { useAgeConfig } from '@/engines/ageEngine'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 // ── Shared helpers ─────────────────────────────────────────────────────────────
 
@@ -49,6 +49,7 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
   const updateStyles = useJourneyStore((s) => s.updateStyles)
   const updateSection = useJourneyStore((s) => s.updateSection)
   const { ageGroup } = useAgeConfig()
+  const { setStepAction } = useStepAction()
 
   const [selected, setSelected]     = useState(null)
   const [textValue, setTextValue]    = useState(step.defaultValue || '')
@@ -62,14 +63,18 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
   useEffect(() => {
     speak(step.teki || '', { mood: step.mood || 'happy' })
     if (step.demoInit) setReactDemo(step.demoInit)
-    // Reset interaction state on remount
     setSelected(null)
     setTextValue(step.defaultValue || '')
     setNewPetName('')
     setConnectedRoutes([])
     setShowCode(false)
     setConfirmed(false)
+    setStepAction(null)
   }, [step.id])
+
+  useEffect(() => {
+    if (showCode) setStepAction({ label: step.action || 'Next Chapter!', onClick: onComplete })
+  }, [showCode])
 
   function confirm(value) {
     setConfirmed(true)
@@ -113,7 +118,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2 mt-1">
               <CodePanel step={step} value={selected} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -158,7 +162,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={textValue} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -197,7 +200,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={selected} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Interesting!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -236,7 +238,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={selected} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -282,7 +283,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={selected} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -338,7 +338,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={null} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -376,7 +375,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={selected} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -433,7 +431,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={null} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Next Chapter!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -470,7 +467,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
           {showCode && (
             <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2">
               <CodePanel step={step} value={null} explanation={explanation} />
-              <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Amazing!'}</Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -481,7 +477,6 @@ export default function ReactLiveDemoStep({ step, onComplete }) {
   // ── fallback ──────────────────────────────────────────────────────────────────
   return (
     <Wrapper>
-      <Button variant="solid" color="blue" fullWidth onClick={onComplete}>{step.action || 'Continue'}</Button>
     </Wrapper>
   )
 }

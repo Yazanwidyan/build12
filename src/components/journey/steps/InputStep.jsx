@@ -2,19 +2,15 @@
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
+import { useStepAction } from '@/contexts/StepActionContext'
 import Input from '@/components/ui/Input'
-import Button from '@/components/ui/Button'
 
 export default function InputStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak)
   const journey = useJourneyStore()
+  const { setStepAction } = useStepAction()
   const [value, setValue] = useState('')
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    // Question goes in the bubble; hint shown below the input
-    speak(step.teki || '', { mood: 'happy' })
-  }, [step.id])
 
   const handleSubmit = () => {
     if (!value.trim()) { setError('Please type something!'); return }
@@ -22,15 +18,22 @@ export default function InputStep({ step, onComplete }) {
       setError(`Needs at least ${step.minLength} characters`)
       return
     }
-
     switch (step.storeKey) {
       case 'websiteName':  journey.setWebsiteName(value.trim()); break
       case 'websiteTopic': journey.setWebsiteTopic(value.trim()); break
     }
-
     speak(`"${value.trim()}" — love it! ✨`, { mood: 'excited' })
     setTimeout(onComplete, 700)
   }
+
+  useEffect(() => {
+    speak(step.teki || '', { mood: 'happy' })
+  }, [step.id])
+
+  // Re-register when value changes so disabled state and onClick closure are fresh
+  useEffect(() => {
+    setStepAction({ label: step.action || 'Continue', onClick: handleSubmit, disabled: !value.trim() })
+  }, [value, step.id])
 
   return (
     <motion.div
@@ -49,9 +52,6 @@ export default function InputStep({ step, onComplete }) {
         onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
         autoFocus
       />
-      <Button variant="solid" color="blue" fullWidth onClick={handleSubmit} disabled={!value.trim()}>
-        {step.action || 'Continue'}
-      </Button>
     </motion.div>
   )
 }

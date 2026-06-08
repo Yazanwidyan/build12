@@ -1,4 +1,5 @@
-import MissionRunner from "@/components/journey/MissionRunner";
+import Button from "@/components/ui/Button";
+import { useStepAction } from "@/contexts/StepActionContext";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useProgressStore } from "@/stores/progressStore";
@@ -13,37 +14,16 @@ import { useEffect, useMemo, useRef } from "react";
 
 import TekiCharacter from "./TekiCharacter";
 
-const TEKI_WIDTH = 390;
-const DEFAULT_LEFT =
-  typeof window !== "undefined"
-    ? Math.max(20, (window.innerWidth - TEKI_WIDTH) / 2)
-    : 20;
+const TEKI_WIDTH = 300;
+const DEFAULT_LEFT = typeof window !== "undefined" ? 16 : 16;
 const DEFAULT_TOP =
-  typeof window !== "undefined"
-    ? Math.max(44, window.innerHeight / 2 - 120)
-    : 300;
+  typeof window !== "undefined" ? Math.max(44, window.innerHeight * 0.6) : 360;
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },
   transition: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
 };
 
-// Steps with rich content → show inside a card panel
-const PANEL_STEPS = new Set([
-  "code-challenge",
-  "input",
-  "canvas-input",
-  "color-picker",
-  "topic-picker",
-  "visual-builder",
-  "act-complete",
-  "react-gateway",
-  "react-spotlight",
-  "react-concept",
-  "react-live-demo",
-]);
-
-// Reading time: proportional to message length, capped between 2s and 4s
 function readTime(msg) {
   return Math.max(2000, Math.min(msg.length * 30, 4000));
 }
@@ -53,9 +33,9 @@ export default function FloatingTeki() {
     useTekiStore();
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
-  const xp = useProgressStore((s) => s.xp);
-  const constraintsRef = useRef(null);
   const { sectionBounds } = useWebsiteLayout();
+  const { stepAction } = useStepAction();
+  const constraintsRef = useRef(null);
 
   const travelTop = useMemo(() => {
     if (!highlightSection) return null;
@@ -102,8 +82,6 @@ export default function FloatingTeki() {
     return () => clearTimeout(t);
   }, [currentMessage, isTyping]);
 
-  const isPanel = currentStep ? PANEL_STEPS.has(currentStep.type) : false;
-
   return (
     <>
       <div
@@ -130,7 +108,7 @@ export default function FloatingTeki() {
         transition={{ opacity: { duration: 0.2 } }}
         whileDrag={{ cursor: "grabbing" }}
       >
-        {/* Speech bubble — always above, cross-fades between messages */}
+        {/* Speech bubble */}
         <AnimatePresence mode="popLayout">
           {currentMessage && (
             <motion.div
@@ -140,9 +118,7 @@ export default function FloatingTeki() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              style={{
-                boxShadow: "0 2px 20px rgba(99,102,241,0.18)",
-              }}
+              style={{ boxShadow: "0 2px 20px rgba(99,102,241,0.18)" }}
             >
               <div
                 className="px-4 py-3 leading-relaxed"
@@ -153,7 +129,7 @@ export default function FloatingTeki() {
                   borderBottomLeftRadius: 0,
                   color: "var(--ink-muted)",
                   fontWeight: 500,
-                  fontSize: 16,
+                  fontSize: 15,
                 }}
               >
                 {currentMessage}
@@ -162,46 +138,37 @@ export default function FloatingTeki() {
           )}
         </AnimatePresence>
 
-        {/* Row: Techi alone on the left, content to his right */}
-        <div className="flex items-start gap-3">
-          {/* Techi — always alone on the left */}
+        {/* Teki character + action button */}
+        <div className="flex items-center gap-3">
           <div className="shrink-0 pointer-events-none">
             <motion.div {...FLOAT}>
-              <TekiCharacter size={72} mood={mood} />
+              <TekiCharacter size={68} mood={mood} />
             </motion.div>
           </div>
-        </div>
-        {/* Content: always visible, no hiding during message delivery */}
-        <div
-          className="flex-1 min-w-0 pointer-events-auto"
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          {currentStep &&
-            (isPanel ? (
-              <div
-                className="rounded-2xl overflow-y-auto pointer-events-auto"
-                style={{
-                  backgroundColor: "var(--app-surface)",
-                  border: "1px solid var(--bubble-border)",
-                  padding: "12px",
-                  maxHeight: "60vh",
-                }}
+
+          {/* Action button — registered by the current step */}
+          <AnimatePresence mode="wait">
+            {stepAction && (
+              <motion.div
+                key={stepAction.label}
+                className="flex-1 pointer-events-auto"
+                initial={{ opacity: 0, x: 8, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.18 }}
+                onPointerDown={(e) => e.stopPropagation()}
               >
-                <MissionRunner
-                  step={currentStep}
-                  stepIndex={currentStepIndex}
-                  onComplete={advanceStep}
-                />
-              </div>
-            ) : (
-              <div className="pointer-events-auto">
-                <MissionRunner
-                  step={currentStep}
-                  stepIndex={currentStepIndex}
-                  onComplete={advanceStep}
-                />
-              </div>
-            ))}
+                <Button
+                  variant="solid"
+                  color="blue"
+                  onClick={stepAction.onClick}
+                  disabled={stepAction.disabled}
+                >
+                  {stepAction.label}
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     </>

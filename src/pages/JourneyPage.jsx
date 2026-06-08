@@ -2,12 +2,14 @@ import ActProgress from "@/components/journey/ActProgress";
 import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
+import MissionPanel from "@/components/journey/MissionPanel";
 import QuizOverlay from "@/components/journey/QuizOverlay";
 import WebsitePreview from "@/components/journey/WebsitePreview";
 import FloatingTeki from "@/components/teki/FloatingTeki";
 import TekiCharacter from "@/components/teki/TekiCharacter";
 import Button from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { StepActionProvider } from "@/contexts/StepActionContext";
 import { WebsiteLayoutProvider } from "@/contexts/WebsiteLayoutContext";
 import { LEVEL_INFO } from "@/data/curriculum";
 import { useJourneyStore } from "@/stores/journeyStore";
@@ -114,78 +116,71 @@ export default function JourneyPage() {
 
   if (!journey.currentJourney) return null;
 
+  const cardStyle = {
+    backgroundColor: "var(--app-surface)",
+    border: "1.5px solid var(--app-border)",
+    boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+  };
+
   return (
     <WebsiteLayoutProvider>
-      <div
-        className="h-screen w-screen overflow-hidden flex"
-        style={{ backgroundColor: "var(--app-raised)" }}
-      >
-        {/* ── Main card ── */}
-        <div className="flex-1 p-6 flex flex-col overflow-hidden min-w-0">
-          <div
-            className="flex-1 flex flex-col overflow-hidden rounded-2xl"
-            style={{
-              backgroundColor: "var(--app-surface)",
-              border: "1.5px solid var(--app-border)",
-              boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
-            }}
-          >
-            {/* Act progress bar */}
-            {introDone && <ActProgress />}
-
-            {/* Top bar — inside the card */}
+      <StepActionProvider>
+        <div
+          className="h-screen w-screen overflow-hidden flex gap-3 p-3"
+          style={{ backgroundColor: "var(--app-raised)" }}
+        >
+          {/* ── Left panel: mission runner (1/3) ── */}
+          {introDone && (
             <div
-              className="h-9 shrink-0 flex items-center gap-2 px-3 border-b"
-              style={{ borderColor: "var(--app-border)" }}
+              className="flex flex-col overflow-hidden rounded-2xl shrink-0"
+              style={{
+                width: "33%",
+                minWidth: 280,
+                maxWidth: 420,
+                ...cardStyle,
+              }}
             >
-              <Button
-                variant="ghost"
-                color="neutral"
-                size="xs"
-                icon={<X size={14} />}
-                onClick={() => navigate({ to: "/dashboard" })}
-              />
-              <div className="flex-1" />
-              <ThemeToggle />
-              <span
-                className="text-xs ml-1"
-                style={{ color: "var(--ink-faint)" }}
-              >
-                {profile.builderName}
-              </span>
+              <ActProgress />
+              <div className="flex-1 overflow-hidden">
+                <MissionPanel />
+              </div>
             </div>
+          )}
 
-            {/* Website preview iframe */}
-            <div className="flex-1 overflow-hidden relative">
-              <WebsitePreview />
-
-              {/* ── Section highlight overlay ── */}
-              {introDone && <JourneyOverlay />}
-
-              {/* ── Inline canvas editor ── */}
-              {introDone && <CanvasEditor />}
+          {/* ── Right panel: website preview (2/3 or full when intro) ── */}
+          <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+            <div
+              className="flex-1 flex flex-col overflow-hidden rounded-2xl"
+              style={cardStyle}
+            >
+              {/* Website preview */}
+              <div className="flex-1 overflow-hidden relative">
+                <WebsitePreview />
+                {introDone && <JourneyOverlay />}
+                {introDone && <CanvasEditor />}
+              </div>
             </div>
           </div>
+
+          {/* ── Floating TEKI (speech + action button) ── */}
+          {introDone && <FloatingTeki />}
+
+          {/* ── Quiz overlay ── */}
+          <QuizOverlay />
+
+          {/* ── Journey intro overlay ── */}
+          {!introDone && <JourneyIntro onDone={() => {}} />}
+
+          {/* ── Level complete overlay ── */}
+          {journey.levelComplete && (
+            <LevelCompleteScreen
+              ageGroup={ageGroup}
+              onGoToDashboard={() => navigate({ to: "/dashboard" })}
+              onOpenBuilder={() => navigate({ to: "/builder" })}
+            />
+          )}
         </div>
-
-        {/* ── Floating TEKI (mission driver) ── */}
-        {introDone && <FloatingTeki />}
-
-        {/* ── Quiz overlay ── */}
-        <QuizOverlay />
-
-        {/* ── Journey intro overlay ── */}
-        {!introDone && <JourneyIntro onDone={() => {}} />}
-
-        {/* ── Level complete overlay ── */}
-        {journey.levelComplete && (
-          <LevelCompleteScreen
-            ageGroup={ageGroup}
-            onGoToDashboard={() => navigate({ to: "/dashboard" })}
-            onOpenBuilder={() => navigate({ to: "/builder" })}
-          />
-        )}
-      </div>
+      </StepActionProvider>
     </WebsiteLayoutProvider>
   );
 }

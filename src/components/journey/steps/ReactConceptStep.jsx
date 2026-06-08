@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useAgeConfig } from '@/engines/ageEngine'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 // ── Animated concept: Blueprint → many components ──────────────────────────────
 function BlueprintToComponentsAnim() {
@@ -175,13 +175,19 @@ const CONCEPTS = {
 export default function ReactConceptStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak)
   const { ageGroup } = useAgeConfig()
+  const { setStepAction } = useStepAction()
   const [showCode, setShowCode] = useState(false)
 
   useEffect(() => {
     speak(step.teki || 'Check this out!', { mood: step.mood || 'excited' })
+    setStepAction(null)
     const t = setTimeout(() => setShowCode(true), 2200)
     return () => clearTimeout(t)
   }, [step.id])
+
+  useEffect(() => {
+    if (showCode) setStepAction({ label: step.action || 'Next!', onClick: onComplete })
+  }, [showCode])
 
   const ConceptAnim = CONCEPTS[step.conceptType] || CONCEPTS['blueprint-to-components']
   const explanation = step.explanation?.[ageGroup] ?? step.explanation?.junior ?? ''
@@ -225,13 +231,6 @@ export default function ReactConceptStep({ step, onComplete }) {
         )}
       </AnimatePresence>
 
-      {showCode && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}>
-          <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
-            {step.action || 'Next!'}
-          </Button>
-        </motion.div>
-      )}
     </motion.div>
   )
 }

@@ -2,8 +2,8 @@
 import { motion } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
+import { useStepAction } from '@/contexts/StepActionContext'
 import Input from '@/components/ui/Input'
-import Button from '@/components/ui/Button'
 
 const TOPIC_EMOJIS = {
   Pets: '🐾', Space: '🚀', Music: '🎵', Sports: '⚽', Gaming: '🎮',
@@ -13,12 +13,9 @@ const TOPIC_EMOJIS = {
 export default function TopicPickerStep({ step, onComplete }) {
   const speak   = useTekiStore((s) => s.speak)
   const journey = useJourneyStore()
+  const { setStepAction } = useStepAction()
   const [selected, setSelected] = useState('')
   const [custom, setCustom]     = useState('')
-
-  useEffect(() => {
-    speak(step.teki || 'What is your website about?', { mood: 'thinking' })
-  }, [step.id])
 
   const active = custom.trim() || selected
 
@@ -29,6 +26,15 @@ export default function TopicPickerStep({ step, onComplete }) {
     speak(`${topic}? That's going to be amazing! 🌟`, { mood: 'excited' })
     setTimeout(onComplete, 700)
   }
+
+  useEffect(() => {
+    speak(step.teki || 'What is your website about?', { mood: 'thinking' })
+  }, [step.id])
+
+  // Re-register when selection changes so disabled state is fresh
+  useEffect(() => {
+    setStepAction({ label: step.action || "That's what it's about!", onClick: confirm, disabled: !active })
+  }, [selected, custom, step.id])
 
   return (
     <motion.div
@@ -62,10 +68,6 @@ export default function TopicPickerStep({ step, onComplete }) {
         onChange={(e) => { setCustom(e.target.value); setSelected('') }}
         onKeyDown={(e) => e.key === 'Enter' && confirm()}
       />
-
-      <Button variant="solid" color="blue" fullWidth onClick={confirm} disabled={!active}>
-        {step.action || "That's what it's about!"}
-      </Button>
     </motion.div>
   )
 }

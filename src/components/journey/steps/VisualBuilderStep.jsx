@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { Plus, X } from 'lucide-react'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
+import { useStepAction } from '@/contexts/StepActionContext'
 import Input from '@/components/ui/Input'
-import Button from '@/components/ui/Button'
 
 const PRESET_COLORS = [
   '#3b82f6','#fde047','#10b981','#f43f5e','#f59e0b',
@@ -124,6 +124,7 @@ export default function VisualBuilderStep({ step, onComplete }) {
   const clearGenerating = useTekiStore((s) => s.clearGenerating)
   const clearHighlight = useTekiStore((s) => s.clearHighlight)
   const journey = useJourneyStore()
+  const { setStepAction } = useStepAction()
 
   const getInit = () => {
     const vals = {}
@@ -141,6 +142,7 @@ export default function VisualBuilderStep({ step, onComplete }) {
     speak(step.teki || 'Customize this section!', { mood: 'happy' })
     if (step.section) setHighlight(step.section)
     else clearHighlight()
+    setStepAction({ label: step.action || 'Done!', onClick: () => handleComplete() })
   }, [step.id])
 
   const setField = (fieldId, val) => {
@@ -197,9 +199,6 @@ export default function VisualBuilderStep({ step, onComplete }) {
         </div>
       ))}
 
-      <Button variant="solid" color="blue" fullWidth onClick={handleComplete}>
-        {step.action || 'Done!'}
-      </Button>
     </motion.div>
   )
 }

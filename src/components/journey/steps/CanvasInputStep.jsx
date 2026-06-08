@@ -1,7 +1,6 @@
-﻿import Button from "@/components/ui/Button";
-import { useJourneyStore } from "@/stores/journeyStore";
+﻿import { useJourneyStore } from "@/stores/journeyStore";
 import { useTekiStore } from "@/stores/tekiStore";
-import { motion } from "framer-motion";
+import { useStepAction } from "@/contexts/StepActionContext";
 import { useEffect } from "react";
 
 export default function CanvasInputStep({ step, onComplete }) {
@@ -9,18 +8,9 @@ export default function CanvasInputStep({ step, onComplete }) {
   const setHighlight = useTekiStore((s) => s.setHighlight);
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const journey = useJourneyStore();
-
-  useEffect(() => {
-    speak(step.teki || "Click on the website and type!", { mood: "excited" });
-    const hl = step.highlight || step.canvasInput?.section;
-    if (hl) setHighlight(hl);
-    else clearHighlight();
-  }, [step.id]);
+  const { setStepAction } = useStepAction();
 
   const handleDone = () => {
-    // Build the section on the final canvas step for this section, then advance.
-    // Advance happens immediately so the overlay disappears before the built HTML renders.
-    // The observation step that follows handles the celebration.
     if (step.buildSectionOnComplete) {
       journey.buildSection(
         step.buildSectionOnComplete,
@@ -30,16 +20,13 @@ export default function CanvasInputStep({ step, onComplete }) {
     onComplete();
   };
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15 }}
-      className="flex flex-col gap-3"
-    >
-      <Button variant="solid" color="blue" fullWidth onClick={handleDone}>
-        {step.action || "Looks good!"}
-      </Button>
-    </motion.div>
-  );
+  useEffect(() => {
+    speak(step.teki || "Click on the website and type!", { mood: "excited" });
+    const hl = step.highlight || step.canvasInput?.section;
+    if (hl) setHighlight(hl);
+    else clearHighlight();
+    setStepAction({ label: step.action || "Looks good!", onClick: handleDone });
+  }, [step.id]);
+
+  return null;
 }

@@ -2,26 +2,30 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTekiStore } from '@/stores/tekiStore'
 import { useJourneyStore } from '@/stores/journeyStore'
-import Button from '@/components/ui/Button'
+import { useStepAction } from '@/contexts/StepActionContext'
 
 // Spotlight step: TEKI points to elements on the website preview.
 // Optionally asks a yes/no question and reacts to the answer.
 export default function ReactSpotlightStep({ step, onComplete }) {
   const speak        = useTekiStore((s) => s.speak)
   const setReactDemo = useJourneyStore((s) => s.setReactDemo)
+  const { setStepAction } = useStepAction()
   const [answeredWith, setAnsweredWith] = useState(null)
   const [ready, setReady]               = useState(!step.question)
 
   useEffect(() => {
     if (step.demoState) setReactDemo(step.demoState)
     speak(step.teki ? [step.teki] : (step.messages || []), { mood: step.mood || 'happy' })
-
-    // Auto-show continue button after a short delay if no question
+    setStepAction(null)
     if (!step.question) {
       const t = setTimeout(() => setReady(true), 600)
       return () => clearTimeout(t)
     }
   }, [step.id])
+
+  useEffect(() => {
+    if (ready) setStepAction({ label: step.action || 'Continue', onClick: onComplete })
+  }, [ready])
 
   const handleOption = (opt) => {
     setAnsweredWith(opt.id)
@@ -106,21 +110,6 @@ export default function ReactSpotlightStep({ step, onComplete }) {
         )}
       </AnimatePresence>
 
-      {/* Continue button */}
-      <AnimatePresence>
-        {ready && (
-          <motion.div
-            key="continue"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <Button variant="solid" color="blue" fullWidth onClick={onComplete}>
-              {step.action || 'Continue'}
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   )
 }
