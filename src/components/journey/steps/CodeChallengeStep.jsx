@@ -4,11 +4,11 @@ import { interpolateCode } from "@/engines/previewEngine";
 import { useJourneyStore } from "@/stores/journeyStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function CodeChallengeStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak);
+  const flashChallenge = useTekiStore((s) => s.flashChallenge);
   const website = useJourneyStore((s) => s.website);
   const buildSection = useJourneyStore((s) => s.buildSection);
   const styledSection = useJourneyStore((s) => s.styledSection);
@@ -51,7 +51,9 @@ export default function CodeChallengeStep({ step, onComplete }) {
         break;
       }
     }
-    setResult(correct ? "correct" : "wrong");
+    const verdict = correct ? "correct" : "wrong";
+    setResult(verdict);
+    flashChallenge(verdict);
     setAttempts((a) => a + 1);
     if (correct) {
       // Apply completion effect — makes something visible on the website preview
@@ -65,7 +67,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
         [step.successMessage || "Perfect! 🎯", "You're writing real code!"],
         { mood: "excited" },
       );
-      setTimeout(onComplete, 1200);
+      setTimeout(onComplete, 2000);
     } else {
       speak(
         attempts >= 1
@@ -73,7 +75,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
           : ["Almost! Try again — you're close!"],
         { mood: "happy" },
       );
-      setTimeout(() => setResult(null), 1500);
+      setTimeout(() => setResult(null), 2000);
     }
   };
 
@@ -118,32 +120,6 @@ export default function CodeChallengeStep({ step, onComplete }) {
         })}
       </div>
 
-      <AnimatePresence>
-        {result && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex items-center justify-center gap-2 py-2 rounded-xl text-sm font-semibold"
-            style={
-              result === "correct"
-                ? {
-                    backgroundColor: "rgba(74,222,128,0.12)",
-                    color: "#4ade80",
-                    border: "1px solid rgba(74,222,128,0.3)",
-                  }
-                : {
-                    backgroundColor: "rgba(248,113,113,0.12)",
-                    color: "#f87171",
-                    border: "1px solid rgba(248,113,113,0.3)",
-                  }
-            }
-          >
-            {result === "correct" ? <Check size={14} /> : <X size={14} />}
-            {result === "correct" ? "Correct!" : "Not quite — try again!"}
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {explanation && (
         <div

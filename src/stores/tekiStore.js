@@ -61,6 +61,13 @@ export const useTekiStore = create((set, get) => ({
   setGenerating: (section) => set({ generatingSection: section, highlightSection: section }),
   clearGenerating: () => set({ generatingSection: null, highlightSection: null }),
 
+  // ── Challenge flash (correct / wrong border glow on left panel) ───────────────
+  challengeFlash: null,
+  flashChallenge: (result) => {
+    set({ challengeFlash: result })
+    setTimeout(() => set({ challengeFlash: null }), 1800)
+  },
+
   setMood: (mood) => set({ mood }),
   setVisible: (isVisible) => set({ isVisible }),
   openBubble: () => set({ isBubbleOpen: true }),

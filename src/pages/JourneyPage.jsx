@@ -91,6 +91,7 @@ export default function JourneyPage() {
   const journey = useJourneyStore();
   const profile = useProfileStore();
   const speak = useTekiStore((s) => s.speak);
+  const challengeFlash = useTekiStore((s) => s.challengeFlash);
   const ageGroup = profile.ageGroup ?? "young";
 
   const introDone = useJourneyStore((s) => !!s.website?.name);
@@ -130,20 +131,34 @@ export default function JourneyPage() {
         >
           {/* ── Left panel: mission runner (1/3) ── */}
           {introDone && (
-            <div
+            <motion.div
               className="flex flex-col overflow-hidden rounded-2xl shrink-0"
+              animate={{
+                boxShadow: challengeFlash === "correct"
+                  ? "0 0 0 2px #4ade80, 0 0 32px rgba(74,222,128,0.45)"
+                  : challengeFlash === "wrong"
+                    ? "0 0 0 2px #f87171, 0 0 32px rgba(248,113,113,0.45)"
+                    : "0 2px 16px rgba(0,0,0,0.07)",
+                borderColor: challengeFlash === "correct"
+                  ? "#4ade80"
+                  : challengeFlash === "wrong"
+                    ? "#f87171"
+                    : "var(--app-border)",
+              }}
+              transition={{ duration: 0.2 }}
               style={{
                 width: "33%",
                 minWidth: 280,
                 maxWidth: 420,
-                ...cardStyle,
+                backgroundColor: "var(--app-surface)",
+                border: "1.5px solid var(--app-border)",
               }}
             >
               <ActProgress />
               <div className="flex-1 overflow-hidden">
                 <MissionPanel />
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* ── Right panel: website preview with browser chrome (2/3) ── */}
