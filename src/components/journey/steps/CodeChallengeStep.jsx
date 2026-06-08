@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function CodeChallengeStep({ step, onComplete }) {
   const speak = useTekiStore((s) => s.speak);
   const flashChallenge = useTekiStore((s) => s.flashChallenge);
+  const flashBuild = useTekiStore((s) => s.flashBuild);
   const website = useJourneyStore((s) => s.website);
   const buildSection = useJourneyStore((s) => s.buildSection);
   const styledSection = useJourneyStore((s) => s.styledSection);
@@ -59,7 +60,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
       // Apply completion effect — makes something visible on the website preview
       const fx = step.completionEffect;
       if (fx) {
-        if (fx.buildSection) buildSection(fx.buildSection);
+        if (fx.buildSection) { buildSection(fx.buildSection); flashBuild(fx.buildSection); }
         if (fx.styleSection) styledSection(fx.styleSection);
         if (fx.enableInteractivity) enableInteractivity();
       }

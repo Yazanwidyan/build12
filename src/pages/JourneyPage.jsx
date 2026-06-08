@@ -1,5 +1,6 @@
 import ActProgress from "@/components/journey/ActProgress";
 import BrowserChrome from "@/components/journey/BrowserChrome";
+import BuildCelebration from "@/components/journey/BuildCelebration";
 import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
@@ -152,6 +153,7 @@ export default function JourneyPage() {
               <WebsitePreview />
               {introDone && <JourneyOverlay />}
               {introDone && <CanvasEditor />}
+              <BuildCelebration />
             </BrowserChrome>
           </motion.div>
 

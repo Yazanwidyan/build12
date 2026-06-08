@@ -68,6 +68,13 @@ export const useTekiStore = create((set, get) => ({
     setTimeout(() => set({ challengeFlash: null }), 1800)
   },
 
+  // ── Build celebration (section appears in the website preview) ─────────────
+  buildFlash: null,
+  flashBuild: (sectionName) => {
+    set({ buildFlash: sectionName })
+    setTimeout(() => set({ buildFlash: null }), 2400)
+  },
+
   setMood: (mood) => set({ mood }),
   setVisible: (isVisible) => set({ isVisible }),
   openBubble: () => set({ isBubbleOpen: true }),
