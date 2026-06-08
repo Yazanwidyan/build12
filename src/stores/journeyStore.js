@@ -41,6 +41,9 @@ const DEFAULT_WEBSITE = {
         buttonText: 'Explore',
       },
     },
+    about:    { built: false, styled: false },
+    features: { built: false, styled: false },
+    gallery:  { built: false, styled: false },
     footer: {
       built: false,
       content: {
@@ -110,6 +113,9 @@ export const useJourneyStore = create(
                 buttonText: 'Explore',
               },
             },
+            about:    { built: true, styled: true },
+            features: { built: true, styled: true },
+            gallery:  { built: true, styled: true },
             footer: {
               built: true,
               content: {
@@ -152,9 +158,27 @@ export const useJourneyStore = create(
           ...s.website,
           sections: {
             ...s.website.sections,
-            [sectionKey]: { built: true, content },
+            [sectionKey]: {
+              ...(s.website.sections[sectionKey] || {}),
+              built: true,
+              ...(content !== undefined ? { content } : {}),
+            },
           },
         },
+      })),
+
+      styledSection: (sectionKey) => set((s) => ({
+        website: {
+          ...s.website,
+          sections: {
+            ...s.website.sections,
+            [sectionKey]: { ...(s.website.sections[sectionKey] || {}), styled: true },
+          },
+        },
+      })),
+
+      enableInteractivity: () => set((s) => ({
+        website: { ...s.website, hasInteractivity: true },
       })),
 
       updateSection: (sectionKey, content) => set((s) => ({

@@ -8,8 +8,11 @@ import { interpolateCode } from '@/engines/previewEngine'
 import Button from '@/components/ui/Button'
 
 export default function CodeChallengeStep({ step, onComplete }) {
-  const speak = useTekiStore((s) => s.speak)
-  const website = useJourneyStore((s) => s.website)
+  const speak              = useTekiStore((s) => s.speak)
+  const website            = useJourneyStore((s) => s.website)
+  const buildSection       = useJourneyStore((s) => s.buildSection)
+  const styledSection      = useJourneyStore((s) => s.styledSection)
+  const enableInteractivity = useJourneyStore((s) => s.enableInteractivity)
   const { ageGroup } = useAgeConfig()
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
@@ -35,6 +38,13 @@ export default function CodeChallengeStep({ step, onComplete }) {
     setResult(correct ? 'correct' : 'wrong')
     setAttempts((a) => a + 1)
     if (correct) {
+      // Apply completion effect — makes something visible on the website preview
+      const fx = step.completionEffect
+      if (fx) {
+        if (fx.buildSection)       buildSection(fx.buildSection, {})
+        if (fx.styleSection)       styledSection(fx.styleSection)
+        if (fx.enableInteractivity) enableInteractivity()
+      }
       speak([step.successMessage || 'Perfect! 🎯', "You're writing real code!"], { mood: 'excited' })
       setTimeout(onComplete, 1200)
     } else {
