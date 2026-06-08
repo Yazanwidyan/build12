@@ -94,26 +94,6 @@ export const ACTS = [
             autoAdvance: true,
           },
           {
-            id: 'header-code',
-            type: 'code-reveal',
-            teki: "This is YOUR header — written in HTML. The <h1> tag holds your site name!",
-            language: 'html',
-            codeTemplate: `<header>
-  <h1>{{name}}</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-  </nav>
-</header>`,
-            explanations: {
-              young: "<header> is like a name tag for the top of the page! <h1> makes text the BIGGEST — it's your site's main title.",
-              junior: "<header> wraps the top of every page. <h1> is the most important heading — only use it once. <nav> groups your navigation links.",
-              senior: "<header> is a semantic HTML5 landmark. One <h1> per page is critical for SEO — search engines read it to understand your page topic.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see my code!",
-          },
-          {
             id: 'header-fix-challenge',
             type: 'code-challenge',
             teki: "Quick challenge! Someone forgot the closing tag. Fix it:",
@@ -347,7 +327,6 @@ export const ACTS = [
             fields: [
               { id: 'primaryColor', label: 'Primary Color', type: 'color', storeSubKey: 'primaryColor', hint: 'Your brand color — buttons, links, highlights' },
               { id: 'backgroundColor', label: 'Background Color', type: 'color', storeSubKey: 'backgroundColor', hint: 'The page background — light or dark?' },
-              { id: 'secondaryColor', label: 'Accent Color', type: 'color', storeSubKey: 'secondaryColor', hint: 'A second color for variety' },
             ],
             action: "Colors are set!",
           },
@@ -357,28 +336,6 @@ export const ACTS = [
             teki: "Same website. Completely different feeling.",
             tekiMessages: ["The SAME layout — totally different personality. That's the power of color! 🎨"],
             autoAdvance: true,
-          },
-          {
-            id: 'color-code-reveal',
-            type: 'code-reveal',
-            teki: "In code, your colors live in CSS variables. Here's what yours look like:",
-            language: 'css',
-            codeTemplate: `:root {
-  --primary: {{primaryColor}};
-  --background: {{backgroundColor}};
-  --accent: {{secondaryColor}};
-}
-
-header {
-  background: var(--primary);
-}`,
-            explanations: {
-              young: "#6366f1 is a secret name for purple! Colors in code are called hex codes — they're like a color's ID card.",
-              junior: "CSS variables (--name) store your colors in one place. var(--primary) uses that stored color anywhere in your stylesheet.",
-              senior: "CSS custom properties cascade and can be updated via JavaScript. Centralize your palette in :root for a single source of truth.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see my colors!",
           },
           {
             id: 'color-challenge',
@@ -583,26 +540,6 @@ header {
             autoAdvance: true,
           },
           {
-            id: 'html-header-reveal',
-            type: 'code-reveal',
-            teki: "This is YOUR header — in the language browsers actually read. Find your site name inside <h1>!",
-            language: 'html',
-            codeTemplate: `<header>
-  <h1>{{name}}</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-  </nav>
-</header>`,
-            explanations: {
-              young: "See {{name}} wrapped in <h1> tags? That's your site's name! The tags are like handles that tell the browser 'make this BIG and important'.",
-              junior: "<h1> is Heading level 1 — the most important text on the page. <nav> groups navigation. <a href='#'> creates a link.",
-              senior: "HTML is a tree of elements. <header> is a semantic landmark. <h1> signals the primary topic to search engines — only one per page.",
-            },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "I found it!",
-          },
-          {
             id: 'html-h1-challenge',
             type: 'code-challenge',
             teki: "Write an h1 heading with your site name:",
@@ -668,32 +605,6 @@ header {
         badge: null,
         steps: [
           {
-            id: 'div-reveal',
-            type: 'code-reveal',
-            teki: "HTML organizes content in containers called <div> and <section> — like rooms in a house, boxes inside boxes:",
-            language: 'html',
-            codeTemplate: `<section class="cards">
-
-  <div class="card">
-    <h2>My Pet</h2>
-    <p>Fluffy is a golden retriever.</p>
-  </div>
-
-  <div class="card">
-    <h2>My Hobby</h2>
-    <p>I love building websites!</p>
-  </div>
-
-</section>`,
-            explanations: {
-              young: "<div> is like a lunchbox — it holds things together! Put divs inside sections to create a grid of cards.",
-              junior: "<section> groups related content with a theme. <div> is a generic container. 'class' gives them a name so CSS can style them.",
-              senior: "<section> implies semantic meaning (thematically grouped content). <div> is purely structural. Use semantic elements wherever content has meaning.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see the nesting!",
-          },
-          {
             id: 'div-challenge',
             type: 'code-challenge',
             teki: "Wrap this content in a div with class 'card':",
@@ -747,31 +658,6 @@ header {
         xp: 140,
         badge: { id: 'html-coder', label: 'HTML Coder', emoji: '📝' },
         steps: [
-          {
-            id: 'page-structure-reveal',
-            type: 'code-reveal',
-            teki: "Here's the full skeleton of a webpage — every website starts with this exact structure:",
-            language: 'html',
-            codeTemplate: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>{{name}}</title>
-    <meta charset="UTF-8" />
-  </head>
-  <body>
-    <header>...</header>
-    <main>...</main>
-    <footer>...</footer>
-  </body>
-</html>`,
-            explanations: {
-              young: "<head> is the brain — invisible info. <body> is the body — everything visitors actually SEE! Your header, main, and footer all go in <body>.",
-              junior: "<head> holds metadata (title, charset, CSS links). <body> holds visible content. The <title> appears in the browser tab.",
-              senior: "<!DOCTYPE html> triggers standards mode. <html lang='en'> aids accessibility. <meta charset='UTF-8'> prevents encoding issues. <head> is render-blocking — keep it lean.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see the skeleton!",
-          },
           {
             id: 'head-challenge',
             type: 'code-challenge',
@@ -881,25 +767,6 @@ header {
         badge: null,
         steps: [
           {
-            id: 'var-reveal',
-            type: 'code-reveal',
-            teki: "Your website already has hidden variables controlling it! Here's what they look like in code — try changing a value and watch the site update:",
-            language: 'javascript',
-            codeTemplate: `let siteName = "{{name}}";
-let topic    = "{{topic}}";
-let headline = "{{headline}}";
-
-// Each variable is a named box holding a value.
-// Change the value → the website updates!`,
-            explanations: {
-              young: "siteName is a box, and '{{name}}' is what's inside! The box has a name (siteName) and a value (what's in the quotes).",
-              junior: "'let' creates a variable. The name on the left is the label. The value on the right is what's stored. Change the value → everything using it updates.",
-              senior: "'let' is block-scoped and reassignable. Use 'const' for values that never change (most variables). 'var' is legacy — avoid it.",
-            },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "I see the boxes!",
-          },
-          {
             id: 'var-declare-challenge',
             type: 'code-challenge',
             teki: "Create a variable to track how many visitors your site has:",
@@ -978,25 +845,6 @@ let isLive  = true;            // boolean (true or false)`,
         xp: 160,
         badge: { id: 'memory-master', label: 'Memory Master', emoji: '🧠' },
         steps: [
-          {
-            id: 'dom-reveal',
-            type: 'code-reveal',
-            teki: "Variables stored in code need to GET INTO the website. This is how — one line of JavaScript:",
-            language: 'javascript',
-            codeTemplate: `let greeting = "Welcome to {{name}}!";
-
-// Find the <h1> on the page and update its text
-document.querySelector('h1').textContent = greeting;
-
-// Now if you change greeting, rerun this line and the page updates!`,
-            explanations: {
-              young: "querySelector goes INSIDE the website, finds an element, and textContent puts your variable's value into it. Magic!",
-              junior: "document.querySelector(selector) finds the first matching element. .textContent reads or sets the visible text. The CSS selector rules apply.",
-              senior: "textContent is XSS-safe (escapes HTML). Use innerHTML only when you need to insert actual HTML nodes. querySelector accepts any CSS selector.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see the connection!",
-          },
           {
             id: 'queryselector-challenge',
             type: 'code-challenge',
@@ -1096,26 +944,6 @@ document.querySelector('p').textContent = description;`,
         badge: null,
         steps: [
           {
-            id: 'if-reveal',
-            type: 'code-reveal',
-            teki: "Your website is always the same — morning, noon, or night. But what if it could CHECK the time and react differently?",
-            language: 'javascript',
-            codeTemplate: `let hour = new Date().getHours(); // 0-23
-
-if (hour < 12) {
-  greeting = "Good morning! ☀️";
-} else {
-  greeting = "Good evening! 🌙";
-}`,
-            explanations: {
-              young: "IF is like asking a question! 'Is it before noon?' YES = morning message. NO = evening message. The website DECIDES!",
-              junior: "if(condition) runs the block when condition is true. else runs when it's false. Only ONE block ever runs.",
-              senior: "Comparison operators: < > <= >= === !==. Strict equality (===) checks both value AND type. Avoid == which does type coercion.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "Smart!",
-          },
-          {
             id: 'if-keyword-challenge',
             type: 'code-challenge',
             teki: "Start the decision. What keyword begins an if statement?",
@@ -1208,31 +1036,6 @@ if (visitor === "Alex") {
         xp: 160,
         badge: { id: 'logic-thinker', label: 'Logic Thinker', emoji: '🤔' },
         steps: [
-          {
-            id: 'elseif-reveal',
-            type: 'code-reveal',
-            teki: "Two options isn't enough — let's handle morning, afternoon, AND evening. Meet 'else if':",
-            language: 'javascript',
-            codeTemplate: `let hour = new Date().getHours();
-let greeting;
-
-if (hour < 12) {
-  greeting = "Good morning! ☀️";
-} else if (hour < 18) {
-  greeting = "Good afternoon! 🌤️";
-} else {
-  greeting = "Good evening! 🌙";
-}
-
-document.querySelector('#greeting').textContent = greeting;`,
-            explanations: {
-              young: "else if adds MORE choices! Morning, afternoon, evening — the website picks the right one automatically!",
-              junior: "'else if' chains multiple conditions. JavaScript checks them top-to-bottom and stops at the first true one.",
-              senior: "else-if chains are readable for 2-3 conditions. For many cases, use a switch statement or an object lookup: { morning: '...', afternoon: '...' }[period]",
-            },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "Three options!",
-          },
           {
             id: 'elseif-challenge',
             type: 'code-challenge',
@@ -1349,26 +1152,6 @@ document.querySelector('#greeting').textContent = greeting;`,
             autoAdvance: true,
           },
           {
-            id: 'addeventlistener-reveal',
-            type: 'code-reveal',
-            teki: "addEventListener is the magic spell that wakes up a button. Here's how it works:",
-            language: 'javascript',
-            codeTemplate: `let btn = document.querySelector('button');
-
-btn.addEventListener('click', function() {
-  alert("Welcome to {{name}}! 🎉");
-});
-
-// Now every click runs the function!`,
-            explanations: {
-              young: "addEventListener means 'listen for an event'. 'click' is the event. The function inside runs when clicked — like a recipe that only cooks when you push the button!",
-              junior: "addEventListener(eventType, callback). 'click' is the most common event. The callback function runs each time the event fires.",
-              senior: "addEventListener(type, callback, options). The callback receives an Event object (e). Use arrow functions for conciseness. Remove with removeEventListener.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see it!",
-          },
-          {
             id: 'addeventlistener-challenge',
             type: 'code-challenge',
             teki: "Complete the code to make the button listen for clicks:",
@@ -1429,23 +1212,6 @@ btn.addEventListener('click', function() {
         badge: null,
         steps: [
           {
-            id: 'input-reveal',
-            type: 'code-reveal',
-            teki: "Websites can LISTEN to what visitors type! Here's a name greeter — type a name and the page responds:",
-            language: 'javascript',
-            codeTemplate: `document.querySelector('#greetBtn').addEventListener('click', () => {
-  let name = document.querySelector('#nameInput').value;
-  document.querySelector('#greeting').textContent = "Hello, " + name + "! 👋";
-});`,
-            explanations: {
-              young: ".value grabs whatever the visitor typed in the input box! Then we stick it into a greeting message.",
-              junior: ".value reads the current text in an input. Combine strings with + or use template literals: `Hello, ${name}!`",
-              senior: ".value always returns a string. Use .trim() to remove whitespace. Consider input validation and sanitization before display.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see .value!",
-          },
-          {
             id: 'value-challenge',
             type: 'code-challenge',
             teki: "Grab what the user typed in the input field:",
@@ -1495,25 +1261,6 @@ let greeting = "Hello, " + name + "! Welcome to {{name}}.";`,
         xp: 200,
         badge: { id: 'action-creator', label: 'Action Creator', emoji: '⚡' },
         steps: [
-          {
-            id: 'counter-reveal',
-            type: 'code-reveal',
-            teki: "This is the most important pattern in all of web development: store a value, react to a click, update the screen. Here it is:",
-            language: 'javascript',
-            codeTemplate: `let likes = 0;   // 1. Store the value
-
-document.querySelector('#likeBtn').addEventListener('click', () => {
-  likes = likes + 1;   // 2. Update the value on click
-  document.querySelector('#count').textContent = likes;   // 3. Show it
-});`,
-            explanations: {
-              young: "Three steps: remember the number, add 1 when clicked, show the new number. That's how EVERY interactive website works!",
-              junior: "This is the state → event → update pattern. likes is the 'state'. The click is the 'event'. Updating textContent is the 'DOM update'.",
-              senior: "This is the fundamental UI pattern formalized by frameworks. state (likes) → event (click) → new state (likes+1) → render (textContent). React's useState hooks around this exact flow.",
-            },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "I see the pattern!",
-          },
           {
             id: 'increment-challenge',
             type: 'code-challenge',
@@ -1639,27 +1386,6 @@ document.querySelector('#likeBtn').addEventListener('click', () => {
             action: "Items added!",
           },
           {
-            id: 'array-reveal',
-            type: 'code-reveal',
-            teki: "Every item you just added is stored as an ARRAY — a numbered list in one variable. Here's what it looks like in code:",
-            language: 'javascript',
-            codeTemplate: `let items = ["Design", "Code", "Create", "Learn"];
-
-// Access items by position (counting from 0!)
-console.log(items[0]);  // "Design" — first item
-console.log(items[2]);  // "Create" — third item
-
-// How many items?
-console.log(items.length);  // 4`,
-            explanations: {
-              young: "An array is like a numbered shelf! items[0] is the first slot, items[1] is the second... Counting always starts at 0!",
-              junior: "Arrays use [] brackets. Items separated by commas. Index starts at 0. .length tells how many items are in the list.",
-              senior: "Zero-indexed arrays. .length is always one more than the last valid index. Common methods: push, pop, shift, unshift, splice, slice, indexOf, find, filter, map.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I see the array!",
-          },
-          {
             id: 'array-index-challenge',
             type: 'code-challenge',
             teki: "Get the SECOND item from the array (remember: counting starts at 0!):",
@@ -1719,29 +1445,6 @@ console.log(skills.length); // should show 4`,
         xp: 180,
         badge: { id: 'data-collector', label: 'Data Collector', emoji: '📦' },
         steps: [
-          {
-            id: 'foreach-reveal',
-            type: 'code-reveal',
-            teki: "Imagine writing a card for each of 100 items manually — that's 100 blocks of code! Loops do all that work with ONE instruction:",
-            language: 'javascript',
-            codeTemplate: `let items = ["Design", "Code", "Create", "Learn"];
-
-items.forEach(function(item) {
-  let card = document.createElement('div');
-  card.className = 'card';
-  card.textContent = item;
-  document.querySelector('#gallery').appendChild(card);
-});
-
-// ONE forEach → creates ALL the cards!`,
-            explanations: {
-              young: "forEach says 'for EACH item in the list, do this!' — runs once per item, handles all of them automatically!",
-              junior: "forEach(callback) runs the callback for each array item. The item is passed as the first argument. Super useful for building lists of DOM elements.",
-              senior: "forEach is a side-effect loop. For transformation, use map(). For filtering, use filter(). For reducing to one value, use reduce(). Prefer these over explicit loops.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "That's efficient!",
-          },
           {
             id: 'foreach-challenge',
             type: 'code-challenge',
@@ -1849,28 +1552,6 @@ skills.forEach(function(skill) {
         badge: null,
         steps: [
           {
-            id: 'function-reveal',
-            type: 'code-reveal',
-            teki: "Imagine you need to greet 100 visitors. Writing 100 alert() calls is insane. A FUNCTION lets you write it once and call it as many times as you want:",
-            language: 'javascript',
-            codeTemplate: `// Define the tool once
-function greetVisitor(name) {
-  return "Welcome to {{name}}, " + name + "! 👋";
-}
-
-// Call it whenever you need it
-greetVisitor("Alex");    // "Welcome to {{name}}, Alex! 👋"
-greetVisitor("Jordan");  // "Welcome to {{name}}, Jordan! 👋"
-greetVisitor("Sam");     // "Welcome to {{name}}, Sam! 👋"`,
-            explanations: {
-              young: "A function is a recipe card! Write the recipe ONCE, then cook it anytime with different ingredients. 'name' is the ingredient!",
-              junior: "'function' keyword defines it. The name after is what you call it. Parameters (in parentheses) are inputs. 'return' sends a value back.",
-              senior: "Functions encapsulate logic and reduce repetition. Parameters define the contract. return provides the output. Arrow function alternative: const greetVisitor = (name) => `Welcome to {{name}}, ${name}! 👋`",
-            },
-            ageExposure: { young: 'read-only', junior: 'editable', senior: 'editable' },
-            action: "I see the power!",
-          },
-          {
             id: 'function-define-challenge',
             type: 'code-challenge',
             teki: "Define a function called 'double' that takes a number and returns it times 2:",
@@ -1957,31 +1638,6 @@ console.log(message); // "Hello, {{name}}!"`,
         xp: 220,
         badge: { id: 'function-engineer', label: 'Function Engineer', emoji: '🔧' },
         steps: [
-          {
-            id: 'generator-reveal',
-            type: 'code-reveal',
-            teki: "Final boss! A random name generator that uses everything you've learned — arrays, functions, Math.random, and events. Read every line carefully:",
-            language: 'javascript',
-            codeTemplate: `let adjectives = ["Fluffy", "Speedy", "Cosmic", "Tiny", "Giant"];
-let nouns = ["Paws", "Whisker", "Rocket", "Biscuit", "Nova"];
-
-function generateName() {
-  let i = Math.floor(Math.random() * adjectives.length);
-  let j = Math.floor(Math.random() * nouns.length);
-  return adjectives[i] + " " + nouns[j];
-}
-
-document.querySelector('#genBtn').addEventListener('click', () => {
-  document.querySelector('#result').textContent = generateName();
-});`,
-            explanations: {
-              young: "Math.random() is like a lucky dip — it picks a surprise number! We use it to grab a random word from each list, then stick them together!",
-              junior: "Math.random() gives a decimal from 0 to 1. Multiply by array length and Math.floor() rounds down to get a valid index (0 to length-1).",
-              senior: "Math.floor(Math.random() * arr.length) is the canonical random-index pattern. For crypto-secure randomness use crypto.getRandomValues(). For seeded random, use a library.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "I read it all!",
-          },
           {
             id: 'math-floor-challenge',
             type: 'code-challenge',
@@ -2659,32 +2315,6 @@ const [theme, setTheme] = useState('ocean');
             ],
             autoAdvance: true,
           },
-          {
-            id: 'api-code',
-            type: 'code-reveal',
-            teki: "Here's how you fetch data from the internet:",
-            language: 'jsx',
-            codeTemplate: `import { useEffect, useState } from 'react';
-
-function CatFact() {
-  const [fact, setFact] = useState('');
-
-  useEffect(() => {
-    fetch('https://catfact.ninja/fact')
-      .then(res => res.json())
-      .then(data => setFact(data.fact));
-  }, []);
-
-  return <p>{fact}</p>;
-}`,
-            explanations: {
-              young: "fetch() goes out to the internet, grabs some data, and brings it back! Like ordering pizza online!",
-              junior: "fetch() requests data. .then() handles the response after it arrives. useEffect runs code when the component first appears.",
-              senior: "useEffect with [] runs once on mount. fetch returns a Promise. Chain .then() or use async/await. Always handle loading and error states.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "Data fetched!",
-          },
         ],
       },
 
@@ -2707,42 +2337,6 @@ function CatFact() {
               "Let's show live data from an API in your website.",
             ],
             autoAdvance: true,
-          },
-          {
-            id: 'live-code',
-            type: 'code-reveal',
-            teki: "A complete data-fetching component with loading state:",
-            language: 'jsx',
-            codeTemplate: `function PetGallery() {
-  const [pets, setPets] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/pets')
-      .then(res => res.json())
-      .then(data => {
-        setPets(data);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Loading pets... 🐾</p>;
-
-  return (
-    <div className="gallery">
-      {pets.map(pet => (
-        <PetCard key={pet.id} {...pet} />
-      ))}
-    </div>
-  );
-}`,
-            explanations: {
-              young: "We show 'Loading...' while we wait, then swap it for the real data when it arrives!",
-              junior: "loading state prevents showing empty content. When data arrives, setLoading(false) and setPets(data) trigger a re-render.",
-              senior: "This is the manual fetch pattern. In production use TanStack Query: useQuery handles caching, background refetch, error states, and deduplication.",
-            },
-            ageExposure: { young: 'read-only', junior: 'read-only', senior: 'editable' },
-            action: "Connected!",
           },
           {
             id: 'act10-complete',

@@ -1,7 +1,6 @@
-﻿import ActProgress from "@/components/journey/ActProgress";
+import ActProgress from "@/components/journey/ActProgress";
 import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
-import JourneyLog from "@/components/journey/JourneyLog";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
 import QuizOverlay from "@/components/journey/QuizOverlay";
 import WebsitePreview from "@/components/journey/WebsitePreview";
@@ -15,8 +14,8 @@ import { useJourneyStore } from "@/stores/journeyStore";
 import { useProfileStore } from "@/stores/profileStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import { useNavigate } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "framer-motion";
-import { ScrollText, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
 import { useEffect } from "react";
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
@@ -85,17 +84,12 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
   );
 }
 
-const LOG_WIDTH = 300;
-
 // ── Main journey page ──────────────────────────────────────────────────────────
 export default function JourneyPage() {
   const navigate = useNavigate();
   const journey = useJourneyStore();
   const profile = useProfileStore();
   const speak = useTekiStore((s) => s.speak);
-  const logPanelOpen = useTekiStore((s) => s.logPanelOpen);
-  const toggleLogPanel = useTekiStore((s) => s.toggleLogPanel);
-  const logCount = useTekiStore((s) => s.log.length);
   const ageGroup = profile.ageGroup ?? "young";
 
   const introDone = useJourneyStore((s) => !!s.website?.name);
@@ -126,23 +120,6 @@ export default function JourneyPage() {
         className="h-screen w-screen overflow-hidden flex"
         style={{ backgroundColor: "var(--app-raised)" }}
       >
-        {/* ── Log panel — flex child, slides in from left ── */}
-        <AnimatePresence initial={false}>
-          {logPanelOpen && (
-            <motion.div
-              key="log-panel"
-              className="h-full shrink-0 overflow-hidden z-[28]"
-              style={{ width: LOG_WIDTH }}
-              initial={{ width: 0 }}
-              animate={{ width: LOG_WIDTH }}
-              exit={{ width: 0 }}
-              transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            >
-              <JourneyLog />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* ── Main card ── */}
         <div className="flex-1 p-6 flex flex-col overflow-hidden min-w-0">
           <div
@@ -169,36 +146,6 @@ export default function JourneyPage() {
                 onClick={() => navigate({ to: "/dashboard" })}
               />
               <div className="flex-1" />
-
-              {/* Log toggle */}
-              <button
-                onClick={toggleLogPanel}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
-                style={{
-                  background: logPanelOpen
-                    ? "rgba(59,130,246,0.15)"
-                    : "transparent",
-                  border: `1px solid ${logPanelOpen ? "rgba(59,130,246,0.4)" : "var(--app-border)"}`,
-                  color: logPanelOpen ? "#3b82f6" : "var(--ink-muted)",
-                }}
-              >
-                <ScrollText size={12} />
-                Log
-                {logCount > 0 && (
-                  <span
-                    className="rounded-full w-4 h-4 flex items-center justify-center text-[9px] font-black"
-                    style={{
-                      background: logPanelOpen
-                        ? "#3b82f6"
-                        : "var(--app-raised)",
-                      color: logPanelOpen ? "#fff" : "var(--ink-muted)",
-                    }}
-                  >
-                    {logCount > 99 ? "99" : logCount}
-                  </span>
-                )}
-              </button>
-
               <ThemeToggle />
               <span
                 className="text-xs ml-1"

@@ -3,7 +3,6 @@
 import ActCompleteStep from "./steps/ActCompleteStep";
 import CanvasInputStep from "./steps/CanvasInputStep";
 import CodeChallengeStep from "./steps/CodeChallengeStep";
-import CodeRevealStep from "./steps/CodeRevealStep";
 import ColorPickerStep from "./steps/ColorPickerStep";
 import InputStep from "./steps/InputStep";
 import ObservationStep from "./steps/ObservationStep";
@@ -22,7 +21,6 @@ const STEP_COMPONENTS = {
   "topic-picker": TopicPickerStep,
   "visual-builder": VisualBuilderStep,
   observation: ObservationStep,
-  "code-reveal": CodeRevealStep,
   "code-challenge": CodeChallengeStep,
   "act-complete": ActCompleteStep,
   "canvas-input": CanvasInputStep,

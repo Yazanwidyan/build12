@@ -1,4 +1,4 @@
-﻿import MissionRunner from "@/components/journey/MissionRunner";
+import MissionRunner from "@/components/journey/MissionRunner";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useProgressStore } from "@/stores/progressStore";
@@ -13,15 +13,34 @@ import { useEffect, useMemo, useRef } from "react";
 
 import TekiCharacter from "./TekiCharacter";
 
-const DEFAULT_TOP = typeof window !== "undefined" ? window.innerHeight - 200 : 600;
+const TEKI_WIDTH = 390;
+const DEFAULT_LEFT = typeof window !== "undefined" ? Math.max(20, (window.innerWidth - TEKI_WIDTH) / 2) : 20;
+const DEFAULT_TOP = typeof window !== "undefined" ? Math.max(44, window.innerHeight / 2 - 120) : 300;
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },
   transition: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
 };
 
-// How long the fade-in lasts before actions unlock
-const FADE_MS = 420;
+// Steps with rich content → show inside a card panel
+const PANEL_STEPS = new Set([
+  "code-challenge",
+  "input",
+  "canvas-input",
+  "color-picker",
+  "topic-picker",
+  "visual-builder",
+  "act-complete",
+  "react-gateway",
+  "react-spotlight",
+  "react-concept",
+  "react-live-demo",
+]);
+
+// Reading time: proportional to message length, capped between 2s and 4s
+function readTime(msg) {
+  return Math.max(2000, Math.min(msg.length * 30, 4000));
+}
 
 export default function FloatingTeki() {
   const {
@@ -30,7 +49,6 @@ export default function FloatingTeki() {
     mood,
     messageTyped,
     highlightSection,
-    toggleLogPanel,
   } = useTekiStore();
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
@@ -38,7 +56,6 @@ export default function FloatingTeki() {
   const constraintsRef = useRef(null);
   const { sectionBounds } = useWebsiteLayout();
 
-  // Teki travel position
   const travelTop = useMemo(() => {
     if (!highlightSection) return null;
     const bound = sectionBounds[highlightSection];
@@ -77,12 +94,14 @@ export default function FloatingTeki() {
     if (!hasHighlight) clearHighlight();
   }, [currentStep?.id]);
 
-  // After the fade completes, advance the message queue
+  // Advance multi-message queues after a proper reading delay
   useEffect(() => {
     if (!currentMessage || !isTyping) return;
-    const t = setTimeout(messageTyped, FADE_MS);
+    const t = setTimeout(messageTyped, readTime(currentMessage));
     return () => clearTimeout(t);
   }, [currentMessage, isTyping]);
+
+  const isPanel = currentStep ? PANEL_STEPS.has(currentStep.type) : false;
 
   return (
     <>
@@ -96,11 +115,11 @@ export default function FloatingTeki() {
         dragConstraints={constraintsRef}
         dragElastic={0.06}
         dragMomentum={false}
-        className="fixed z-50 flex flex-col gap-1 select-none"
+        className="fixed z-50 flex flex-col gap-2 select-none"
         style={{
           top: 0,
-          left: 20,
-          width: 350,
+          left: DEFAULT_LEFT,
+          width: TEKI_WIDTH,
           x: posX,
           y: posY,
           cursor: "grab",
@@ -110,26 +129,22 @@ export default function FloatingTeki() {
         transition={{ opacity: { duration: 0.2 } }}
         whileDrag={{ cursor: "grabbing" }}
       >
-        {/* Speech bubble — fades in with purple glow */}
-        <AnimatePresence mode="wait">
+        {/* Speech bubble — always above, cross-fades between messages */}
+        <AnimatePresence mode="popLayout">
           {currentMessage && (
             <motion.div
               key={currentMessage}
               className="relative pointer-events-auto"
-              initial={{ opacity: 0, y: 28 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                boxShadow: [
-                  "0 0 28px 8px rgba(99,102,241,0.55)",
-                  "0 2px 12px rgba(99,102,241,0.10)",
-                ],
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              style={{
+                boxShadow: "0 2px 20px rgba(99,102,241,0.18)",
               }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
-                className="px-4 py-3 text-sm leading-relaxed"
+                className="px-4 py-3 leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
                   border: "1px solid var(--bubble-border)",
@@ -146,40 +161,47 @@ export default function FloatingTeki() {
           )}
         </AnimatePresence>
 
-        {/* Bottom row: Teki + actions */}
-        <div className="flex items-start gap-3 mt-1">
-          <div className="flex flex-col items-center gap-1 shrink-0">
-            <motion.button
-              {...FLOAT}
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleLogPanel();
-              }}
-              className="pointer-events-auto focus:outline-none"
-              title="Toggle Journey Log"
-              onPointerDown={(e) => e.stopPropagation()}
-            >
+        {/* Row: Techi alone on the left, content to his right */}
+        <div className="flex items-start gap-3">
+          {/* Techi — always alone on the left */}
+          <div className="shrink-0 pointer-events-none">
+            <motion.div {...FLOAT}>
               <TekiCharacter size={72} mood={mood} />
-            </motion.button>
+            </motion.div>
           </div>
 
+          {/* Content: always visible, no hiding during message delivery */}
           <div
-            className="pointer-events-auto overflow-y-auto flex-1 min-w-0"
-            style={{
-              maxHeight: isTyping ? 0 : "52vh",
-              opacity: isTyping ? 0 : 1,
-              transition: "opacity 0.2s, max-height 0.25s",
-              pointerEvents: isTyping ? "none" : "auto",
-            }}
+            className="flex-1 min-w-0 pointer-events-auto"
             onPointerDown={(e) => e.stopPropagation()}
           >
-            <div className="p-4">
-              <MissionRunner
-                step={currentStep}
-                stepIndex={currentStepIndex}
-                onComplete={advanceStep}
-              />
-            </div>
+            {currentStep && (
+              isPanel ? (
+                <div
+                  className="rounded-2xl overflow-y-auto pointer-events-auto"
+                  style={{
+                    backgroundColor: "var(--app-surface)",
+                    border: "1px solid var(--bubble-border)",
+                    padding: "12px",
+                    maxHeight: "60vh",
+                  }}
+                >
+                  <MissionRunner
+                    step={currentStep}
+                    stepIndex={currentStepIndex}
+                    onComplete={advanceStep}
+                  />
+                </div>
+              ) : (
+                <div className="pointer-events-auto">
+                  <MissionRunner
+                    step={currentStep}
+                    stepIndex={currentStepIndex}
+                    onComplete={advanceStep}
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
       </motion.div>
