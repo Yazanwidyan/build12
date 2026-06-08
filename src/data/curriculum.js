@@ -224,29 +224,31 @@ export const ACTS = [
             messages: [
               "Header done! Now the most important section — the HERO.",
               "It's the BIG bold area visitors see the moment they land on your site.",
-              "Studies show you have just 5 seconds to grab attention — so it has to be great!",
+              "In HTML, the <main> tag wraps this main content — every page has exactly one!",
             ],
             action: "Let's do it!",
           },
           {
             id: "hero-build-challenge",
             type: "code-challenge",
-            teki: "First — write the button tag that makes the hero section appear on your site. Then we'll fill it with your words!",
+            teki: "The hero lives inside a <main> tag — the single most important content area on any web page. Write it and watch the section appear!",
             language: "html",
-            code: "<___>Explore →</___>",
-            answer: "<button>Explore →</button>",
+            code: `<header>...</header>
+<___>Hero content here</___>`,
+            answer: `<header>...</header>
+<main>Hero content here</main>`,
             blanks: [
-              { position: 0, answer: "button" },
-              { position: 1, answer: "button" },
+              { position: 0, answer: "main" },
+              { position: 1, answer: "main" },
             ],
             completionEffect: { buildSection: "hero" },
             explanations: {
               young:
-                "The <button> tag makes something you can click. It needs both an opening <button> AND a closing </button>!",
+                "The <main> tag holds the main content of your page — the big important stuff visitors come to see!",
               junior:
-                "<button> creates a clickable element. It looks plain now — CSS will style it beautifully in Act 2!",
+                "<main> is a semantic HTML element. Every page should have exactly one <main> — it wraps your primary content, separate from header and footer.",
               senior:
-                "Use <button type='button'> for JS-driven actions to avoid accidental form submissions inside forms.",
+                "<main> is a landmark element that improves accessibility and SEO. Screen readers jump straight to it. Only one per page, and it must not be inside <header>, <footer>, or <nav>.",
             },
             ageExposure: {
               young: "guided",
@@ -479,52 +481,21 @@ export const ACTS = [
             messages: [
               "Your website has structure — now it needs STYLE!",
               "CSS is the painter. HTML was the architect. Look at your three wireframe sections — grey and plain.",
-              "Every CSS rule you write will paint a section. The header will get your color. Then the hero. Then the footer.",
+              "CSS custom properties let you define a color ONCE and use it everywhere on the page.",
               "Here's a secret: colors trigger emotions INSTANTLY — before anyone reads a word. Blue = calm. Red = urgent. Green = fresh.",
             ],
             action: "Let me paint it!",
           },
           {
-            id: "color-design",
-            type: "visual-builder",
-            section: null,
-            isStyleUpdate: true,
-            teki: "Choose your website's personality! Pick a primary color and a background color.",
-            fields: [
-              {
-                id: "primaryColor",
-                label: "Primary Color",
-                type: "color",
-                storeSubKey: "primaryColor",
-                hint: "Your brand color — used for buttons, links, and highlights",
-              },
-              {
-                id: "backgroundColor",
-                label: "Background Color",
-                type: "color",
-                storeSubKey: "backgroundColor",
-                hint: "The page background — light feels clean, dark feels bold",
-              },
-            ],
-            action: "Colors are set!",
-          },
-          {
-            id: "color-observe",
-            type: "observation",
-            teki: "Colors chosen! Now write the CSS to apply them — and watch your header transform from grey to COLORFUL!",
-            autoAdvance: true,
-            autoAdvanceDelay: 2500,
-          },
-          {
             id: "color-css-challenge",
             type: "code-challenge",
-            teki: "This CSS applies your brand color to the header. Complete the selector — it means 'apply to the WHOLE page':",
+            teki: "Write the CSS selector that targets the ROOT of the entire page — this is where you define colors for everything:",
             language: "css",
             code: `___ {
-  --primary: {{primaryColor}};
+  --primary: #6366f1;
 }`,
             answer: `:root {
-  --primary: {{primaryColor}};
+  --primary: #6366f1;
 }`,
             blanks: [{ position: 0, answer: ":root" }],
             completionEffect: { styleSection: "header" },
@@ -541,21 +512,37 @@ export const ACTS = [
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage:
-              "Header painted with your color! Grey → Beautiful! 🎨",
-            action: "Paint the header!",
+            successMessage: "Header styled! Now make that color YOURS →",
+            action: "Style the header!",
+          },
+          {
+            id: "color-primary-pick",
+            type: "visual-builder",
+            section: null,
+            isStyleUpdate: true,
+            teki: "Now make it yours! Pick your primary color and watch the header update live as you choose.",
+            fields: [
+              {
+                id: "primaryColor",
+                label: "Primary Color",
+                type: "color",
+                storeSubKey: "primaryColor",
+                hint: "Your brand color — used for buttons, links, and highlights",
+              },
+            ],
+            action: "That's my color!",
           },
           {
             id: "header-styled-observe",
             type: "observation",
-            teki: "Your header transformed! One CSS rule — instant color. Now let's paint the hero section!",
+            teki: "Your header is now YOUR color! You wrote the CSS rule, then picked the value. That's exactly how every designer on earth works.",
             autoAdvance: true,
-            autoAdvanceDelay: 2500,
+            autoAdvanceDelay: 3000,
           },
           {
             id: "color-bg-challenge",
             type: "code-challenge",
-            teki: "background-color fills the hero section. Complete the property name:",
+            teki: "Now the hero. `color` sets TEXT color. `background-color` fills the AREA behind the content. Complete the property name:",
             language: "css",
             code: `main {
   background-___: #f8fafc;
@@ -569,26 +556,43 @@ export const ACTS = [
             completionEffect: { styleSection: "hero" },
             explanations: {
               young:
-                "background-color fills the background of a section with color!",
+                "background-color fills the BACKGROUND of a section — the area behind all the text!",
               junior:
-                "background-color sets the background. Use background shorthand for gradients or images.",
+                "background-color sets the fill behind content. The `color` property only sets TEXT color — they're separate.",
               senior:
-                "Prefer background-color for solid colors — it's explicit. background is shorthand for multiple properties.",
+                "Prefer background-color for solid fills — it's explicit. Use background shorthand only for gradients, images, or multiple values.",
             },
             ageExposure: {
               young: "guided",
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage: "Hero section styled! Two down, one to go!",
+            successMessage: "Hero styled! Now pick your background color →",
             action: "Style the hero!",
+          },
+          {
+            id: "color-bg-pick",
+            type: "visual-builder",
+            section: null,
+            isStyleUpdate: true,
+            teki: "Now your page background — light feels clean, dark feels bold. Pick it and watch the hero section fill with your color!",
+            fields: [
+              {
+                id: "backgroundColor",
+                label: "Background Color",
+                type: "color",
+                storeSubKey: "backgroundColor",
+                hint: "The page background — light feels clean, dark feels bold",
+              },
+            ],
+            action: "Background set!",
           },
           {
             id: "hero-styled-observe",
             type: "observation",
-            teki: "Two sections styled! Header and hero are both colorful now. One more — the footer!",
+            teki: "Two sections styled with YOUR colors! Header has your brand color, hero has your background. One section left — the footer!",
             autoAdvance: true,
-            autoAdvanceDelay: 2500,
+            autoAdvanceDelay: 3000,
           },
         ],
       },
@@ -612,49 +616,14 @@ export const ACTS = [
               "Design isn't just colors — FONTS have personality too!",
               "A modern sans-serif feels like technology. A classic serif feels like a newspaper.",
               "And BUTTON shapes send signals — pill buttons feel friendly, sharp buttons feel serious.",
-              "Let's give your website its final look — and style the footer!",
+              "Write the CSS rule first, then pick your font and shape — and the footer gets styled at the same time!",
             ],
-            action: "Let's style it!",
-          },
-          {
-            id: "font-design",
-            type: "visual-builder",
-            section: null,
-            isStyleUpdate: true,
-            teki: "Pick your font style and button shape — this is your website's personality!",
-            fields: [
-              {
-                id: "fontFamily",
-                label: "Font Style",
-                type: "select",
-                options: ["sans-serif", "serif", "monospace"],
-                labels: ["Modern", "Classic", "Code"],
-                storeSubKey: "fontFamily",
-                hint: "The overall text personality",
-              },
-              {
-                id: "buttonStyle",
-                label: "Button Shape",
-                type: "select",
-                options: ["rounded", "pill", "square"],
-                labels: ["Rounded", "Pill", "Square"],
-                storeSubKey: "buttonStyle",
-                hint: "How your buttons look",
-              },
-            ],
-            action: "Styled!",
-          },
-          {
-            id: "font-observe",
-            type: "observation",
-            teki: "Perfect choices! Now write the CSS to apply your font — and watch the footer get styled at the same time!",
-            autoAdvance: true,
-            autoAdvanceDelay: 2500,
+            action: "Write the CSS!",
           },
           {
             id: "font-css-challenge",
             type: "code-challenge",
-            teki: "Here's the CSS that sets your font across the whole website. Fill in the property name:",
+            teki: "font-family sets the text style for the whole website. Fill in the property name:",
             language: "css",
             code: `body {
   ___-family: 'Inter', sans-serif;
@@ -679,14 +648,41 @@ export const ACTS = [
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage:
-              "Footer styled! All three sections now have your full design applied! 🎨",
+            successMessage: "Footer styled! Now pick your font style and button shape →",
             action: "Style the footer!",
+          },
+          {
+            id: "font-design",
+            type: "visual-builder",
+            section: null,
+            isStyleUpdate: true,
+            teki: "Now make it yours! Pick your font style and button shape — watch the whole website update as you choose.",
+            fields: [
+              {
+                id: "fontFamily",
+                label: "Font Style",
+                type: "select",
+                options: ["sans-serif", "serif", "monospace"],
+                labels: ["Modern", "Classic", "Code"],
+                storeSubKey: "fontFamily",
+                hint: "The overall text personality",
+              },
+              {
+                id: "buttonStyle",
+                label: "Button Shape",
+                type: "select",
+                options: ["rounded", "pill", "square"],
+                labels: ["Rounded", "Pill", "Square"],
+                storeSubKey: "buttonStyle",
+                hint: "How your buttons look",
+              },
+            ],
+            action: "That's my style!",
           },
           {
             id: "all-styled-observe",
             type: "observation",
-            teki: "LOOK at your website now! Header, hero, and footer — all with your colors and font. You went from grey wireframe to a designed website with CSS!",
+            teki: "Your website is fully designed! Header, hero, and footer — all with your colors, font, and button style. You went from grey wireframe to a real designed website with CSS!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
@@ -770,15 +766,70 @@ export const ACTS = [
             mood: "excited",
             messages: [
               "HTML is the language of the web. It gives your page its STRUCTURE — like the skeleton of a body.",
-              "Every element you see is made with tags. Tags look like this: <h2>Title</h2>",
-              "The tag opens, content goes in, the tag closes. When you write the RIGHT tag — something APPEARS on your website! Watch the site on the left!",
+              "Every element you see is made with tags. Tags look like this: <section>content</section>",
+              "The tag opens, content goes in, the tag closes. Write the right tag — something APPEARS on your website!",
             ],
             action: "Let me try!",
           },
           {
+            id: "html-section-intro",
+            type: "teki-message",
+            mood: "thinking",
+            messages: [
+              "Every section of a website — About, Features, Gallery — is wrapped in a <section> tag.",
+              "It's like a labeled box: it groups related content and tells the browser 'everything in here belongs together'.",
+            ],
+            action: "Show me!",
+          },
+          {
+            id: "html-section-challenge",
+            type: "code-challenge",
+            teki: "Write the <section> tag to make your About section appear on the website:",
+            language: "html",
+            code: "<___>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</___>",
+            answer: "<section>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</section>",
+            blanks: [
+              { position: 0, answer: "section" },
+              { position: 1, answer: "section" },
+            ],
+            completionEffect: { buildSection: "about" },
+            explanations: {
+              young:
+                "A section is like a labeled box that holds a chunk of your website!",
+              junior:
+                "<section> groups related content semantically — it tells the browser this chunk belongs together. Great for SEO.",
+              senior:
+                "<section> is a semantic landmark element. Each should ideally contain a heading. Use <div> when you need grouping with no semantic meaning.",
+            },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Your About section appeared on the website! 📦",
+            action: "Add the About section!",
+          },
+          {
+            id: "about-appear-observe",
+            type: "observation",
+            teki: "Your About section appeared — wireframe style! The <section> tag created the container. No colors yet — that's HTML: pure structure. CSS will paint it later!",
+            autoAdvance: true,
+            autoAdvanceDelay: 3000,
+          },
+          {
+            id: "html-h2-intro",
+            type: "teki-message",
+            mood: "thinking",
+            messages: [
+              "Inside every section lives a HEADING — the title that labels the whole section.",
+              "<h2> is a second-level heading. <h1> is the hero headline at the top. <h2> goes on every section title below it.",
+            ],
+            action: "Got it!",
+          },
+          {
             id: "html-h2-challenge",
             type: "code-challenge",
-            teki: "The <h2> tag creates a section heading. Fill in both blanks to add an About section:",
+            teki: "Fill in both blanks to complete the heading tag that labels a section:",
             language: "html",
             code: "<h___>About {{name}}</h___>",
             answer: "<h2>About {{name}}</h2>",
@@ -786,75 +837,36 @@ export const ACTS = [
               { position: 0, answer: "2" },
               { position: 1, answer: "2" },
             ],
-            completionEffect: { buildSection: "about" },
             explanations: {
               young:
-                "h2 stands for Heading Level 2! A big bold title that appears on your page.",
+                "h2 stands for Heading Level 2! A big bold title that labels your section.",
               junior:
-                "<h2> is a second-level heading. <h1> is used for the hero headline, <h2> for section titles. Always close your tags!",
+                "<h2> is a second-level heading. <h1> is for the page title, <h2> for section headings. Always close your tags!",
               senior:
-                "Heading hierarchy matters for SEO and accessibility — one <h1> per page, then h2–h6 for sections.",
+                "Heading hierarchy matters for SEO and accessibility — one <h1> per page, then h2–h6 for section titles. Screen readers navigate by headings.",
             },
             ageExposure: {
               young: "guided",
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage: "Your About section just appeared on the website!",
-            action: "Add it to my website!",
+            successMessage: "Heading tag mastered! Every section title uses <h2>.",
+            action: "Add the heading!",
           },
           {
-            id: "about-appear-observe",
+            id: "html-h2-observe",
             type: "observation",
-            teki: "Your About section appeared — in wireframe style. No colors yet! That's HTML: pure structure. CSS will paint it in the next act!",
+            teki: "See that 'About' heading in your section? Every section title you see on any website is a <h2> tag — and you just wrote it!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
-          },
-          {
-            id: "html-section-intro",
-            type: "teki-message",
-            mood: "thinking",
-            messages: [
-              "Now you know the <h2> heading tag. But headings don't float in space — they live INSIDE containers.",
-              "The <section> tag is that container. It wraps a whole chunk of your page and says: everything here belongs together.",
-            ],
-            action: "Show me!",
-          },
-          {
-            id: "html-section-challenge",
-            type: "code-challenge",
-            teki: "The <section> tag wraps related content — like a box that holds a chunk of your page:",
-            language: "html",
-            code: "<___>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</___>",
-            answer:
-              "<section>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</section>",
-            blanks: [
-              { position: 0, answer: "section" },
-              { position: 1, answer: "section" },
-            ],
-            explanations: {
-              young:
-                "A section is like a labeled box that holds a chunk of your website!",
-              junior:
-                "<section> groups related content semantically. It helps search engines understand your page structure.",
-              senior:
-                "<section> is a semantic landmark. Each one should ideally contain a heading.",
-            },
-            ageExposure: {
-              young: "guided",
-              junior: "fill-blank",
-              senior: "fill-blank",
-            },
-            successMessage: "Section tag mastered! 📦",
-            action: "Check it!",
           },
           {
             id: "html-section-wrap",
             type: "teki-message",
             mood: "proud",
             messages: [
-              "Two HTML tags down — <h2> builds headings, <section> groups content.",
-              "These are the building blocks on every web page. Next mission: add paragraphs and a full Features section to your site!",
+              "<section> creates the box. <h2> labels it. These two tags always go together.",
+              "Next mission: fill sections with paragraph text and bullet lists — and build the Features section!",
             ],
             action: "Keep building!",
           },
@@ -884,7 +896,7 @@ export const ACTS = [
           {
             id: "html-p-challenge",
             type: "code-challenge",
-            teki: "Complete the paragraph tag:",
+            teki: "Complete the paragraph tag — the most common tag on any website:",
             language: "html",
             code: "<___>{{subtext}}</___>",
             answer: "<p>{{subtext}}</p>",
@@ -898,15 +910,22 @@ export const ACTS = [
               junior:
                 "<p> renders as a block-level element with default top/bottom margin. Use it for any block of body text.",
               senior:
-                "<p> is block-level. Nesting block elements inside inline elements is invalid HTML.",
+                "<p> is block-level. Never nest block-level elements inside inline elements — it's invalid HTML.",
             },
             ageExposure: {
               young: "guided",
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage: "Paragraph added! ✅",
+            successMessage: "Paragraph tag mastered! ✅",
             action: "Check it!",
+          },
+          {
+            id: "about-p-observe",
+            type: "observation",
+            teki: "See the paragraph text in your About section? Every sentence of body text on every website lives inside a <p> tag — that's exactly what you just wrote!",
+            autoAdvance: true,
+            autoAdvanceDelay: 3000,
           },
           {
             id: "html-list-teki",
@@ -950,7 +969,7 @@ export const ACTS = [
           {
             id: "features-appear-observe",
             type: "observation",
-            teki: "Two new sections on your website — wireframe style! HTML builds raw structure. Next act, CSS turns this wireframe into something beautiful!",
+            teki: "Features section appeared on your website! Bullet lists are everywhere online — navigation menus, product features, recipe steps. All built with <ul> and <li> exactly like you just wrote.",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
@@ -990,9 +1009,9 @@ export const ACTS = [
               young:
                 "href stands for Hypertext REFerence — it's the address the link sends you to!",
               junior:
-                "href is the URL the browser navigates to when clicked. Use href='#section-id' for same-page jumps.",
+                "href is the URL the browser navigates to when clicked. Use href='#section-id' for same-page anchor jumps.",
               senior:
-                "For external links add rel='noopener noreferrer' for security. Use target='_blank' with rel='noopener'.",
+                "For external links add rel='noopener noreferrer' for security. Always use target='_blank' with rel='noopener' to prevent tab-napping.",
             },
             ageExposure: {
               young: "guided",
@@ -1003,14 +1022,22 @@ export const ACTS = [
             action: "Check it!",
           },
           {
+            id: "html-link-observe",
+            type: "observation",
+            teki: "See the navigation links in your header? Each one is an <a href='...'> tag. Every single link ever clicked on the internet uses this exact tag — and you just wrote it.",
+            autoAdvance: true,
+            autoAdvanceDelay: 3000,
+          },
+          {
             id: "html-review-teki",
             type: "teki-message",
             mood: "proud",
             messages: [
-              "You've learned the core HTML tags: <h2>, <p>, <section>, <ul>, <li>, <a>. These 6 tags build 90% of every website!",
-              "Two new sections appeared on your website — BUILT by your HTML code. Structure first, style next!",
+              "You've written 6 core HTML tags: <section>, <h2>, <p>, <ul>, <li>, <a>.",
+              "These 6 tags build the structure of 90% of every website on the internet — and you now know all of them!",
+              "About and Features sections grew from your code. Structure is done. Next: CSS makes it beautiful!",
             ],
-            action: "Amazing!",
+            action: "Let's paint it!",
           },
           {
             id: "act3-complete",
