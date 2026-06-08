@@ -139,7 +139,7 @@ export default function FloatingTeki() {
         </AnimatePresence>
 
         {/* Teki character + action button */}
-        <div className="flex items-start gap-3 ">
+        <div className="flex items-center gap-3">
           <div className="shrink-0 pointer-events-none">
             <motion.div {...FLOAT}>
               <TekiCharacter size={68} mood={mood} />
