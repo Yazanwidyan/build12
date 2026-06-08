@@ -1,4 +1,5 @@
 import ActProgress from "@/components/journey/ActProgress";
+import BrowserChrome from "@/components/journey/BrowserChrome";
 import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
@@ -8,7 +9,6 @@ import WebsitePreview from "@/components/journey/WebsitePreview";
 import FloatingTeki from "@/components/teki/FloatingTeki";
 import TekiCharacter from "@/components/teki/TekiCharacter";
 import Button from "@/components/ui/Button";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 import { StepActionProvider } from "@/contexts/StepActionContext";
 import { WebsiteLayoutProvider } from "@/contexts/WebsiteLayoutContext";
 import { LEVEL_INFO } from "@/data/curriculum";
@@ -17,7 +17,6 @@ import { useProfileStore } from "@/stores/profileStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
 import { useEffect } from "react";
 
 // ── Level complete overlay ─────────────────────────────────────────────────────
@@ -147,19 +146,19 @@ export default function JourneyPage() {
             </div>
           )}
 
-          {/* ── Right panel: website preview (2/3 or full when intro) ── */}
-          <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-            <div
-              className="flex-1 flex flex-col overflow-hidden rounded-2xl"
-              style={cardStyle}
+          {/* ── Right panel: website preview with browser chrome (2/3) ── */}
+          <div className="flex-1 flex flex-col overflow-hidden min-w-0"
+            style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)", borderRadius: 16, border: "1.5px solid var(--app-border)" }}
+          >
+            <BrowserChrome
+              website={journey.website}
+              onExit={() => navigate({ to: "/dashboard" })}
+              builderName={profile.builderName}
             >
-              {/* Website preview */}
-              <div className="flex-1 overflow-hidden relative">
-                <WebsitePreview />
-                {introDone && <JourneyOverlay />}
-                {introDone && <CanvasEditor />}
-              </div>
-            </div>
+              <WebsitePreview />
+              {introDone && <JourneyOverlay />}
+              {introDone && <CanvasEditor />}
+            </BrowserChrome>
           </div>
 
           {/* ── Floating TEKI (speech + action button) ── */}
