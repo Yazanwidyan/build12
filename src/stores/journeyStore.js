@@ -28,6 +28,7 @@ const DEFAULT_WEBSITE = {
   sections: {
     header: {
       built: false,
+      styled: false,
       content: {
         title: '',
         navLinks: ['Home', 'About', 'Contact'],
@@ -35,17 +36,21 @@ const DEFAULT_WEBSITE = {
     },
     hero: {
       built: false,
+      styled: false,
       content: {
         headline: '',
         subtext: '',
         buttonText: 'Explore',
       },
     },
-    about:    { built: false, styled: false },
-    features: { built: false, styled: false },
-    gallery:  { built: false, styled: false },
+    about:        { built: false, styled: false },
+    features:     { built: false, styled: false },
+    gallery:      { built: false, styled: false },
+    testimonials: { built: false, styled: false },
+    contact:      { built: false, styled: false },
     footer: {
       built: false,
+      styled: false,
       content: {
         copyright: '',
         links: ['Privacy', 'Terms'],
@@ -100,6 +105,7 @@ export const useJourneyStore = create(
           sections: {
             header: {
               built: true,
+              styled: true,
               content: {
                 title: name,
                 navLinks: ['Home', 'About', 'Gallery', 'Contact'],
@@ -107,17 +113,21 @@ export const useJourneyStore = create(
             },
             hero: {
               built: true,
+              styled: true,
               content: {
                 headline: `Welcome to ${name}!`,
                 subtext: `Your go-to place for everything about ${topic}.`,
                 buttonText: 'Explore',
               },
             },
-            about:    { built: true, styled: true },
-            features: { built: true, styled: true },
-            gallery:  { built: true, styled: true },
+            about:        { built: true, styled: true },
+            features:     { built: true, styled: true },
+            gallery:      { built: true, styled: true },
+            testimonials: { built: true, styled: true },
+            contact:      { built: true, styled: true },
             footer: {
               built: true,
+              styled: true,
               content: {
                 copyright: `© ${new Date().getFullYear()} ${name}`,
                 links: ['Privacy', 'Terms', 'Contact'],

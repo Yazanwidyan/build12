@@ -41,7 +41,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
       // Apply completion effect — makes something visible on the website preview
       const fx = step.completionEffect
       if (fx) {
-        if (fx.buildSection)       buildSection(fx.buildSection, {})
+        if (fx.buildSection)       buildSection(fx.buildSection)
         if (fx.styleSection)       styledSection(fx.styleSection)
         if (fx.enableInteractivity) enableInteractivity()
       }
@@ -75,8 +75,7 @@ export default function CodeChallengeStep({ step, onComplete }) {
                 onKeyDown={(e) => e.key === 'Enter' && check()}
                 placeholder={ageGroup === 'young' ? step.blanks?.[bi]?.answer : '...'}
                 className="inline-block rounded px-1.5 focus:outline-none w-16 text-center"
-                style={{ backgroundColor: 'rgba(59,130,246,0.1)', border: '2px solid #3b82f6', color: '#93c5fd' }}
-                style={{ fontFamily: 'inherit', fontSize: 'inherit' }}
+                style={{ backgroundColor: 'rgba(59,130,246,0.1)', border: '2px solid #3b82f6', color: '#93c5fd', fontFamily: 'inherit', fontSize: 'inherit' }}
                 autoFocus={bi === 0}
               />
             )

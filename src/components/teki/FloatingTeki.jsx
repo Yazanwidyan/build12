@@ -14,8 +14,14 @@ import { useEffect, useMemo, useRef } from "react";
 import TekiCharacter from "./TekiCharacter";
 
 const TEKI_WIDTH = 390;
-const DEFAULT_LEFT = typeof window !== "undefined" ? Math.max(20, (window.innerWidth - TEKI_WIDTH) / 2) : 20;
-const DEFAULT_TOP = typeof window !== "undefined" ? Math.max(44, window.innerHeight / 2 - 120) : 300;
+const DEFAULT_LEFT =
+  typeof window !== "undefined"
+    ? Math.max(20, (window.innerWidth - TEKI_WIDTH) / 2)
+    : 20;
+const DEFAULT_TOP =
+  typeof window !== "undefined"
+    ? Math.max(44, window.innerHeight / 2 - 120)
+    : 300;
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },
@@ -43,13 +49,8 @@ function readTime(msg) {
 }
 
 export default function FloatingTeki() {
-  const {
-    currentMessage,
-    isTyping,
-    mood,
-    messageTyped,
-    highlightSection,
-  } = useTekiStore();
+  const { currentMessage, isTyping, mood, messageTyped, highlightSection } =
+    useTekiStore();
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
   const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
   const xp = useProgressStore((s) => s.xp);
@@ -169,40 +170,38 @@ export default function FloatingTeki() {
               <TekiCharacter size={72} mood={mood} />
             </motion.div>
           </div>
-
-          {/* Content: always visible, no hiding during message delivery */}
-          <div
-            className="flex-1 min-w-0 pointer-events-auto"
-            onPointerDown={(e) => e.stopPropagation()}
-          >
-            {currentStep && (
-              isPanel ? (
-                <div
-                  className="rounded-2xl overflow-y-auto pointer-events-auto"
-                  style={{
-                    backgroundColor: "var(--app-surface)",
-                    border: "1px solid var(--bubble-border)",
-                    padding: "12px",
-                    maxHeight: "60vh",
-                  }}
-                >
-                  <MissionRunner
-                    step={currentStep}
-                    stepIndex={currentStepIndex}
-                    onComplete={advanceStep}
-                  />
-                </div>
-              ) : (
-                <div className="pointer-events-auto">
-                  <MissionRunner
-                    step={currentStep}
-                    stepIndex={currentStepIndex}
-                    onComplete={advanceStep}
-                  />
-                </div>
-              )
-            )}
-          </div>
+        </div>
+        {/* Content: always visible, no hiding during message delivery */}
+        <div
+          className="flex-1 min-w-0 pointer-events-auto"
+          onPointerDown={(e) => e.stopPropagation()}
+        >
+          {currentStep &&
+            (isPanel ? (
+              <div
+                className="rounded-2xl overflow-y-auto pointer-events-auto"
+                style={{
+                  backgroundColor: "var(--app-surface)",
+                  border: "1px solid var(--bubble-border)",
+                  padding: "12px",
+                  maxHeight: "60vh",
+                }}
+              >
+                <MissionRunner
+                  step={currentStep}
+                  stepIndex={currentStepIndex}
+                  onComplete={advanceStep}
+                />
+              </div>
+            ) : (
+              <div className="pointer-events-auto">
+                <MissionRunner
+                  step={currentStep}
+                  stepIndex={currentStepIndex}
+                  onComplete={advanceStep}
+                />
+              </div>
+            ))}
         </div>
       </motion.div>
     </>
