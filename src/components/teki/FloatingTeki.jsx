@@ -57,7 +57,7 @@ const getMoodCfg = (m) => MOOD_FLOAT[m] ?? MOOD_FLOAT.happy;
 const MOOD_POP_ROTATE = { excited: 14, proud: -8, amazed: 10, thinking: -5, sad: 4 };
 
 function readTime(msg) {
-  return Math.max(2000, Math.min(msg.length * 30, 4000));
+  return Math.max(3500, Math.min(msg.length * 60, 8000));
 }
 
 // Step type → travel zone
