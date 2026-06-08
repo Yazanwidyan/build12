@@ -1,22 +1,21 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useJourneyStore } from "@/stores/journeyStore";
-import { buildSectionBounds } from "@/lib/sectionLayout";
+import { buildSectionBounds, SECTION_META } from "@/lib/sectionLayout";
 
 const WebsiteLayoutContext = createContext(null);
 
-// Fallback before the iframe is measured on first render.
 const FALLBACK_RECT = { top: 90, left: 8, width: 800, right: 808 };
 
 export function WebsiteLayoutProvider({ children }) {
   const [iframeEl, setIframeEl] = useState(null);
   const [iframeRect, setIframeRect] = useState(FALLBACK_RECT);
+  const [iframeBounds, setIframeBounds] = useState(null);
 
   const headerBuilt = useJourneyStore((s) => s.website.sections.header.built);
   const heroBuilt   = useJourneyStore((s) => s.website.sections.hero.built);
   const footerBuilt = useJourneyStore((s) => s.website.sections.footer.built);
   const sections    = useJourneyStore((s) => s.website.sections);
 
-  // Callback ref: fires synchronously when the iframe mounts/unmounts.
   const iframeRef = useCallback((el) => {
     if (!el) return;
     setIframeEl(el);
@@ -24,8 +23,6 @@ export function WebsiteLayoutProvider({ children }) {
     setIframeRect({ top: r.top, left: r.left, width: r.width, right: r.right });
   }, []);
 
-  // Re-measure whenever the iframe element changes size (layout animation settling,
-  // viewport toggle, window resize) using ResizeObserver + window resize fallback.
   useEffect(() => {
     if (!iframeEl) return;
     const measure = () => {
@@ -44,11 +41,32 @@ export function WebsiteLayoutProvider({ children }) {
     };
   }, [iframeEl]);
 
-  const sectionBounds = useMemo(
-    () => buildSectionBounds(sections, iframeRect.top),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [headerBuilt, heroBuilt, footerBuilt, iframeRect.top]
-  );
+  // Listen for real section positions reported by the iframe script
+  useEffect(() => {
+    function onMessage(e) {
+      if (e.data?.type !== "section-bounds") return;
+      setIframeBounds(e.data);
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
+  // When sections change the iframe reloads — clear stale bounds so fallback is used briefly
+  useEffect(() => {
+    setIframeBounds(null);
+  }, [headerBuilt, heroBuilt, footerBuilt]);
+
+  const sectionBounds = useMemo(() => {
+    if (iframeBounds) {
+      const offset = iframeRect.top;
+      return {
+        header: { top: offset + iframeBounds.header.top, height: iframeBounds.header.height, ...SECTION_META.header },
+        hero:   { top: offset + iframeBounds.hero.top,   height: iframeBounds.hero.height,   ...SECTION_META.hero   },
+        footer: { top: offset + iframeBounds.footer.top, height: iframeBounds.footer.height, ...SECTION_META.footer },
+      };
+    }
+    return buildSectionBounds(sections, iframeRect.top);
+  }, [iframeBounds, iframeRect.top, headerBuilt, heroBuilt, footerBuilt, sections]);
 
   return (
     <WebsiteLayoutContext.Provider value={{ iframeRef, iframeRect, sectionBounds }}>

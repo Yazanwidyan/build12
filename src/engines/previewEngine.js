@@ -304,7 +304,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     : ''
 
   const heroHTML = !hero.built
-    ? `<div style="position:relative;height:320px;overflow:hidden;background:${effectiveBg};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:0 2rem;">
+    ? `<div style="position:relative;min-height:360px;background:${effectiveBg};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:0 2rem;">
         <div style="position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:#f1f5f920;pointer-events:none;"></div>
         <div style="width:72px;height:18px;border-radius:9999px;background:#e2e8f0;position:absolute;top:20px;"></div>
         <div style="width:58%;height:32px;border-radius:8px;background:#f1f5f9;animation:shimmer 1.8s ease-in-out infinite;"></div>
@@ -337,7 +337,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   const aboutHTML = about.built
     ? about.styled
       ? `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid ${effectivePrimary}10;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:580px;margin:0 auto;display:flex;gap:2rem;align-items:center;">
+          <div style="max-width:860px;margin:0 auto;display:flex;gap:2.5rem;align-items:center;">
             <div style="font-size:3.5rem;flex-shrink:0;">${td.emoji}</div>
             <div>
               <h2 style="color:${effectivePrimary};font-size:1.5rem;font-weight:800;margin:0 0 0.6rem;letter-spacing:-0.02em;">${td.about.heading}</h2>
@@ -346,7 +346,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           </div>
         </section>`
       : `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid #e5e7eb;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:580px;margin:0 auto;">
+          <div style="max-width:860px;margin:0 auto;">
             <div style="display:inline-block;padding:0.15rem 0.5rem;background:#f1f5f9;border-radius:4px;font-family:monospace;font-size:0.68rem;color:#94a3b8;margin-bottom:0.75rem;">&lt;section&gt;</div>
             <h2 style="color:#374151;font-size:1.5rem;font-weight:800;margin:0 0 0.75rem;line-height:1.3;">${td.about.heading}</h2>
             <p style="color:#6b7280;font-size:0.9375rem;line-height:1.7;margin:0;">${td.about.text}</p>
@@ -359,7 +359,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   const featuresHTML = features.built
     ? features.styled
       ? `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid ${effectiveText}0c;animation:fadeIn 0.5s ease-out;">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:640px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;">
             ${td.feats.map(([emoji, title, desc]) => `
               <div onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px ${effectivePrimary}22'" onmouseout="this.style.transform='none';this.style.boxShadow='none'" style="background:${effectivePrimary}0a;border:1.5px solid ${effectivePrimary}1a;border-radius:16px;padding:1.375rem 1rem;text-align:center;transition:transform 0.18s,box-shadow 0.18s;">
                 <div style="font-size:1.75rem;margin-bottom:0.5rem;">${emoji}</div>
@@ -369,7 +369,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           </div>
         </section>`
       : `<section style="padding:2rem;background:${effectiveBg};border-top:1px solid #e5e7eb;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:640px;margin:0 auto;">
+          <div style="max-width:900px;margin:0 auto;">
             <div style="display:inline-block;padding:0.15rem 0.5rem;background:#f1f5f9;border-radius:4px;font-family:monospace;font-size:0.68rem;color:#94a3b8;margin-bottom:0.75rem;">&lt;ul&gt;</div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
               ${td.feats.map(([emoji, title]) => `
@@ -388,7 +388,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     ? gallery.styled
       ? `<section id="section-gallery" style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid ${effectiveText}0c;animation:fadeIn 0.5s ease-out;">
           <h3 style="text-align:center;color:${effectiveText};font-size:1.125rem;font-weight:800;margin:0 0 1.5rem;letter-spacing:-0.01em;">${td.gallery.title}</h3>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;max-width:520px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:900px;margin:0 auto;">
             ${td.gallery.items.map(item => `
               <div onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='none'" style="background:${effectivePrimary}0d;border:1.5px solid ${effectivePrimary}1a;border-radius:12px;padding:1rem 0.5rem;text-align:center;font-size:0.8rem;font-weight:600;color:${effectiveText};transition:transform 0.2s;">
                 ${item}
@@ -396,7 +396,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           </div>
         </section>`
       : `<section style="padding:2rem;background:${effectiveBg};border-top:1px solid #e5e7eb;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:520px;margin:0 auto;">
+          <div style="max-width:900px;margin:0 auto;">
             <div style="display:inline-block;padding:0.15rem 0.5rem;background:#f1f5f9;border-radius:4px;font-family:monospace;font-size:0.68rem;color:#94a3b8;margin-bottom:0.75rem;">document.querySelector()</div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;">
               ${td.gallery.items.map(item => `
@@ -413,7 +413,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     ? testimonials.styled
       ? `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid ${effectivePrimary}10;animation:fadeIn 0.5s ease-out;">
           <h3 style="text-align:center;color:${effectivePrimary};font-size:1.125rem;font-weight:800;margin:0 0 1.5rem;">What People Say</h3>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:640px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;">
             ${td.testimonials.map(item => `
               <div style="background:${effectivePrimary}0a;border:1.5px solid ${effectivePrimary}1a;border-radius:16px;padding:1.25rem 1rem;text-align:center;">
                 <div style="font-size:1.25rem;margin-bottom:0.6rem;">⭐</div>
@@ -423,7 +423,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           </div>
         </section>`
       : `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid #e5e7eb;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:640px;margin:0 auto;">
+          <div style="max-width:900px;margin:0 auto;">
             <div style="display:inline-block;padding:0.15rem 0.5rem;background:#f1f5f9;border-radius:4px;font-family:monospace;font-size:0.68rem;color:#94a3b8;margin-bottom:1rem;">function()</div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
               ${td.testimonials.map(item => `
@@ -441,7 +441,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   const contactHTML = contact.built
     ? contact.styled
       ? `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid ${effectivePrimary}10;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:440px;margin:0 auto;text-align:center;">
+          <div style="max-width:560px;margin:0 auto;text-align:center;">
             <h3 style="color:${effectivePrimary};font-size:1.25rem;font-weight:800;margin:0 0 0.5rem;">${td.contact.heading}</h3>
             <p style="color:${effectiveText};opacity:0.6;font-size:0.875rem;margin:0 0 1.5rem;">${td.contact.subtext}</p>
             <div style="background:${effectivePrimary}08;border:1.5px solid ${effectivePrimary}18;border-radius:16px;padding:1.5rem;">
@@ -451,7 +451,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           </div>
         </section>`
       : `<section style="padding:2.5rem 2rem;background:${effectiveBg};border-top:1px solid #e5e7eb;animation:fadeIn 0.5s ease-out;">
-          <div style="max-width:440px;margin:0 auto;">
+          <div style="max-width:560px;margin:0 auto;">
             <div style="display:inline-block;padding:0.15rem 0.5rem;background:#f1f5f9;border-radius:4px;font-family:monospace;font-size:0.68rem;color:#94a3b8;margin-bottom:1rem;">fetch('/api/contact')</div>
             <div style="background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:12px;padding:1.5rem;">
               <div style="height:14px;background:#e5e7eb;border-radius:4px;margin-bottom:0.875rem;width:55%;"></div>
@@ -501,6 +501,33 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     button { animation: pulse-ring 1.8s ease-out infinite; }
   ` : ''
 
+  const measureScript = `<script>
+(function(){
+  function post(){
+    var header=document.body.firstElementChild;
+    var main=document.querySelector('main');
+    var hero=main&&main.firstElementChild;
+    var els=document.body.children;var footer=null;for(var i=els.length-1;i>=0;i--){if(els[i].tagName!=='SCRIPT'){footer=els[i];break;}}
+    if(!header||!hero||!footer)return;
+    var h=header.getBoundingClientRect();
+    var r=hero.getBoundingClientRect();
+    var f=footer.getBoundingClientRect();
+    window.parent.postMessage({type:'section-bounds',
+      header:{top:h.top,height:h.height},
+      hero:{top:r.top,height:r.height},
+      footer:{top:f.top,height:f.height}
+    },'*');
+  }
+  function postAfterLayout(){requestAnimationFrame(function(){setTimeout(post,60)});}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',postAfterLayout);}
+  else{postAfterLayout();}
+  window.addEventListener('resize',post);
+  document.addEventListener('DOMContentLoaded',function(){
+    new MutationObserver(post).observe(document.body,{childList:true,subtree:true});
+  });
+})();
+<\/script>`
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -509,14 +536,20 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   <title>${name || 'My Website'}</title>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
     html{scroll-behavior:smooth}
     body{
       font-family:${fontFamily === 'serif' ? 'Georgia,serif' : fontFamily === 'monospace' ? "'Courier New',monospace" : 'system-ui,sans-serif'};
       background:${effectiveBg};
       color:${effectiveText};
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
+    main{flex:1;display:flex;flex-direction:column}
     a{color:inherit}
     button{cursor:pointer;border:none}
+    section,div[id^="section-"]{width:100%}
     @keyframes shimmer{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
     @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
     ${highlightCSS}
@@ -534,6 +567,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     ${demoSections}
   </main>
   ${footerHTML}
+  ${measureScript}
 </body>
 </html>`
 }
@@ -613,7 +647,7 @@ function buildDemoSections(demo, primary, bg, text, btnRadius, btnColor, siteNam
       <section id="section-gallery" style="padding:3rem 2rem;background:${bg};border-top:1px solid ${text}11;">
         <h3 style="text-align:center;color:${text};font-size:1.25rem;font-weight:800;margin-bottom:0.5rem;">🐾 Our Pets</h3>
         <p style="text-align:center;color:${text}66;font-size:0.875rem;margin-bottom:2rem;">${demo.pets.length} wonderful friend${demo.pets.length === 1 ? '' : 's'}</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1rem;max-width:600px;margin:0 auto;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;max-width:900px;margin:0 auto;">
           ${demo.pets.map((pet, i) => `
             <div onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'" style="background:${primary}14;border:2px solid ${primary}22;border-radius:16px;padding:1.25rem 0.75rem;text-align:center;transition:transform 0.2s;">
               <div style="font-size:2rem;margin-bottom:0.5rem;">${petEmojis[i % petEmojis.length]}</div>

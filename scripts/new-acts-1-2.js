@@ -282,13 +282,13 @@
             id: 'canvas-footer-copyright',
             type: 'canvas-input',
             highlight: 'footer',
-            teki: "Add your copyright line — like: © 2024 Your Name. The © symbol means you own this website!",
+            teki: "Add your copyright line — like: © 2026 Your Name. The © symbol means you own this website!",
             canvasInput: {
               fieldKey: 'footer-copyright',
               section: 'footer',
               storeKey: 'copyright',
               label: 'Copyright',
-              placeholder: '© 2024 My Website',
+              placeholder: '© 2026 My Website',
             },
             action: "Signed it!",
           },
@@ -314,10 +314,10 @@
             language: 'html',
             code: `<header>...</header>
 <main>...</main>
-<___>© 2024 {{name}}</___>`,
+<___>© 2026 {{name}}</___>`,
             answer: `<header>...</header>
 <main>...</main>
-<footer>© 2024 {{name}}</footer>`,
+<footer>© 2026 {{name}}</footer>`,
             blanks: [{ position: 0, answer: 'footer' }, { position: 1, answer: 'footer' }],
             completionEffect: { buildSection: 'footer' },
             explanations: {

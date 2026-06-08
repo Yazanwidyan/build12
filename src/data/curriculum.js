@@ -15,49 +15,66 @@
 export const ACTS = [
   // ── ACT 1 ── Your Website Awakens ─────────────────────────────────────────────
   {
-    id: 'act1',
+    id: "act1",
     number: 1,
-    title: 'Your Website Awakens',
-    tagline: 'Build it section by section',
-    color: '#3b82f6',
-    emoji: '🏗️',
+    title: "Your Website Awakens",
+    tagline: "Build it section by section",
+    color: "#3b82f6",
+    emoji: "🏗️",
     quiz: [
       {
-        question: 'What is a website made of?',
-        options: ['Bricks and mortar', 'Pages you view in a browser with text, images, and links', 'Spreadsheets and databases only', 'Only videos'],
+        question: "What is a website made of?",
+        options: [
+          "Bricks and mortar",
+          "Pages you view in a browser with text, images, and links",
+          "Spreadsheets and databases only",
+          "Only videos",
+        ],
         correct: 1,
-        explanation: 'A website is a page (or set of pages) that lives on the internet and contains content like text, images, and interactive elements.',
+        explanation:
+          "A website is a page (or set of pages) that lives on the internet and contains content like text, images, and interactive elements.",
       },
       {
-        question: 'What does the HEADER of a website typically show?',
-        options: ['The checkout cart', 'The site name and navigation links', 'The privacy policy', 'Advertisements'],
+        question: "What does the HEADER of a website typically show?",
+        options: [
+          "The checkout cart",
+          "The site name and navigation links",
+          "The privacy policy",
+          "Advertisements",
+        ],
         correct: 1,
-        explanation: 'The header is the top bar — it has your site name and the links that let visitors navigate around.',
+        explanation:
+          "The header is the top bar — it has your site name and the links that let visitors navigate around.",
       },
       {
-        question: 'What is the HERO section?',
-        options: ['A character in a game', 'The big, bold welcome area at the top of a page', 'A type of database', 'The footer of a website'],
+        question: "What is the HERO section?",
+        options: [
+          "A character in a game",
+          "The big, bold welcome area at the top of a page",
+          "A type of database",
+          "The footer of a website",
+        ],
         correct: 1,
-        explanation: 'The hero is the first big section visitors see — it grabs attention with a headline, description, and a call-to-action button.',
+        explanation:
+          "The hero is the first big section visitors see — it grabs attention with a headline, description, and a call-to-action button.",
       },
     ],
     missions: [
-
       // ── Mission 1 — Your First Website ──────────────────────────────────────────
       {
-        id: 'mission-1',
+        id: "mission-1",
         number: 1,
         act: 1,
-        title: 'Your First Website',
-        subtitle: 'Pick a topic and give your site a name',
-        concept: 'website-intro',
+        title: "Your First Website",
+        subtitle: "Pick a topic and give your site a name",
+        concept: "website-intro",
         xp: 100,
-        badge: { id: 'first-website', label: 'First Website', emoji: '🌐' },
+        badge: { id: "first-website", label: "First Website", emoji: "🌐" },
         steps: [
           {
-            id: 'welcome-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "welcome-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Welcome! I'm TEKI — your coding companion! 👋",
               "Together we're going to build a REAL website from scratch.",
@@ -67,23 +84,32 @@ export const ACTS = [
             action: "I'm ready!",
           },
           {
-            id: 'topic-pick',
-            type: 'topic-picker',
+            id: "topic-pick",
+            type: "topic-picker",
             teki: "What is your website going to be about? Pick a topic or type your own!",
-            options: ['Pets', 'Space', 'Music', 'Sports', 'Gaming', 'Art', 'Food', 'Travel'],
+            options: [
+              "Pets",
+              "Space",
+              "Music",
+              "Sports",
+              "Gaming",
+              "Art",
+              "Food",
+              "Travel",
+            ],
             action: "That's my topic!",
           },
           {
-            id: 'canvas-site-name',
-            type: 'canvas-input',
-            highlight: 'header',
+            id: "canvas-site-name",
+            type: "canvas-input",
+            highlight: "header",
             teki: "Every website needs a name! See that empty bar at the top? Click it and type your website's name!",
             canvasInput: {
-              fieldKey: 'header-title',
-              section: 'header',
-              storeKey: 'title',
-              label: 'Website name',
-              placeholder: 'My Awesome Website…',
+              fieldKey: "header-title",
+              section: "header",
+              storeKey: "title",
+              label: "Website name",
+              placeholder: "My Awesome Website…",
             },
             action: "That's my name!",
           },
@@ -92,19 +118,19 @@ export const ACTS = [
 
       // ── Mission 2 — Build the Entrance ──────────────────────────────────────────
       {
-        id: 'mission-2',
+        id: "mission-2",
         number: 2,
         act: 1,
-        title: 'Build the Entrance',
-        subtitle: 'Every website starts with a header',
-        concept: 'header',
+        title: "Build the Entrance",
+        subtitle: "Every website starts with a header",
+        concept: "header",
         xp: 120,
         badge: null,
         steps: [
           {
-            id: 'header-explain',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "header-explain",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
               "The HEADER is the first thing visitors see.",
               "Think of it like the sign above a shop door — it shows your name and what's inside.",
@@ -114,63 +140,81 @@ export const ACTS = [
             action: "Got it!",
           },
           {
-            id: 'canvas-header-nav',
-            type: 'canvas-input',
-            highlight: 'header',
+            id: "canvas-header-nav",
+            type: "canvas-input",
+            highlight: "header",
             teki: "Add navigation links! These are the pages people can visit. Type 3–4 page names separated by commas.",
             canvasInput: {
-              fieldKey: 'header-nav',
-              section: 'header',
-              storeKey: 'navLinks',
-              label: 'Navigation links',
-              placeholder: 'Home, About, Projects, Contact…',
+              fieldKey: "header-nav",
+              section: "header",
+              storeKey: "navLinks",
+              label: "Navigation links",
+              placeholder: "Home, About, Projects, Contact…",
               isArray: true,
             },
             action: "Links added!",
           },
           {
-            id: 'header-build-challenge',
-            type: 'code-challenge',
+            id: "header-build-challenge",
+            type: "code-challenge",
             teki: "Now write the HTML tag that tells the browser this is the header. Watch your website!",
-            language: 'html',
-            code: '<___>{{name}}</___>',
-            answer: '<header>{{name}}</header>',
-            blanks: [{ position: 0, answer: 'header' }, { position: 1, answer: 'header' }],
-            completionEffect: { buildSection: 'header' },
+            language: "html",
+            code: "<___>{{name}}</___>",
+            answer: "<header>{{name}}</header>",
+            blanks: [
+              { position: 0, answer: "header" },
+              { position: 1, answer: "header" },
+            ],
+            completionEffect: { buildSection: "header" },
             explanations: {
-              young: "The <header> tag creates the top bar of your website! Fill both blanks with 'header'.",
-              junior: "<header> is a semantic HTML element — it tells the browser this is the site's top navigation area. Opening and closing tags must match.",
-              senior: "<header> is a semantic landmark element. It can appear at page level or inside <article>/<section>. Improves SEO and accessibility.",
+              young:
+                "The <header> tag creates the top bar of your website! Fill both blanks with 'header'.",
+              junior:
+                "<header> is a semantic HTML element — it tells the browser this is the site's top navigation area. Opening and closing tags must match.",
+              senior:
+                "<header> is a semantic landmark element. It can appear at page level or inside <article>/<section>. Improves SEO and accessibility.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Your header appeared on the website — wireframe style!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Your header appeared on the website — wireframe style!",
             action: "Build the header!",
           },
           {
-            id: 'header-wireframe-observe',
-            type: 'observation',
+            id: "header-wireframe-observe",
+            type: "observation",
             teki: "Your header appeared! It's in wireframe style — grey, no color yet. HTML builds the STRUCTURE. Act 2 will paint it with your color!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'header-tag-challenge',
-            type: 'code-challenge',
+            id: "header-tag-challenge",
+            type: "code-challenge",
             teki: "Here's the code behind your header title. One tag is broken — fix the closing tag:",
-            language: 'html',
+            language: "html",
             code: `<header>
   <h1>{{name}}</h___>
 </header>`,
             answer: `<header>
   <h1>{{name}}</h1>
 </header>`,
-            blanks: [{ position: 0, answer: '1' }],
+            blanks: [{ position: 0, answer: "1" }],
             explanations: {
-              young: "HTML tags come in pairs — <h1> opens and </h1> closes. The number has to match!",
-              junior: "Every opening tag needs a matching closing tag. <h1> is a heading level 1 — the most important heading on the page.",
-              senior: "<h1> is a semantic heading. There should be exactly one <h1> per page for SEO. The closing tag must match the opening tag exactly.",
+              young:
+                "HTML tags come in pairs — <h1> opens and </h1> closes. The number has to match!",
+              junior:
+                "Every opening tag needs a matching closing tag. <h1> is a heading level 1 — the most important heading on the page.",
+              senior:
+                "<h1> is a semantic heading. There should be exactly one <h1> per page for SEO. The closing tag must match the opening tag exactly.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
             successMessage: "Header code fixed! 🔧",
             action: "Check it!",
           },
@@ -179,19 +223,19 @@ export const ACTS = [
 
       // ── Mission 3 — First Impressions ────────────────────────────────────────────
       {
-        id: 'mission-3',
+        id: "mission-3",
         number: 3,
         act: 1,
-        title: 'First Impressions',
-        subtitle: 'Build the section that grabs attention',
-        concept: 'hero',
+        title: "First Impressions",
+        subtitle: "Build the section that grabs attention",
+        concept: "hero",
         xp: 130,
         badge: null,
         steps: [
           {
-            id: 'hero-explain',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "hero-explain",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "That big empty space below the header? That's the HERO section.",
               "It's the FIRST thing visitors read — so it has to be bold and clear.",
@@ -201,68 +245,79 @@ export const ACTS = [
             action: "Let's do it!",
           },
           {
-            id: 'canvas-hero-headline',
-            type: 'canvas-input',
-            highlight: 'hero',
+            id: "canvas-hero-headline",
+            type: "canvas-input",
+            highlight: "hero",
             teki: "Type a big, bold headline — what is your website all about in one sentence?",
             canvasInput: {
-              fieldKey: 'hero-headline',
-              section: 'hero',
-              storeKey: 'headline',
-              label: 'Big headline',
-              placeholder: 'Welcome to my world!',
+              fieldKey: "hero-headline",
+              section: "hero",
+              storeKey: "headline",
+              label: "Big headline",
+              placeholder: "Welcome to my world!",
             },
             action: "Bold and ready!",
           },
           {
-            id: 'canvas-hero-subtext',
-            type: 'canvas-input',
-            highlight: 'hero',
+            id: "canvas-hero-subtext",
+            type: "canvas-input",
+            highlight: "hero",
             teki: "Now add one supporting line — tell visitors exactly what they'll find here!",
             canvasInput: {
-              fieldKey: 'hero-subtext',
-              section: 'hero',
-              storeKey: 'subtext',
-              label: 'Description',
-              placeholder: 'A place for…',
+              fieldKey: "hero-subtext",
+              section: "hero",
+              storeKey: "subtext",
+              label: "Description",
+              placeholder: "A place for…",
             },
             action: "Perfect!",
           },
           {
-            id: 'canvas-hero-button',
-            type: 'canvas-input',
-            highlight: 'hero',
+            id: "canvas-hero-button",
+            type: "canvas-input",
+            highlight: "hero",
             teki: "Every great hero needs a CALL TO ACTION — a button that invites visitors to do something. What should yours say?",
             canvasInput: {
-              fieldKey: 'hero-button',
-              section: 'hero',
-              storeKey: 'buttonText',
-              label: 'Button text',
-              placeholder: 'Explore →',
+              fieldKey: "hero-button",
+              section: "hero",
+              storeKey: "buttonText",
+              label: "Button text",
+              placeholder: "Explore →",
             },
             action: "Button text set!",
           },
           {
-            id: 'hero-build-challenge',
-            type: 'code-challenge',
+            id: "hero-build-challenge",
+            type: "code-challenge",
             teki: "Your button was made with ONE HTML tag. Fill in both blanks — and watch your hero section appear!",
-            language: 'html',
+            language: "html",
             code: `<___>{{buttonText}}</___>`,
             answer: `<button>{{buttonText}}</button>`,
-            blanks: [{ position: 0, answer: 'button' }, { position: 1, answer: 'button' }],
-            completionEffect: { buildSection: 'hero' },
+            blanks: [
+              { position: 0, answer: "button" },
+              { position: 1, answer: "button" },
+            ],
+            completionEffect: { buildSection: "hero" },
             explanations: {
-              young: "The <button> tag makes something you can click. It needs both an opening <button> AND a closing </button>!",
-              junior: "<button> creates a clickable element. Right now it looks plain because the hero is in wireframe mode — CSS will style it in Act 2!",
-              senior: "Use <button type='button'> for JS-driven actions to avoid accidental form submissions inside forms.",
+              young:
+                "The <button> tag makes something you can click. It needs both an opening <button> AND a closing </button>!",
+              junior:
+                "<button> creates a clickable element. Right now it looks plain because the hero is in wireframe mode — CSS will style it in Act 2!",
+              senior:
+                "Use <button type='button'> for JS-driven actions to avoid accidental form submissions inside forms.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Hero section appeared on your website — wireframe style!",
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Hero section appeared on your website — wireframe style!",
             action: "Build the hero!",
           },
           {
-            id: 'hero-wireframe-observe',
-            type: 'observation',
+            id: "hero-wireframe-observe",
+            type: "observation",
             teki: "Your hero appeared! Grey and plain right now — that's the HTML wireframe. Two sections built! Next: the footer.",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
@@ -272,19 +327,19 @@ export const ACTS = [
 
       // ── Mission 4 — Seal the Deal ─────────────────────────────────────────────────
       {
-        id: 'mission-4',
+        id: "mission-4",
         number: 4,
         act: 1,
-        title: 'Seal the Deal',
-        subtitle: 'Finish your website with a footer',
-        concept: 'footer',
+        title: "Seal the Deal",
+        subtitle: "Finish your website with a footer",
+        concept: "footer",
         xp: 100,
-        badge: { id: 'website-built', label: 'Website Built', emoji: '🌐' },
+        badge: { id: "website-built", label: "Website Built", emoji: "🌐" },
         steps: [
           {
-            id: 'footer-explain',
-            type: 'teki-message',
-            mood: 'happy',
+            id: "footer-explain",
+            type: "teki-message",
+            mood: "happy",
             messages: [
               "Almost done! One more section: the FOOTER.",
               "It's the last thing at the bottom of every website.",
@@ -294,70 +349,82 @@ export const ACTS = [
             action: "Let's finish it!",
           },
           {
-            id: 'canvas-footer-copyright',
-            type: 'canvas-input',
-            highlight: 'footer',
-            teki: "Add your copyright line — like: © 2024 Your Name. The © symbol means you own this website!",
+            id: "canvas-footer-copyright",
+            type: "canvas-input",
+            highlight: "footer",
+            teki: "Add your copyright line — like: © 2026 Your Name. The © symbol means you own this website!",
             canvasInput: {
-              fieldKey: 'footer-copyright',
-              section: 'footer',
-              storeKey: 'copyright',
-              label: 'Copyright',
-              placeholder: '© 2024 My Website',
+              fieldKey: "footer-copyright",
+              section: "footer",
+              storeKey: "copyright",
+              label: "Copyright",
+              placeholder: "© 2026 My Website",
             },
             action: "Signed it!",
           },
           {
-            id: 'canvas-footer-links',
-            type: 'canvas-input',
-            highlight: 'footer',
+            id: "canvas-footer-links",
+            type: "canvas-input",
+            highlight: "footer",
             teki: "Now add footer links. Visitors expect Privacy, Terms, and Contact at the bottom of every professional site!",
             canvasInput: {
-              fieldKey: 'footer-links',
-              section: 'footer',
-              storeKey: 'links',
-              label: 'Footer links',
-              placeholder: 'Privacy, Terms, Contact…',
+              fieldKey: "footer-links",
+              section: "footer",
+              storeKey: "links",
+              label: "Footer links",
+              placeholder: "Privacy, Terms, Contact…",
               isArray: true,
             },
             action: "Footer links added!",
           },
           {
-            id: 'footer-tag-challenge',
-            type: 'code-challenge',
+            id: "footer-tag-challenge",
+            type: "code-challenge",
             teki: "Complete the page structure — what tag surrounds the bottom content? This will build your footer!",
-            language: 'html',
+            language: "html",
             code: `<header>...</header>
 <main>...</main>
-<___>© 2024 {{name}}</___>`,
+<___>© 2026 {{name}}</___>`,
             answer: `<header>...</header>
 <main>...</main>
-<footer>© 2024 {{name}}</footer>`,
-            blanks: [{ position: 0, answer: 'footer' }, { position: 1, answer: 'footer' }],
-            completionEffect: { buildSection: 'footer' },
+<footer>© 2026 {{name}}</footer>`,
+            blanks: [
+              { position: 0, answer: "footer" },
+              { position: 1, answer: "footer" },
+            ],
+            completionEffect: { buildSection: "footer" },
             explanations: {
-              young: "Just like a book has a first page AND a last page, websites have a <header> AND a <footer>!",
-              junior: "<footer> is a semantic HTML element for page-bottom content — copyright, links, and contact info.",
-              senior: "<footer> is a semantic landmark element. It can appear inside <article> or <section>, not just at the page level.",
+              young:
+                "Just like a book has a first page AND a last page, websites have a <header> AND a <footer>!",
+              junior:
+                "<footer> is a semantic HTML element for page-bottom content — copyright, links, and contact info.",
+              senior:
+                "<footer> is a semantic landmark element. It can appear inside <article> or <section>, not just at the page level.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Footer appeared! Three wireframe sections — your website's skeleton is complete!",
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Footer appeared! Three wireframe sections — your website's skeleton is complete!",
             action: "Check it!",
           },
           {
-            id: 'website-complete-observe',
-            type: 'observation',
+            id: "website-complete-observe",
+            type: "observation",
             teki: "Header. Hero. Footer. All three sections built — all in wireframe style! HTML gave your website STRUCTURE. Next act: CSS will paint every section with your color and font!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
           {
-            id: 'act1-complete',
-            type: 'act-complete',
-            actId: 'act1',
-            title: 'ACT 1 Complete!',
-            message: "You built a real website with a header, hero, and footer — in wireframe style. You wrote the HTML tags that made each section appear. Now let's make them look stunning with CSS!",
-            power: { label: 'Website Builder', emoji: '🏗️' },
+            id: "act1-complete",
+            type: "act-complete",
+            actId: "act1",
+            title: "ACT 1 Complete!",
+            message:
+              "You built a real website with a header, hero, and footer — in wireframe style. You wrote the HTML tags that made each section appear. Now let's make them look stunning with CSS!",
+            power: { label: "Website Builder", emoji: "🏗️" },
             xpBonus: 200,
             action: "Enter the Design Studio!",
           },
@@ -368,49 +435,66 @@ export const ACTS = [
 
   // ── ACT 2 ── Design Studio ──────────────────────────────────────────────────────
   {
-    id: 'act2',
+    id: "act2",
     number: 2,
-    title: 'Design Studio',
-    tagline: 'Make it beautiful',
-    color: '#ec4899',
-    emoji: '🎨',
+    title: "Design Studio",
+    tagline: "Make it beautiful",
+    color: "#ec4899",
+    emoji: "🎨",
     quiz: [
       {
-        question: 'What is a HEX color code like #3b82f6?',
-        options: ['A cheat code for games', 'A secret name for a color used in code', 'A font family name', 'A website address'],
+        question: "What is a HEX color code like #3b82f6?",
+        options: [
+          "A cheat code for games",
+          "A secret name for a color used in code",
+          "A font family name",
+          "A website address",
+        ],
         correct: 1,
-        explanation: 'Hex codes are how code names colors. #3b82f6 is a shade of blue — the # is followed by 6 characters that describe the exact color.',
+        explanation:
+          "Hex codes are how code names colors. #3b82f6 is a shade of blue — the # is followed by 6 characters that describe the exact color.",
       },
       {
-        question: 'What does CSS stand for?',
-        options: ['Computer Screen Style', 'Cascading Style Sheets', 'Colorful Site Settings', 'Custom Script System'],
+        question: "What does CSS stand for?",
+        options: [
+          "Computer Screen Style",
+          "Cascading Style Sheets",
+          "Colorful Site Settings",
+          "Custom Script System",
+        ],
         correct: 1,
-        explanation: "CSS = Cascading Style Sheets. It's the language that controls how HTML elements look — colors, fonts, sizes, and layouts.",
+        explanation:
+          "CSS = Cascading Style Sheets. It's the language that controls how HTML elements look — colors, fonts, sizes, and layouts.",
       },
       {
-        question: 'What does border-radius do in CSS?',
-        options: ['Sets the text color', 'Adds a shadow behind an element', 'Rounds the corners of an element', 'Changes the font size'],
+        question: "What does border-radius do in CSS?",
+        options: [
+          "Sets the text color",
+          "Adds a shadow behind an element",
+          "Rounds the corners of an element",
+          "Changes the font size",
+        ],
         correct: 2,
-        explanation: 'border-radius rounds the corners of boxes! 0 = sharp square corners, 999px = a fully rounded pill shape.',
+        explanation:
+          "border-radius rounds the corners of boxes! 0 = sharp square corners, 999px = a fully rounded pill shape.",
       },
     ],
     missions: [
-
       // ── Mission 5 — The Color Lab ─────────────────────────────────────────────────
       {
-        id: 'mission-5',
+        id: "mission-5",
         number: 5,
         act: 2,
-        title: 'The Color Lab',
-        subtitle: 'CSS paints your wireframe sections one by one',
-        concept: 'colors',
+        title: "The Color Lab",
+        subtitle: "CSS paints your wireframe sections one by one",
+        concept: "colors",
         xp: 110,
         badge: null,
         steps: [
           {
-            id: 'color-explain',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "color-explain",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
               "Your website has structure — now it needs STYLE!",
               "CSS is the painter. HTML was the architect. Look at your three wireframe sections — grey and plain.",
@@ -420,58 +504,78 @@ export const ACTS = [
             action: "Let me paint it!",
           },
           {
-            id: 'color-design',
-            type: 'visual-builder',
+            id: "color-design",
+            type: "visual-builder",
             section: null,
             isStyleUpdate: true,
             teki: "Choose your website's personality! Pick a primary color and a background color.",
             fields: [
-              { id: 'primaryColor', label: 'Primary Color', type: 'color', storeSubKey: 'primaryColor', hint: 'Your brand color — used for buttons, links, and highlights' },
-              { id: 'backgroundColor', label: 'Background Color', type: 'color', storeSubKey: 'backgroundColor', hint: 'The page background — light feels clean, dark feels bold' },
+              {
+                id: "primaryColor",
+                label: "Primary Color",
+                type: "color",
+                storeSubKey: "primaryColor",
+                hint: "Your brand color — used for buttons, links, and highlights",
+              },
+              {
+                id: "backgroundColor",
+                label: "Background Color",
+                type: "color",
+                storeSubKey: "backgroundColor",
+                hint: "The page background — light feels clean, dark feels bold",
+              },
             ],
             action: "Colors are set!",
           },
           {
-            id: 'color-observe',
-            type: 'observation',
+            id: "color-observe",
+            type: "observation",
             teki: "Colors chosen! Now write the CSS to apply them — and watch your header transform from grey to COLORFUL!",
             autoAdvance: true,
             autoAdvanceDelay: 2500,
           },
           {
-            id: 'color-css-challenge',
-            type: 'code-challenge',
+            id: "color-css-challenge",
+            type: "code-challenge",
             teki: "This CSS applies your brand color to the header. Complete the selector — it means 'apply to the WHOLE page':",
-            language: 'css',
+            language: "css",
             code: `___ {
   --primary: {{primaryColor}};
 }`,
             answer: `:root {
   --primary: {{primaryColor}};
 }`,
-            blanks: [{ position: 0, answer: ':root' }],
-            completionEffect: { styleSection: 'header' },
+            blanks: [{ position: 0, answer: ":root" }],
+            completionEffect: { styleSection: "header" },
             explanations: {
-              young: "Type :root — it means 'apply this to the WHOLE page'. Think of it as the master settings panel!",
-              junior: ":root targets the topmost HTML element. CSS variables (--name) defined here are available everywhere in your stylesheet.",
-              senior: ":root has higher specificity than the html selector. CSS custom properties defined here cascade to all child elements and can be overridden locally.",
+              young:
+                "Type :root — it means 'apply this to the WHOLE page'. Think of it as the master settings panel!",
+              junior:
+                ":root targets the topmost HTML element. CSS variables (--name) defined here are available everywhere in your stylesheet.",
+              senior:
+                ":root has higher specificity than the html selector. CSS custom properties defined here cascade to all child elements and can be overridden locally.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Header painted with your color! Grey → Beautiful! 🎨",
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Header painted with your color! Grey → Beautiful! 🎨",
             action: "Paint the header!",
           },
           {
-            id: 'header-styled-observe',
-            type: 'observation',
+            id: "header-styled-observe",
+            type: "observation",
             teki: "Your header transformed! One CSS rule — instant color. Now let's paint the hero section!",
             autoAdvance: true,
             autoAdvanceDelay: 2500,
           },
           {
-            id: 'color-bg-challenge',
-            type: 'code-challenge',
+            id: "color-bg-challenge",
+            type: "code-challenge",
             teki: "background-color fills the hero section. Complete the property name:",
-            language: 'css',
+            language: "css",
             code: `main {
   background-___: #f8fafc;
   padding: 2rem;
@@ -480,20 +584,27 @@ export const ACTS = [
   background-color: #f8fafc;
   padding: 2rem;
 }`,
-            blanks: [{ position: 0, answer: 'color' }],
-            completionEffect: { styleSection: 'hero' },
+            blanks: [{ position: 0, answer: "color" }],
+            completionEffect: { styleSection: "hero" },
             explanations: {
-              young: "background-color fills the background of a section with color!",
-              junior: "background-color sets the background. Use background shorthand for gradients or images.",
-              senior: "Prefer background-color for solid colors — it's explicit. background is shorthand for multiple properties.",
+              young:
+                "background-color fills the background of a section with color!",
+              junior:
+                "background-color sets the background. Use background shorthand for gradients or images.",
+              senior:
+                "Prefer background-color for solid colors — it's explicit. background is shorthand for multiple properties.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
             successMessage: "Hero section styled! Two down, one to go!",
             action: "Style the hero!",
           },
           {
-            id: 'hero-styled-observe',
-            type: 'observation',
+            id: "hero-styled-observe",
+            type: "observation",
             teki: "Two sections styled! Header and hero are both colorful now. One more — the footer!",
             autoAdvance: true,
             autoAdvanceDelay: 2500,
@@ -503,19 +614,19 @@ export const ACTS = [
 
       // ── Mission 6 — Fonts & Buttons ───────────────────────────────────────────────
       {
-        id: 'mission-6',
+        id: "mission-6",
         number: 6,
         act: 2,
-        title: 'Fonts & Buttons',
-        subtitle: 'Typography and shapes complete the design',
-        concept: 'typography',
+        title: "Fonts & Buttons",
+        subtitle: "Typography and shapes complete the design",
+        concept: "typography",
         xp: 130,
-        badge: { id: 'designer', label: 'Designer', emoji: '🎨' },
+        badge: { id: "designer", label: "Designer", emoji: "🎨" },
         steps: [
           {
-            id: 'font-explain',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "font-explain",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Design isn't just colors — FONTS have personality too!",
               "A modern sans-serif feels like technology. A classic serif feels like a newspaper.",
@@ -525,29 +636,45 @@ export const ACTS = [
             action: "Let's style it!",
           },
           {
-            id: 'font-design',
-            type: 'visual-builder',
+            id: "font-design",
+            type: "visual-builder",
             section: null,
             isStyleUpdate: true,
             teki: "Pick your font style and button shape — this is your website's personality!",
             fields: [
-              { id: 'fontFamily', label: 'Font Style', type: 'select', options: ['sans-serif', 'serif', 'monospace'], labels: ['Modern', 'Classic', 'Code'], storeSubKey: 'fontFamily', hint: 'The overall text personality' },
-              { id: 'buttonStyle', label: 'Button Shape', type: 'select', options: ['rounded', 'pill', 'square'], labels: ['Rounded', 'Pill', 'Square'], storeSubKey: 'buttonStyle', hint: 'How your buttons look' },
+              {
+                id: "fontFamily",
+                label: "Font Style",
+                type: "select",
+                options: ["sans-serif", "serif", "monospace"],
+                labels: ["Modern", "Classic", "Code"],
+                storeSubKey: "fontFamily",
+                hint: "The overall text personality",
+              },
+              {
+                id: "buttonStyle",
+                label: "Button Shape",
+                type: "select",
+                options: ["rounded", "pill", "square"],
+                labels: ["Rounded", "Pill", "Square"],
+                storeSubKey: "buttonStyle",
+                hint: "How your buttons look",
+              },
             ],
             action: "Styled!",
           },
           {
-            id: 'font-observe',
-            type: 'observation',
+            id: "font-observe",
+            type: "observation",
             teki: "Perfect choices! Now write the CSS to apply your font — and watch the footer get styled at the same time!",
             autoAdvance: true,
             autoAdvanceDelay: 2500,
           },
           {
-            id: 'font-css-challenge',
-            type: 'code-challenge',
+            id: "font-css-challenge",
+            type: "code-challenge",
             teki: "Here's the CSS that sets your font across the whole website. Fill in the property name:",
-            language: 'css',
+            language: "css",
             code: `body {
   ___-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -556,31 +683,40 @@ export const ACTS = [
   font-family: 'Inter', sans-serif;
   font-size: 16px;
 }`,
-            blanks: [{ position: 0, answer: 'font' }],
-            completionEffect: { styleSection: 'footer' },
+            blanks: [{ position: 0, answer: "font" }],
+            completionEffect: { styleSection: "footer" },
             explanations: {
-              young: "font-family changes the STYLE of all text! 'Inter' is the name of the font.",
-              junior: "font-family sets the typeface for all text inside <body>. Always include a fallback (like sans-serif) in case the named font doesn't load.",
-              senior: "Font stacks: primary font → fallback → generic family. Use system-ui or Inter for performant UI. Self-host fonts or use font-display: swap.",
+              young:
+                "font-family changes the STYLE of all text! 'Inter' is the name of the font.",
+              junior:
+                "font-family sets the typeface for all text inside <body>. Always include a fallback (like sans-serif) in case the named font doesn't load.",
+              senior:
+                "Font stacks: primary font → fallback → generic family. Use system-ui or Inter for performant UI. Self-host fonts or use font-display: swap.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Footer styled! All three sections now have your full design applied! 🎨",
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Footer styled! All three sections now have your full design applied! 🎨",
             action: "Style the footer!",
           },
           {
-            id: 'all-styled-observe',
-            type: 'observation',
+            id: "all-styled-observe",
+            type: "observation",
             teki: "LOOK at your website now! Header, hero, and footer — all with your colors and font. You went from grey wireframe to a designed website with CSS!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
           {
-            id: 'act2-complete',
-            type: 'act-complete',
-            actId: 'act2',
-            title: 'ACT 2 Complete!',
-            message: "Every section transformed from wireframe to designed! You wrote CSS that painted your header, hero, and footer. Colors + fonts + buttons all working together. Now let's add MORE sections with HTML!",
-            power: { label: 'Designer', emoji: '🎨' },
+            id: "act2-complete",
+            type: "act-complete",
+            actId: "act2",
+            title: "ACT 2 Complete!",
+            message:
+              "Every section transformed from wireframe to designed! You wrote CSS that painted your header, hero, and footer. Colors + fonts + buttons all working together. Now let's add MORE sections with HTML!",
+            power: { label: "Designer", emoji: "🎨" },
             xpBonus: 200,
             action: "Build more sections!",
           },
@@ -589,172 +725,231 @@ export const ACTS = [
     ],
   },
 
-// ── ACT 3 ── Building with HTML ─────────────────────────────────────────────
+  // ── ACT 3 ── Building with HTML ─────────────────────────────────────────────
   {
-    id: 'act3',
+    id: "act3",
     number: 3,
-    title: 'Building with HTML',
-    tagline: 'Every website starts with structure',
-    color: '#f59e0b',
-    emoji: '🏗️',
+    title: "Building with HTML",
+    tagline: "Every website starts with structure",
+    color: "#f59e0b",
+    emoji: "🏗️",
     quiz: [
       {
-        question: 'What does HTML stand for?',
-        options: ['High Tech Markup Layout', 'HyperText Markup Language', 'Home Template Making Language', 'How To Make Links'],
+        question: "What does HTML stand for?",
+        options: [
+          "High Tech Markup Layout",
+          "HyperText Markup Language",
+          "Home Template Making Language",
+          "How To Make Links",
+        ],
         correct: 1,
-        explanation: 'HTML = HyperText Markup Language. Every single website on the internet uses it.',
+        explanation:
+          "HTML = HyperText Markup Language. Every single website on the internet uses it.",
       },
       {
-        question: 'What is an HTML TAG?',
-        options: ['A type of password', 'A color value', 'A label wrapped in < > that gives content meaning', 'A file extension'],
+        question: "What is an HTML TAG?",
+        options: [
+          "A type of password",
+          "A color value",
+          "A label wrapped in < > that gives content meaning",
+          "A file extension",
+        ],
         correct: 2,
-        explanation: 'Tags like <h2> or <p> wrap content and tell the browser WHAT that content is.',
+        explanation:
+          "Tags like <h2> or <p> wrap content and tell the browser WHAT that content is.",
       },
       {
-        question: 'What is the difference between HTML and CSS?',
-        options: ['They do the same thing', 'HTML gives structure, CSS gives style and color', 'CSS gives structure, HTML gives color', 'Both handle interactivity'],
+        question: "What is the difference between HTML and CSS?",
+        options: [
+          "They do the same thing",
+          "HTML gives structure, CSS gives style and color",
+          "CSS gives structure, HTML gives color",
+          "Both handle interactivity",
+        ],
         correct: 1,
-        explanation: 'HTML builds the skeleton — structure and content. CSS paints it — colors, fonts, and spacing.',
+        explanation:
+          "HTML builds the skeleton — structure and content. CSS paints it — colors, fonts, and spacing.",
       },
     ],
     missions: [
-
       // ── Mission 7 — Your About Section ───────────────────────────────────────
       {
-        id: 'mission-7',
+        id: "mission-7",
         number: 7,
         act: 3,
-        title: 'Your About Section',
-        subtitle: 'Write HTML and watch it appear on your website',
-        concept: 'html-headings',
+        title: "Your About Section",
+        subtitle: "Write HTML and watch it appear on your website",
+        concept: "html-headings",
         xp: 120,
         badge: null,
         steps: [
           {
-            id: 'html-intro-1',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "html-intro-1",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'HTML is the language of the web. It gives your page its STRUCTURE — like the skeleton of a body.',
-              'Every element you see is made with tags. Tags look like this: <h2>Title</h2>',
-              'The tag opens, content goes in, the tag closes. When you write the RIGHT tag — something APPEARS on your website! Watch the site on the left!',
+              "HTML is the language of the web. It gives your page its STRUCTURE — like the skeleton of a body.",
+              "Every element you see is made with tags. Tags look like this: <h2>Title</h2>",
+              "The tag opens, content goes in, the tag closes. When you write the RIGHT tag — something APPEARS on your website! Watch the site on the left!",
             ],
-            action: 'Let me try!',
+            action: "Let me try!",
           },
           {
-            id: 'html-h2-challenge',
-            type: 'code-challenge',
-            teki: 'The <h2> tag creates a section heading. Fill in both blanks to add an About section:',
-            language: 'html',
-            code: '<h___>About {{name}}</h___>',
-            answer: '<h2>About {{name}}</h2>',
-            blanks: [{ position: 0, answer: '2' }, { position: 1, answer: '2' }],
-            completionEffect: { buildSection: 'about' },
+            id: "html-h2-challenge",
+            type: "code-challenge",
+            teki: "The <h2> tag creates a section heading. Fill in both blanks to add an About section:",
+            language: "html",
+            code: "<h___>About {{name}}</h___>",
+            answer: "<h2>About {{name}}</h2>",
+            blanks: [
+              { position: 0, answer: "2" },
+              { position: 1, answer: "2" },
+            ],
+            completionEffect: { buildSection: "about" },
             explanations: {
-              young: 'h2 stands for Heading Level 2! A big bold title that appears on your page.',
-              junior: '<h2> is a second-level heading. <h1> is used for the hero headline, <h2> for section titles. Always close your tags!',
-              senior: 'Heading hierarchy matters for SEO and accessibility — one <h1> per page, then h2–h6 for sections.',
+              young:
+                "h2 stands for Heading Level 2! A big bold title that appears on your page.",
+              junior:
+                "<h2> is a second-level heading. <h1> is used for the hero headline, <h2> for section titles. Always close your tags!",
+              senior:
+                "Heading hierarchy matters for SEO and accessibility — one <h1> per page, then h2–h6 for sections.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Your About section just appeared on the website!',
-            action: 'Add it to my website!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Your About section just appeared on the website!",
+            action: "Add it to my website!",
           },
           {
-            id: 'about-appear-observe',
-            type: 'observation',
+            id: "about-appear-observe",
+            type: "observation",
             teki: "Your About section appeared — in wireframe style. No colors yet! That's HTML: pure structure. CSS will paint it in the next act!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'html-section-challenge',
-            type: 'code-challenge',
-            teki: 'The <section> tag wraps related content — like a box that holds a chunk of your page:',
-            language: 'html',
-            code: '<___>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</___>',
-            answer: '<section>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</section>',
-            blanks: [{ position: 0, answer: 'section' }, { position: 1, answer: 'section' }],
+            id: "html-section-challenge",
+            type: "code-challenge",
+            teki: "The <section> tag wraps related content — like a box that holds a chunk of your page:",
+            language: "html",
+            code: "<___>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</___>",
+            answer:
+              "<section>\n  <h2>About Us</h2>\n  <p>Content here...</p>\n</section>",
+            blanks: [
+              { position: 0, answer: "section" },
+              { position: 1, answer: "section" },
+            ],
             explanations: {
-              young: 'A section is like a labeled box that holds a chunk of your website!',
-              junior: '<section> groups related content semantically. It helps search engines understand your page structure.',
-              senior: '<section> is a semantic landmark. Each one should ideally contain a heading.',
+              young:
+                "A section is like a labeled box that holds a chunk of your website!",
+              junior:
+                "<section> groups related content semantically. It helps search engines understand your page structure.",
+              senior:
+                "<section> is a semantic landmark. Each one should ideally contain a heading.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Section tag mastered! 📦',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Section tag mastered! 📦",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 8 — Your Features Section ────────────────────────────────────
       {
-        id: 'mission-8',
+        id: "mission-8",
         number: 8,
         act: 3,
-        title: 'Your Features Section',
-        subtitle: 'Paragraphs and lists bring your content to life',
-        concept: 'html-content',
+        title: "Your Features Section",
+        subtitle: "Paragraphs and lists bring your content to life",
+        concept: "html-content",
         xp: 130,
         badge: null,
         steps: [
           {
-            id: 'html-p-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "html-p-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
-              'The <p> tag holds paragraph text — the most common tag on any website. Every sentence of content you read online is usually inside a <p>!',
+              "The <p> tag holds paragraph text — the most common tag on any website. Every sentence of content you read online is usually inside a <p>!",
             ],
-            action: 'Got it!',
+            action: "Got it!",
           },
           {
-            id: 'html-p-challenge',
-            type: 'code-challenge',
-            teki: 'Complete the paragraph tag:',
-            language: 'html',
-            code: '<___>{{subtext}}</___>',
-            answer: '<p>{{subtext}}</p>',
-            blanks: [{ position: 0, answer: 'p' }, { position: 1, answer: 'p' }],
+            id: "html-p-challenge",
+            type: "code-challenge",
+            teki: "Complete the paragraph tag:",
+            language: "html",
+            code: "<___>{{subtext}}</___>",
+            answer: "<p>{{subtext}}</p>",
+            blanks: [
+              { position: 0, answer: "p" },
+              { position: 1, answer: "p" },
+            ],
             explanations: {
-              young: '<p> means paragraph! It wraps a block of text on your page.',
-              junior: '<p> renders as a block-level element with default top/bottom margin. Use it for any block of body text.',
-              senior: '<p> is block-level. Nesting block elements inside inline elements is invalid HTML.',
+              young:
+                "<p> means paragraph! It wraps a block of text on your page.",
+              junior:
+                "<p> renders as a block-level element with default top/bottom margin. Use it for any block of body text.",
+              senior:
+                "<p> is block-level. Nesting block elements inside inline elements is invalid HTML.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Paragraph added! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Paragraph added! ✅",
+            action: "Check it!",
           },
           {
-            id: 'html-list-teki',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "html-list-teki",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'Lists are everywhere on websites! <ul> creates a bullet-point list. Each item inside it goes in an <li> tag.',
-              'Solve the next challenge and a Features section will appear on your website!',
+              "Lists are everywhere on websites! <ul> creates a bullet-point list. Each item inside it goes in an <li> tag.",
+              "Solve the next challenge and a Features section will appear on your website!",
             ],
-            action: 'Add it!',
+            action: "Add it!",
           },
           {
-            id: 'html-li-challenge',
-            type: 'code-challenge',
-            teki: 'What tag goes inside a <ul> list?',
-            language: 'html',
-            code: '<ul>\n  <___>First Feature</___>\n  <li>Second Feature</li>\n  <li>Third Feature</li>\n</ul>',
-            answer: '<ul>\n  <li>First Feature</li>\n  <li>Second Feature</li>\n  <li>Third Feature</li>\n</ul>',
-            blanks: [{ position: 0, answer: 'li' }, { position: 1, answer: 'li' }],
-            completionEffect: { buildSection: 'features' },
+            id: "html-li-challenge",
+            type: "code-challenge",
+            teki: "What tag goes inside a <ul> list?",
+            language: "html",
+            code: "<ul>\n  <___>First Feature</___>\n  <li>Second Feature</li>\n  <li>Third Feature</li>\n</ul>",
+            answer:
+              "<ul>\n  <li>First Feature</li>\n  <li>Second Feature</li>\n  <li>Third Feature</li>\n</ul>",
+            blanks: [
+              { position: 0, answer: "li" },
+              { position: 1, answer: "li" },
+            ],
+            completionEffect: { buildSection: "features" },
             explanations: {
-              young: "<li> means List Item! It's the bullet point inside your list.",
-              junior: '<li> items go inside <ul> (unordered) or <ol> (ordered). Each item holds inline or block content.',
-              senior: '<ul>/<ol> with <li> is the semantic way to mark up lists — important for screen readers and SEO.',
+              young:
+                "<li> means List Item! It's the bullet point inside your list.",
+              junior:
+                "<li> items go inside <ul> (unordered) or <ol> (ordered). Each item holds inline or block content.",
+              senior:
+                "<ul>/<ol> with <li> is the semantic way to mark up lists — important for screen readers and SEO.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Features section appeared on your website!',
-            action: 'Add features to my site!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Features section appeared on your website!",
+            action: "Add features to my site!",
           },
           {
-            id: 'features-appear-observe',
-            type: 'observation',
-            teki: 'Two new sections on your website — wireframe style! HTML builds raw structure. Next act, CSS turns this wireframe into something beautiful!',
+            id: "features-appear-observe",
+            type: "observation",
+            teki: "Two new sections on your website — wireframe style! HTML builds raw structure. Next act, CSS turns this wireframe into something beautiful!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
@@ -763,61 +958,69 @@ export const ACTS = [
 
       // ── Mission 9 — Links & Act Complete ──────────────────────────────────────
       {
-        id: 'mission-9',
+        id: "mission-9",
         number: 9,
         act: 3,
-        title: 'Linking It All',
-        subtitle: 'Links connect the entire web together',
-        concept: 'html-links',
+        title: "Linking It All",
+        subtitle: "Links connect the entire web together",
+        concept: "html-links",
         xp: 100,
-        badge: { id: 'html-builder', label: 'HTML Builder', emoji: '🏗️' },
+        badge: { id: "html-builder", label: "HTML Builder", emoji: "🏗️" },
         steps: [
           {
-            id: 'html-link-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "html-link-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
-              'Links are the backbone of the internet — they connect every page to every other page.',
-              'The <a> tag creates a clickable link. The href attribute tells it WHERE to go.',
+              "Links are the backbone of the internet — they connect every page to every other page.",
+              "The <a> tag creates a clickable link. The href attribute tells it WHERE to go.",
             ],
-            action: 'Got it!',
+            action: "Got it!",
           },
           {
-            id: 'html-href-challenge',
-            type: 'code-challenge',
-            teki: 'Every link needs this attribute — without it, the link goes nowhere:',
-            language: 'html',
+            id: "html-href-challenge",
+            type: "code-challenge",
+            teki: "Every link needs this attribute — without it, the link goes nowhere:",
+            language: "html",
             code: '<a ___="https://example.com">Visit Us</a>',
             answer: '<a href="https://example.com">Visit Us</a>',
-            blanks: [{ position: 0, answer: 'href' }],
+            blanks: [{ position: 0, answer: "href" }],
             explanations: {
-              young: "href stands for Hypertext REFerence — it's the address the link sends you to!",
-              junior: "href is the URL the browser navigates to when clicked. Use href='#section-id' for same-page jumps.",
-              senior: "For external links add rel='noopener noreferrer' for security. Use target='_blank' with rel='noopener'.",
+              young:
+                "href stands for Hypertext REFerence — it's the address the link sends you to!",
+              junior:
+                "href is the URL the browser navigates to when clicked. Use href='#section-id' for same-page jumps.",
+              senior:
+                "For external links add rel='noopener noreferrer' for security. Use target='_blank' with rel='noopener'.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Link connected! 🔗',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Link connected! 🔗",
+            action: "Check it!",
           },
           {
-            id: 'html-review-teki',
-            type: 'teki-message',
-            mood: 'proud',
+            id: "html-review-teki",
+            type: "teki-message",
+            mood: "proud",
             messages: [
               "You've learned the core HTML tags: <h2>, <p>, <section>, <ul>, <li>, <a>. These 6 tags build 90% of every website!",
-              'Two new sections appeared on your website — BUILT by your HTML code. Structure first, style next!',
+              "Two new sections appeared on your website — BUILT by your HTML code. Structure first, style next!",
             ],
-            action: 'Amazing!',
+            action: "Amazing!",
           },
           {
-            id: 'act3-complete',
-            type: 'act-complete',
-            actId: 'act3',
-            title: 'ACT 3 Complete!',
-            message: 'You wrote real HTML and your website grew! About + Features sections appeared — built by your code. They look plain right now because HTML gives structure. Next act: CSS paints them beautiful.',
-            power: { label: 'HTML Builder', emoji: '🏗️' },
+            id: "act3-complete",
+            type: "act-complete",
+            actId: "act3",
+            title: "ACT 3 Complete!",
+            message:
+              "You wrote real HTML and your website grew! About + Features sections appeared — built by your code. They look plain right now because HTML gives structure. Next act: CSS paints them beautiful.",
+            power: { label: "HTML Builder", emoji: "🏗️" },
             xpBonus: 200,
-            action: 'Time to paint it!',
+            action: "Time to paint it!",
           },
         ],
       },
@@ -826,173 +1029,222 @@ export const ACTS = [
 
   // ── ACT 4 ── CSS: Paint Your Website ─────────────────────────────────────────
   {
-    id: 'act4',
+    id: "act4",
     number: 4,
-    title: 'CSS: Paint Your Website',
-    tagline: 'Turn your wireframe into something beautiful',
-    color: '#ec4899',
-    emoji: '🎨',
+    title: "CSS: Paint Your Website",
+    tagline: "Turn your wireframe into something beautiful",
+    color: "#ec4899",
+    emoji: "🎨",
     quiz: [
       {
-        question: 'What does CSS stand for?',
-        options: ['Computer Screen Style', 'Cascading Style Sheets', 'Colorful Site Settings', 'Custom Script System'],
+        question: "What does CSS stand for?",
+        options: [
+          "Computer Screen Style",
+          "Cascading Style Sheets",
+          "Colorful Site Settings",
+          "Custom Script System",
+        ],
         correct: 1,
-        explanation: 'CSS = Cascading Style Sheets. The cascading part means styles inherit and override each other.',
+        explanation:
+          "CSS = Cascading Style Sheets. The cascading part means styles inherit and override each other.",
       },
       {
-        question: 'How do you target an HTML element in CSS?',
-        options: ['Using the href attribute', 'Using a selector like h2 {} or .card {}', 'By writing its tag name in HTML', 'Through JavaScript'],
+        question: "How do you target an HTML element in CSS?",
+        options: [
+          "Using the href attribute",
+          "Using a selector like h2 {} or .card {}",
+          "By writing its tag name in HTML",
+          "Through JavaScript",
+        ],
         correct: 1,
-        explanation: 'CSS selectors target elements. h2 {} targets all <h2> elements. .card {} targets elements with class="card".',
+        explanation:
+          'CSS selectors target elements. h2 {} targets all <h2> elements. .card {} targets elements with class="card".',
       },
       {
         question: 'What does the CSS "color" property affect?',
-        options: ['The background color', 'The border color only', 'The text color of an element', 'All colors at once'],
+        options: [
+          "The background color",
+          "The border color only",
+          "The text color of an element",
+          "All colors at once",
+        ],
         correct: 2,
-        explanation: 'The CSS "color" property sets the text color. For background use "background-color".',
+        explanation:
+          'The CSS "color" property sets the text color. For background use "background-color".',
       },
     ],
     missions: [
-
       // ── Mission 10 — CSS Colors ────────────────────────────────────────────────
       {
-        id: 'mission-10',
+        id: "mission-10",
         number: 10,
         act: 4,
-        title: 'Coloring Your Sections',
-        subtitle: 'CSS brings color and personality to your wireframe',
-        concept: 'css-colors',
+        title: "Coloring Your Sections",
+        subtitle: "CSS brings color and personality to your wireframe",
+        concept: "css-colors",
         xp: 130,
         badge: null,
         steps: [
           {
-            id: 'css-intro-1',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "css-intro-1",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'Your website has structure — now it needs STYLE! CSS is the language that adds colors, fonts, and spacing.',
-              'CSS works like this: target an element, then set rules for it. h2 { color: blue; } — every h2 turns blue!',
-              'Solve the challenge and watch the About section transform from grey to COLORFUL!',
+              "Your website has structure — now it needs STYLE! CSS is the language that adds colors, fonts, and spacing.",
+              "CSS works like this: target an element, then set rules for it. h2 { color: blue; } — every h2 turns blue!",
+              "Solve the challenge and watch the About section transform from grey to COLORFUL!",
             ],
             action: "Let's paint it!",
           },
           {
-            id: 'css-color-challenge',
-            type: 'code-challenge',
-            teki: 'Apply your brand color to the About section heading. What property sets text color?',
-            language: 'css',
-            code: 'h2 {\n  ___: {{primaryColor}};\n}',
-            answer: 'h2 {\n  color: {{primaryColor}};\n}',
-            blanks: [{ position: 0, answer: 'color' }],
-            completionEffect: { styleSection: 'about' },
+            id: "css-color-challenge",
+            type: "code-challenge",
+            teki: "Apply your brand color to the About section heading. What property sets text color?",
+            language: "css",
+            code: "h2 {\n  ___: {{primaryColor}};\n}",
+            answer: "h2 {\n  color: {{primaryColor}};\n}",
+            blanks: [{ position: 0, answer: "color" }],
+            completionEffect: { styleSection: "about" },
             explanations: {
-              young: "'color' is the CSS property for text color! Your primary color will paint your headings.",
-              junior: "The 'color' property sets text color. This targets ALL h2 elements on the page.",
-              senior: 'CSS specificity: element (0,0,1) < class (0,1,0) < ID (1,0,0). Use var(--primary) for design systems.',
+              young:
+                "'color' is the CSS property for text color! Your primary color will paint your headings.",
+              junior:
+                "The 'color' property sets text color. This targets ALL h2 elements on the page.",
+              senior:
+                "CSS specificity: element (0,0,1) < class (0,1,0) < ID (1,0,0). Use var(--primary) for design systems.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'About section styled! Your color is now on the website!',
-            action: 'Apply the color!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "About section styled! Your color is now on the website!",
+            action: "Apply the color!",
           },
           {
-            id: 'about-styled-observe',
-            type: 'observation',
+            id: "about-styled-observe",
+            type: "observation",
             teki: "The About section transformed! Your primary color appeared on the heading. That's CSS magic — one rule changed the whole look!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'css-bg-challenge',
-            type: 'code-challenge',
+            id: "css-bg-challenge",
+            type: "code-challenge",
             teki: "Background color fills an element with a color. What's the property?",
-            language: 'css',
-            code: 'section {\n  background-___: #f8fafc;\n  padding: 2rem;\n}',
-            answer: 'section {\n  background-color: #f8fafc;\n  padding: 2rem;\n}',
-            blanks: [{ position: 0, answer: 'color' }],
+            language: "css",
+            code: "section {\n  background-___: #f8fafc;\n  padding: 2rem;\n}",
+            answer:
+              "section {\n  background-color: #f8fafc;\n  padding: 2rem;\n}",
+            blanks: [{ position: 0, answer: "color" }],
             explanations: {
-              young: 'background-color fills the background of a section with color!',
-              junior: 'background-color sets the background. Use background shorthand for gradients or images.',
-              senior: "Prefer background-color for solid colors — it's explicit. background is shorthand for multiple properties.",
+              young:
+                "background-color fills the background of a section with color!",
+              junior:
+                "background-color sets the background. Use background shorthand for gradients or images.",
+              senior:
+                "Prefer background-color for solid colors — it's explicit. background is shorthand for multiple properties.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Background colored! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Background colored! ✅",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 11 — Spacing & Typography ─────────────────────────────────────
       {
-        id: 'mission-11',
+        id: "mission-11",
         number: 11,
         act: 4,
-        title: 'Space & Type',
-        subtitle: 'Spacing and fonts complete your design',
-        concept: 'css-layout',
+        title: "Space & Type",
+        subtitle: "Spacing and fonts complete your design",
+        concept: "css-layout",
         xp: 150,
-        badge: { id: 'css-painter', label: 'CSS Painter', emoji: '🎨' },
+        badge: { id: "css-painter", label: "CSS Painter", emoji: "🎨" },
         steps: [
           {
-            id: 'css-padding-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "css-padding-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
               "'padding' adds space INSIDE an element. 'margin' adds space OUTSIDE. Without spacing, everything feels cramped!",
               "Let's style the Features section cards!",
             ],
-            action: 'Add some breathing room!',
+            action: "Add some breathing room!",
           },
           {
-            id: 'css-padding-challenge',
-            type: 'code-challenge',
+            id: "css-padding-challenge",
+            type: "code-challenge",
             teki: "Add space inside the feature cards so the text isn't cramped:",
-            language: 'css',
-            code: '.card {\n  ___: 1.5rem;\n  border-radius: 12px;\n}',
-            answer: '.card {\n  padding: 1.5rem;\n  border-radius: 12px;\n}',
-            blanks: [{ position: 0, answer: 'padding' }],
-            completionEffect: { styleSection: 'features' },
+            language: "css",
+            code: ".card {\n  ___: 1.5rem;\n  border-radius: 12px;\n}",
+            answer: ".card {\n  padding: 1.5rem;\n  border-radius: 12px;\n}",
+            blanks: [{ position: 0, answer: "padding" }],
+            completionEffect: { styleSection: "features" },
             explanations: {
-              young: 'padding is breathing room INSIDE a box! More padding = more space around the text.',
-              junior: 'padding: 1.5rem adds equal space on all 4 sides. Use padding: top right bottom left for individual sides.',
-              senior: 'padding shorthand: 1 value = all sides; 2 = top/bottom + left/right; 4 = clockwise. rem scales with root font-size.',
+              young:
+                "padding is breathing room INSIDE a box! More padding = more space around the text.",
+              junior:
+                "padding: 1.5rem adds equal space on all 4 sides. Use padding: top right bottom left for individual sides.",
+              senior:
+                "padding shorthand: 1 value = all sides; 2 = top/bottom + left/right; 4 = clockwise. rem scales with root font-size.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Features section fully styled! Your website looks professional!',
-            action: 'Style the cards!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Features section fully styled! Your website looks professional!",
+            action: "Style the cards!",
           },
           {
-            id: 'features-styled-observe',
-            type: 'observation',
-            teki: 'Your Features section transformed! From a plain wireframe to polished cards. HTML builds it. CSS makes it beautiful!',
+            id: "features-styled-observe",
+            type: "observation",
+            teki: "Your Features section transformed! From a plain wireframe to polished cards. HTML builds it. CSS makes it beautiful!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
           {
-            id: 'css-fontsize-challenge',
-            type: 'code-challenge',
-            teki: 'Font size controls how big text appears. What property sets it?',
-            language: 'css',
-            code: 'h1 {\n  ___-size: 2rem;\n  font-weight: 800;\n}',
-            answer: 'h1 {\n  font-size: 2rem;\n  font-weight: 800;\n}',
-            blanks: [{ position: 0, answer: 'font' }],
+            id: "css-fontsize-challenge",
+            type: "code-challenge",
+            teki: "Font size controls how big text appears. What property sets it?",
+            language: "css",
+            code: "h1 {\n  ___-size: 2rem;\n  font-weight: 800;\n}",
+            answer: "h1 {\n  font-size: 2rem;\n  font-weight: 800;\n}",
+            blanks: [{ position: 0, answer: "font" }],
             explanations: {
-              young: 'font-size makes text bigger or smaller! 2rem is twice the normal size.',
-              junior: 'font-size sets text size. rem is relative to the root element (16px by default). 2rem = 32px.',
-              senior: 'Prefer rem over px to respect user browser settings. Use clamp() for fluid responsive typography.',
+              young:
+                "font-size makes text bigger or smaller! 2rem is twice the normal size.",
+              junior:
+                "font-size sets text size. rem is relative to the root element (16px by default). 2rem = 32px.",
+              senior:
+                "Prefer rem over px to respect user browser settings. Use clamp() for fluid responsive typography.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Typography styled! 📝',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Typography styled! 📝",
+            action: "Check it!",
           },
           {
-            id: 'act4-complete',
-            type: 'act-complete',
-            actId: 'act4',
-            title: 'ACT 4 Complete!',
-            message: 'You took a plain HTML wireframe and painted it with CSS. Colors, spacing, and fonts — all working together. Your website went from skeleton to stunning! Next: JavaScript gives it a brain.',
-            power: { label: 'CSS Painter', emoji: '🎨' },
+            id: "act4-complete",
+            type: "act-complete",
+            actId: "act4",
+            title: "ACT 4 Complete!",
+            message:
+              "You took a plain HTML wireframe and painted it with CSS. Colors, spacing, and fonts — all working together. Your website went from skeleton to stunning! Next: JavaScript gives it a brain.",
+            power: { label: "CSS Painter", emoji: "🎨" },
             xpBonus: 200,
-            action: 'Give it a brain!',
+            action: "Give it a brain!",
           },
         ],
       },
@@ -1001,165 +1253,213 @@ export const ACTS = [
 
   // ── ACT 5 ── JavaScript: Variables & DOM ─────────────────────────────────────
   {
-    id: 'act5',
+    id: "act5",
     number: 5,
-    title: 'JavaScript: Variables & DOM',
-    tagline: 'Give your website a memory',
-    color: '#8b5cf6',
-    emoji: '🧠',
+    title: "JavaScript: Variables & DOM",
+    tagline: "Give your website a memory",
+    color: "#8b5cf6",
+    emoji: "🧠",
     quiz: [
       {
-        question: 'What is a variable in JavaScript?',
-        options: ['A type of HTML tag', 'A named container that stores a value', 'A CSS property', 'A link to another page'],
+        question: "What is a variable in JavaScript?",
+        options: [
+          "A type of HTML tag",
+          "A named container that stores a value",
+          "A CSS property",
+          "A link to another page",
+        ],
         correct: 1,
-        explanation: 'A variable is a labelled box that stores information — a number, a word, or anything your code needs to remember.',
+        explanation:
+          "A variable is a labelled box that stores information — a number, a word, or anything your code needs to remember.",
       },
       {
-        question: 'What is the difference between let and const?',
-        options: ['They do the same thing', 'let can be reassigned, const cannot', 'const is faster', 'let is older and should be avoided'],
+        question: "What is the difference between let and const?",
+        options: [
+          "They do the same thing",
+          "let can be reassigned, const cannot",
+          "const is faster",
+          "let is older and should be avoided",
+        ],
         correct: 1,
-        explanation: 'let allows reassignment. const is a fixed binding — use const by default, let when you need to change it.',
+        explanation:
+          "let allows reassignment. const is a fixed binding — use const by default, let when you need to change it.",
       },
       {
-        question: 'What does document.querySelector() do?',
-        options: ['Creates a new HTML element', 'Sends data to a server', 'Finds an element in the page and returns it', 'Removes an element'],
+        question: "What does document.querySelector() do?",
+        options: [
+          "Creates a new HTML element",
+          "Sends data to a server",
+          "Finds an element in the page and returns it",
+          "Removes an element",
+        ],
         correct: 2,
-        explanation: "querySelector() searches the DOM for the first matching element. document.querySelector('#title') finds the element with id=\"title\".",
+        explanation:
+          "querySelector() searches the DOM for the first matching element. document.querySelector('#title') finds the element with id=\"title\".",
       },
     ],
     missions: [
-
       // ── Mission 12 — Variables ─────────────────────────────────────────────────
       {
-        id: 'mission-12',
+        id: "mission-12",
         number: 12,
         act: 5,
-        title: 'Website Memory',
-        subtitle: 'Variables store information your website needs',
-        concept: 'js-variables',
+        title: "Website Memory",
+        subtitle: "Variables store information your website needs",
+        concept: "js-variables",
         xp: 140,
         badge: null,
         steps: [
           {
-            id: 'js-intro-1',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "js-intro-1",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'HTML = structure. CSS = style. JavaScript = BEHAVIOUR! JS makes your website respond, think, and remember.',
+              "HTML = structure. CSS = style. JavaScript = BEHAVIOUR! JS makes your website respond, think, and remember.",
               "First lesson: variables. A variable stores a value — like a labelled box. let score = 0 — the box is called 'score' and holds 0.",
             ],
-            action: 'I get it!',
+            action: "I get it!",
           },
           {
-            id: 'js-let-challenge',
-            type: 'code-challenge',
+            id: "js-let-challenge",
+            type: "code-challenge",
             teki: "Use 'let' for values that can change:",
-            language: 'javascript',
+            language: "javascript",
             code: '___ visitorName = "{{name}} Fan"\nconsole.log(visitorName)',
-            answer: 'let visitorName = "{{name}} Fan"\nconsole.log(visitorName)',
-            blanks: [{ position: 0, answer: 'let' }],
+            answer:
+              'let visitorName = "{{name}} Fan"\nconsole.log(visitorName)',
+            blanks: [{ position: 0, answer: "let" }],
             explanations: {
-              young: 'let creates a variable you can change later! Like a rewritable sticky note.',
-              junior: "'let' declares a block-scoped variable that can be reassigned. Introduced in ES6 to replace 'var'.",
-              senior: "'let' is block-scoped (inside {}). Avoid 'var' — it's function-scoped and has hoisting quirks.",
+              young:
+                "let creates a variable you can change later! Like a rewritable sticky note.",
+              junior:
+                "'let' declares a block-scoped variable that can be reassigned. Introduced in ES6 to replace 'var'.",
+              senior:
+                "'let' is block-scoped (inside {}). Avoid 'var' — it's function-scoped and has hoisting quirks.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Variable created with let! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Variable created with let! ✅",
+            action: "Check it!",
           },
           {
-            id: 'js-const-challenge',
-            type: 'code-challenge',
+            id: "js-const-challenge",
+            type: "code-challenge",
             teki: "Use 'const' for values that NEVER change:",
-            language: 'javascript',
+            language: "javascript",
             code: '___ siteName = "{{name}}"\nconsole.log(siteName)',
             answer: 'const siteName = "{{name}}"\nconsole.log(siteName)',
-            blanks: [{ position: 0, answer: 'const' }],
+            blanks: [{ position: 0, answer: "const" }],
             explanations: {
-              young: 'const creates a locked variable — you cannot change it once set!',
-              junior: "'const' declares a block-scoped variable that CANNOT be reassigned. Use it for values that shouldn't change.",
-              senior: "'const' prevents reassignment but not mutation. const arr = [] can still have push/pop.",
+              young:
+                "const creates a locked variable — you cannot change it once set!",
+              junior:
+                "'const' declares a block-scoped variable that CANNOT be reassigned. Use it for values that shouldn't change.",
+              senior:
+                "'const' prevents reassignment but not mutation. const arr = [] can still have push/pop.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Constant locked in! 🔒',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Constant locked in! 🔒",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 13 — The DOM ───────────────────────────────────────────────────
       {
-        id: 'mission-13',
+        id: "mission-13",
         number: 13,
         act: 5,
-        title: 'Control Your Website',
-        subtitle: 'JavaScript can find and change any element on your page',
-        concept: 'js-dom',
+        title: "Control Your Website",
+        subtitle: "JavaScript can find and change any element on your page",
+        concept: "js-dom",
         xp: 160,
-        badge: { id: 'js-thinker', label: 'JS Thinker', emoji: '🧠' },
+        badge: { id: "js-thinker", label: "JS Thinker", emoji: "🧠" },
         steps: [
           {
-            id: 'dom-intro-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "dom-intro-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
-              'JavaScript can see EVERY element on your page through the DOM — Document Object Model.',
+              "JavaScript can see EVERY element on your page through the DOM — Document Object Model.",
               "Use document.querySelector('#id') to grab any element. Then change it with .textContent!",
-              'Solve the next challenge and a Gallery section appears on your website — placed there by JavaScript!',
+              "Solve the next challenge and a Gallery section appears on your website — placed there by JavaScript!",
             ],
             action: "Let's grab things!",
           },
           {
-            id: 'js-querySelector-challenge',
-            type: 'code-challenge',
-            teki: 'Grab the hero headline element from the page:',
-            language: 'javascript',
+            id: "js-querySelector-challenge",
+            type: "code-challenge",
+            teki: "Grab the hero headline element from the page:",
+            language: "javascript",
             code: "const title = document.___('#hero-title')",
             answer: "const title = document.querySelector('#hero-title')",
-            blanks: [{ position: 0, answer: 'querySelector' }],
+            blanks: [{ position: 0, answer: "querySelector" }],
             explanations: {
-              young: 'querySelector finds the first element that matches — like a treasure hunter!',
-              junior: "querySelector('#hero-title') finds the element with id='hero-title'. Use '#' for IDs, '.' for classes.",
-              senior: 'querySelector returns the first match or null. Use querySelectorAll for all matches. Optional chain: el?.textContent to avoid null errors.',
+              young:
+                "querySelector finds the first element that matches — like a treasure hunter!",
+              junior:
+                "querySelector('#hero-title') finds the element with id='hero-title'. Use '#' for IDs, '.' for classes.",
+              senior:
+                "querySelector returns the first match or null. Use querySelectorAll for all matches. Optional chain: el?.textContent to avoid null errors.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Element grabbed! 🎯',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Element grabbed! 🎯",
+            action: "Check it!",
           },
           {
-            id: 'js-textContent-challenge',
-            type: 'code-challenge',
+            id: "js-textContent-challenge",
+            type: "code-challenge",
             teki: "Change the element's text with .textContent:",
-            language: 'javascript',
+            language: "javascript",
             code: 'title.___ = "Welcome to {{name}}!"',
             answer: 'title.textContent = "Welcome to {{name}}!"',
-            blanks: [{ position: 0, answer: 'textContent' }],
-            completionEffect: { buildSection: 'gallery' },
+            blanks: [{ position: 0, answer: "textContent" }],
+            completionEffect: { buildSection: "gallery" },
             explanations: {
-              young: 'textContent is the text inside the element! Setting it changes what you see on the page.',
-              junior: '.textContent reads or sets the plain text inside an element. Use .innerHTML if you need to insert HTML tags.',
-              senior: 'textContent is safer than innerHTML — it does not parse HTML and avoids XSS. Use innerHTML only when explicitly needed.',
+              young:
+                "textContent is the text inside the element! Setting it changes what you see on the page.",
+              junior:
+                ".textContent reads or sets the plain text inside an element. Use .innerHTML if you need to insert HTML tags.",
+              senior:
+                "textContent is safer than innerHTML — it does not parse HTML and avoids XSS. Use innerHTML only when explicitly needed.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Text updated AND a gallery appeared — JavaScript building your website live!',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Text updated AND a gallery appeared — JavaScript building your website live!",
+            action: "Check it!",
           },
           {
-            id: 'dom-gallery-observe',
-            type: 'observation',
+            id: "dom-gallery-observe",
+            type: "observation",
             teki: "Your gallery section just appeared — added by JavaScript! Your DOM code ran and built something real on your website. That's developer power!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'act5-complete',
-            type: 'act-complete',
-            actId: 'act5',
-            title: 'ACT 5 Complete!',
-            message: 'You gave your website a brain! Variables store information, and querySelector + textContent let you grab and change anything on the page. Three sections grew on your website through code!',
-            power: { label: 'JS Thinker', emoji: '🧠' },
+            id: "act5-complete",
+            type: "act-complete",
+            actId: "act5",
+            title: "ACT 5 Complete!",
+            message:
+              "You gave your website a brain! Variables store information, and querySelector + textContent let you grab and change anything on the page. Three sections grew on your website through code!",
+            power: { label: "JS Thinker", emoji: "🧠" },
             xpBonus: 200,
-            action: 'Add logic!',
+            action: "Add logic!",
           },
         ],
       },
@@ -1168,215 +1468,273 @@ export const ACTS = [
 
   // ── ACT 6 ── JavaScript: Logic & Events ──────────────────────────────────────
   {
-    id: 'act6',
+    id: "act6",
     number: 6,
-    title: 'JavaScript: Logic & Events',
-    tagline: 'Decisions, clicks, and counters',
-    color: '#06b6d4',
-    emoji: '⚡',
+    title: "JavaScript: Logic & Events",
+    tagline: "Decisions, clicks, and counters",
+    color: "#06b6d4",
+    emoji: "⚡",
     quiz: [
       {
-        question: 'What does an if statement do?',
-        options: ['Loops through an array', 'Runs code ONLY when a condition is true', 'Declares a variable', 'Styles an element'],
+        question: "What does an if statement do?",
+        options: [
+          "Loops through an array",
+          "Runs code ONLY when a condition is true",
+          "Declares a variable",
+          "Styles an element",
+        ],
         correct: 1,
-        explanation: 'An if statement runs a block of code only when its condition is true. If false, the code is skipped.',
+        explanation:
+          "An if statement runs a block of code only when its condition is true. If false, the code is skipped.",
       },
       {
-        question: 'What does addEventListener do?',
-        options: ['Adds a new HTML element', 'Listens for a user action and runs code when it happens', 'Sets a CSS style', 'Creates a variable'],
+        question: "What does addEventListener do?",
+        options: [
+          "Adds a new HTML element",
+          "Listens for a user action and runs code when it happens",
+          "Sets a CSS style",
+          "Creates a variable",
+        ],
         correct: 1,
-        explanation: 'addEventListener attaches a function to an element. When the event fires, the function runs.',
+        explanation:
+          "addEventListener attaches a function to an element. When the event fires, the function runs.",
       },
       {
-        question: 'What does the ++ operator do?',
-        options: ['Multiplies a number by 2', 'Joins two strings together', 'Adds 1 to a variable', 'Subtracts 1 from a variable'],
+        question: "What does the ++ operator do?",
+        options: [
+          "Multiplies a number by 2",
+          "Joins two strings together",
+          "Adds 1 to a variable",
+          "Subtracts 1 from a variable",
+        ],
         correct: 2,
-        explanation: 'count++ is shorthand for count = count + 1. Very common for counters and loops.',
+        explanation:
+          "count++ is shorthand for count = count + 1. Very common for counters and loops.",
       },
     ],
     missions: [
-
       // ── Mission 14 — If Statements ─────────────────────────────────────────────
       {
-        id: 'mission-14',
+        id: "mission-14",
         number: 14,
         act: 6,
-        title: 'Website Decisions',
-        subtitle: 'if statements let your website choose what to do',
-        concept: 'js-conditionals',
+        title: "Website Decisions",
+        subtitle: "if statements let your website choose what to do",
+        concept: "js-conditionals",
         xp: 140,
         badge: null,
         steps: [
           {
-            id: 'if-intro-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "if-intro-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
-              'Every smart website makes DECISIONS. Show this to logged-in users. Hide that from guests. Display a sale banner on Fridays.',
-              'In JavaScript, decisions use if statements: IF this is true, do this. OTHERWISE, do that.',
+              "Every smart website makes DECISIONS. Show this to logged-in users. Hide that from guests. Display a sale banner on Fridays.",
+              "In JavaScript, decisions use if statements: IF this is true, do this. OTHERWISE, do that.",
             ],
             action: "Let's decide things!",
           },
           {
-            id: 'js-if-challenge',
-            type: 'code-challenge',
-            teki: 'Start an if statement that checks if a visitor is new:',
-            language: 'javascript',
-            code: '__ (isNewVisitor) {\n  showWelcomeBanner()\n}',
-            answer: 'if (isNewVisitor) {\n  showWelcomeBanner()\n}',
-            blanks: [{ position: 0, answer: 'if' }],
+            id: "js-if-challenge",
+            type: "code-challenge",
+            teki: "Start an if statement that checks if a visitor is new:",
+            language: "javascript",
+            code: "__ (isNewVisitor) {\n  showWelcomeBanner()\n}",
+            answer: "if (isNewVisitor) {\n  showWelcomeBanner()\n}",
+            blanks: [{ position: 0, answer: "if" }],
             explanations: {
-              young: "'if' is the magic word that says 'only do this when something is true'!",
-              junior: "'if (condition)' runs the block only when condition is truthy.",
-              senior: 'JavaScript uses truthy/falsy values. null, undefined, 0, empty string, NaN, false are falsy — everything else is truthy.',
+              young:
+                "'if' is the magic word that says 'only do this when something is true'!",
+              junior:
+                "'if (condition)' runs the block only when condition is truthy.",
+              senior:
+                "JavaScript uses truthy/falsy values. null, undefined, 0, empty string, NaN, false are falsy — everything else is truthy.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'If statement written! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "If statement written! ✅",
+            action: "Check it!",
           },
           {
-            id: 'js-else-challenge',
-            type: 'code-challenge',
+            id: "js-else-challenge",
+            type: "code-challenge",
             teki: "The else block runs when the if condition is false — the 'otherwise' plan:",
-            language: 'javascript',
-            code: 'if (isLoggedIn) {\n  showDashboard()\n} ___ {\n  showLoginPage()\n}',
-            answer: 'if (isLoggedIn) {\n  showDashboard()\n} else {\n  showLoginPage()\n}',
-            blanks: [{ position: 0, answer: 'else' }],
+            language: "javascript",
+            code: "if (isLoggedIn) {\n  showDashboard()\n} ___ {\n  showLoginPage()\n}",
+            answer:
+              "if (isLoggedIn) {\n  showDashboard()\n} else {\n  showLoginPage()\n}",
+            blanks: [{ position: 0, answer: "else" }],
             explanations: {
-              young: "'else' is the backup plan! If the first condition fails, else runs instead.",
-              junior: "'else' provides a fallback that runs when the if condition is false. if/else covers both outcomes.",
-              senior: 'Prefer early returns over nested if/else in functions. For multiple conditions, if/else if/else is clearer.',
+              young:
+                "'else' is the backup plan! If the first condition fails, else runs instead.",
+              junior:
+                "'else' provides a fallback that runs when the if condition is false. if/else covers both outcomes.",
+              senior:
+                "Prefer early returns over nested if/else in functions. For multiple conditions, if/else if/else is clearer.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Decision logic complete! 🧩',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Decision logic complete! 🧩",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 15 — Events ────────────────────────────────────────────────────
       {
-        id: 'mission-15',
+        id: "mission-15",
         number: 15,
         act: 6,
-        title: 'Click Magic',
-        subtitle: 'Make your website respond to what users do',
-        concept: 'js-events',
+        title: "Click Magic",
+        subtitle: "Make your website respond to what users do",
+        concept: "js-events",
         xp: 160,
         badge: null,
         steps: [
           {
-            id: 'events-intro-teki',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "events-intro-teki",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'Your website can LISTEN for what users do — clicks, key presses, typing.',
-              'addEventListener connects a function to a user action. When the action happens, your function runs!',
-              'Solve the challenge and your hero button will actually DO something when clicked!',
+              "Your website can LISTEN for what users do — clicks, key presses, typing.",
+              "addEventListener connects a function to a user action. When the action happens, your function runs!",
+              "Solve the challenge and your hero button will actually DO something when clicked!",
             ],
-            action: 'Make it click!',
+            action: "Make it click!",
           },
           {
-            id: 'js-addEventListener-challenge',
-            type: 'code-challenge',
-            teki: 'Make the hero button listen for clicks:',
-            language: 'javascript',
+            id: "js-addEventListener-challenge",
+            type: "code-challenge",
+            teki: "Make the hero button listen for clicks:",
+            language: "javascript",
             code: "button.___('click', function() {\n  alert('Welcome to {{name}}! 🎉')\n})",
-            answer: "button.addEventListener('click', function() {\n  alert('Welcome to {{name}}! 🎉')\n})",
-            blanks: [{ position: 0, answer: 'addEventListener' }],
+            answer:
+              "button.addEventListener('click', function() {\n  alert('Welcome to {{name}}! 🎉')\n})",
+            blanks: [{ position: 0, answer: "addEventListener" }],
             completionEffect: { enableInteractivity: true },
             explanations: {
-              young: 'addEventListener makes the button LISTEN! When clicked, it runs your instructions.',
-              junior: "addEventListener(event, handler) attaches a listener. Common events: 'click', 'keydown', 'input', 'submit'.",
-              senior: 'addEventListener is preferred over inline handlers (onclick=). It supports multiple listeners and can be removed with removeEventListener.',
+              young:
+                "addEventListener makes the button LISTEN! When clicked, it runs your instructions.",
+              junior:
+                "addEventListener(event, handler) attaches a listener. Common events: 'click', 'keydown', 'input', 'submit'.",
+              senior:
+                "addEventListener is preferred over inline handlers (onclick=). It supports multiple listeners and can be removed with removeEventListener.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Your hero button is now interactive — try clicking it on the website!',
-            action: 'Make it listen!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Your hero button is now interactive — try clicking it on the website!",
+            action: "Make it listen!",
           },
           {
-            id: 'button-interactive-observe',
-            type: 'observation',
+            id: "button-interactive-observe",
+            type: "observation",
             teki: "Try clicking the button on your website — it responds now! That's an event listener in action. This is how EVERY interactive website works!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
           {
-            id: 'js-value-challenge',
-            type: 'code-challenge',
-            teki: 'To read what a user typed in an input field, use .value:',
-            language: 'javascript',
+            id: "js-value-challenge",
+            type: "code-challenge",
+            teki: "To read what a user typed in an input field, use .value:",
+            language: "javascript",
             code: "const searchBox = document.querySelector('#search')\nconst userTyped = searchBox.___",
-            answer: "const searchBox = document.querySelector('#search')\nconst userTyped = searchBox.value",
-            blanks: [{ position: 0, answer: 'value' }],
+            answer:
+              "const searchBox = document.querySelector('#search')\nconst userTyped = searchBox.value",
+            blanks: [{ position: 0, answer: "value" }],
             explanations: {
-              young: ".value reads what's typed inside an input box! Like peeking inside a text field.",
-              junior: '.value works on <input>, <textarea>, and <select> elements. It returns the current content as a string.',
-              senior: ".value is a live DOM property — it reflects current state, not the initial HTML attribute. Use the 'input' event for reactive updates.",
+              young:
+                ".value reads what's typed inside an input box! Like peeking inside a text field.",
+              junior:
+                ".value works on <input>, <textarea>, and <select> elements. It returns the current content as a string.",
+              senior:
+                ".value is a live DOM property — it reflects current state, not the initial HTML attribute. Use the 'input' event for reactive updates.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Input value read! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Input value read! ✅",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 16 — Counters ──────────────────────────────────────────────────
       {
-        id: 'mission-16',
+        id: "mission-16",
         number: 16,
         act: 6,
-        title: 'Live Counter',
-        subtitle: 'Variables + events = a real feature',
-        concept: 'js-counter',
+        title: "Live Counter",
+        subtitle: "Variables + events = a real feature",
+        concept: "js-counter",
         xp: 180,
-        badge: { id: 'event-master', label: 'Event Master', emoji: '⚡' },
+        badge: { id: "event-master", label: "Event Master", emoji: "⚡" },
         steps: [
           {
-            id: 'counter-intro-teki',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "counter-intro-teki",
+            type: "teki-message",
+            mood: "excited",
             messages: [
-              'Time to build something REAL — a live counter! Think likes, views, or votes.',
-              'A variable holds the count. A click event increments it. The DOM shows the new value. Simple!',
+              "Time to build something REAL — a live counter! Think likes, views, or votes.",
+              "A variable holds the count. A click event increments it. The DOM shows the new value. Simple!",
             ],
-            action: 'Build the counter!',
+            action: "Build the counter!",
           },
           {
-            id: 'js-increment-challenge',
-            type: 'code-challenge',
-            teki: 'The ++ operator adds 1 to a variable — perfect for counting:',
-            language: 'javascript',
+            id: "js-increment-challenge",
+            type: "code-challenge",
+            teki: "The ++ operator adds 1 to a variable — perfect for counting:",
+            language: "javascript",
             code: "let likes = 0\n\nbutton.addEventListener('click', function() {\n  likes___\n  countDisplay.textContent = likes\n})",
-            answer: "let likes = 0\n\nbutton.addEventListener('click', function() {\n  likes++\n  countDisplay.textContent = likes\n})",
-            blanks: [{ position: 0, answer: '++' }],
+            answer:
+              "let likes = 0\n\nbutton.addEventListener('click', function() {\n  likes++\n  countDisplay.textContent = likes\n})",
+            blanks: [{ position: 0, answer: "++" }],
             explanations: {
-              young: '++ adds 1 to your counter every click! likes++ is the same as likes = likes + 1.',
-              junior: 'count++ is a post-increment operator. Equivalent to count = count + 1. Common in click handlers.',
-              senior: 'count++ returns the OLD value, ++count returns the NEW value. For simple counters the distinction rarely matters.',
+              young:
+                "++ adds 1 to your counter every click! likes++ is the same as likes = likes + 1.",
+              junior:
+                "count++ is a post-increment operator. Equivalent to count = count + 1. Common in click handlers.",
+              senior:
+                "count++ returns the OLD value, ++count returns the NEW value. For simple counters the distinction rarely matters.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Counter built! Every click adds 1. ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Counter built! Every click adds 1. ✅",
+            action: "Check it!",
           },
           {
-            id: 'counter-teki-followup',
-            type: 'teki-message',
-            mood: 'proud',
+            id: "counter-teki-followup",
+            type: "teki-message",
+            mood: "proud",
             messages: [
-              'You just combined a variable (likes), an event (click), and the DOM (textContent) into one working feature. That is real programming!',
+              "You just combined a variable (likes), an event (click), and the DOM (textContent) into one working feature. That is real programming!",
             ],
             action: "That's wild!",
           },
           {
-            id: 'act6-complete',
-            type: 'act-complete',
-            actId: 'act6',
-            title: 'ACT 6 Complete!',
-            message: 'Your website can make decisions, respond to clicks, and count interactions. Variables + Events + DOM = any interactive feature you can imagine. One more act: arrays and functions!',
-            power: { label: 'Event Master', emoji: '⚡' },
+            id: "act6-complete",
+            type: "act-complete",
+            actId: "act6",
+            title: "ACT 6 Complete!",
+            message:
+              "Your website can make decisions, respond to clicks, and count interactions. Variables + Events + DOM = any interactive feature you can imagine. One more act: arrays and functions!",
+            power: { label: "Event Master", emoji: "⚡" },
             xpBonus: 200,
-            action: 'Final toolkit!',
+            action: "Final toolkit!",
           },
         ],
       },
@@ -1385,173 +1743,225 @@ export const ACTS = [
 
   // ── ACT 7 ── JavaScript: Power Tools ─────────────────────────────────────────
   {
-    id: 'act7',
+    id: "act7",
     number: 7,
-    title: 'JavaScript: Power Tools',
-    tagline: 'Arrays and functions — the professional toolkit',
-    color: '#f97316',
-    emoji: '🛠️',
+    title: "JavaScript: Power Tools",
+    tagline: "Arrays and functions — the professional toolkit",
+    color: "#f97316",
+    emoji: "🛠️",
     quiz: [
       {
-        question: 'What is an array in JavaScript?',
-        options: ['A type of CSS property', 'A container that holds multiple values in order', 'A way to style elements', 'A database connection'],
+        question: "What is an array in JavaScript?",
+        options: [
+          "A type of CSS property",
+          "A container that holds multiple values in order",
+          "A way to style elements",
+          "A database connection",
+        ],
         correct: 1,
-        explanation: 'An array is a list — a single variable that holds multiple values: const fruits = ["apple", "banana", "cherry"].',
+        explanation:
+          'An array is a list — a single variable that holds multiple values: const fruits = ["apple", "banana", "cherry"].',
       },
       {
-        question: 'What does forEach do?',
-        options: ['Creates a new array', 'Reverses an array', 'Runs a function once for each item in the array', 'Sorts the array alphabetically'],
+        question: "What does forEach do?",
+        options: [
+          "Creates a new array",
+          "Reverses an array",
+          "Runs a function once for each item in the array",
+          "Sorts the array alphabetically",
+        ],
         correct: 2,
-        explanation: 'forEach loops through every item in an array and runs your function once per item.',
+        explanation:
+          "forEach loops through every item in an array and runs your function once per item.",
       },
       {
-        question: 'What does the return keyword do inside a function?',
-        options: ['Starts a new loop', 'Exits the function and sends a value back', 'Creates a variable', 'Styles an element'],
+        question: "What does the return keyword do inside a function?",
+        options: [
+          "Starts a new loop",
+          "Exits the function and sends a value back",
+          "Creates a variable",
+          "Styles an element",
+        ],
         correct: 1,
-        explanation: 'return exits the function and sends a value back to wherever it was called.',
+        explanation:
+          "return exits the function and sends a value back to wherever it was called.",
       },
     ],
     missions: [
-
       // ── Mission 17 — Arrays & forEach ─────────────────────────────────────────
       {
-        id: 'mission-17',
+        id: "mission-17",
         number: 17,
         act: 7,
-        title: 'Dynamic Gallery',
-        subtitle: 'Arrays + forEach power your content gallery',
-        concept: 'js-arrays',
+        title: "Dynamic Gallery",
+        subtitle: "Arrays + forEach power your content gallery",
+        concept: "js-arrays",
         xp: 160,
         badge: null,
         steps: [
           {
-            id: 'arrays-intro-teki',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "arrays-intro-teki",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Imagine showing 50 items on a page. Would you write 50 separate lines of HTML? Arrays save you!",
               "An array is a list: const items = ['Item 1', 'Item 2', 'Item 3']. One variable, many values.",
             ],
-            action: 'One variable for all!',
+            action: "One variable for all!",
           },
           {
-            id: 'js-array-challenge',
-            type: 'code-challenge',
-            teki: 'Create an array of topics for your gallery. Arrays use square brackets:',
-            language: 'javascript',
+            id: "js-array-challenge",
+            type: "code-challenge",
+            teki: "Create an array of topics for your gallery. Arrays use square brackets:",
+            language: "javascript",
             code: 'const topics = ___"{{topic}}", "Community", "News"___',
             answer: 'const topics = ["{{topic}}", "Community", "News"]',
-            blanks: [{ position: 0, answer: '[' }, { position: 1, answer: ']' }],
-            completionEffect: { styleSection: 'gallery' },
-            explanations: {
-              young: 'Square brackets [ ] make an array! Everything inside is your list.',
-              junior: 'Arrays use square bracket notation. Access items with topics[0] (first), topics[1] (second), etc.',
-              senior: 'Arrays are objects in JS. Use Array.isArray() to check. Prefer const for array declarations since the reference does not change.',
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Array created — your gallery is now fully styled with topic data!',
-            action: 'Check it!',
-          },
-          {
-            id: 'forEach-teki',
-            type: 'teki-message',
-            mood: 'thinking',
-            messages: [
-              'forEach lets you loop through every item and do something with each one. Like visiting every house in a street!',
+            blanks: [
+              { position: 0, answer: "[" },
+              { position: 1, answer: "]" },
             ],
-            action: 'Loop through it!',
+            completionEffect: { styleSection: "gallery" },
+            explanations: {
+              young:
+                "Square brackets [ ] make an array! Everything inside is your list.",
+              junior:
+                "Arrays use square bracket notation. Access items with topics[0] (first), topics[1] (second), etc.",
+              senior:
+                "Arrays are objects in JS. Use Array.isArray() to check. Prefer const for array declarations since the reference does not change.",
+            },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Array created — your gallery is now fully styled with topic data!",
+            action: "Check it!",
           },
           {
-            id: 'js-forEach-challenge',
-            type: 'code-challenge',
-            teki: 'Loop through the topics array:',
-            language: 'javascript',
-            code: 'topics.___(function(topic) {\n  console.log(topic)\n})',
-            answer: 'topics.forEach(function(topic) {\n  console.log(topic)\n})',
-            blanks: [{ position: 0, answer: 'forEach' }],
+            id: "forEach-teki",
+            type: "teki-message",
+            mood: "thinking",
+            messages: [
+              "forEach lets you loop through every item and do something with each one. Like visiting every house in a street!",
+            ],
+            action: "Loop through it!",
+          },
+          {
+            id: "js-forEach-challenge",
+            type: "code-challenge",
+            teki: "Loop through the topics array:",
+            language: "javascript",
+            code: "topics.___(function(topic) {\n  console.log(topic)\n})",
+            answer:
+              "topics.forEach(function(topic) {\n  console.log(topic)\n})",
+            blanks: [{ position: 0, answer: "forEach" }],
             explanations: {
-              young: 'forEach visits each item in the list and does something with it!',
-              junior: 'forEach(callback) runs the callback once for each array element. Great for rendering lists to the DOM.',
-              senior: 'forEach does not return a value — use map() when you need a transformed array. forEach is for side effects only.',
+              young:
+                "forEach visits each item in the list and does something with it!",
+              junior:
+                "forEach(callback) runs the callback once for each array element. Great for rendering lists to the DOM.",
+              senior:
+                "forEach does not return a value — use map() when you need a transformed array. forEach is for side effects only.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'forEach looping! ✅',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "forEach looping! ✅",
+            action: "Check it!",
           },
         ],
       },
 
       // ── Mission 18 — Functions ─────────────────────────────────────────────────
       {
-        id: 'mission-18',
+        id: "mission-18",
         number: 18,
         act: 7,
-        title: 'Reusable Tools',
-        subtitle: 'Functions are the most powerful tool in programming',
-        concept: 'js-functions',
+        title: "Reusable Tools",
+        subtitle: "Functions are the most powerful tool in programming",
+        concept: "js-functions",
         xp: 200,
-        badge: { id: 'junior-creator', label: 'Junior Creator', emoji: '🛠️' },
+        badge: { id: "junior-creator", label: "Junior Creator", emoji: "🛠️" },
         steps: [
           {
-            id: 'functions-intro-teki',
-            type: 'teki-message',
-            mood: 'proud',
+            id: "functions-intro-teki",
+            type: "teki-message",
+            mood: "proud",
             messages: [
-              'Functions are the most important concept in programming. Write code ONCE, give it a name, use it anywhere.',
-              'Think of it like a machine: give it inputs (parameters), it does something, gives back an output (return).',
+              "Functions are the most important concept in programming. Write code ONCE, give it a name, use it anywhere.",
+              "Think of it like a machine: give it inputs (parameters), it does something, gives back an output (return).",
             ],
-            action: 'Build a function!',
+            action: "Build a function!",
           },
           {
-            id: 'functions-syntax-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "functions-syntax-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
               "Syntax: function myName(param) { ... return value; }. The 'function' keyword starts it, the name labels it, 'return' sends the result back!",
             ],
-            action: 'Got the syntax!',
+            action: "Got the syntax!",
           },
           {
-            id: 'js-function-challenge',
-            type: 'code-challenge',
-            teki: 'Define a function that formats a page title:',
-            language: 'javascript',
+            id: "js-function-challenge",
+            type: "code-challenge",
+            teki: "Define a function that formats a page title:",
+            language: "javascript",
             code: '___ formatTitle(title) {\n  return "✨ " + title\n}',
             answer: 'function formatTitle(title) {\n  return "✨ " + title\n}',
-            blanks: [{ position: 0, answer: 'function' }],
+            blanks: [{ position: 0, answer: "function" }],
             explanations: {
-              young: "'function' is the magic word to start making a reusable tool!",
-              junior: "'function' declares a named function. The name after it is how you call it: formatTitle('Hello').",
-              senior: 'Function declarations are hoisted — they can be called before they are defined. Arrow functions are not hoisted.',
+              young:
+                "'function' is the magic word to start making a reusable tool!",
+              junior:
+                "'function' declares a named function. The name after it is how you call it: formatTitle('Hello').",
+              senior:
+                "Function declarations are hoisted — they can be called before they are defined. Arrow functions are not hoisted.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Function defined! 🛠️',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Function defined! 🛠️",
+            action: "Check it!",
           },
           {
-            id: 'js-return-challenge',
-            type: 'code-challenge',
+            id: "js-return-challenge",
+            type: "code-challenge",
             teki: "The 'return' keyword sends the result OUT of the function:",
-            language: 'javascript',
-            code: 'function double(number) {\n  ___ number * 2\n}\n\nlet result = double(5)  // result = 10',
-            answer: 'function double(number) {\n  return number * 2\n}\n\nlet result = double(5)  // result = 10',
-            blanks: [{ position: 0, answer: 'return' }],
+            language: "javascript",
+            code: "function double(number) {\n  ___ number * 2\n}\n\nlet result = double(5)  // result = 10",
+            answer:
+              "function double(number) {\n  return number * 2\n}\n\nlet result = double(5)  // result = 10",
+            blanks: [{ position: 0, answer: "return" }],
             explanations: {
-              young: 'return hands the answer OUT of the function — like the kitchen handing you your finished meal!',
-              junior: "'return' exits the function and sends a value back to the caller. Without return, the function returns undefined.",
-              senior: "'return' exits immediately. Early returns are great for guard clauses. A function without return returns undefined.",
+              young:
+                "return hands the answer OUT of the function — like the kitchen handing you your finished meal!",
+              junior:
+                "'return' exits the function and sends a value back to the caller. Without return, the function returns undefined.",
+              senior:
+                "'return' exits immediately. Early returns are great for guard clauses. A function without return returns undefined.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Value returned! 🎯',
-            action: 'Check it!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage: "Value returned! 🎯",
+            action: "Check it!",
           },
           {
-            id: 'act7-complete',
-            type: 'act-complete',
-            actId: 'act7',
-            title: 'ACT 7 Complete!',
-            message: "You have the FULL toolkit! Variables, DOM, conditionals, events, arrays, loops, and functions — AND your website grew with every concept: About, Features, and Gallery sections all appeared through YOUR code. You are a Junior Creator!",
-            power: { label: 'Junior Creator', emoji: '🛠️' },
+            id: "act7-complete",
+            type: "act-complete",
+            actId: "act7",
+            title: "ACT 7 Complete!",
+            message:
+              "You have the FULL toolkit! Variables, DOM, conditionals, events, arrays, loops, and functions — AND your website grew with every concept: About, Features, and Gallery sections all appeared through YOUR code. You are a Junior Creator!",
+            power: { label: "Junior Creator", emoji: "🛠️" },
             xpBonus: 200,
             action: "I'm a Junior Creator!",
           },
@@ -1562,79 +1972,104 @@ export const ACTS = [
 
   // ── ACT 8 ── Teaching The Website Skills ────────────────────────────────────
   {
-    id: 'act8',
+    id: "act8",
     number: 8,
-    title: 'Teaching The Website Skills',
-    tagline: 'Functions — reusable tools',
-    color: '#f97316',
-    emoji: '🔧',
+    title: "Teaching The Website Skills",
+    tagline: "Functions — reusable tools",
+    color: "#f97316",
+    emoji: "🔧",
     quiz: [
       {
-        question: 'What is a FUNCTION in code?',
-        options: ['A type of error message', 'A reusable block of code with a name', 'A color value', 'A database table'],
+        question: "What is a FUNCTION in code?",
+        options: [
+          "A type of error message",
+          "A reusable block of code with a name",
+          "A color value",
+          "A database table",
+        ],
         correct: 1,
-        explanation: 'A function is a named recipe — write it once, call it as many times as you need.',
+        explanation:
+          "A function is a named recipe — write it once, call it as many times as you need.",
       },
       {
-        question: 'What does it mean to CALL a function?',
-        options: ['Give it a name', 'Delete it from memory', 'Run / execute it', 'Copy it to another file'],
+        question: "What does it mean to CALL a function?",
+        options: [
+          "Give it a name",
+          "Delete it from memory",
+          "Run / execute it",
+          "Copy it to another file",
+        ],
         correct: 2,
-        explanation: 'Calling a function means running the code inside it: greet() calls the greet function.',
+        explanation:
+          "Calling a function means running the code inside it: greet() calls the greet function.",
       },
       {
-        question: 'What do PARAMETERS let you do?',
-        options: ['Style text on the page', 'Pass different values INTO a function each time it runs', 'Create loops', 'Connect to a server'],
+        question: "What do PARAMETERS let you do?",
+        options: [
+          "Style text on the page",
+          "Pass different values INTO a function each time it runs",
+          "Create loops",
+          "Connect to a server",
+        ],
         correct: 1,
-        explanation: 'Parameters are like blank boxes in a recipe — you fill them in differently each time you call the function.',
+        explanation:
+          "Parameters are like blank boxes in a recipe — you fill them in differently each time you call the function.",
       },
     ],
     missions: [
-
       // ── Mission 19 — Write Once, Use Everywhere ──────────────────────────────
       {
-        id: 'mission-19',
+        id: "mission-19",
         number: 19,
         act: 8,
-        title: 'Write Once, Use Everywhere',
-        subtitle: 'Functions are reusable named tools',
-        concept: 'functions',
+        title: "Write Once, Use Everywhere",
+        subtitle: "Functions are reusable named tools",
+        concept: "functions",
         xp: 170,
         badge: null,
         steps: [
           {
-            id: 'function-define-challenge',
-            type: 'code-challenge',
+            id: "function-define-challenge",
+            type: "code-challenge",
             teki: "Define a function called 'double' that takes a number and returns it times 2. Watch your website grow!",
-            language: 'javascript',
+            language: "javascript",
             code: `___ double(number) {
   return number * 2;
 }`,
             answer: `function double(number) {
   return number * 2;
 }`,
-            blanks: [{ position: 0, answer: 'function' }],
+            blanks: [{ position: 0, answer: "function" }],
             explanations: {
-              young: "Type 'function' to start defining it — like writing the title of your recipe card!",
-              junior: "'function' is the keyword that creates a reusable block. The name after it is how you call it.",
-              senior: "'function' creates a named function declaration which is hoisted. Arrow functions const f = () => {} are not hoisted.",
+              young:
+                "Type 'function' to start defining it — like writing the title of your recipe card!",
+              junior:
+                "'function' is the keyword that creates a reusable block. The name after it is how you call it.",
+              senior:
+                "'function' creates a named function declaration which is hoisted. Arrow functions const f = () => {} are not hoisted.",
             },
-            completionEffect: { buildSection: 'testimonials' },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Function defined — and a Testimonials section appeared on your website!',
-            action: 'Check it!',
+            completionEffect: { buildSection: "testimonials" },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Function defined — and a Testimonials section appeared on your website!",
+            action: "Check it!",
           },
           {
-            id: 'testimonials-appear-observe',
-            type: 'observation',
-            teki: 'A Testimonials section appeared — built by your function knowledge! Wireframe for now — the next challenge styles it!',
+            id: "testimonials-appear-observe",
+            type: "observation",
+            teki: "A Testimonials section appeared — built by your function knowledge! Wireframe for now — the next challenge styles it!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'return-challenge',
-            type: 'code-challenge',
+            id: "return-challenge",
+            type: "code-challenge",
             teki: "A function that doesn't return anything is useless. Make this one return the greeting:",
-            language: 'javascript',
+            language: "javascript",
             code: `function greet(name) {
   ___ "Hello, " + name + "!";
 }
@@ -1645,21 +2080,28 @@ let msg = greet("Alex");  // msg should be "Hello, Alex!"`,
 }
 
 let msg = greet("Alex");  // msg should be "Hello, Alex!"`,
-            blanks: [{ position: 0, answer: 'return' }],
+            blanks: [{ position: 0, answer: "return" }],
             explanations: {
-              young: "return sends the result OUT of the function — like the kitchen handing you your cooked meal!",
-              junior: "'return' exits the function and sends a value back to whoever called it. Without return, the function returns undefined.",
-              senior: "Functions without return return undefined. Use return early for guard clauses. Avoid multiple returns for complex logic — prefer a result variable.",
+              young:
+                "return sends the result OUT of the function — like the kitchen handing you your cooked meal!",
+              junior:
+                "'return' exits the function and sends a value back to whoever called it. Without return, the function returns undefined.",
+              senior:
+                "Functions without return return undefined. Use return early for guard clauses. Avoid multiple returns for complex logic — prefer a result variable.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
             successMessage: "Value returned! ✅",
             action: "Check it!",
           },
           {
-            id: 'call-function-challenge',
-            type: 'code-challenge',
+            id: "call-function-challenge",
+            type: "code-challenge",
             teki: "Now CALL the function with a visitor's name:",
-            language: 'javascript',
+            language: "javascript",
             code: `function greet(name) {
   return "Hello, " + name + "!";
 }
@@ -1672,13 +2114,20 @@ console.log(message); // "Hello, {{name}}!"`,
 
 let message = greet("{{name}}");
 console.log(message); // "Hello, {{name}}!"`,
-            blanks: [{ position: 0, answer: 'greet' }],
+            blanks: [{ position: 0, answer: "greet" }],
             explanations: {
-              young: "Call it by its name followed by () — like calling a friend to come over!",
-              junior: "functionName(argument) calls the function and passes the argument as the parameter. The return value can be stored in a variable.",
-              senior: "Function calls are expressions — they evaluate to the return value. Can be used inline: console.log(greet('Alex')) or in other expressions.",
+              young:
+                "Call it by its name followed by () — like calling a friend to come over!",
+              junior:
+                "functionName(argument) calls the function and passes the argument as the parameter. The return value can be stored in a variable.",
+              senior:
+                "Function calls are expressions — they evaluate to the return value. Can be used inline: console.log(greet('Alex')) or in other expressions.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
             successMessage: "Function called! 📞",
             action: "Check it!",
           },
@@ -1687,20 +2136,24 @@ console.log(message); // "Hello, {{name}}!"`,
 
       // ── Mission 20 — The Name Generator ─────────────────────────────────────
       {
-        id: 'mission-20',
+        id: "mission-20",
         number: 20,
         act: 8,
-        title: 'Random Name Generator',
-        subtitle: 'Arrays + functions + events — all together',
-        concept: 'function-project',
+        title: "Random Name Generator",
+        subtitle: "Arrays + functions + events — all together",
+        concept: "function-project",
         xp: 220,
-        badge: { id: 'function-engineer', label: 'Function Engineer', emoji: '🔧' },
+        badge: {
+          id: "function-engineer",
+          label: "Function Engineer",
+          emoji: "🔧",
+        },
         steps: [
           {
-            id: 'math-floor-challenge',
-            type: 'code-challenge',
+            id: "math-floor-challenge",
+            type: "code-challenge",
             teki: "Math.floor() rounds down to a whole number. Use it to get a random index:",
-            language: 'javascript',
+            language: "javascript",
             code: `let words = ["cat", "dog", "bird"];
 
 let randomIndex = Math.___(Math.random() * words.length);
@@ -1709,21 +2162,28 @@ let randomWord = words[randomIndex];`,
 
 let randomIndex = Math.floor(Math.random() * words.length);
 let randomWord = words[randomIndex];`,
-            blanks: [{ position: 0, answer: 'floor' }],
+            blanks: [{ position: 0, answer: "floor" }],
             explanations: {
-              young: "Math.floor rounds DOWN to the nearest whole number. 2.9 → 2. 1.1 → 1. This prevents going past the end of the array!",
-              junior: "Math.floor(n) returns the largest integer ≤ n. Math.random() * length gives 0 to (length-1.0001), so floor gives 0 to length-1.",
-              senior: "Math.floor vs Math.round vs Math.trunc: floor always goes down, round goes to nearest, trunc truncates toward zero. For positive numbers, floor and trunc are equivalent.",
+              young:
+                "Math.floor rounds DOWN to the nearest whole number. 2.9 → 2. 1.1 → 1. This prevents going past the end of the array!",
+              junior:
+                "Math.floor(n) returns the largest integer ≤ n. Math.random() * length gives 0 to (length-1.0001), so floor gives 0 to length-1.",
+              senior:
+                "Math.floor vs Math.round vs Math.trunc: floor always goes down, round goes to nearest, trunc truncates toward zero. For positive numbers, floor and trunc are equivalent.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
             successMessage: "Random index! 🎲",
             action: "Check it!",
           },
           {
-            id: 'generator-function-challenge',
-            type: 'code-challenge',
+            id: "generator-function-challenge",
+            type: "code-challenge",
             teki: "Complete the generateName function to return a random combined name:",
-            language: 'javascript',
+            language: "javascript",
             code: `let adjs  = ["Fluffy", "Speedy", "Cosmic"];
 let nouns = ["Paws", "Whisker", "Rocket"];
 
@@ -1740,31 +2200,40 @@ function generateName() {
   let noun = nouns[Math.floor(Math.random() * nouns.length)];
   return adj + " " + noun;
 }`,
-            blanks: [{ position: 0, answer: 'return' }],
+            blanks: [{ position: 0, answer: "return" }],
             explanations: {
-              young: "return sends the combined name OUT of the function so we can use it!",
-              junior: "return adj + ' ' + noun sends the combined string back to whoever called generateName().",
-              senior: "Could also write as: return `${adj} ${noun}` using template literals for cleaner string building.",
+              young:
+                "return sends the combined name OUT of the function so we can use it!",
+              junior:
+                "return adj + ' ' + noun sends the combined string back to whoever called generateName().",
+              senior:
+                "Could also write as: return `${adj} ${noun}` using template literals for cleaner string building.",
             },
-            completionEffect: { styleSection: 'testimonials' },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'Generator complete — Testimonials section fully styled! 🎰',
-            action: 'Check it!',
+            completionEffect: { styleSection: "testimonials" },
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "Generator complete — Testimonials section fully styled! 🎰",
+            action: "Check it!",
           },
           {
-            id: 'testimonials-styled-observe',
-            type: 'observation',
-            teki: 'Testimonials section fully styled! Your website now shows real reviews for your topic — powered by your function knowledge!',
+            id: "testimonials-styled-observe",
+            type: "observation",
+            teki: "Testimonials section fully styled! Your website now shows real reviews for your topic — powered by your function knowledge!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
           {
-            id: 'act8-complete',
-            type: 'act-complete',
-            actId: 'act8',
-            title: 'ACT 8 Complete!',
-            message: "Variables, conditionals, events, arrays, loops, functions — you know ALL the fundamentals of programming! Now meet the tools professionals actually use.",
-            power: { label: 'Function Engineer', emoji: '🔧' },
+            id: "act8-complete",
+            type: "act-complete",
+            actId: "act8",
+            title: "ACT 8 Complete!",
+            message:
+              "Variables, conditionals, events, arrays, loops, functions — you know ALL the fundamentals of programming! Now meet the tools professionals actually use.",
+            power: { label: "Function Engineer", emoji: "🔧" },
             xpBonus: 250,
             action: "Show me modern tools!",
           },
@@ -1777,51 +2246,68 @@ function generateName() {
   // 8 chapters, each taught ON the student's auto-generated website.
   // Uses react-gateway / react-spotlight / react-concept / react-live-demo steps.
   {
-    id: 'act9',
+    id: "act9",
     number: 9,
-    title: 'Modern Builder Tools',
-    tagline: 'React — the way professionals build',
-    color: '#0ea5e9',
-    emoji: '⚛️',
+    title: "Modern Builder Tools",
+    tagline: "React — the way professionals build",
+    color: "#0ea5e9",
+    emoji: "⚛️",
     quiz: [
       {
-        question: 'What is a React COMPONENT?',
-        options: ['A database row', 'A CSS file', 'A reusable piece of UI built with JavaScript', 'A type of loop'],
+        question: "What is a React COMPONENT?",
+        options: [
+          "A database row",
+          "A CSS file",
+          "A reusable piece of UI built with JavaScript",
+          "A type of loop",
+        ],
         correct: 2,
-        explanation: 'Components are the building blocks of React apps — each one is a self-contained UI piece.',
+        explanation:
+          "Components are the building blocks of React apps — each one is a self-contained UI piece.",
       },
       {
-        question: 'What is React STATE?',
-        options: ['The location of the server', 'Data stored inside a component that can change over time', 'A special HTML attribute', 'A routing library'],
+        question: "What is React STATE?",
+        options: [
+          "The location of the server",
+          "Data stored inside a component that can change over time",
+          "A special HTML attribute",
+          "A routing library",
+        ],
         correct: 1,
-        explanation: 'State is a component\'s memory — when state changes, React automatically re-renders the UI.',
+        explanation:
+          "State is a component's memory — when state changes, React automatically re-renders the UI.",
       },
       {
-        question: 'How do you pass data INTO a React component?',
-        options: ['Using useState', 'Using a for loop', 'Using props', 'Using a database'],
+        question: "How do you pass data INTO a React component?",
+        options: [
+          "Using useState",
+          "Using a for loop",
+          "Using props",
+          "Using a database",
+        ],
         correct: 2,
-        explanation: 'Props (properties) let parent components send data down to child components.',
+        explanation:
+          "Props (properties) let parent components send data down to child components.",
       },
     ],
     missions: [
-
       // ── Mission 21 ─ Chapter 1: Components ───────────────────────────────────
       {
-        id: 'mission-21',
+        id: "mission-21",
         number: 21,
         act: 9,
         title: "The Developer's Secret",
-        subtitle: 'React Components — build once, use everywhere',
-        concept: 'components',
+        subtitle: "React Components — build once, use everywhere",
+        concept: "components",
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'm21-gateway',
-            type: 'react-gateway',
+            id: "m21-gateway",
+            type: "react-gateway",
             chapterNumber: 1,
-            chapterTitle: 'Reusable Pieces',
-            chapterSubtitle: 'React Components',
+            chapterTitle: "Reusable Pieces",
+            chapterSubtitle: "React Components",
             messages: [
               "Nice.",
               "We have a real website.",
@@ -1830,61 +2316,72 @@ function generateName() {
               "They use special tools.",
               "Want to see them?",
             ],
-            mood: 'excited',
+            mood: "excited",
             action: "Show Me",
           },
           {
-            id: 'm21-spotlight',
-            type: 'react-spotlight',
-            demoState: { mode: 'components', highlightButtons: true },
+            id: "m21-spotlight",
+            type: "react-spotlight",
+            demoState: { mode: "components", highlightButtons: true },
             teki: "Look around your website.",
             question: "Do you think developers built each button separately?",
             options: [
-              { id: 'yes', label: 'Yes' },
-              { id: 'no',  label: 'No'  },
+              { id: "yes", label: "Yes" },
+              { id: "no", label: "No" },
             ],
             tekiReaction: {
-              yes: { messages: ["Actually... nope. Let me show you the secret."], mood: 'thinking' },
-              no:  { messages: ["Exactly! Let me show you how."], mood: 'excited' },
+              yes: {
+                messages: ["Actually... nope. Let me show you the secret."],
+                mood: "thinking",
+              },
+              no: {
+                messages: ["Exactly! Let me show you how."],
+                mood: "excited",
+              },
             },
             action: "Show Me How",
           },
           {
-            id: 'm21-concept',
-            type: 'react-concept',
-            conceptType: 'blueprint-to-components',
+            id: "m21-concept",
+            type: "react-concept",
+            conceptType: "blueprint-to-components",
             teki: "They built ONE blueprint. Then copied it everywhere.",
-            codeReveal: '<Button />',
-            language: 'jsx',
+            codeReveal: "<Button />",
+            language: "jsx",
             explanation: {
-              young: "A Component is like a LEGO piece! Make one, snap it in 100 times!",
-              junior: "Components are reusable. Define once in code — use as many times as you want.",
-              senior: "React components are pure functions of their props. Define once, compose freely.",
+              young:
+                "A Component is like a LEGO piece! Make one, snap it in 100 times!",
+              junior:
+                "Components are reusable. Define once in code — use as many times as you want.",
+              senior:
+                "React components are pure functions of their props. Define once, compose freely.",
             },
             action: "I love it!",
           },
           {
-            id: 'm21-demo',
-            type: 'react-live-demo',
-            demoType: 'button-style',
+            id: "m21-demo",
+            type: "react-live-demo",
+            demoType: "button-style",
             teki: "Try it. Change every button style at once.",
-            demoInit: { mode: 'components', highlightButtons: false },
+            demoInit: { mode: "components", highlightButtons: false },
             options: [
-              { label: 'Rounded', value: 'rounded' },
-              { label: 'Pill',    value: 'pill'    },
-              { label: 'Square',  value: 'square'  },
+              { label: "Rounded", value: "rounded" },
+              { label: "Pill", value: "pill" },
+              { label: "Square", value: "square" },
             ],
             codeReveal: `function Button({ text }) {
   return <button className="btn">{text}</button>;
 }
 
 // Every button on the site uses this one component.`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "See? ONE change. EVERY button updated.",
             explanation: {
               young: "One blueprint changed everything at once!",
-              junior: "Changing the Button component updates every button instantly — no manual edits.",
-              senior: "Centralising UI in a component means one change propagates everywhere. This is the core benefit of component-based architecture.",
+              junior:
+                "Changing the Button component updates every button instantly — no manual edits.",
+              senior:
+                "Centralising UI in a component means one change propagates everywhere. This is the core benefit of component-based architecture.",
             },
             action: "Next Chapter!",
           },
@@ -1893,50 +2390,55 @@ function generateName() {
 
       // ── Mission 22 ─ Chapter 2: Props ─────────────────────────────────────────
       {
-        id: 'mission-22',
+        id: "mission-22",
         number: 22,
         act: 9,
-        title: 'Shape Shifters',
-        subtitle: 'Props — customize each piece',
-        concept: 'props',
+        title: "Shape Shifters",
+        subtitle: "Props — customize each piece",
+        concept: "props",
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'm22-gateway',
-            type: 'react-gateway',
+            id: "m22-gateway",
+            type: "react-gateway",
             chapterNumber: 2,
-            chapterTitle: 'Shape Shifters',
-            chapterSubtitle: 'Props',
-            messages: [
-              "What if the same blueprint could look different?",
-            ],
-            mood: 'thinking',
+            chapterTitle: "Shape Shifters",
+            chapterSubtitle: "Props",
+            messages: ["What if the same blueprint could look different?"],
+            mood: "thinking",
             action: "Show Me",
           },
           {
-            id: 'm22-spotlight',
-            type: 'react-spotlight',
-            demoState: { mode: 'components', propShowcase: true, highlightButtons: false },
+            id: "m22-spotlight",
+            type: "react-spotlight",
+            demoState: {
+              mode: "components",
+              propShowcase: true,
+              highlightButtons: false,
+            },
             teki: "Same Button component — three different labels.",
-            highlightLabels: ['Adopt Now', 'Learn More', 'Contact Us'],
+            highlightLabels: ["Adopt Now", "Learn More", "Contact Us"],
             action: "Interesting!",
           },
           {
-            id: 'm22-demo',
-            type: 'react-live-demo',
-            demoType: 'text-editor',
+            id: "m22-demo",
+            type: "react-live-demo",
+            demoType: "text-editor",
             teki: "Your turn. Change the button text.",
-            demoInit: { mode: 'props', propShowcase: false },
+            demoInit: { mode: "props", propShowcase: false },
             placeholder: "e.g. Join The Mission",
             defaultValue: "Join The Mission",
             codeReveal: `<Button text="{{value}}" />`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "Same blueprint. Different information.",
             explanation: {
-              young: "Props are like instructions you give each piece! Same toy, different label.",
-              junior: "Props let you pass data into a component. Each instance can display different content.",
-              senior: "Props are immutable from the child's perspective. The parent owns the data — the child just renders it.",
+              young:
+                "Props are like instructions you give each piece! Same toy, different label.",
+              junior:
+                "Props let you pass data into a component. Each instance can display different content.",
+              senior:
+                "Props are immutable from the child's perspective. The parent owns the data — the child just renders it.",
             },
             action: "Next Chapter!",
           },
@@ -1945,71 +2447,71 @@ function generateName() {
 
       // ── Mission 23 ─ Chapter 3: State ─────────────────────────────────────────
       {
-        id: 'mission-23',
+        id: "mission-23",
         number: 23,
         act: 9,
-        title: 'Website Memory',
-        subtitle: 'State — the site remembers your choices',
-        concept: 'state',
+        title: "Website Memory",
+        subtitle: "State — the site remembers your choices",
+        concept: "state",
         xp: 220,
         badge: null,
         steps: [
           {
-            id: 'm23-gateway',
-            type: 'react-gateway',
+            id: "m23-gateway",
+            type: "react-gateway",
             chapterNumber: 3,
-            chapterTitle: 'Website Memory',
-            chapterSubtitle: 'State',
+            chapterTitle: "Website Memory",
+            chapterSubtitle: "State",
             messages: [
               "Your website has a theme switcher now.",
               "Click Dark Mode and watch what happens.",
             ],
-            mood: 'thinking',
+            mood: "thinking",
             action: "Okay",
           },
           {
-            id: 'm23-state-demo',
-            type: 'react-live-demo',
-            demoType: 'theme-toggle',
-            demoInit: { mode: 'state', showThemeBar: true },
+            id: "m23-state-demo",
+            type: "react-live-demo",
+            demoType: "theme-toggle",
+            demoInit: { mode: "state", showThemeBar: true },
             teki: "Click Dark Mode!",
             options: [
-              { label: 'Light Mode', value: false },
-              { label: 'Dark Mode',  value: true  },
+              { label: "Light Mode", value: false },
+              { label: "Dark Mode", value: true },
             ],
             action: "Interesting!",
           },
           {
-            id: 'm23-teki',
-            type: 'teki-message',
-            mood: 'amazed',
-            messages: [
-              "Interesting...",
-              "The website remembered your choice.",
-            ],
+            id: "m23-teki",
+            type: "teki-message",
+            mood: "amazed",
+            messages: ["Interesting...", "The website remembered your choice."],
             autoAdvance: true,
           },
           {
-            id: 'm23-setting-demo',
-            type: 'react-live-demo',
-            demoType: 'add-setting',
-            demoInit: { mode: 'state' },
+            id: "m23-setting-demo",
+            type: "react-live-demo",
+            demoType: "add-setting",
+            demoInit: { mode: "state" },
             teki: "Mission: Add another setting to your website.",
             options: [
-              { label: 'Theme',     value: 'theme',    icon: '🎨' },
-              { label: 'Font Size', value: 'fontSize',  icon: '📏' },
-              { label: 'Hero Text', value: 'heroText',  icon: '✏️' },
+              { label: "Theme", value: "theme", icon: "🎨" },
+              { label: "Font Size", value: "fontSize", icon: "📏" },
+              { label: "Hero Text", value: "heroText", icon: "✏️" },
             ],
             codeReveal: `const [theme, setTheme] = useState('light');
 
 // When user clicks:
 setTheme('dark');  // ← triggers re-render automatically`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "This is website memory. Developers call it State.",
             explanation: {
-              young: "useState is a memory crystal! It remembers things and updates the screen when changed!",
-              junior: "useState(initial) returns [value, setter]. Calling the setter triggers a re-render with the new value.",
-              senior: "useState is a React Hook. State updates are batched and asynchronous. Avoid duplicating state that can be derived.",
+              young:
+                "useState is a memory crystal! It remembers things and updates the screen when changed!",
+              junior:
+                "useState(initial) returns [value, setter]. Calling the setter triggers a re-render with the new value.",
+              senior:
+                "useState is a React Hook. State updates are batched and asynchronous. Avoid duplicating state that can be derived.",
             },
             action: "Next Chapter!",
           },
@@ -2018,63 +2520,68 @@ setTheme('dark');  // ← triggers re-render automatically`,
 
       // ── Mission 24 ─ Chapter 4: Events ────────────────────────────────────────
       {
-        id: 'mission-24',
+        id: "mission-24",
         number: 24,
         act: 9,
-        title: 'Teaching Actions',
-        subtitle: 'Events — buttons that actually do things',
-        concept: 'react-events',
+        title: "Teaching Actions",
+        subtitle: "Events — buttons that actually do things",
+        concept: "react-events",
         xp: 180,
         badge: null,
         steps: [
           {
-            id: 'm24-gateway',
-            type: 'react-gateway',
+            id: "m24-gateway",
+            type: "react-gateway",
             chapterNumber: 4,
-            chapterTitle: 'Teaching Actions',
-            chapterSubtitle: 'Events',
+            chapterTitle: "Teaching Actions",
+            chapterSubtitle: "Events",
             messages: [],
-            mood: 'happy',
+            mood: "happy",
             action: "Let's See",
           },
           {
-            id: 'm24-dead-button',
-            type: 'react-spotlight',
-            demoState: { mode: 'events', showDeadButton: true, eventAction: null },
+            id: "m24-dead-button",
+            type: "react-spotlight",
+            demoState: {
+              mode: "events",
+              showDeadButton: true,
+              eventAction: null,
+            },
             teki: 'The hero button says "Explore". Click it in the preview. Nothing happens.',
             action: "Nothing happened...",
           },
           {
-            id: 'm24-teki',
-            type: 'teki-message',
-            mood: 'thinking',
-            messages: [
-              "Let's teach it what to do.",
-            ],
+            id: "m24-teki",
+            type: "teki-message",
+            mood: "thinking",
+            messages: ["Let's teach it what to do."],
             autoAdvance: true,
           },
           {
-            id: 'm24-event-demo',
-            type: 'react-live-demo',
-            demoType: 'event-picker',
+            id: "m24-event-demo",
+            type: "react-live-demo",
+            demoType: "event-picker",
             teki: "Choose what the button should do:",
-            demoInit: { mode: 'events' },
+            demoInit: { mode: "events" },
             options: [
-              { label: 'Show Message', value: 'message',     icon: '💬' },
-              { label: 'Open Popup',   value: 'popup',       icon: '📋' },
-              { label: 'Change Text',  value: 'text-change', icon: '✏️' },
+              { label: "Show Message", value: "message", icon: "💬" },
+              { label: "Open Popup", value: "popup", icon: "📋" },
+              { label: "Change Text", value: "text-change", icon: "✏️" },
             ],
             codeReveal: `<button onClick={handleClick}>
   Explore
 </button>
 
 // onClick fires every time the button is clicked.`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "The button knows what to do now!",
             explanation: {
-              young: "onClick is like a tiny sensor! When clicked, it runs your instructions!",
-              junior: "onClick={handler} attaches a click listener. Pass the function name — don't call it with ().",
-              senior: "React synthetic events wrap native DOM events. Use onClick, onChange, onSubmit. Pass references, not invocations.",
+              young:
+                "onClick is like a tiny sensor! When clicked, it runs your instructions!",
+              junior:
+                "onClick={handler} attaches a click listener. Pass the function name — don't call it with ().",
+              senior:
+                "React synthetic events wrap native DOM events. Use onClick, onChange, onSubmit. Pass references, not invocations.",
             },
             action: "Next Chapter!",
           },
@@ -2083,40 +2590,40 @@ setTheme('dark');  // ← triggers re-render automatically`,
 
       // ── Mission 25 ─ Chapter 5: map() ─────────────────────────────────────────
       {
-        id: 'mission-25',
+        id: "mission-25",
         number: 25,
         act: 9,
-        title: 'Automatic Factories',
-        subtitle: 'map() — one instruction, many results',
-        concept: 'list-rendering',
+        title: "Automatic Factories",
+        subtitle: "map() — one instruction, many results",
+        concept: "list-rendering",
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'm25-gateway',
-            type: 'react-gateway',
+            id: "m25-gateway",
+            type: "react-gateway",
             chapterNumber: 5,
-            chapterTitle: 'Automatic Factories',
-            chapterSubtitle: 'map()',
+            chapterTitle: "Automatic Factories",
+            chapterSubtitle: "map()",
             messages: [],
-            mood: 'excited',
+            mood: "excited",
             action: "Show Me",
           },
           {
-            id: 'm25-gallery-show',
-            type: 'react-spotlight',
+            id: "m25-gallery-show",
+            type: "react-spotlight",
             demoState: {
-              mode: 'map',
+              mode: "map",
               showPets: true,
-              pets: ['Buddy 🐶', 'Whiskers 🐱', 'Hopscotch 🐰'],
+              pets: ["Buddy 🐶", "Whiskers 🐱", "Hopscotch 🐰"],
             },
             teki: "Look — a pet gallery just appeared on your website!",
             action: "Cool!",
           },
           {
-            id: 'm25-teki',
-            type: 'teki-message',
-            mood: 'thinking',
+            id: "m25-teki",
+            type: "teki-message",
+            mood: "thinking",
             messages: [
               "Imagine adding 100 pets manually.",
               "That's 100 separate blocks of code.",
@@ -2125,23 +2632,30 @@ setTheme('dark');  // ← triggers re-render automatically`,
             autoAdvance: true,
           },
           {
-            id: 'm25-add-pet',
-            type: 'react-live-demo',
-            demoType: 'add-pet',
+            id: "m25-add-pet",
+            type: "react-live-demo",
+            demoType: "add-pet",
             teki: "Add a new pet. Watch the gallery update automatically.",
-            demoInit: { mode: 'map', showPets: true, pets: ['Buddy 🐶', 'Whiskers 🐱', 'Hopscotch 🐰'] },
+            demoInit: {
+              mode: "map",
+              showPets: true,
+              pets: ["Buddy 🐶", "Whiskers 🐱", "Hopscotch 🐰"],
+            },
             codeReveal: `const pets = ["Buddy", "Whiskers", "Hopscotch", /* new pet */];
 
 // ONE instruction creates ALL the cards:
 pets.map((pet) => (
   <PetCard key={pet} name={pet} />
 ))`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "One instruction. Many cards.",
             explanation: {
-              young: "map() is a magic factory! Give it a list, it makes a card for EACH one!",
-              junior: "map() transforms every array item. Add one pet to the array — one new card appears instantly.",
-              senior: "map() in JSX returns a list of elements. Each needs a stable key prop for efficient reconciliation.",
+              young:
+                "map() is a magic factory! Give it a list, it makes a card for EACH one!",
+              junior:
+                "map() transforms every array item. Add one pet to the array — one new card appears instantly.",
+              senior:
+                "map() in JSX returns a list of elements. Each needs a stable key prop for efficient reconciliation.",
             },
             action: "Next Chapter!",
           },
@@ -2150,42 +2664,46 @@ pets.map((pet) => (
 
       // ── Mission 26 ─ Chapter 6: Conditional Rendering ────────────────────────
       {
-        id: 'mission-26',
+        id: "mission-26",
         number: 26,
         act: 9,
-        title: 'Smart Decisions',
-        subtitle: 'Conditional Rendering — show the right thing',
-        concept: 'conditional-rendering',
+        title: "Smart Decisions",
+        subtitle: "Conditional Rendering — show the right thing",
+        concept: "conditional-rendering",
         xp: 200,
         badge: null,
         steps: [
           {
-            id: 'm26-gateway',
-            type: 'react-gateway',
+            id: "m26-gateway",
+            type: "react-gateway",
             chapterNumber: 6,
-            chapterTitle: 'Smart Decisions',
-            chapterSubtitle: 'Conditional Rendering',
+            chapterTitle: "Smart Decisions",
+            chapterSubtitle: "Conditional Rendering",
             messages: [],
-            mood: 'thinking',
+            mood: "thinking",
             action: "Got it",
           },
           {
-            id: 'm26-spotlight',
-            type: 'react-spotlight',
-            demoState: { mode: 'conditional', showConditional: true, userType: null },
+            id: "m26-spotlight",
+            type: "react-spotlight",
+            demoState: {
+              mode: "conditional",
+              showConditional: true,
+              userType: null,
+            },
             teki: 'Your website shows "Welcome, Visitor!" to everyone. But what if it could be smarter?',
             action: "What if...?",
           },
           {
-            id: 'm26-demo',
-            type: 'react-live-demo',
-            demoType: 'user-type',
+            id: "m26-demo",
+            type: "react-live-demo",
+            demoType: "user-type",
             teki: "Choose who's visiting. Watch the message change.",
-            demoInit: { mode: 'conditional', showConditional: true },
+            demoInit: { mode: "conditional", showConditional: true },
             options: [
-              { label: 'Kid',     value: 'kid',     icon: '🧒' },
-              { label: 'Parent',  value: 'parent',  icon: '👩' },
-              { label: 'Teacher', value: 'teacher', icon: '👩‍🏫' },
+              { label: "Kid", value: "kid", icon: "🧒" },
+              { label: "Parent", value: "parent", icon: "👩" },
+              { label: "Teacher", value: "teacher", icon: "👩‍🏫" },
             ],
             codeReveal: `{isKid
   ? <p>Hey future builder! 🎉</p>
@@ -2193,12 +2711,15 @@ pets.map((pet) => (
   ? <p>Explore our resources! 👩‍👧</p>
   : <p>Welcome, Educator! 👩‍🏫</p>
 }`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "Different visitors, different experience!",
             explanation: {
-              young: "IF kid → this message. IF parent → that message. The website chooses!",
-              junior: "The ternary operator condition ? A : B renders different JSX based on a condition.",
-              senior: "Conditional rendering in JSX uses &&, ternary, or extracted variables. Prefer early returns for complex branching.",
+              young:
+                "IF kid → this message. IF parent → that message. The website chooses!",
+              junior:
+                "The ternary operator condition ? A : B renders different JSX based on a condition.",
+              senior:
+                "Conditional rendering in JSX uses &&, ternary, or extracted variables. Prefer early returns for complex branching.",
             },
             action: "Next Chapter!",
           },
@@ -2207,35 +2728,39 @@ pets.map((pet) => (
 
       // ── Mission 27 ─ Chapter 7: Routing ───────────────────────────────────────
       {
-        id: 'mission-27',
+        id: "mission-27",
         number: 27,
         act: 9,
-        title: 'Multiple Rooms',
-        subtitle: 'Routing — connect your pages',
-        concept: 'routing',
+        title: "Multiple Rooms",
+        subtitle: "Routing — connect your pages",
+        concept: "routing",
         xp: 220,
-        badge: { id: 'react-builder', label: 'React Builder', emoji: '🧩' },
+        badge: { id: "react-builder", label: "React Builder", emoji: "🧩" },
         steps: [
           {
-            id: 'm27-gateway',
-            type: 'react-gateway',
+            id: "m27-gateway",
+            type: "react-gateway",
             chapterNumber: 7,
-            chapterTitle: 'Multiple Rooms',
-            chapterSubtitle: 'Routing',
+            chapterTitle: "Multiple Rooms",
+            chapterSubtitle: "Routing",
             messages: [
               "Your website has rooms.",
               "Home, About, Gallery, Contact.",
               "But they need doors.",
             ],
-            mood: 'thinking',
+            mood: "thinking",
             action: "Connect Them!",
           },
           {
-            id: 'm27-demo',
-            type: 'react-live-demo',
-            demoType: 'connect-routes',
+            id: "m27-demo",
+            type: "react-live-demo",
+            demoType: "connect-routes",
             teki: "Connect your pages — click each nav link to activate it.",
-            demoInit: { mode: 'routing', pagesConnected: false, connectedRoutes: [] },
+            demoInit: {
+              mode: "routing",
+              pagesConnected: false,
+              connectedRoutes: [],
+            },
             codeReveal: `import { Link, Route } from '@tanstack/react-router';
 
 // Navigation link
@@ -2243,12 +2768,15 @@ pets.map((pet) => (
 
 // Page definition
 <Route path="/about" component={AboutPage} />`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "Your pages are connected!",
             explanation: {
-              young: "Links are like doors between rooms! Click one and you're in a new room instantly!",
-              junior: "React Router's <Link> navigates without reloading. <Route> defines which component to show for each URL.",
-              senior: "Client-side routing intercepts navigation. TanStack Router offers type-safe routes with loaders and search params.",
+              young:
+                "Links are like doors between rooms! Click one and you're in a new room instantly!",
+              junior:
+                "React Router's <Link> navigates without reloading. <Route> defines which component to show for each URL.",
+              senior:
+                "Client-side routing intercepts navigation. TanStack Router offers type-safe routes with loaders and search params.",
             },
             action: "Next Chapter!",
           },
@@ -2257,40 +2785,40 @@ pets.map((pet) => (
 
       // ── Mission 28 ─ Chapter 8: Props + State Together ────────────────────────
       {
-        id: 'mission-28',
+        id: "mission-28",
         number: 28,
         act: 9,
-        title: 'Sharing Information',
-        subtitle: 'Props + State — the full picture',
-        concept: 'props-state',
+        title: "Sharing Information",
+        subtitle: "Props + State — the full picture",
+        concept: "props-state",
         xp: 250,
-        badge: { id: 'react-master', label: 'React Master', emoji: '⚛️' },
+        badge: { id: "react-master", label: "React Master", emoji: "⚛️" },
         steps: [
           {
-            id: 'm28-gateway',
-            type: 'react-gateway',
+            id: "m28-gateway",
+            type: "react-gateway",
             chapterNumber: 8,
-            chapterTitle: 'Sharing Information',
-            chapterSubtitle: 'Props + State Together',
+            chapterTitle: "Sharing Information",
+            chapterSubtitle: "Props + State Together",
             messages: [
               "Final chapter.",
               "Everything comes together now.",
               "Build a Theme Selector that updates your ENTIRE website.",
             ],
-            mood: 'excited',
+            mood: "excited",
             action: "Build It",
           },
           {
-            id: 'm28-demo',
-            type: 'react-live-demo',
-            demoType: 'theme-selector',
+            id: "m28-demo",
+            type: "react-live-demo",
+            demoType: "theme-selector",
             teki: "Pick a theme. Watch the entire website update.",
-            demoInit: { mode: 'theme-selector', showThemeSelector: true },
+            demoInit: { mode: "theme-selector", showThemeSelector: true },
             options: [
-              { label: 'Ocean',  value: '#0ea5e9', icon: '🌊' },
-              { label: 'Forest', value: '#10b981', icon: '🌿' },
-              { label: 'Sunset', value: '#f59e0b', icon: '🌅' },
-              { label: 'Royal',  value: '#8b5cf6', icon: '👑' },
+              { label: "Ocean", value: "#0ea5e9", icon: "🌊" },
+              { label: "Forest", value: "#10b981", icon: "🌿" },
+              { label: "Sunset", value: "#f59e0b", icon: "🌅" },
+              { label: "Royal", value: "#8b5cf6", icon: "👑" },
             ],
             codeReveal: `// Parent holds the state
 const [theme, setTheme] = useState('ocean');
@@ -2299,81 +2827,102 @@ const [theme, setTheme] = useState('ocean');
 <Header theme={theme} />
 <Hero   theme={theme} />
 <Footer theme={theme} />`,
-            language: 'jsx',
+            language: "jsx",
             successMessage: "Props + State working together!",
             explanation: {
-              young: "The parent remembers the theme and tells ALL its children what to use!",
-              junior: "Parent component holds state. That state is passed to children as props — any change flows instantly.",
-              senior: "Unidirectional data flow: state lives in the nearest common ancestor and propagates downward via props. For deeper sharing, use Context or a state manager.",
+              young:
+                "The parent remembers the theme and tells ALL its children what to use!",
+              junior:
+                "Parent component holds state. That state is passed to children as props — any change flows instantly.",
+              senior:
+                "Unidirectional data flow: state lives in the nearest common ancestor and propagates downward via props. For deeper sharing, use Context or a state manager.",
             },
             autoAdvance: true,
           },
           {
-            id: 'm28-concept',
-            type: 'react-concept',
-            conceptType: 'props-state-flow',
+            id: "m28-concept",
+            type: "react-concept",
+            conceptType: "props-state-flow",
             teki: "Here's how Parent and Child components share information:",
             action: "I understand it all!",
           },
           {
-            id: 'act9-complete',
-            type: 'act-complete',
-            actId: 'act9',
-            title: 'ACT 9 Complete!',
-            message: "You know React! Components, props, state, events, map, conditional rendering, routing, and data flow. You build like a pro.",
-            power: { label: 'React Master', emoji: '⚛️' },
+            id: "act9-complete",
+            type: "act-complete",
+            actId: "act9",
+            title: "ACT 9 Complete!",
+            message:
+              "You know React! Components, props, state, events, map, conditional rendering, routing, and data flow. You build like a pro.",
+            power: { label: "React Master", emoji: "⚛️" },
             xpBonus: 400,
             action: "Connect to the world!",
           },
         ],
       },
-
     ],
   },
 
   // ── ACT 10 ── Connecting To The World ────────────────────────────────────────
   {
-    id: 'act10',
+    id: "act10",
     number: 10,
-    title: 'Connecting To The World',
-    tagline: 'APIs — live data from anywhere',
-    color: '#14b8a6',
-    emoji: '🌎',
+    title: "Connecting To The World",
+    tagline: "APIs — live data from anywhere",
+    color: "#14b8a6",
+    emoji: "🌎",
     quiz: [
       {
-        question: 'What does an API do?',
-        options: ['Styles the page with colors', 'Lets your app talk to other services and get live data', 'Renders HTML templates', 'Manages local variables'],
+        question: "What does an API do?",
+        options: [
+          "Styles the page with colors",
+          "Lets your app talk to other services and get live data",
+          "Renders HTML templates",
+          "Manages local variables",
+        ],
         correct: 1,
-        explanation: 'API = Application Programming Interface — it\'s a door that lets two apps exchange data.',
+        explanation:
+          "API = Application Programming Interface — it's a door that lets two apps exchange data.",
       },
       {
-        question: 'What does fetch() do in JavaScript?',
-        options: ['Creates a new React component', 'Changes text styling', 'Makes a network request to get data from a URL', 'Stores data in localStorage'],
+        question: "What does fetch() do in JavaScript?",
+        options: [
+          "Creates a new React component",
+          "Changes text styling",
+          "Makes a network request to get data from a URL",
+          "Stores data in localStorage",
+        ],
         correct: 2,
-        explanation: 'fetch() sends a request to a URL and returns the response — like asking a waiter for your order.',
+        explanation:
+          "fetch() sends a request to a URL and returns the response — like asking a waiter for your order.",
       },
       {
-        question: 'What does async/await help with?',
-        options: ['Making fonts bigger', 'Waiting for slow operations (like fetching data) without freezing the app', 'Looping through arrays', 'Creating CSS animations'],
+        question: "What does async/await help with?",
+        options: [
+          "Making fonts bigger",
+          "Waiting for slow operations (like fetching data) without freezing the app",
+          "Looping through arrays",
+          "Creating CSS animations",
+        ],
         correct: 1,
-        explanation: 'async/await lets you write asynchronous code that reads top-to-bottom, just like normal code.',
+        explanation:
+          "async/await lets you write asynchronous code that reads top-to-bottom, just like normal code.",
       },
     ],
     missions: [
       {
-        id: 'mission-29',
+        id: "mission-29",
         number: 29,
         act: 10,
-        title: 'Data Portal',
-        subtitle: 'APIs bring live data in',
-        concept: 'apis',
+        title: "Data Portal",
+        subtitle: "APIs bring live data in",
+        concept: "apis",
         xp: 250,
         badge: null,
         steps: [
           {
-            id: 'api-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "api-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Your website lives on the internet. The internet is FULL of data!",
               "Weather, news, facts, photos — all available via APIs.",
@@ -2383,26 +2932,35 @@ const [theme, setTheme] = useState('ocean');
             autoAdvance: true,
           },
           {
-            id: 'fetch-challenge',
-            type: 'code-challenge',
-            teki: 'Use fetch() to request data from a URL:',
-            language: 'javascript',
+            id: "fetch-challenge",
+            type: "code-challenge",
+            teki: "Use fetch() to request data from a URL:",
+            language: "javascript",
             code: "const response = await ___('/api/data')\nconst data = await response.json()",
-            answer: "const response = await fetch('/api/data')\nconst data = await response.json()",
-            blanks: [{ position: 0, answer: 'fetch' }],
-            completionEffect: { buildSection: 'contact' },
+            answer:
+              "const response = await fetch('/api/data')\nconst data = await response.json()",
+            blanks: [{ position: 0, answer: "fetch" }],
+            completionEffect: { buildSection: "contact" },
             explanations: {
-              young: 'fetch() sends a request to a URL — like asking a waiter for your order!',
-              junior: 'fetch(url) returns a Promise that resolves with a Response object. Call .json() to parse the body.',
-              senior: 'fetch() is a browser API returning a Promise<Response>. Always handle errors with .catch() or try/catch.',
+              young:
+                "fetch() sends a request to a URL — like asking a waiter for your order!",
+              junior:
+                "fetch(url) returns a Promise that resolves with a Response object. Call .json() to parse the body.",
+              senior:
+                "fetch() is a browser API returning a Promise<Response>. Always handle errors with .catch() or try/catch.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'fetch() mastered — and a Contact section appeared on your website!',
-            action: 'Fetch the data!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "fetch() mastered — and a Contact section appeared on your website!",
+            action: "Fetch the data!",
           },
           {
-            id: 'contact-appear-observe',
-            type: 'observation',
+            id: "contact-appear-observe",
+            type: "observation",
             teki: "A Contact section appeared — wireframe style! Your fetch() knowledge built a connection point on your website. Next: async/await will style it!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
@@ -2411,19 +2969,19 @@ const [theme, setTheme] = useState('ocean');
       },
 
       {
-        id: 'mission-30',
+        id: "mission-30",
         number: 30,
         act: 10,
-        title: 'Live Content',
-        subtitle: 'Display real data beautifully',
-        concept: 'data-display',
+        title: "Live Content",
+        subtitle: "Display real data beautifully",
+        concept: "data-display",
         xp: 250,
-        badge: { id: 'data-connector', label: 'Data Connector', emoji: '🌎' },
+        badge: { id: "data-connector", label: "Data Connector", emoji: "🌎" },
         steps: [
           {
-            id: 'live-intro',
-            type: 'teki-message',
-            mood: 'proud',
+            id: "live-intro",
+            type: "teki-message",
+            mood: "proud",
             messages: [
               "Getting data is one thing. DISPLAYING it beautifully is another!",
               "async/await makes fetch() feel like normal code — no confusing callbacks!",
@@ -2431,37 +2989,47 @@ const [theme, setTheme] = useState('ocean');
             autoAdvance: true,
           },
           {
-            id: 'async-challenge',
-            type: 'code-challenge',
+            id: "async-challenge",
+            type: "code-challenge",
             teki: "Mark a function as async so it can use await inside it:",
-            language: 'javascript',
+            language: "javascript",
             code: "___ function loadContent() {\n  const res = await fetch('/api/content')\n  return await res.json()\n}",
-            answer: "async function loadContent() {\n  const res = await fetch('/api/content')\n  return await res.json()\n}",
-            blanks: [{ position: 0, answer: 'async' }],
-            completionEffect: { styleSection: 'contact' },
+            answer:
+              "async function loadContent() {\n  const res = await fetch('/api/content')\n  return await res.json()\n}",
+            blanks: [{ position: 0, answer: "async" }],
+            completionEffect: { styleSection: "contact" },
             explanations: {
-              young: "'async' tells JavaScript: this function will wait for things. Like saying 'I'll be patient'!",
-              junior: "'async' functions always return a Promise. Inside them, 'await' pauses execution until the Promise resolves.",
-              senior: "async/await is syntactic sugar over Promises. async functions return Promise<T>. Errors need try/catch.",
+              young:
+                "'async' tells JavaScript: this function will wait for things. Like saying 'I'll be patient'!",
+              junior:
+                "'async' functions always return a Promise. Inside them, 'await' pauses execution until the Promise resolves.",
+              senior:
+                "async/await is syntactic sugar over Promises. async functions return Promise<T>. Errors need try/catch.",
             },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: 'async mastered — Contact section fully styled! Your website can connect to the world!',
-            action: 'Make it async!',
+            ageExposure: {
+              young: "guided",
+              junior: "fill-blank",
+              senior: "fill-blank",
+            },
+            successMessage:
+              "async mastered — Contact section fully styled! Your website can connect to the world!",
+            action: "Make it async!",
           },
           {
-            id: 'contact-styled-observe',
-            type: 'observation',
+            id: "contact-styled-observe",
+            type: "observation",
             teki: "Contact section fully styled! Your website now has a beautiful email form — powered by your async/await knowledge. You built a site that can connect to the real world!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
           {
-            id: 'act10-complete',
-            type: 'act-complete',
-            actId: 'act10',
-            title: 'ACT 10 Complete!',
-            message: "You can fetch and display live data! One final act: create your own thing.",
-            power: { label: 'Data Connector', emoji: '🌎' },
+            id: "act10-complete",
+            type: "act-complete",
+            actId: "act10",
+            title: "ACT 10 Complete!",
+            message:
+              "You can fetch and display live data! One final act: create your own thing.",
+            power: { label: "Data Connector", emoji: "🌎" },
             xpBonus: 300,
             action: "Final challenge!",
           },
@@ -2472,48 +3040,67 @@ const [theme, setTheme] = useState('ocean');
 
   // ── ACT 11 ── Creator Challenges ─────────────────────────────────────────────
   {
-    id: 'act11',
+    id: "act11",
     number: 11,
-    title: 'Creator Challenges',
-    tagline: 'Build anything you imagine',
-    color: '#a855f7',
-    emoji: '🏆',
+    title: "Creator Challenges",
+    tagline: "Build anything you imagine",
+    color: "#a855f7",
+    emoji: "🏆",
     quiz: [
       {
-        question: 'Which of these is the best description of a full-stack developer?',
-        options: ['Someone who only does design', 'Someone who only writes databases', 'Someone who builds both the frontend (UI) and backend (server/data)', 'Someone who manages the office'],
+        question:
+          "Which of these is the best description of a full-stack developer?",
+        options: [
+          "Someone who only does design",
+          "Someone who only writes databases",
+          "Someone who builds both the frontend (UI) and backend (server/data)",
+          "Someone who manages the office",
+        ],
         correct: 2,
-        explanation: 'Full-stack means you can handle the whole product — what users see AND the server logic behind it.',
+        explanation:
+          "Full-stack means you can handle the whole product — what users see AND the server logic behind it.",
       },
       {
-        question: 'What is a good first step when starting any new project?',
-        options: ['Write as much code as possible without planning', 'Deploy it immediately', 'Break the problem into smaller parts and plan your approach', 'Copy another project completely'],
+        question: "What is a good first step when starting any new project?",
+        options: [
+          "Write as much code as possible without planning",
+          "Deploy it immediately",
+          "Break the problem into smaller parts and plan your approach",
+          "Copy another project completely",
+        ],
         correct: 2,
-        explanation: 'Great builders always plan first — breaking big problems into small steps makes them manageable.',
+        explanation:
+          "Great builders always plan first — breaking big problems into small steps makes them manageable.",
       },
       {
-        question: 'What does it mean to DEPLOY a website?',
-        options: ['Delete the code', 'Publish it so real people on the internet can visit it', 'Make a backup copy', 'Run tests on your computer'],
+        question: "What does it mean to DEPLOY a website?",
+        options: [
+          "Delete the code",
+          "Publish it so real people on the internet can visit it",
+          "Make a backup copy",
+          "Run tests on your computer",
+        ],
         correct: 1,
-        explanation: 'Deployment puts your code on a server so anyone with a URL can visit your site.',
+        explanation:
+          "Deployment puts your code on a server so anyone with a URL can visit your site.",
       },
     ],
     missions: [
       {
-        id: 'challenge-1',
+        id: "challenge-1",
         number: 31,
         act: 11,
-        title: 'Pet Website',
-        subtitle: 'Build a pet-themed website',
-        concept: 'challenge',
+        title: "Pet Website",
+        subtitle: "Build a pet-themed website",
+        concept: "challenge",
         xp: 300,
-        badge: { id: 'creator-1', label: 'Pet Creator', emoji: '🐾' },
+        badge: { id: "creator-1", label: "Pet Creator", emoji: "🐾" },
         isChallenge: true,
         steps: [
           {
-            id: 'challenge-1-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "challenge-1-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Challenge time! 🎯",
               "Build a complete pet website using everything you've learned.",
@@ -2524,20 +3111,20 @@ const [theme, setTheme] = useState('ocean');
         ],
       },
       {
-        id: 'challenge-2',
+        id: "challenge-2",
         number: 32,
         act: 11,
-        title: 'School Website',
-        subtitle: 'Design a school website',
-        concept: 'challenge',
+        title: "School Website",
+        subtitle: "Design a school website",
+        concept: "challenge",
         xp: 300,
-        badge: { id: 'creator-2', label: 'School Builder', emoji: '🏫' },
+        badge: { id: "creator-2", label: "School Builder", emoji: "🏫" },
         isChallenge: true,
         steps: [
           {
-            id: 'challenge-2-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "challenge-2-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Challenge 2! 🎯",
               "Build a school website with a homepage, about page, and class schedule.",
@@ -2547,20 +3134,20 @@ const [theme, setTheme] = useState('ocean');
         ],
       },
       {
-        id: 'challenge-3',
+        id: "challenge-3",
         number: 33,
         act: 11,
-        title: 'Space Explorer Website',
-        subtitle: 'Build an out-of-this-world site',
-        concept: 'challenge',
+        title: "Space Explorer Website",
+        subtitle: "Build an out-of-this-world site",
+        concept: "challenge",
         xp: 350,
-        badge: { id: 'creator-3', label: 'Space Explorer', emoji: '🚀' },
+        badge: { id: "creator-3", label: "Space Explorer", emoji: "🚀" },
         isChallenge: true,
         steps: [
           {
-            id: 'challenge-3-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "challenge-3-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Challenge 3! 🚀",
               "Build a space exploration website. Fetch real data from a space API!",
@@ -2570,20 +3157,20 @@ const [theme, setTheme] = useState('ocean');
         ],
       },
       {
-        id: 'challenge-4',
+        id: "challenge-4",
         number: 34,
         act: 11,
-        title: 'Portfolio Website',
-        subtitle: 'Showcase your work to the world',
-        concept: 'challenge',
+        title: "Portfolio Website",
+        subtitle: "Showcase your work to the world",
+        concept: "challenge",
         xp: 400,
-        badge: { id: 'creator-4', label: 'Portfolio Builder', emoji: '💼' },
+        badge: { id: "creator-4", label: "Portfolio Builder", emoji: "💼" },
         isChallenge: true,
         steps: [
           {
-            id: 'challenge-4-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "challenge-4-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "Challenge 4! 💼",
               "Build YOUR portfolio website. Show the world what you can do!",
@@ -2593,20 +3180,20 @@ const [theme, setTheme] = useState('ocean');
         ],
       },
       {
-        id: 'challenge-5',
+        id: "challenge-5",
         number: 35,
         act: 11,
-        title: 'Open Creation Challenge',
-        subtitle: 'Build anything you can imagine',
-        concept: 'challenge',
+        title: "Open Creation Challenge",
+        subtitle: "Build anything you can imagine",
+        concept: "challenge",
         xp: 500,
-        badge: { id: 'creator-5', label: 'Full Creator', emoji: '🏆' },
+        badge: { id: "creator-5", label: "Full Creator", emoji: "🏆" },
         isChallenge: true,
         steps: [
           {
-            id: 'challenge-5-intro',
-            type: 'teki-message',
-            mood: 'excited',
+            id: "challenge-5-intro",
+            type: "teki-message",
+            mood: "excited",
             messages: [
               "The FINAL challenge! 🏆",
               "No instructions. No template.",
@@ -2619,17 +3206,19 @@ const [theme, setTheme] = useState('ocean');
       },
     ],
   },
-]
+];
 
 // ── Base helpers ───────────────────────────────────────────────────────────────
 
-export const getAllMissions = () => ACTS.flatMap((act) => act.missions)
-export const getMissionById = (id) => getAllMissions().find((m) => m.id === id)
-export const getMissionByNumber = (n) => getAllMissions().find((m) => m.number === n)
-export const getActById = (id) => ACTS.find((a) => a.id === id)
-export const getMissionsForAct = (actId) => ACTS.find((a) => a.id === actId)?.missions ?? []
-export const TOTAL_MISSIONS = getAllMissions().length
-export const TOTAL_ACTS = ACTS.length
+export const getAllMissions = () => ACTS.flatMap((act) => act.missions);
+export const getMissionById = (id) => getAllMissions().find((m) => m.id === id);
+export const getMissionByNumber = (n) =>
+  getAllMissions().find((m) => m.number === n);
+export const getActById = (id) => ACTS.find((a) => a.id === id);
+export const getMissionsForAct = (actId) =>
+  ACTS.find((a) => a.id === actId)?.missions ?? [];
+export const TOTAL_MISSIONS = getAllMissions().length;
+export const TOTAL_ACTS = ACTS.length;
 
 // ── Level scoping ──────────────────────────────────────────────────────────────
 // Each level is a distinct journey through a subset of acts.
@@ -2640,36 +3229,51 @@ export const TOTAL_ACTS = ACTS.length
 //  Future Developer (15+)    → Acts 1–11 : full curriculum + React + APIs
 
 export const LEVEL_ACT_NUMBERS = {
-  young:  [1, 2, 3],
+  young: [1, 2, 3],
   junior: [1, 2, 3, 4, 5, 6, 7],
   // Seniors skip the visual-building acts — website is auto-generated.
   // They jump straight into React, APIs, and Creator Challenges.
   senior: [9, 10, 11],
-}
+};
 
 export const LEVEL_INFO = {
-  young:  { label: 'Young Builder',    emoji: '🌱', color: '#10b981', totalActs: 3 },
-  junior: { label: 'Junior Creator',   emoji: '🚀', color: '#3b82f6', totalActs: 7 },
-  senior: { label: 'Future Developer', emoji: '💻', color: '#f59e0b', totalActs: 3 },
-}
+  young: {
+    label: "Young Builder",
+    emoji: "🌱",
+    color: "#10b981",
+    totalActs: 3,
+  },
+  junior: {
+    label: "Junior Creator",
+    emoji: "🚀",
+    color: "#3b82f6",
+    totalActs: 7,
+  },
+  senior: {
+    label: "Future Developer",
+    emoji: "💻",
+    color: "#f59e0b",
+    totalActs: 3,
+  },
+};
 
 // All missions a level goes through, in order
 export const getMissionsForLevel = (ageGroup) => {
-  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
-  return getAllMissions().filter((m) => actNums.includes(m.act))
-}
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young;
+  return getAllMissions().filter((m) => actNums.includes(m.act));
+};
 
 // All acts a level contains
 export const getActsForLevel = (ageGroup) => {
-  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
-  return ACTS.filter((a) => actNums.includes(a.number))
-}
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young;
+  return ACTS.filter((a) => actNums.includes(a.number));
+};
 
 // The final act number for a level (completing this act = level complete)
 export const getLastActNumberForLevel = (ageGroup) => {
-  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young
-  return actNums[actNums.length - 1]
-}
+  const actNums = LEVEL_ACT_NUMBERS[ageGroup] ?? LEVEL_ACT_NUMBERS.young;
+  return actNums[actNums.length - 1];
+};
 
 export const isLastActForLevel = (actNumber, ageGroup) =>
-  actNumber === getLastActNumberForLevel(ageGroup)
+  actNumber === getLastActNumberForLevel(ageGroup);

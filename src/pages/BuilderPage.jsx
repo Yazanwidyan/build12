@@ -162,7 +162,7 @@ export default function BuilderPage() {
               onChange={(e) =>
                 journey.updateSection("footer", { copyright: e.target.value })
               }
-              placeholder="© 2024 My Website"
+              placeholder="© 2026 My Website"
             />
           </div>
         </div>
