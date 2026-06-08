@@ -15,23 +15,20 @@ import TekiCharacter from "./TekiCharacter";
 
 const TEKI_WIDTH = 300;
 
-// ── One-time geometry (computed at module load) ────────────────────────────────
-const _panelW      = typeof window !== "undefined" ? Math.min(Math.max(window.innerWidth * 0.33, 280), 420) : 340;
-const _rightStart  = typeof window !== "undefined" ? 12 + _panelW + 12 : 460;
-const _rightW      = typeof window !== "undefined" ? window.innerWidth - _rightStart - 12 : 700;
-const _iH          = typeof window !== "undefined" ? window.innerHeight : 800;
-const _iW          = typeof window !== "undefined" ? window.innerWidth  : 1440;
+// ── One-time geometry (full-width layout — no left panel) ─────────────────────
+const _iH = typeof window !== "undefined" ? window.innerHeight : 800;
+const _iW = typeof window !== "undefined" ? window.innerWidth  : 1440;
 
-// LEFT  — bottom-center of the mission panel
-const LEFT_X  = Math.max(0, 12 + _panelW / 2 - TEKI_WIDTH / 2);
-const LEFT_Y  = Math.max(44, _iH - 200);
+// LEFT  — left edge of screen, mid-height (above the bottom-center popup)
+const LEFT_X  = 16;
+const LEFT_Y  = Math.round(_iH * 0.42);
 
 // CENTER — middle of the full screen (default resting spot)
 const CENTER_X = Math.max(0, (_iW - TEKI_WIDTH) / 2);
 const CENTER_Y = Math.round(_iH * 0.38);
 
-// RIGHT  — centered in the website preview panel
-const RIGHT_X = _rightStart + Math.max(0, (_rightW - TEKI_WIDTH) / 2);
+// RIGHT  — right edge of screen, mid-height
+const RIGHT_X = Math.max(0, _iW - TEKI_WIDTH - 16);
 const RIGHT_Y = Math.round(_iH * 0.42);
 
 const FLOAT = {
@@ -97,8 +94,8 @@ export default function FloatingTeki() {
     zone === "right"  ? (travelTop ?? RIGHT_Y) :
     CENTER_Y;
 
-  // posX is an offset from LEFT_X (the CSS `left` anchor)
-  const posX = useMotionValue(CENTER_X - LEFT_X); // start at center
+  // posX is an offset added to the CSS `left: LEFT_X` anchor
+  const posX = useMotionValue(CENTER_X - LEFT_X);
   const posY = useMotionValue(CENTER_Y);
 
   useEffect(() => {

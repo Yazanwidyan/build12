@@ -3,7 +3,7 @@ import BrowserChrome from "@/components/journey/BrowserChrome";
 import CanvasEditor from "@/components/journey/CanvasEditor";
 import JourneyIntro from "@/components/journey/JourneyIntro";
 import JourneyOverlay from "@/components/journey/JourneyOverlay";
-import MissionPanel from "@/components/journey/MissionPanel";
+import MissionPopup from "@/components/journey/MissionPopup";
 import QuizOverlay from "@/components/journey/QuizOverlay";
 import WebsitePreview from "@/components/journey/WebsitePreview";
 import FloatingTeki from "@/components/teki/FloatingTeki";
@@ -47,36 +47,23 @@ function LevelCompleteScreen({ ageGroup, onGoToDashboard, onOpenBuilder }) {
         </motion.div>
 
         <div>
-          <p
-            className="text-sm font-semibold uppercase tracking-widest mb-2"
-            style={{ color: "#3b82f6" }}
-          >
+          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#3b82f6" }}>
             Level Complete!
           </p>
           <h2 className="text-3xl font-black text-ink mb-2">
             {levelInfo.emoji} {levelInfo.label}
           </h2>
           <p className="text-muted text-base leading-relaxed">
-            You finished all {levelInfo.totalActs} acts in your level. The
-            Website Builder is now unlocked — build anything you imagine!
+            You finished all {levelInfo.totalActs} acts in your level. The Website
+            Builder is now unlocked — build anything you imagine!
           </p>
         </div>
 
         <div className="flex flex-col gap-2 w-full">
-          <Button
-            variant="solid"
-            color="blue"
-            fullWidth
-            onClick={onOpenBuilder}
-          >
+          <Button variant="solid" color="blue" fullWidth onClick={onOpenBuilder}>
             🔓 Open Website Builder
           </Button>
-          <Button
-            variant="ghost"
-            color="neutral"
-            fullWidth
-            onClick={onGoToDashboard}
-          >
+          <Button variant="ghost" color="neutral" fullWidth onClick={onGoToDashboard}>
             Go to Dashboard
           </Button>
         </div>
@@ -93,7 +80,6 @@ export default function JourneyPage() {
   const speak = useTekiStore((s) => s.speak);
   const challengeFlash = useTekiStore((s) => s.challengeFlash);
   const ageGroup = profile.ageGroup ?? "young";
-
   const introDone = useJourneyStore((s) => !!s.website?.name);
 
   useEffect(() => {
@@ -105,10 +91,7 @@ export default function JourneyPage() {
     const { currentMessage } = useTekiStore.getState();
     if (!currentMessage) {
       speak(
-        [
-          "Hey! I'm TEKI — your building companion! 👋",
-          "Let's bring your website to life!",
-        ],
+        ["Hey! I'm TEKI — your building companion! 👋", "Let's bring your website to life!"],
         { mood: "excited" },
       );
     }
@@ -116,58 +99,47 @@ export default function JourneyPage() {
 
   if (!journey.currentJourney) return null;
 
-  const cardStyle = {
-    backgroundColor: "var(--app-surface)",
-    border: "1.5px solid var(--app-border)",
-    boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
-  };
-
   return (
     <WebsiteLayoutProvider>
       <StepActionProvider>
         <div
-          className="h-screen w-screen overflow-hidden flex gap-3 p-3"
+          className="h-screen w-screen overflow-hidden flex flex-col gap-2 p-3"
           style={{ backgroundColor: "var(--app-raised)" }}
         >
-          {/* ── Left panel: mission runner (1/3) ── */}
+          {/* ── Top acts progress bar ── */}
           {introDone && (
-            <motion.div
-              className="flex flex-col overflow-hidden rounded-2xl shrink-0"
-              animate={{
-                boxShadow:
-                  challengeFlash === "correct"
-                    ? "0 0 0 2px #4ade80, 0 0 32px rgba(74,222,128,0.45)"
-                    : challengeFlash === "wrong"
-                      ? "0 0 0 2px #f87171, 0 0 32px rgba(248,113,113,0.45)"
-                      : "0 2px 16px rgba(0,0,0,0.07)",
-                borderColor:
-                  challengeFlash === "correct"
-                    ? "#4ade80"
-                    : challengeFlash === "wrong"
-                      ? "#f87171"
-                      : "var(--app-border)",
-              }}
-              transition={{ duration: 0.2 }}
+            <div
+              className="shrink-0 overflow-hidden"
               style={{
-                width: "23%",
-                minWidth: 280,
-                maxWidth: 420,
-                backgroundColor: "var(--app-surface)",
+                borderRadius: 12,
                 border: "1.5px solid var(--app-border)",
+                backgroundColor: "var(--app-surface)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
               }}
             >
               <ActProgress />
-              <div className="flex-1 overflow-hidden">
-                <MissionPanel />
-              </div>
-            </motion.div>
+            </div>
           )}
 
-          {/* ── Right panel: website preview with browser chrome (2/3) ── */}
-          <div
+          {/* ── Website preview (full width, flex-1) ── */}
+          <motion.div
             className="flex-1 flex flex-col overflow-hidden min-w-0"
+            animate={{
+              boxShadow:
+                challengeFlash === "correct"
+                  ? "0 0 0 2px #4ade80, 0 0 32px rgba(74,222,128,0.4)"
+                  : challengeFlash === "wrong"
+                    ? "0 0 0 2px #f87171, 0 0 32px rgba(248,113,113,0.4)"
+                    : "0 2px 16px rgba(0,0,0,0.07)",
+              borderColor:
+                challengeFlash === "correct"
+                  ? "#4ade80"
+                  : challengeFlash === "wrong"
+                    ? "#f87171"
+                    : "var(--app-border)",
+            }}
+            transition={{ duration: 0.2 }}
             style={{
-              boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
               borderRadius: 16,
               border: "1.5px solid var(--app-border)",
             }}
@@ -181,18 +153,17 @@ export default function JourneyPage() {
               {introDone && <JourneyOverlay />}
               {introDone && <CanvasEditor />}
             </BrowserChrome>
-          </div>
+          </motion.div>
 
-          {/* ── Floating TEKI (speech + action button) ── */}
+          {/* ── Mission popup (interactive steps only) ── */}
+          {introDone && <MissionPopup />}
+
+          {/* ── Floating TEKI ── */}
           {introDone && <FloatingTeki />}
 
-          {/* ── Quiz overlay ── */}
           <QuizOverlay />
-
-          {/* ── Journey intro overlay ── */}
           {!introDone && <JourneyIntro onDone={() => {}} />}
 
-          {/* ── Level complete overlay ── */}
           {journey.levelComplete && (
             <LevelCompleteScreen
               ageGroup={ageGroup}

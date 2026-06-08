@@ -17,7 +17,6 @@ export default function ActProgress() {
     <div
       className="flex items-center gap-0 overflow-x-auto px-3 shrink-0"
       style={{
-        borderBottom: '1px solid var(--app-border)',
         height: 40,
         backgroundColor: 'var(--app-surface)',
       }}
