@@ -535,9 +535,9 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       ? `<header style="background:${surfaceBg};border-bottom:1.5px solid ${surfaceBorder};padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;height:62px;box-shadow:0 1px 12px rgba(0,0,0,0.05);animation:fadeIn 0.4s ease-out;">
         <div style="display:flex;align-items:center;gap:0.5rem;">
           <span style="width:9px;height:9px;border-radius:50%;background:${effectivePrimary};display:inline-block;flex-shrink:0;"></span>
-          <span style="color:${effectivePrimary};font-size:1.125rem;font-weight:800;letter-spacing:-0.02em;">${header.content?.title || name}</span>
+          <span id="site-name" style="color:${effectivePrimary};font-size:1.125rem;font-weight:800;letter-spacing:-0.02em;">${header.content?.title || name}</span>
         </div>
-        <nav style="display:flex;gap:1.5rem;">
+        <nav id="site-nav" style="display:flex;gap:1.5rem;">
           ${(header.content?.navLinks || ["Home"])
             .map((link) => {
               const href =
@@ -552,10 +552,10 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       : `<header style="background:#f8fafc;border-bottom:1.5px solid #e5e7eb;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;height:62px;animation:fadeIn 0.4s ease-out;">
         <div style="display:flex;align-items:center;gap:0.5rem;">
           <span style="width:9px;height:9px;border-radius:50%;background:#cbd5e1;display:inline-block;flex-shrink:0;"></span>
-          <span style="color:#374151;font-size:1.125rem;font-weight:800;letter-spacing:-0.02em;">${header.content?.title || name}</span>
+          <span id="site-name" style="color:#374151;font-size:1.125rem;font-weight:800;letter-spacing:-0.02em;">${header.content?.title || name}</span>
           <span style="font-family:monospace;font-size:0.62rem;color:#94a3b8;padding:0.1rem 0.4rem;background:#f1f5f9;border-radius:3px;margin-left:0.3rem;">&lt;header&gt;</span>
         </div>
-        <nav style="display:flex;gap:1.5rem;">
+        <nav id="site-nav" style="display:flex;gap:1.5rem;">
           ${(header.content?.navLinks || ["Home", "About", "Contact"])
             .map(
               (link) =>
@@ -594,15 +594,15 @@ export function generateWebsiteHTML(website, reactDemo = null) {
           ${td.emoji} ${topic || "My Website"}
         </div>
         <h2 id="hero-title" style="color:${effectiveText};font-size:${hsz};font-weight:800;line-height:1.2;margin:0;max-width:520px;text-align:center;letter-spacing:-0.025em;">${hero.content?.headline || "Welcome!"}</h2>
-        <p style="color:${effectiveText}7a;font-size:1rem;margin:0;max-width:440px;line-height:1.65;text-align:center;">${hero.content?.subtext || ""}</p>
+        <p id="hero-subtext" style="color:${effectiveText}7a;font-size:1rem;margin:0;max-width:440px;line-height:1.65;text-align:center;">${hero.content?.subtext || ""}</p>
         ${heroBtn}
       </section>`
       : `<section style="position:relative;background:#f9fafb;height:320px;overflow:hidden;display:flex;flex-direction:column;flex:1;align-items:center;justify-content:center;gap:1rem;padding:0 2rem;border-bottom:1px solid #e5e7eb;animation:fadeIn 0.4s ease-out;">
         <div style="position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:#e5e7eb20;pointer-events:none;"></div>
         <div style="position:absolute;top:12px;font-family:monospace;font-size:0.62rem;color:#94a3b8;background:#f1f5f9;padding:0.1rem 0.45rem;border-radius:3px;">&lt;main&gt;</div>
         <h2 id="hero-title" style="color:#374151;font-size:${hsz};font-weight:800;line-height:1.2;margin:0;max-width:520px;text-align:center;">${hero.content?.headline || "Your Headline Here"}</h2>
-        <p style="color:#9ca3af;font-size:1rem;margin:0;max-width:440px;line-height:1.65;text-align:center;">${hero.content?.subtext || ""}</p>
-        <button style="background:#e5e7eb;color:#6b7280;border:none;padding:0.75rem 2rem;border-radius:${btnRadius};font-size:0.9375rem;font-weight:700;cursor:default;margin-top:0.25rem;">${hero.content?.buttonText || "Explore"}</button>
+        <p id="hero-subtext" style="color:#9ca3af;font-size:1rem;margin:0;max-width:440px;line-height:1.65;text-align:center;">${hero.content?.subtext || ""}</p>
+        <button id="hero-btn" style="background:#e5e7eb;color:#6b7280;border:none;padding:0.75rem 2rem;border-radius:${btnRadius};font-size:0.9375rem;font-weight:700;cursor:default;margin-top:0.25rem;">${hero.content?.buttonText || "Explore"}</button>
       </section>`;
 
   // ── About: wireframe → styled ─────────────────────────────────────────────────
@@ -772,8 +772,8 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       </div>`
     : footer.styled
       ? `<footer style="background:${footerBg};color:white;padding:0 2rem;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.625rem;animation:fadeIn 0.4s ease-out;">
-        <p style="margin:0;font-size:0.875rem;opacity:0.55;font-weight:500;">${footer.content?.copyright || `© ${new Date().getFullYear()} ${name}`}</p>
-        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+        <p id="footer-copy" style="margin:0;font-size:0.875rem;opacity:0.55;font-weight:500;">${footer.content?.copyright || `© ${new Date().getFullYear()} ${name}`}</p>
+        <div id="footer-links-row" style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
           ${(footer.content?.links || [])
             .map(
               (link) =>
@@ -784,8 +784,8 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       </footer>`
       : `<footer style="background:#f1f5f9;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.625rem;padding:0 2rem;border-top:1px solid #e5e7eb;animation:fadeIn 0.4s ease-out;">
         <span style="font-family:monospace;font-size:0.62rem;color:#94a3b8;background:#e2e8f0;padding:0.1rem 0.45rem;border-radius:3px;margin-bottom:0.1rem;">&lt;footer&gt;</span>
-        <p style="color:#6b7280;font-size:0.875rem;opacity:0.8;margin:0;">${footer.content?.copyright || `© ${new Date().getFullYear()} ${name}`}</p>
-        <div style="display:flex;gap:1.5rem;">
+        <p id="footer-copy" style="color:#6b7280;font-size:0.875rem;opacity:0.8;margin:0;">${footer.content?.copyright || `© ${new Date().getFullYear()} ${name}`}</p>
+        <div id="footer-links-row" style="display:flex;gap:1.5rem;">
           ${(footer.content?.links || []).map((l) => `<a href="#" style="color:#94a3b8;text-decoration:none;font-size:0.8125rem;">${l}</a>`).join("")}
         </div>
       </footer>`;
@@ -813,6 +813,38 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   `
     : "";
 
+  // ── Content-update listener — lets the parent send field updates without
+  //    regenerating the entire srcDoc, eliminating iframe flicker on every keystroke.
+  const contentUpdateScript = `<script>
+(function(){
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='content-update')return;
+    var u=e.data.updates,el;
+    if(u.siteName!==undefined){el=document.getElementById('site-name');if(el)el.textContent=u.siteName;}
+    if(u.navLinks!==undefined){
+      el=document.getElementById('site-nav');
+      if(el){
+        var existingA=el.querySelector('a');
+        var c=existingA?existingA.style.color:'#9ca3af';
+        el.innerHTML=u.navLinks.map(function(l){return'<a href="#" style="color:'+c+';text-decoration:none;font-size:0.875rem;font-weight:500;">'+l+'</a>';}).join('');
+      }
+    }
+    if(u.headline!==undefined){el=document.getElementById('hero-title');if(el)el.textContent=u.headline||'Your Headline Here';}
+    if(u.subtext!==undefined){el=document.getElementById('hero-subtext');if(el)el.textContent=u.subtext;}
+    if(u.buttonText!==undefined){el=document.getElementById('hero-btn');if(el)el.textContent=u.buttonText||'Explore';}
+    if(u.copyright!==undefined){el=document.getElementById('footer-copy');if(el)el.textContent=u.copyright;}
+    if(u.footerLinks!==undefined){
+      el=document.getElementById('footer-links-row');
+      if(el){
+        var existingA=el.querySelector('a');
+        var c=existingA?existingA.style.color:'#94a3b8';
+        el.innerHTML=u.footerLinks.map(function(l){return'<a href="#" style="color:'+c+';text-decoration:none;font-size:0.8125rem;">'+l+'</a>';}).join('');
+      }
+    }
+  });
+})();
+<\/script>`;
+
   const measureScript = `<script>
 (function(){
   function post(){
@@ -830,6 +862,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       footer:{top:f.top,height:f.height}
     },'*');
   }
+  window._postSectionBounds=post;
   function postAfterLayout(){requestAnimationFrame(function(){setTimeout(post,60)});}
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',postAfterLayout);}
   else{postAfterLayout();}
@@ -879,6 +912,7 @@ export function generateWebsiteHTML(website, reactDemo = null) {
     ${demoSections}
   </main>
   ${footerHTML}
+  ${contentUpdateScript}
   ${measureScript}
 </body>
 </html>`;
@@ -896,23 +930,23 @@ function buildHeroButton(
 ) {
   // Wireframe button — grey, no interactivity yet
   if (!heroStyled) {
-    return `<button style="background:#e5e7eb;color:#6b7280;border:none;padding:0.75rem 2rem;border-radius:${btnRadius};font-size:0.9375rem;font-weight:700;cursor:default;margin-top:0.25rem;">${text}</button>`;
+    return `<button id="hero-btn" style="background:#e5e7eb;color:#6b7280;border:none;padding:0.75rem 2rem;border-radius:${btnRadius};font-size:0.9375rem;font-weight:700;cursor:default;margin-top:0.25rem;">${text}</button>`;
   }
 
   const base = `background:${btnColor};color:white;border:none;padding:0.75rem 2rem;border-radius:${btnRadius};font-size:0.9375rem;font-weight:700;cursor:pointer;margin-top:0.25rem;letter-spacing:0.01em;box-shadow:0 4px 14px ${btnColor}44;transition:opacity 0.2s,transform 0.15s;`;
   const hover = `onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='none'"`;
 
   if (hasInteractivity && !demo.mode) {
-    return `<button style="${base}" ${hover} onclick="alert('Welcome to ${siteName}! 🎉')">${text}</button>`;
+    return `<button id="hero-btn" style="${base}" ${hover} onclick="alert('Welcome to ${siteName}! 🎉')">${text}</button>`;
   }
 
   if (demo.mode === "events" || demo.showDeadButton) {
     const action = demo.eventAction;
-    if (!action) return `<button style="${base}" ${hover}>${text}</button>`;
+    if (!action) return `<button id="hero-btn" style="${base}" ${hover}>${text}</button>`;
     if (action === "message")
-      return `<button style="${base}" ${hover} onclick="alert('Welcome to ${siteName}! 🎉')">${text}</button>`;
+      return `<button id="hero-btn" style="${base}" ${hover} onclick="alert('Welcome to ${siteName}! 🎉')">${text}</button>`;
     if (action === "popup")
-      return `<button style="${base}" ${hover} onclick="document.getElementById('demo-popup').style.display='flex'">${text}</button>
+      return `<button id="hero-btn" style="${base}" ${hover} onclick="document.getElementById('demo-popup').style.display='flex'">${text}</button>
               <div id="demo-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:999;" onclick="this.style.display='none'">
                 <div style="background:white;border-radius:16px;padding:2rem;text-align:center;max-width:280px;">
                   <p style="font-size:1.25rem;font-weight:700;margin-bottom:0.5rem;">🎉 You opened a popup!</p>
@@ -921,10 +955,10 @@ function buildHeroButton(
                 </div>
               </div>`;
     if (action === "text-change")
-      return `<button style="${base}" ${hover} onclick="this.textContent = this.textContent === '${text}' ? 'You clicked! ✅' : '${text}'">${text}</button>`;
+      return `<button id="hero-btn" style="${base}" ${hover} onclick="this.textContent = this.textContent === '${text}' ? 'You clicked! ✅' : '${text}'">${text}</button>`;
   }
 
-  return `<button style="${base}" ${hover}>${text}</button>`;
+  return `<button id="hero-btn" style="${base}" ${hover}>${text}</button>`;
 }
 
 // ── React demo extra sections (Acts 9+) ───────────────────────────────────────

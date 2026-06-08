@@ -1,14 +1,83 @@
-﻿import TekiCharacter from "@/components/teki/TekiCharacter";
+import TekiCharacter from "@/components/teki/TekiCharacter";
 import { ACTS } from "@/data/curriculum";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useProgressStore } from "@/stores/progressStore";
 import { useTekiStore } from "@/stores/tekiStore";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
 
 import MissionRunner from "./MissionRunner";
 
+// ── Mood-driven float configs ─────────────────────────────────────────────────
+const MOOD_FLOAT = {
+  happy:    { y: [0, -6, 0],              rotate: [0, 0, 0],           dur: 2.8 },
+  excited:  { y: [0, -11, 3, -10, 0],    rotate: [-3, 3, -2, 0],      dur: 1.4 },
+  thinking: { y: [0, -2, -5, -2, 0],     rotate: [-1.5, 1.5, -1, 0],  dur: 4.2 },
+  proud:    { y: [0, -9, -1, 0],          rotate: [0, 0, 0],           dur: 2.0 },
+  amazed:   { y: [0, -14, 4, -9, 0],     rotate: [-5, 5, -3, 0],      dur: 1.6 },
+  sad:      { y: [2, 1, 2],              rotate: [2, -1, 2],           dur: 5.0 },
+};
+const getMoodConfig = (m) => MOOD_FLOAT[m] ?? MOOD_FLOAT.happy;
+const MOOD_POP_ROTATE = { excited: 12, proud: -7, amazed: 9, thinking: -4, sad: 3 };
+
+// ── Inner character widget: handles float + reactions independently ────────────
+function PanelTekiCharacter({ mood, challengeFlash }) {
+  const floatControls    = useAnimation();
+  const reactionControls = useAnimation();
+
+  // Restart float loop whenever mood changes
+  useEffect(() => {
+    const cfg = getMoodConfig(mood);
+    floatControls.start({
+      y: cfg.y,
+      rotate: cfg.rotate,
+      transition: { duration: cfg.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" },
+    });
+  }, [mood]);
+
+  // React to code-challenge verdicts
+  useEffect(() => {
+    if (!challengeFlash) return;
+    if (challengeFlash === "correct") {
+      reactionControls.start({
+        scale:  [1, 1.35, 0.88, 1.12, 1],
+        rotate: [0, -10, 12, -6, 0],
+        y:      [0, -18, 4, -7, 0],
+        transition: { duration: 0.65, ease: "easeOut" },
+      });
+    } else {
+      reactionControls.start({
+        x:      [0, -9, 9, -9, 9, -5, 5, 0],
+        rotate: [0, -5, 5, -4, 4, 0],
+        transition: { duration: 0.5, ease: "easeInOut" },
+      });
+    }
+  }, [challengeFlash]);
+
+  return (
+    <div className="shrink-0 mt-1">
+      {/* Flash reaction wrapper */}
+      <motion.div animate={reactionControls}>
+        {/* Mood float wrapper */}
+        <motion.div animate={floatControls}>
+          {/* Pop-in on mood change */}
+          <motion.div
+            key={mood}
+            initial={{ scale: 0.78, rotate: MOOD_POP_ROTATE[mood] ?? 0 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 450, damping: 16 }}
+          >
+            <TekiCharacter size={60} mood={mood} />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
+// ── Main panel ────────────────────────────────────────────────────────────────
 export default function TekiPanel() {
-  const { currentMessage, displayedText, isTyping, mood } = useTekiStore();
+  const { currentMessage, displayedText, isTyping, mood, challengeFlash } = useTekiStore();
   const {
     currentMission,
     currentStep,
@@ -66,14 +135,7 @@ export default function TekiPanel() {
 
       {/* ── TEKI + bubble + interaction ────────────────────────────── */}
       <div className="flex-1 flex items-start gap-3 px-4 py-3 overflow-y-auto min-h-0">
-        {/* TEKI character */}
-        <motion.div
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="shrink-0 mt-1"
-        >
-          <TekiCharacter size={60} mood={mood} />
-        </motion.div>
+        <PanelTekiCharacter mood={mood} challengeFlash={challengeFlash} />
 
         {/* Right column: bubble then interaction */}
         <div className="flex-1 flex flex-col gap-3 min-w-0">
@@ -82,9 +144,9 @@ export default function TekiPanel() {
             {shownText && (
               <motion.div
                 key={currentMessage}
-                initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, y: -6, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0,  scale: 1    }}
+                exit={  { opacity: 0, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 28 }}
                 className="relative rounded-2xl px-4 py-3"
                 style={{
@@ -92,21 +154,26 @@ export default function TekiPanel() {
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   boxShadow: "var(--bubble-shadow)",
-                  color: "var(--ink-muted)",
                   fontWeight: 500,
                   fontSize: 16,
                 }}
               >
-                <p
-                  className="text-base leading-relaxed"
-                  style={{ color: "var(--bubble-text)" }}
-                >
+                <p className="text-base leading-relaxed" style={{ color: "var(--bubble-text)" }}>
                   {shownText}
                   {isTyping && (
-                    <span
-                      className="inline-block w-0.5 h-3.5 ml-0.5 animate-pulse align-middle"
-                      style={{ background: "var(--bubble-text)" }}
-                    />
+                    <span className="inline-flex gap-0.5 ml-2 align-middle">
+                      {[0, 1, 2].map((i) => (
+                        <motion.span
+                          key={i}
+                          style={{
+                            width: 4, height: 4, borderRadius: "50%",
+                            background: "var(--bubble-text)", display: "inline-block",
+                          }}
+                          animate={{ opacity: [0.25, 1, 0.25], y: [0, -3, 0] }}
+                          transition={{ duration: 0.75, repeat: Infinity, delay: i * 0.18 }}
+                        />
+                      ))}
+                    </span>
                   )}
                 </p>
               </motion.div>

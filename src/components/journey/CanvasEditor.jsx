@@ -222,27 +222,8 @@ function CanvasInput({ fieldKey, canvasInput, sectionTop }) {
 }
 
 // ── Canvas editor root ─────────────────────────────────────────────────────────
+// Input is now rendered inside MissionPopup (CanvasInputStep) so the preview
+// stays clean and the user can watch their text appear live in the website above.
 export default function CanvasEditor() {
-  const { currentStep } = useMissionEngine();
-  const { sectionBounds } = useWebsiteLayout();
-
-  if (!currentStep || currentStep.type !== "canvas-input") return null;
-
-  const { canvasInput } = currentStep;
-  if (!canvasInput) return null;
-
-  const sectionTop = sectionBounds[canvasInput.section]?.top ?? 90;
-
-  return (
-    <div className="fixed inset-0 z-[30] pointer-events-none">
-      <AnimatePresence mode="wait">
-        <CanvasInput
-          key={currentStep.id}
-          fieldKey={canvasInput.fieldKey}
-          canvasInput={canvasInput}
-          sectionTop={sectionTop}
-        />
-      </AnimatePresence>
-    </div>
-  );
+  return null;
 }

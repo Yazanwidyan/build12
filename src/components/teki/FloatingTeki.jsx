@@ -7,46 +7,60 @@ import {
   AnimatePresence,
   animate,
   motion,
+  useAnimation,
   useMotionValue,
 } from "framer-motion";
 import { useEffect, useMemo, useRef } from "react";
 
 import TekiCharacter from "./TekiCharacter";
 
-const TEKI_WIDTH = 300;
+const TEKI_W = 300;
 
-// ── One-time geometry (full-width layout — no left panel) ─────────────────────
-const _iH = typeof window !== "undefined" ? window.innerHeight : 800;
-const _iW = typeof window !== "undefined" ? window.innerWidth  : 1440;
+// ── Stable viewport snapshot (valid until hard reload) ────────────────────────
+const VW = typeof window !== "undefined" ? window.innerWidth  : 1440;
+const VH = typeof window !== "undefined" ? window.innerHeight : 800;
 
-// LEFT  — left edge of screen, mid-height (above the bottom-center popup)
-const LEFT_X  = 16;
-const LEFT_Y  = Math.round(_iH * 0.42);
+// ── Zone X anchors ─────────────────────────────────────────────────────────────
+// MissionPopup: fixed bottom-14, left: 50vw-190px, width: 380px.
+// TEKI docks LEFT of the popup during interaction and RIGHT during observation.
+// CENTER is the horizontal midpoint when no popup competes.
+const POPUP_HALF = 190;   // half of 380px popup
+const GAP        = 14;    // gap between TEKI edge and popup edge
 
-// CENTER — middle of the full screen (default resting spot)
-const CENTER_X = Math.max(0, (_iW - TEKI_WIDTH) / 2);
-const CENTER_Y = Math.round(_iH * 0.38);
+const X_LEFT   = Math.max(16, Math.round(VW / 2) - POPUP_HALF - TEKI_W - GAP);
+const X_CENTER = Math.max(16, Math.round((VW - TEKI_W) / 2));
+const X_RIGHT  = Math.min(VW - TEKI_W - 16, Math.round(VW / 2) + POPUP_HALF + GAP);
 
-// RIGHT  — right edge of screen, mid-height
-const RIGHT_X = Math.max(0, _iW - TEKI_WIDTH - 16);
-const RIGHT_Y = Math.round(_iH * 0.42);
+// ── Default docking Y — just above where the popup normally lives ─────────────
+// This keeps TEKI in the bottom zone without overlapping the preview content.
+const DOCK_Y = VH - 310;
 
-const FLOAT = {
-  animate: { y: [0, -7, 0] },
-  transition: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
+// Minimum Y so the speech bubble (≈90px tall) stays on screen
+const MIN_Y  = 200;
+// Maximum Y so TEKI doesn't go below popup area
+const MAX_Y  = VH - 220;
+
+// ── Springs ───────────────────────────────────────────────────────────────────
+const SPRING_X = { type: "spring", stiffness: 130, damping: 25 };
+const SPRING_Y = { type: "spring", stiffness: 160, damping: 26 };
+
+// ── Mood float keyframes ──────────────────────────────────────────────────────
+const MOOD_FLOAT = {
+  happy:    { y: [0, -8,  0],             rotate: [0,    0,    0],  dur: 2.8 },
+  excited:  { y: [0, -14, 3, -13, 0],    rotate: [-3,   3,   -2, 0], dur: 1.4 },
+  thinking: { y: [0, -3,  -6, -3, 0],    rotate: [-1.5, 1.5, -1, 0], dur: 4.2 },
+  proud:    { y: [0, -12, -1, 0],         rotate: [0,    0,    0],  dur: 2.0 },
+  amazed:   { y: [0, -18, 5,  -12, 0],   rotate: [-5,   5,   -3, 0], dur: 1.6 },
+  sad:      { y: [3,  1,   3],            rotate: [2,   -1,    2],  dur: 5.0 },
 };
-
-const SPRING_X = { type: "spring", stiffness: 160, damping: 28 };
-const SPRING_Y = { type: "spring", stiffness: 200, damping: 30 };
+const getMoodCfg = (m) => MOOD_FLOAT[m] ?? MOOD_FLOAT.happy;
+const MOOD_POP_ROTATE = { excited: 14, proud: -8, amazed: 10, thinking: -5, sad: 4 };
 
 function readTime(msg) {
   return Math.max(2000, Math.min(msg.length * 30, 4000));
 }
 
-// ── Zone rules ─────────────────────────────────────────────────────────────────
-// left  → steps where the user interacts with the mission panel
-// right → observation steps (watching what changed on the website)
-// center → everything else (default resting zone)
+// Step type → travel zone
 function zoneForStep(step) {
   if (!step) return "center";
   switch (step.type) {
@@ -65,56 +79,81 @@ function zoneForStep(step) {
 }
 
 export default function FloatingTeki() {
-  const { currentMessage, isTyping, mood, messageTyped, highlightSection } =
-    useTekiStore();
-  const clearHighlight = useTekiStore((s) => s.clearHighlight);
-  const { currentStep } = useMissionEngine();
+  const {
+    currentMessage, isTyping, mood, messageTyped,
+    highlightSection, challengeFlash,
+  } = useTekiStore();
+  const clearHighlight   = useTekiStore((s) => s.clearHighlight);
+  const { currentStep }  = useMissionEngine();
   const { sectionBounds } = useWebsiteLayout();
-  const { stepAction } = useStepAction();
-  const constraintsRef = useRef(null);
+  const { stepAction }   = useStepAction();
+  const constraintsRef   = useRef(null);
 
-  // Y position when travelling toward a highlighted section (observation / canvas-input)
-  const travelTop = useMemo(() => {
+  const floatControls    = useAnimation();
+  const reactionControls = useAnimation();
+
+  // ── Section-based Y: TEKI sits just below the highlighted section ─────────
+  // Applies to both canvas-input (TEKI near what's being edited) and
+  // observation (TEKI watches what just appeared). The speech bubble
+  // floats upward toward the section.
+  const travelY = useMemo(() => {
     if (!highlightSection) return null;
     const bound = sectionBounds[highlightSection];
     if (!bound) return null;
-    if (currentStep?.type === "canvas-input" && currentStep?.canvasInput?.section) {
-      return Math.max(44, Math.min(bound.top + bound.height + 12, _iH - 220));
-    }
-    return Math.max(44, bound.top + bound.height / 2 - 36);
+    const below = bound.top + bound.height + 16;
+    return Math.max(MIN_Y, Math.min(below, MAX_Y));
   }, [highlightSection, sectionBounds, currentStep?.id]);
 
-  const zone = useMemo(() => zoneForStep(currentStep), [currentStep?.id]);
+  const zone    = useMemo(() => zoneForStep(currentStep), [currentStep?.id]);
+  const targetX = zone === "left" ? X_LEFT : zone === "right" ? X_RIGHT : X_CENTER;
+  // Section highlight overrides the dock Y for both zones
+  const targetY = travelY ?? DOCK_Y;
 
-  // Resolve target coordinates
-  const targetLeft =
-    zone === "left" ? LEFT_X : zone === "right" ? RIGHT_X : CENTER_X;
-  const targetTop =
-    zone === "left"   ? LEFT_Y :
-    zone === "right"  ? (travelTop ?? RIGHT_Y) :
-    CENTER_Y;
+  // posX/posY are absolute screen coordinates (element anchored top-left: 0,0)
+  const posX = useMotionValue(X_CENTER);
+  const posY = useMotionValue(DOCK_Y + 60); // start slightly below — entrance effect
 
-  // posX is an offset added to the CSS `left: LEFT_X` anchor
-  const posX = useMotionValue(CENTER_X - LEFT_X);
-  const posY = useMotionValue(CENTER_Y);
+  useEffect(() => { animate(posX, targetX, SPRING_X); }, [targetX]);
+  useEffect(() => { animate(posY, targetY, SPRING_Y); }, [targetY]);
 
+  // ── Mood-driven float loop ─────────────────────────────────────────────────
   useEffect(() => {
-    animate(posX, targetLeft - LEFT_X, SPRING_X);
-  }, [targetLeft]);
+    const cfg = getMoodCfg(mood);
+    floatControls.start({
+      y: cfg.y,
+      rotate: cfg.rotate,
+      transition: { duration: cfg.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" },
+    });
+  }, [mood]);
 
+  // ── Challenge verdict reaction ─────────────────────────────────────────────
   useEffect(() => {
-    animate(posY, targetTop, SPRING_Y);
-  }, [targetTop]);
+    if (!challengeFlash) return;
+    if (challengeFlash === "correct") {
+      reactionControls.start({
+        scale:  [1, 1.38, 0.88, 1.14, 1],
+        rotate: [0, -10, 12, -6, 0],
+        y:      [0, -20,  4, -8, 0],
+        transition: { duration: 0.7, ease: "easeOut" },
+      });
+    } else {
+      reactionControls.start({
+        x:      [0, -10, 10, -10, 10, -6, 6, 0],
+        rotate: [0, -5,   5,  -4,  4,  0],
+        transition: { duration: 0.55, ease: "easeInOut" },
+      });
+    }
+  }, [challengeFlash]);
 
-  // Clear section highlight when the step doesn't declare one
+  // ── Clear highlight when step doesn't declare one ─────────────────────────
   useEffect(() => {
-    const hasHighlight =
+    const has =
       currentStep?.highlight || currentStep?.highlightSection ||
       currentStep?.section   || currentStep?.canvasInput?.section;
-    if (!hasHighlight) clearHighlight();
+    if (!has) clearHighlight();
   }, [currentStep?.id]);
 
-  // Auto-advance multi-message queues
+  // ── Auto-advance message queue ────────────────────────────────────────────
   useEffect(() => {
     if (!currentMessage || !isTyping) return;
     const t = setTimeout(messageTyped, readTime(currentMessage));
@@ -133,28 +172,29 @@ export default function FloatingTeki() {
         className="fixed z-50 select-none"
         style={{
           top: 0,
-          left: LEFT_X,
-          width: TEKI_WIDTH,
+          left: 0,
+          width: TEKI_W,
           x: posX,
           y: posY,
           cursor: "grab",
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ opacity: { duration: 0.2 } }}
-        whileDrag={{ cursor: "grabbing" }}
+        // Entrance: fade + scale in (y handled by posY starting offset)
+        initial={{ opacity: 0, scale: 0.78 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.32, ease: "easeOut" }}
+        whileDrag={{ cursor: "grabbing", scale: 1.04 }}
       >
-        {/* Speech bubble — grows upward, always anchored bottom-left toward the character */}
+        {/* Speech bubble — anchored above the character, grows upward */}
         <AnimatePresence mode="popLayout">
           {currentMessage && (
             <motion.div
               key={currentMessage}
               className="absolute pointer-events-auto"
               style={{ bottom: "100%", left: 0, width: "100%", paddingBottom: 8 }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
+              initial={{ opacity: 0, y: 14, scale: 0.88 }}
+              animate={{ opacity: 1, y: 0,  scale: 1    }}
+              exit={  { opacity: 0, y: -10, scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 420, damping: 26 }}
             >
               <div
                 className="px-4 py-3 leading-relaxed"
@@ -163,23 +203,50 @@ export default function FloatingTeki() {
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   borderBottomLeftRadius: 0,
-                  color: "var(--ink-muted)",
                   fontWeight: 500,
                   fontSize: 15,
                   boxShadow: "0 2px 20px rgba(99,102,241,0.18)",
+                  color: "var(--ink-muted)",
                 }}
               >
                 {currentMessage}
+                {isTyping && (
+                  <span className="inline-flex gap-0.5 ml-2 align-middle">
+                    {[0, 1, 2].map((i) => (
+                      <motion.span
+                        key={i}
+                        style={{
+                          width: 4, height: 4, borderRadius: "50%",
+                          background: "var(--bubble-text)", display: "inline-block",
+                        }}
+                        animate={{ opacity: [0.25, 1, 0.25], y: [0, -3, 0] }}
+                        transition={{ duration: 0.75, repeat: Infinity, delay: i * 0.18 }}
+                      />
+                    ))}
+                  </span>
+                )}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Teki character + action button */}
+        {/* Character + action button */}
         <div className="flex items-center gap-3">
           <div className="shrink-0 pointer-events-none">
-            <motion.div {...FLOAT}>
-              <TekiCharacter size={68} mood={mood} />
+            {/* Flash-reaction wrapper (shake / bounce) */}
+            <motion.div animate={reactionControls}>
+              {/* Mood-driven float */}
+              <motion.div animate={floatControls}>
+                {/* Pop-in when mood changes */}
+                <motion.div
+                  key={mood}
+                  initial={{ scale: 0.78, rotate: MOOD_POP_ROTATE[mood] ?? 0 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 16 }}
+                >
+                  <TekiCharacter size={68} mood={mood} />
+                </motion.div>
+              </motion.div>
             </motion.div>
           </div>
 
@@ -188,10 +255,10 @@ export default function FloatingTeki() {
               <motion.div
                 key={stepAction.label}
                 className="flex-1 pointer-events-auto"
-                initial={{ opacity: 0, x: 8, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.18 }}
+                initial={{ opacity: 0, x: 14, scale: 0.9  }}
+                animate={{ opacity: 1, x: 0,  scale: 1    }}
+                exit={  { opacity: 0, x: -10, scale: 0.88 }}
+                transition={{ type: "spring", stiffness: 360, damping: 26 }}
                 onPointerDown={(e) => e.stopPropagation()}
               >
                 <Button
