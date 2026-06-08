@@ -523,13 +523,12 @@ export function generateWebsiteHTML(website, reactDemo = null) {
 
   // ── Header ────────────────────────────────────────────────────────────────────
   const headerHTML = !header.built
-    ? `<div style="background:${surfaceBg};border-bottom:1.5px solid #f1f5f9;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:62px;">
-        <div style="display:flex;align-items:center;gap:0.5rem;">
-          <span style="width:9px;height:9px;border-radius:50%;background:#e2e8f0;display:inline-block;"></span>
-          <span style="color:#cbd5e1;font-size:1.1rem;font-weight:800;letter-spacing:-0.02em;">Your Website Name</span>
-        </div>
-        <div style="display:flex;gap:1.25rem;">
-          ${["Page 1", "Page 2", "Page 3"].map((p) => `<span style="color:#e2e8f0;font-size:0.875rem;font-weight:500;">${p}</span>`).join("")}
+    ? `<div style="height:62px;border-bottom:1.5px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;">
+        <div style="width:110px;height:2px;border-top:2px dashed #e2e8f0;border-radius:2px;"></div>
+        <div style="display:flex;gap:1rem;">
+          <div style="width:44px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+          <div style="width:44px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+          <div style="width:44px;height:2px;border-top:2px dashed #e2e8f0;"></div>
         </div>
       </div>`
     : header.styled
@@ -581,15 +580,11 @@ export function generateWebsiteHTML(website, reactDemo = null) {
       : "";
 
   const heroHTML = !hero.built
-    ? `<div style="position:relative;min-height:360px;background:${effectiveBg};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:0 2rem;">
-        <div style="position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:#f1f5f920;pointer-events:none;"></div>
-        <div style="width:72px;height:18px;border-radius:9999px;background:#e2e8f0;position:absolute;top:20px;"></div>
-        <div style="width:58%;height:32px;border-radius:8px;background:#f1f5f9;animation:shimmer 1.8s ease-in-out infinite;"></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;">
-          <div style="width:46%;height:14px;border-radius:5px;background:#f1f5f9;animation:shimmer 1.8s ease-in-out infinite 0.15s;"></div>
-          <div style="width:36%;height:14px;border-radius:5px;background:#f1f5f9;animation:shimmer 1.8s ease-in-out infinite 0.3s;"></div>
-        </div>
-        <div style="width:112px;height:38px;border-radius:${btnRadius};background:#e2e8f0;animation:shimmer 1.8s ease-in-out infinite 0.45s;"></div>
+    ? `<div style="min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:2rem;">
+        <div style="width:200px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+        <div style="width:300px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+        <div style="width:240px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+        <div style="width:96px;height:2px;border-top:2px dashed #e2e8f0;margin-top:8px;"></div>
       </div>`
     : hero.styled
       ? `<section id="section-home" style="position:relative;background:${effectiveBg};height:320px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:0 2rem;animation:fadeIn 0.4s ease-out;">
@@ -767,10 +762,12 @@ export function generateWebsiteHTML(website, reactDemo = null) {
   // ── Footer ────────────────────────────────────────────────────────────────────
   const footerBg = demo.darkMode ? "#020617" : "#1e293b";
   const footerHTML = !footer.built
-    ? `<div style="background:${footerBg};height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.625rem;padding:0 2rem;">
-        <div style="width:150px;height:13px;border-radius:5px;background:rgba(255,255,255,0.1);"></div>
-        <div style="display:flex;gap:1.25rem;">
-          ${[72, 54, 64].map((w) => `<div style="width:${w}px;height:11px;border-radius:4px;background:rgba(255,255,255,0.07);"></div>`).join("")}
+    ? `<div style="height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;border-top:1px solid #f1f5f9;">
+        <div style="width:150px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+        <div style="display:flex;gap:1.5rem;">
+          <div style="width:56px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+          <div style="width:48px;height:2px;border-top:2px dashed #e2e8f0;"></div>
+          <div style="width:52px;height:2px;border-top:2px dashed #e2e8f0;"></div>
         </div>
       </div>`
     : footer.styled

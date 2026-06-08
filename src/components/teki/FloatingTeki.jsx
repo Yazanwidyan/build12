@@ -98,7 +98,7 @@ export default function FloatingTeki() {
         dragConstraints={constraintsRef}
         dragElastic={0.06}
         dragMomentum={false}
-        className="fixed z-50 flex flex-col gap-2 select-none"
+        className="fixed z-50 select-none"
         style={{
           top: 0,
           left: DEFAULT_LEFT,
@@ -112,17 +112,17 @@ export default function FloatingTeki() {
         transition={{ opacity: { duration: 0.2 } }}
         whileDrag={{ cursor: "grabbing" }}
       >
-        {/* Speech bubble */}
+        {/* Speech bubble — absolutely above Teki so it grows upward without moving Teki */}
         <AnimatePresence mode="popLayout">
           {currentMessage && (
             <motion.div
               key={currentMessage}
-              className="relative pointer-events-auto"
-              initial={{ opacity: 0, y: 10 }}
+              className="absolute pointer-events-auto"
+              style={{ bottom: "100%", left: 0, width: "100%", paddingBottom: 8 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              style={{ boxShadow: "0 2px 20px rgba(99,102,241,0.18)" }}
             >
               <div
                 className="px-4 py-3 leading-relaxed"
@@ -134,6 +134,7 @@ export default function FloatingTeki() {
                   color: "var(--ink-muted)",
                   fontWeight: 500,
                   fontSize: 15,
+                  boxShadow: "0 2px 20px rgba(99,102,241,0.18)",
                 }}
               >
                 {currentMessage}
@@ -142,7 +143,7 @@ export default function FloatingTeki() {
           )}
         </AnimatePresence>
 
-        {/* Teki character + action button */}
+        {/* Teki character + action button — anchored at posY, never moves when bubble changes */}
         <div className="flex items-center gap-3">
           <div className="shrink-0 pointer-events-none">
             <motion.div {...FLOAT}>
