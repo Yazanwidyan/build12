@@ -253,7 +253,7 @@ export default function FloatingTeki() {
           </div>
 
           <AnimatePresence mode="wait">
-            {stepAction && (
+            {stepAction && !isTyping && (
               <motion.div
                 key={stepAction.label}
                 className="flex-1 pointer-events-auto"
