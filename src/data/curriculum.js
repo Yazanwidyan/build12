@@ -61,12 +61,14 @@ export const ACTS = [
     ],
     missions: [
       // ── Mission 1 — Your First Website ──────────────────────────────────────────
+      // PLAN only — no canvas input before any section exists.
+      // Every section gets content → code → appear in its own mission.
       {
         id: "mission-1",
         number: 1,
         act: 1,
         title: "Your First Website",
-        subtitle: "Pick a topic and give your site a name",
+        subtitle: "Pick a topic and plan your build",
         concept: "website-intro",
         xp: 100,
         badge: { id: "first-website", label: "First Website", emoji: "🌐" },
@@ -78,15 +80,15 @@ export const ACTS = [
             messages: [
               "Welcome! I'm TEKI — your coding companion! 👋",
               "Together we're going to build a REAL website from scratch.",
-              "You don't need to know anything yet. I'll guide every step.",
-              "Let's start with the most important question...",
+              "You don't need to know anything yet — I'll guide every single step.",
+              "Every website is built from three sections: a HEADER, a HERO, and a FOOTER.",
             ],
             action: "I'm ready!",
           },
           {
             id: "topic-pick",
             type: "topic-picker",
-            teki: "What is your website going to be about? Pick a topic or type your own!",
+            teki: "First — what is your website going to be about? Pick a topic that excites you!",
             options: [
               "Pets",
               "Space",
@@ -100,23 +102,22 @@ export const ACTS = [
             action: "That's my topic!",
           },
           {
-            id: "canvas-site-name",
-            type: "canvas-input",
-            highlight: "header",
-            teki: "Every website needs a name! See that empty bar at the top? Click it and type your website's name!",
-            canvasInput: {
-              fieldKey: "header-title",
-              section: "header",
-              storeKey: "title",
-              label: "Website name",
-              placeholder: "My Awesome Website…",
-            },
-            action: "That's my name!",
+            id: "blueprint-preview",
+            type: "teki-message",
+            mood: "thinking",
+            messages: [
+              "Great choice! Here's the plan — we'll build your site one section at a time.",
+              "First: the HEADER — your site name and navigation links at the top.",
+              "Then: the HERO — the big bold welcome section visitors see first.",
+              "Finally: the FOOTER — the bottom bar with your copyright and links.",
+            ],
+            action: "Let's start building!",
           },
         ],
       },
 
       // ── Mission 2 — Build the Entrance ──────────────────────────────────────────
+      // Pattern: LEARN (teki explains) → BUILD (fill in content) → CODE (write tag → section appears) → SEE (observe)
       {
         id: "mission-2",
         number: 2,
@@ -132,18 +133,31 @@ export const ACTS = [
             type: "teki-message",
             mood: "thinking",
             messages: [
-              "The HEADER is the first thing visitors see.",
-              "Think of it like the sign above a shop door — it shows your name and what's inside.",
-              "In HTML, we use the <header> tag to tell the browser: this is the top navigation bar.",
-              "Now add your navigation links — the paths visitors can take!",
+              "The HEADER is the first thing visitors see — like the sign above a shop.",
+              "It shows your site name and the navigation links to every page.",
+              "In HTML, the <header> tag tells the browser: this is the top navigation bar.",
             ],
             action: "Got it!",
+          },
+          {
+            id: "canvas-site-name",
+            type: "canvas-input",
+            highlight: "header",
+            teki: "Let's set up your header content! First — what is your website called?",
+            canvasInput: {
+              fieldKey: "header-title",
+              section: "header",
+              storeKey: "title",
+              label: "Website name",
+              placeholder: "My Awesome Website…",
+            },
+            action: "That's my name!",
           },
           {
             id: "canvas-header-nav",
             type: "canvas-input",
             highlight: "header",
-            teki: "Add navigation links! These are the pages people can visit. Type 3–4 page names separated by commas.",
+            teki: "Now add navigation links — the pages visitors can jump to. Separate them with commas.",
             canvasInput: {
               fieldKey: "header-nav",
               section: "header",
@@ -157,7 +171,7 @@ export const ACTS = [
           {
             id: "header-build-challenge",
             type: "code-challenge",
-            teki: "Now write the HTML tag that tells the browser this is the header. Watch your website!",
+            teki: "Content ready! Now write the HTML tag that makes your header APPEAR on the website.",
             language: "html",
             code: "<___>{{name}}</___>",
             answer: "<header>{{name}}</header>",
@@ -179,44 +193,15 @@ export const ACTS = [
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage:
-              "Your header appeared on the website — wireframe style!",
+            successMessage: "Your header appeared on the website — wireframe style! 🏗️",
             action: "Build the header!",
           },
           {
             id: "header-wireframe-observe",
             type: "observation",
-            teki: "Your header appeared! It's in wireframe style — grey, no color yet. HTML builds the STRUCTURE. Act 2 will paint it with your color!",
+            teki: "Look! Your header is live — grey wireframe style. HTML built the STRUCTURE. Act 2 will paint it with your color!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
-          },
-          {
-            id: "header-tag-challenge",
-            type: "code-challenge",
-            teki: "Here's the code behind your header title. One tag is broken — fix the closing tag:",
-            language: "html",
-            code: `<header>
-  <h1>{{name}}</h___>
-</header>`,
-            answer: `<header>
-  <h1>{{name}}</h1>
-</header>`,
-            blanks: [{ position: 0, answer: "1" }],
-            explanations: {
-              young:
-                "HTML tags come in pairs — <h1> opens and </h1> closes. The number has to match!",
-              junior:
-                "Every opening tag needs a matching closing tag. <h1> is a heading level 1 — the most important heading on the page.",
-              senior:
-                "<h1> is a semantic heading. There should be exactly one <h1> per page for SEO. The closing tag must match the opening tag exactly.",
-            },
-            ageExposure: {
-              young: "guided",
-              junior: "fill-blank",
-              senior: "fill-blank",
-            },
-            successMessage: "Header code fixed! 🔧",
-            action: "Check it!",
           },
         ],
       },
@@ -237,10 +222,9 @@ export const ACTS = [
             type: "teki-message",
             mood: "excited",
             messages: [
-              "That big empty space below the header? That's the HERO section.",
-              "It's the FIRST thing visitors read — so it has to be bold and clear.",
-              "Studies show you have just 5 seconds to grab someone's attention!",
-              "Let's fill it with something amazing.",
+              "Header done! Now the most important section — the HERO.",
+              "It's the BIG bold area visitors see the moment they land on your site.",
+              "Studies show you have just 5 seconds to grab attention — so it has to be great!",
             ],
             action: "Let's do it!",
           },
@@ -248,7 +232,7 @@ export const ACTS = [
             id: "canvas-hero-headline",
             type: "canvas-input",
             highlight: "hero",
-            teki: "Type a big, bold headline — what is your website all about in one sentence?",
+            teki: "Write your hero headline — one bold sentence that tells visitors exactly what your site is about.",
             canvasInput: {
               fieldKey: "hero-headline",
               section: "hero",
@@ -262,7 +246,7 @@ export const ACTS = [
             id: "canvas-hero-subtext",
             type: "canvas-input",
             highlight: "hero",
-            teki: "Now add one supporting line — tell visitors exactly what they'll find here!",
+            teki: "Add one supporting line — give visitors a bit more detail about what they'll find here.",
             canvasInput: {
               fieldKey: "hero-subtext",
               section: "hero",
@@ -276,7 +260,7 @@ export const ACTS = [
             id: "canvas-hero-button",
             type: "canvas-input",
             highlight: "hero",
-            teki: "Every great hero needs a CALL TO ACTION — a button that invites visitors to do something. What should yours say?",
+            teki: "Every great hero has a CALL TO ACTION — a button that tells visitors what to do next. What should yours say?",
             canvasInput: {
               fieldKey: "hero-button",
               section: "hero",
@@ -289,7 +273,7 @@ export const ACTS = [
           {
             id: "hero-build-challenge",
             type: "code-challenge",
-            teki: "Your button was made with ONE HTML tag. Fill in both blanks — and watch your hero section appear!",
+            teki: "Your button needs one HTML tag. Write it — and watch the whole hero section appear!",
             language: "html",
             code: `<___>{{buttonText}}</___>`,
             answer: `<button>{{buttonText}}</button>`,
@@ -302,7 +286,7 @@ export const ACTS = [
               young:
                 "The <button> tag makes something you can click. It needs both an opening <button> AND a closing </button>!",
               junior:
-                "<button> creates a clickable element. Right now it looks plain because the hero is in wireframe mode — CSS will style it in Act 2!",
+                "<button> creates a clickable element. It looks plain now — CSS will style it beautifully in Act 2!",
               senior:
                 "Use <button type='button'> for JS-driven actions to avoid accidental form submissions inside forms.",
             },
@@ -311,14 +295,13 @@ export const ACTS = [
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage:
-              "Hero section appeared on your website — wireframe style!",
+            successMessage: "Hero section appeared — wireframe style! 🏆",
             action: "Build the hero!",
           },
           {
             id: "hero-wireframe-observe",
             type: "observation",
-            teki: "Your hero appeared! Grey and plain right now — that's the HTML wireframe. Two sections built! Next: the footer.",
+            teki: "Header ✓ Hero ✓ — grey and plain, that's the HTML wireframe. One section left: the footer!",
             autoAdvance: true,
             autoAdvanceDelay: 3000,
           },
@@ -341,10 +324,9 @@ export const ACTS = [
             type: "teki-message",
             mood: "happy",
             messages: [
-              "Almost done! One more section: the FOOTER.",
-              "It's the last thing at the bottom of every website.",
+              "Two sections down — just one left! The FOOTER goes at the very bottom.",
               "Footers show copyright info, legal links, and contact details.",
-              "Visitors look here when they want to learn more or get in touch!",
+              "Visitors always check the footer when they want to learn more or get in touch.",
             ],
             action: "Let's finish it!",
           },
@@ -352,7 +334,7 @@ export const ACTS = [
             id: "canvas-footer-copyright",
             type: "canvas-input",
             highlight: "footer",
-            teki: "Add your copyright line — like: © 2026 Your Name. The © symbol means you own this website!",
+            teki: "Add your copyright line — like: © 2026 Your Name. The © symbol means you made this!",
             canvasInput: {
               fieldKey: "footer-copyright",
               section: "footer",
@@ -366,7 +348,7 @@ export const ACTS = [
             id: "canvas-footer-links",
             type: "canvas-input",
             highlight: "footer",
-            teki: "Now add footer links. Visitors expect Privacy, Terms, and Contact at the bottom of every professional site!",
+            teki: "Add footer links. Every professional site has Privacy, Terms, and Contact at the bottom!",
             canvasInput: {
               fieldKey: "footer-links",
               section: "footer",
@@ -380,7 +362,7 @@ export const ACTS = [
           {
             id: "footer-tag-challenge",
             type: "code-challenge",
-            teki: "Complete the page structure — what tag surrounds the bottom content? This will build your footer!",
+            teki: "Complete the page structure — what HTML tag wraps the bottom content? This will build your footer!",
             language: "html",
             code: `<header>...</header>
 <main>...</main>
@@ -395,25 +377,24 @@ export const ACTS = [
             completionEffect: { buildSection: "footer" },
             explanations: {
               young:
-                "Just like a book has a first page AND a last page, websites have a <header> AND a <footer>!",
+                "Just like a book has a first AND a last page, websites have a <header> AND a <footer>!",
               junior:
-                "<footer> is a semantic HTML element for page-bottom content — copyright, links, and contact info.",
+                "<footer> is a semantic HTML element — perfect for page-bottom content like copyright and links.",
               senior:
-                "<footer> is a semantic landmark element. It can appear inside <article> or <section>, not just at the page level.",
+                "<footer> is a semantic landmark element. It can also appear inside <article> or <section>, not just at the page level.",
             },
             ageExposure: {
               young: "guided",
               junior: "fill-blank",
               senior: "fill-blank",
             },
-            successMessage:
-              "Footer appeared! Three wireframe sections — your website's skeleton is complete!",
+            successMessage: "Footer built! Header + Hero + Footer — your website skeleton is complete! 🦴",
             action: "Check it!",
           },
           {
             id: "website-complete-observe",
             type: "observation",
-            teki: "Header. Hero. Footer. All three sections built — all in wireframe style! HTML gave your website STRUCTURE. Next act: CSS will paint every section with your color and font!",
+            teki: "Header ✓ Hero ✓ Footer ✓ — all three sections built in wireframe style! HTML gave your site STRUCTURE. Next: CSS will paint everything with your color!",
             autoAdvance: true,
             autoAdvanceDelay: 3500,
           },
