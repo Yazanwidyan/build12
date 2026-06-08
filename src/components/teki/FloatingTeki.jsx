@@ -2,7 +2,6 @@ import Button from "@/components/ui/Button";
 import { useStepAction } from "@/contexts/StepActionContext";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
 import { useMissionEngine } from "@/engines/missionEngine";
-import { useProgressStore } from "@/stores/progressStore";
 import { useTekiStore } from "@/stores/tekiStore";
 import {
   AnimatePresence,
@@ -15,71 +14,110 @@ import { useEffect, useMemo, useRef } from "react";
 import TekiCharacter from "./TekiCharacter";
 
 const TEKI_WIDTH = 300;
-// Bottom-center of the left mission panel (33% wide, min 280, max 420, with 12px outer padding)
-const DEFAULT_LEFT = typeof window !== "undefined"
-  ? Math.max(0, 12 + Math.min(Math.max(window.innerWidth * 0.33, 280), 420) / 2 - TEKI_WIDTH / 2)
-  : 16;
-const DEFAULT_TOP = typeof window !== "undefined"
-  ? Math.max(44, window.innerHeight - 200)
-  : 500;
+
+// ── One-time geometry (computed at module load) ────────────────────────────────
+const _panelW      = typeof window !== "undefined" ? Math.min(Math.max(window.innerWidth * 0.33, 280), 420) : 340;
+const _rightStart  = typeof window !== "undefined" ? 12 + _panelW + 12 : 460;
+const _rightW      = typeof window !== "undefined" ? window.innerWidth - _rightStart - 12 : 700;
+const _iH          = typeof window !== "undefined" ? window.innerHeight : 800;
+const _iW          = typeof window !== "undefined" ? window.innerWidth  : 1440;
+
+// LEFT  — bottom-center of the mission panel
+const LEFT_X  = Math.max(0, 12 + _panelW / 2 - TEKI_WIDTH / 2);
+const LEFT_Y  = Math.max(44, _iH - 200);
+
+// CENTER — middle of the full screen (default resting spot)
+const CENTER_X = Math.max(0, (_iW - TEKI_WIDTH) / 2);
+const CENTER_Y = Math.round(_iH * 0.38);
+
+// RIGHT  — centered in the website preview panel
+const RIGHT_X = _rightStart + Math.max(0, (_rightW - TEKI_WIDTH) / 2);
+const RIGHT_Y = Math.round(_iH * 0.42);
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },
   transition: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
 };
 
+const SPRING_X = { type: "spring", stiffness: 160, damping: 28 };
+const SPRING_Y = { type: "spring", stiffness: 200, damping: 30 };
+
 function readTime(msg) {
   return Math.max(2000, Math.min(msg.length * 30, 4000));
+}
+
+// ── Zone rules ─────────────────────────────────────────────────────────────────
+// left  → steps where the user interacts with the mission panel
+// right → observation steps (watching what changed on the website)
+// center → everything else (default resting zone)
+function zoneForStep(step) {
+  if (!step) return "center";
+  switch (step.type) {
+    case "code-challenge":
+    case "canvas-input":
+    case "topic-picker":
+    case "color-picker":
+    case "input":
+    case "visual-builder":
+      return "left";
+    case "observation":
+      return "right";
+    default:
+      return "center";
+  }
 }
 
 export default function FloatingTeki() {
   const { currentMessage, isTyping, mood, messageTyped, highlightSection } =
     useTekiStore();
   const clearHighlight = useTekiStore((s) => s.clearHighlight);
-  const { currentStep, currentStepIndex, advanceStep } = useMissionEngine();
+  const { currentStep } = useMissionEngine();
   const { sectionBounds } = useWebsiteLayout();
   const { stepAction } = useStepAction();
   const constraintsRef = useRef(null);
 
+  // Y position when travelling toward a highlighted section (observation / canvas-input)
   const travelTop = useMemo(() => {
     if (!highlightSection) return null;
     const bound = sectionBounds[highlightSection];
     if (!bound) return null;
-    if (
-      currentStep?.type === "canvas-input" &&
-      currentStep?.canvasInput?.section
-    ) {
-      return Math.max(
-        44,
-        Math.min(bound.top + bound.height + 12, window.innerHeight - 220),
-      );
+    if (currentStep?.type === "canvas-input" && currentStep?.canvasInput?.section) {
+      return Math.max(44, Math.min(bound.top + bound.height + 12, _iH - 220));
     }
     return Math.max(44, bound.top + bound.height / 2 - 36);
   }, [highlightSection, sectionBounds, currentStep?.id]);
 
-  const effectiveTop = travelTop ?? DEFAULT_TOP;
-  const posX = useMotionValue(0);
-  const posY = useMotionValue(effectiveTop);
+  const zone = useMemo(() => zoneForStep(currentStep), [currentStep?.id]);
+
+  // Resolve target coordinates
+  const targetLeft =
+    zone === "left" ? LEFT_X : zone === "right" ? RIGHT_X : CENTER_X;
+  const targetTop =
+    zone === "left"   ? LEFT_Y :
+    zone === "right"  ? (travelTop ?? RIGHT_Y) :
+    CENTER_Y;
+
+  // posX is an offset from LEFT_X (the CSS `left` anchor)
+  const posX = useMotionValue(CENTER_X - LEFT_X); // start at center
+  const posY = useMotionValue(CENTER_Y);
 
   useEffect(() => {
-    animate(posX, 0, { type: "spring", stiffness: 260, damping: 34 });
-    animate(posY, effectiveTop, {
-      type: "spring",
-      stiffness: 200,
-      damping: 30,
-    });
-  }, [effectiveTop]);
+    animate(posX, targetLeft - LEFT_X, SPRING_X);
+  }, [targetLeft]);
 
+  useEffect(() => {
+    animate(posY, targetTop, SPRING_Y);
+  }, [targetTop]);
+
+  // Clear section highlight when the step doesn't declare one
   useEffect(() => {
     const hasHighlight =
-      currentStep?.highlight ||
-      currentStep?.highlightSection ||
-      currentStep?.section ||
-      currentStep?.canvasInput?.section;
+      currentStep?.highlight || currentStep?.highlightSection ||
+      currentStep?.section   || currentStep?.canvasInput?.section;
     if (!hasHighlight) clearHighlight();
   }, [currentStep?.id]);
 
-  // Advance multi-message queues after a proper reading delay
+  // Auto-advance multi-message queues
   useEffect(() => {
     if (!currentMessage || !isTyping) return;
     const t = setTimeout(messageTyped, readTime(currentMessage));
@@ -88,10 +126,7 @@ export default function FloatingTeki() {
 
   return (
     <>
-      <div
-        ref={constraintsRef}
-        className="fixed inset-0 pointer-events-none z-40"
-      />
+      <div ref={constraintsRef} className="fixed inset-0 pointer-events-none z-40" />
 
       <motion.div
         drag
@@ -101,7 +136,7 @@ export default function FloatingTeki() {
         className="fixed z-50 select-none"
         style={{
           top: 0,
-          left: DEFAULT_LEFT,
+          left: LEFT_X,
           width: TEKI_WIDTH,
           x: posX,
           y: posY,
@@ -112,7 +147,7 @@ export default function FloatingTeki() {
         transition={{ opacity: { duration: 0.2 } }}
         whileDrag={{ cursor: "grabbing" }}
       >
-        {/* Speech bubble — absolutely above Teki so it grows upward without moving Teki */}
+        {/* Speech bubble — grows upward, always anchored bottom-left toward the character */}
         <AnimatePresence mode="popLayout">
           {currentMessage && (
             <motion.div
@@ -143,7 +178,7 @@ export default function FloatingTeki() {
           )}
         </AnimatePresence>
 
-        {/* Teki character + action button — anchored at posY, never moves when bubble changes */}
+        {/* Teki character + action button */}
         <div className="flex items-center gap-3">
           <div className="shrink-0 pointer-events-none">
             <motion.div {...FLOAT}>
@@ -151,7 +186,6 @@ export default function FloatingTeki() {
             </motion.div>
           </div>
 
-          {/* Action button — registered by the current step */}
           <AnimatePresence mode="wait">
             {stepAction && (
               <motion.div

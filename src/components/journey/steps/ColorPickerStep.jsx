@@ -46,23 +46,26 @@ export default function ColorPickerStep({ step, onComplete }) {
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col gap-3"
     >
-      <div className="grid grid-cols-6 gap-2">
+      <div className="grid grid-cols-6 gap-1.5">
         {PRESET_COLORS.map((c) => (
           <motion.button
             key={c.value}
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.92 }}
             onClick={() => pick(c.value)}
             title={c.label}
-            className="relative aspect-square rounded-xl shadow-sm focus:outline-none"
+            className="relative focus:outline-none"
             style={{
+              width: 28, height: 28,
+              borderRadius: 8,
               background: c.value,
-              outline: selected === c.value ? `3px solid ${c.value}` : 'none',
+              outline: selected === c.value ? `2.5px solid ${c.value}` : 'none',
               outlineOffset: 2,
+              flexShrink: 0,
             }}
           >
             {selected === c.value && (
-              <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm">✓</span>
+              <span className="absolute inset-0 flex items-center justify-center text-white font-bold" style={{ fontSize: 11 }}>✓</span>
             )}
           </motion.button>
         ))}
@@ -73,14 +76,14 @@ export default function ColorPickerStep({ step, onComplete }) {
           type="color"
           value={selected}
           onChange={(e) => pick(e.target.value)}
-          className="h-8 w-12 rounded-lg cursor-pointer p-0.5 shrink-0"
-          style={{ border: '2px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
+          className="rounded cursor-pointer p-0.5 shrink-0"
+          style={{ height: 24, width: 36, border: '1.5px solid var(--app-border)', backgroundColor: 'var(--app-raised)' }}
         />
         <div
-          className="flex-1 h-8 rounded-xl flex items-center px-3"
-          style={{ border: '2px solid var(--app-border)', background: selected + '22' }}
+          className="flex-1 rounded-lg flex items-center px-2"
+          style={{ height: 24, border: '1.5px solid var(--app-border)', background: selected + '22' }}
         >
-          <span className="text-sm font-mono" style={{ color: 'var(--ink-muted)' }}>{selected}</span>
+          <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ink-muted)' }}>{selected}</span>
         </div>
       </div>
 
