@@ -134,20 +134,22 @@ export default function JourneyPage() {
             <motion.div
               className="flex flex-col overflow-hidden rounded-2xl shrink-0"
               animate={{
-                boxShadow: challengeFlash === "correct"
-                  ? "0 0 0 2px #4ade80, 0 0 32px rgba(74,222,128,0.45)"
-                  : challengeFlash === "wrong"
-                    ? "0 0 0 2px #f87171, 0 0 32px rgba(248,113,113,0.45)"
-                    : "0 2px 16px rgba(0,0,0,0.07)",
-                borderColor: challengeFlash === "correct"
-                  ? "#4ade80"
-                  : challengeFlash === "wrong"
-                    ? "#f87171"
-                    : "var(--app-border)",
+                boxShadow:
+                  challengeFlash === "correct"
+                    ? "0 0 0 2px #4ade80, 0 0 32px rgba(74,222,128,0.45)"
+                    : challengeFlash === "wrong"
+                      ? "0 0 0 2px #f87171, 0 0 32px rgba(248,113,113,0.45)"
+                      : "0 2px 16px rgba(0,0,0,0.07)",
+                borderColor:
+                  challengeFlash === "correct"
+                    ? "#4ade80"
+                    : challengeFlash === "wrong"
+                      ? "#f87171"
+                      : "var(--app-border)",
               }}
               transition={{ duration: 0.2 }}
               style={{
-                width: "33%",
+                width: "23%",
                 minWidth: 280,
                 maxWidth: 420,
                 backgroundColor: "var(--app-surface)",
@@ -162,8 +164,13 @@ export default function JourneyPage() {
           )}
 
           {/* ── Right panel: website preview with browser chrome (2/3) ── */}
-          <div className="flex-1 flex flex-col overflow-hidden min-w-0"
-            style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)", borderRadius: 16, border: "1.5px solid var(--app-border)" }}
+          <div
+            className="flex-1 flex flex-col overflow-hidden min-w-0"
+            style={{
+              boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+              borderRadius: 16,
+              border: "1.5px solid var(--app-border)",
+            }}
           >
             <BrowserChrome
               website={journey.website}
