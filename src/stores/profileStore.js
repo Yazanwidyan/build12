@@ -2,9 +2,9 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export const AGE_GROUPS = [
-  { id: 'young',  label: 'Young Builder',    range: 'Under 11',  codeExposure: 'visual'  },
-  { id: 'junior', label: 'Junior Creator',   range: '11 – 14',   codeExposure: 'guided'  },
-  { id: 'senior', label: 'Future Developer', range: '15+',       codeExposure: 'full'    },
+  { id: 'young',  label: 'Beginner',     range: 'Start here',  codeExposure: 'visual'               },
+  { id: 'junior', label: 'Intermediate', range: 'Coming soon', codeExposure: 'guided',  locked: true },
+  { id: 'senior', label: 'Advanced',     range: 'Coming soon', codeExposure: 'full',    locked: true },
 ]
 
 const defaultProfile = {

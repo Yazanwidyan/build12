@@ -3335,19 +3335,19 @@ export const LEVEL_ACT_NUMBERS = {
 
 export const LEVEL_INFO = {
   young: {
-    label: "Young Builder",
+    label: "Beginner",
     emoji: "🌱",
     color: "#10b981",
     totalActs: 3,
   },
   junior: {
-    label: "Junior Creator",
+    label: "Intermediate",
     emoji: "🚀",
     color: "#3b82f6",
     totalActs: 7,
   },
   senior: {
-    label: "Future Developer",
+    label: "Advanced",
     emoji: "💻",
     color: "#f59e0b",
     totalActs: 3,

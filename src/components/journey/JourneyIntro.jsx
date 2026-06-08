@@ -70,8 +70,6 @@ export default function JourneyIntro({ onDone }) {
   const [nameErr, setNameErr] = useState("");
   const [color, setColor] = useState("#3b82f6");
   const [topic, setTopic] = useState("");
-  const [custom, setCustom] = useState("");
-
   const next = () => setStep((s) => s + 1);
 
   const handleName = () => {
@@ -84,10 +82,9 @@ export default function JourneyIntro({ onDone }) {
   };
 
   const handleDone = () => {
-    const finalTopic = custom.trim() || topic;
     setWebsiteName(name.trim());
     setWebsiteColor(color);
-    setWebsiteTopic(finalTopic || "General");
+    setWebsiteTopic(topic || "General");
     onDone();
   };
 
@@ -99,7 +96,7 @@ export default function JourneyIntro({ onDone }) {
     onDone();
   };
 
-  const canFinish = topic || custom.trim();
+  const canFinish = !!topic;
   const visibleSteps = isYoung ? STEPS.slice(0, 1) : STEPS;
 
   return (
@@ -317,41 +314,18 @@ export default function JourneyIntro({ onDone }) {
                   {TOPICS.map((t) => (
                     <button
                       key={t}
-                      onClick={() => {
-                        setTopic(t);
-                        setCustom("");
-                      }}
+                      onClick={() => setTopic(t)}
                       className="px-3 py-1.5 rounded-xl text-sm font-semibold border-2 transition-all"
                       style={{
-                        borderColor:
-                          topic === t && !custom
-                            ? "#3b82f6"
-                            : "var(--app-border)",
-                        backgroundColor:
-                          topic === t && !custom
-                            ? "rgba(59,130,246,0.1)"
-                            : "var(--app-raised)",
-                        color:
-                          topic === t && !custom
-                            ? "#3b82f6"
-                            : "var(--ink-muted)",
+                        borderColor: topic === t ? "#3b82f6" : "var(--app-border)",
+                        backgroundColor: topic === t ? "rgba(59,130,246,0.1)" : "var(--app-raised)",
+                        color: topic === t ? "#3b82f6" : "var(--ink-muted)",
                       }}
                     >
                       {t}
                     </button>
                   ))}
                 </div>
-                <Input
-                  placeholder="Or type your own topic…"
-                  value={custom}
-                  onChange={(e) => {
-                    setCustom(e.target.value);
-                    setTopic("");
-                  }}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && canFinish && handleDone()
-                  }
-                />
                 <Button
                   variant="solid"
                   color="blue"
