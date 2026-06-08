@@ -15,9 +15,13 @@ import { useEffect, useMemo, useRef } from "react";
 import TekiCharacter from "./TekiCharacter";
 
 const TEKI_WIDTH = 300;
-const DEFAULT_LEFT = typeof window !== "undefined" ? 16 : 16;
-const DEFAULT_TOP =
-  typeof window !== "undefined" ? Math.max(44, window.innerHeight * 0.6) : 360;
+// Bottom-center of the left mission panel (33% wide, min 280, max 420, with 12px outer padding)
+const DEFAULT_LEFT = typeof window !== "undefined"
+  ? Math.max(0, 12 + Math.min(Math.max(window.innerWidth * 0.33, 280), 420) / 2 - TEKI_WIDTH / 2)
+  : 16;
+const DEFAULT_TOP = typeof window !== "undefined"
+  ? Math.max(44, window.innerHeight - 200)
+  : 500;
 
 const FLOAT = {
   animate: { y: [0, -7, 0] },

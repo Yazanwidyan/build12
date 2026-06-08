@@ -298,12 +298,13 @@ export default function OnboardingFlow() {
         actionDisabled={name.trim().length < 2}
       >
         <Input
+          className="max-w-xs mx-auto"
           value={name}
           onChange={(e) => {
             setName(e.target.value);
             setNameError("");
           }}
-          placeholder="Your builder name..."
+          placeholder="Enter username..."
           error={nameError}
           onKeyDown={(e) => e.key === "Enter" && submitName()}
           autoFocus
