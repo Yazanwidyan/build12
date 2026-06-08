@@ -1,4 +1,4 @@
-﻿// ─── Curriculum — HelloBuildIt Website Journey ────────────────────────────────
+// ─── Curriculum — HelloBuildIt Website Journey ────────────────────────────────
 // Each mission drives the journey engine. Steps are rendered by MissionRunner.
 //
 // Step types:
@@ -8,58 +8,76 @@
 //   topic-picker   — grid of topic chips + custom input
 //   visual-builder — form that live-updates the website preview
 //   observation    — show updated preview, TEKI reacts
-//   code-reveal    — slide-in code snippet with age-adapted explanation
 //   code-challenge — fill-in-the-blank or small editor challenge
 //   act-complete   — celebration screen, then advance to next act
 // ──────────────────────────────────────────────────────────────────────────────
 
 export const ACTS = [
-  // ── ACT 1 ── Bringing The Website To Life ───────────────────────────────────
+  // ── ACT 1 ── Your Website Awakens ─────────────────────────────────────────────
   {
     id: 'act1',
     number: 1,
-    title: 'Bringing The Website To Life',
-    tagline: 'From blueprint to reality',
+    title: 'Your Website Awakens',
+    tagline: 'Build it section by section',
     color: '#3b82f6',
     emoji: '🏗️',
     quiz: [
       {
-        question: 'What does the HEADER section of a website show?',
-        options: ['Product prices and discounts', 'Site name and navigation links', 'Social media posts', 'Hidden code files'],
+        question: 'What is a website made of?',
+        options: ['Bricks and mortar', 'Pages you view in a browser with text, images, and links', 'Spreadsheets and databases only', 'Only videos'],
         correct: 1,
-        explanation: 'A header shows your site\'s name and navigation — it\'s the sign at the top that tells visitors where they are.',
+        explanation: 'A website is a page (or set of pages) that lives on the internet and contains content like text, images, and interactive elements.',
       },
       {
-        question: 'What is the HERO section of a website?',
-        options: ['A security firewall', 'The big welcome/intro area at the top of the page', 'The footer menu at the bottom', 'A database table'],
+        question: 'What does the HEADER of a website typically show?',
+        options: ['The checkout cart', 'The site name and navigation links', 'The privacy policy', 'Advertisements'],
         correct: 1,
-        explanation: 'The hero is the big, bold welcome area that grabs attention right when you arrive.',
+        explanation: 'The header is the top bar — it has your site name and the links that let visitors navigate around.',
       },
       {
-        question: 'What does a FOOTER usually contain?',
-        options: ['The main site title', 'Hero images', 'Privacy links and contact info', 'Product catalog'],
-        correct: 2,
-        explanation: 'Footers sit at the bottom and hold useful links like Privacy, Terms, and Contact info.',
+        question: 'What is the HERO section?',
+        options: ['A character in a game', 'The big, bold welcome area at the top of a page', 'A type of database', 'The footer of a website'],
+        correct: 1,
+        explanation: 'The hero is the first big section visitors see — it grabs attention with a headline, description, and a call-to-action button.',
       },
     ],
     missions: [
 
-      // ── Mission 1 — Build the Entrance ──────────────────────────────────────
+      // ── Mission 1 — Your First Website ──────────────────────────────────────────
       {
         id: 'mission-1',
         number: 1,
         act: 1,
-        title: 'The Missing Entrance',
-        subtitle: 'Build your header',
-        concept: 'header',
-        xp: 120,
-        badge: { id: 'first-section', label: 'First Section', emoji: '🚪' },
+        title: 'Your First Website',
+        subtitle: 'Pick a topic and give your site a name',
+        concept: 'website-intro',
+        xp: 100,
+        badge: { id: 'first-website', label: 'First Website', emoji: '🌐' },
         steps: [
           {
-            id: 'canvas-header-title',
+            id: 'welcome-intro',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Welcome! I'm TEKI — your coding companion! 👋",
+              "Together we're going to build a REAL website from scratch.",
+              "You don't need to know anything yet. I'll guide every step.",
+              "Let's start with the most important question...",
+            ],
+            action: "I'm ready!",
+          },
+          {
+            id: 'topic-pick',
+            type: 'topic-picker',
+            teki: "What is your website going to be about? Pick a topic or type your own!",
+            options: ['Pets', 'Space', 'Music', 'Sports', 'Gaming', 'Art', 'Food', 'Travel'],
+            action: "That's my topic!",
+          },
+          {
+            id: 'canvas-site-name',
             type: 'canvas-input',
             highlight: 'header',
-            teki: "Your website exists — but it has no name! See that empty bar at the top? Click it and type your website's name!",
+            teki: "Every website needs a name! See that empty bar at the top? Click it and type your website's name!",
             canvasInput: {
               fieldKey: 'header-title',
               section: 'header',
@@ -69,16 +87,41 @@ export const ACTS = [
             },
             action: "That's my name!",
           },
+        ],
+      },
+
+      // ── Mission 2 — Build the Entrance ──────────────────────────────────────────
+      {
+        id: 'mission-2',
+        number: 2,
+        act: 1,
+        title: 'Build the Entrance',
+        subtitle: 'Every website starts with a header',
+        concept: 'header',
+        xp: 120,
+        badge: null,
+        steps: [
+          {
+            id: 'header-explain',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "The HEADER is the first thing visitors see.",
+              "Think of it like the sign above a shop door — it shows your name and what's inside.",
+              "Now let's add navigation links — the paths visitors can take!",
+            ],
+            action: "Got it!",
+          },
           {
             id: 'canvas-header-nav',
             type: 'canvas-input',
             highlight: 'header',
-            teki: "Now add navigation links — where can visitors explore? Type 3–4 pages separated by commas!",
+            teki: "Add navigation links! These are the pages people can visit. Type 3–4 page names separated by commas.",
             canvasInput: {
               fieldKey: 'header-nav',
               section: 'header',
               storeKey: 'navLinks',
-              label: 'Nav links',
+              label: 'Navigation links',
               placeholder: 'Home, About, Projects, Contact…',
               isArray: true,
             },
@@ -86,17 +129,17 @@ export const ACTS = [
             action: "Header is live!",
           },
           {
-            id: 'header-reveal',
+            id: 'header-observe',
             type: 'observation',
-            teki: "Your entrance is open!",
-            tekiMessages: ["Your website finally has an entrance! 🚪 Now let's look at the code that made it..."],
+            teki: "Your header is alive!",
+            tekiMessages: ["Look at the top of your website — a real header! Every website on the internet has one just like this. 🚪"],
             highlightSection: 'header',
             autoAdvance: true,
           },
           {
-            id: 'header-fix-challenge',
+            id: 'header-tag-challenge',
             type: 'code-challenge',
-            teki: "Quick challenge! Someone forgot the closing tag. Fix it:",
+            teki: "Here's the code behind your header. One tag is broken — fix the closing tag:",
             language: 'html',
             code: `<header>
   <h1>{{name}}</h___>
@@ -106,33 +149,45 @@ export const ACTS = [
 </header>`,
             blanks: [{ position: 0, answer: '1' }],
             explanations: {
-              young: "Every tag needs a matching closing tag! If it opens with <h1> it closes with </h1>.",
-              junior: "HTML tags come in pairs: <tag> opens, </tag> closes. The closing tag always has a forward slash.",
-              senior: "Unclosed tags cause browser parsing errors. Use a linter or prettier to catch these automatically.",
+              young: "HTML tags come in pairs — <h1> opens and </h1> closes. The number has to match!",
+              junior: "Every opening tag needs a matching closing tag. <h1> is a heading level 1 — the most important heading on the page.",
+              senior: "<h1> is a semantic heading. There should be exactly one <h1> per page for SEO. The closing tag must match the opening tag exactly.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Header repaired! 🔧",
+            successMessage: "Header code fixed! 🔧",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 2 — First Impressions ────────────────────────────────────────
+      // ── Mission 3 — First Impressions ────────────────────────────────────────────
       {
-        id: 'mission-2',
-        number: 2,
+        id: 'mission-3',
+        number: 3,
         act: 1,
         title: 'First Impressions',
-        subtitle: 'Build the section visitors see first',
+        subtitle: 'Build the section that grabs attention',
         concept: 'hero',
         xp: 130,
         badge: null,
         steps: [
           {
+            id: 'hero-explain',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "That big empty space below the header? That's the HERO section.",
+              "It's the FIRST thing visitors read — so it has to be bold and clear.",
+              "Studies show you have just 5 seconds to grab someone's attention!",
+              "Let's fill it with something amazing.",
+            ],
+            action: "Let's do it!",
+          },
+          {
             id: 'canvas-hero-headline',
             type: 'canvas-input',
             highlight: 'hero',
-            teki: "That big empty space is your HERO — visitors see it first. Click it and write something bold and memorable!",
+            teki: "Type a big, bold headline — what is your website all about in one sentence?",
             canvasInput: {
               fieldKey: 'hero-headline',
               section: 'hero',
@@ -146,7 +201,7 @@ export const ACTS = [
             id: 'canvas-hero-subtext',
             type: 'canvas-input',
             highlight: 'hero',
-            teki: "Now write one line below — tell visitors exactly what this website is about!",
+            teki: "Now add one supporting line — tell visitors exactly what they'll find here!",
             canvasInput: {
               fieldKey: 'hero-subtext',
               section: 'hero',
@@ -160,7 +215,7 @@ export const ACTS = [
             id: 'canvas-hero-button',
             type: 'canvas-input',
             highlight: 'hero',
-            teki: "Every hero needs a CALL TO ACTION — a button that says 'do something'. What should yours say?",
+            teki: "Every great hero needs a CALL TO ACTION — a button that invites visitors to do something. What should yours say?",
             canvasInput: {
               fieldKey: 'hero-button',
               section: 'hero',
@@ -172,41 +227,61 @@ export const ACTS = [
             action: "Hero is ready!",
           },
           {
+            id: 'hero-observe',
+            type: 'observation',
+            teki: "Look at that!",
+            tekiMessages: ["Your hero section is live! That's exactly what visitors see on every professional website. 🌟"],
+            highlightSection: 'hero',
+            autoAdvance: true,
+          },
+          {
             id: 'button-tag-challenge',
             type: 'code-challenge',
-            teki: "Your button was made with one HTML tag. Write it:",
+            teki: "Your button was made with ONE HTML tag. Fill in both blanks with the right tag name:",
             language: 'html',
-            code: `<______>{{buttonText}}</______ >`,
+            code: `<___>{{buttonText}}</___>`,
             answer: `<button>{{buttonText}}</button>`,
             blanks: [{ position: 0, answer: 'button' }, { position: 1, answer: 'button' }],
             explanations: {
-              young: "The <button> tag creates something you can click! It needs an opening AND closing tag.",
-              junior: "<button> creates a clickable element. Right now it does nothing — JavaScript will give it superpowers later!",
-              senior: "Use <button type='button'> for JS-driven actions to prevent accidental form submission.",
+              young: "The <button> tag makes something you can click. It needs both an opening <button> AND a closing </button>!",
+              junior: "<button> creates a clickable element. Right now it looks good but doesn't DO anything — JavaScript will give it superpowers in Act 6!",
+              senior: "Use <button type='button'> for JS-driven actions to avoid accidental form submissions in forms.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Button coded! 🎯",
+            successMessage: "Button tag nailed! 🎯",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 3 — The Final Stop ────────────────────────────────────────────
+      // ── Mission 4 — Seal the Deal ─────────────────────────────────────────────────
       {
-        id: 'mission-3',
-        number: 3,
+        id: 'mission-4',
+        number: 4,
         act: 1,
         title: 'Seal the Deal',
-        subtitle: 'Build your footer',
+        subtitle: 'Finish your website with a footer',
         concept: 'footer',
         xp: 100,
-        badge: { id: 'complete-website', label: 'Website Built', emoji: '🌐' },
+        badge: { id: 'website-built', label: 'Website Built', emoji: '🌐' },
         steps: [
+          {
+            id: 'footer-explain',
+            type: 'teki-message',
+            mood: 'happy',
+            messages: [
+              "Almost done! One more section: the FOOTER.",
+              "It's the last thing at the bottom of every website.",
+              "Footers show copyright info, legal links, and contact details.",
+              "Visitors look here when they want to learn more or get in touch!",
+            ],
+            action: "Let's finish it!",
+          },
           {
             id: 'canvas-footer-copyright',
             type: 'canvas-input',
             highlight: 'footer',
-            teki: "The FOOTER is the last thing visitors see. Click the dark bar at the bottom and add your copyright — like: © 2024 Your Name",
+            teki: "Add your copyright line — like: © 2024 Your Name. The © symbol means you own this website!",
             canvasInput: {
               fieldKey: 'footer-copyright',
               section: 'footer',
@@ -220,7 +295,7 @@ export const ACTS = [
             id: 'canvas-footer-links',
             type: 'canvas-input',
             highlight: 'footer',
-            teki: "Now add footer links — Privacy, Terms, Contact. Visitors expect these at the bottom of every site!",
+            teki: "Now add footer links. Visitors expect Privacy, Terms, and Contact at the bottom of every professional site!",
             canvasInput: {
               fieldKey: 'footer-links',
               section: 'footer',
@@ -233,30 +308,30 @@ export const ACTS = [
             action: "Footer complete!",
           },
           {
-            id: 'website-complete',
+            id: 'website-complete-observe',
             type: 'observation',
-            teki: "HEADER. HERO. FOOTER.",
+            teki: "Header. Hero. Footer.",
             tekiMessages: [
-              "Look at that! 🏆 Every website in the world has these exact 3 sections — and you just built them all from scratch!",
+              "You built a REAL website! 🏆 Header, hero, and footer — the exact structure that billions of websites use.",
             ],
             autoAdvance: true,
           },
           {
-            id: 'structure-challenge',
+            id: 'footer-tag-challenge',
             type: 'code-challenge',
-            teki: "Last challenge! Complete the page structure — what tag goes at the bottom?",
+            teki: "Complete the page structure — what tag surrounds the bottom content?",
             language: 'html',
             code: `<header>...</header>
 <main>...</main>
-<______>© 2024 {{name}}</______ >`,
+<___>© 2024 {{name}}</___>`,
             answer: `<header>...</header>
 <main>...</main>
 <footer>© 2024 {{name}}</footer>`,
             blanks: [{ position: 0, answer: 'footer' }, { position: 1, answer: 'footer' }],
             explanations: {
               young: "Just like a book has a first page AND a last page, websites have a <header> AND a <footer>!",
-              junior: "<footer> is a semantic element for page-bottom content — copyright, links, contact info.",
-              senior: "<footer> is a semantic landmark. It can also appear inside <article> or <section> — not just at the page bottom.",
+              junior: "<footer> is a semantic HTML element for page-bottom content — copyright, links, and contact info.",
+              senior: "<footer> is a semantic landmark element. It can appear inside <article> or <section>, not just at the page level.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
             successMessage: "Website structure complete! 🌐",
@@ -267,8 +342,8 @@ export const ACTS = [
             type: 'act-complete',
             actId: 'act1',
             title: 'ACT 1 Complete!',
-            message: "You built a real website! Header, hero, footer — the 3 sections every site on the internet has. Now let's make it look stunning.",
-            power: { label: 'Builder', emoji: '🏗️' },
+            message: "You built a real website with a header, hero, and footer — the exact structure every website on the internet uses. Now let's make it look stunning!",
+            power: { label: 'Website Builder', emoji: '🏗️' },
             xpBonus: 200,
             action: "Enter the Design Studio!",
           },
@@ -277,7 +352,7 @@ export const ACTS = [
     ],
   },
 
-  // ── ACT 2 ── Design Studio ───────────────────────────────────────────────────
+  // ── ACT 2 ── Design Studio ──────────────────────────────────────────────────────
   {
     id: 'act2',
     number: 2,
@@ -287,199 +362,163 @@ export const ACTS = [
     emoji: '🎨',
     quiz: [
       {
-        question: 'What is a HEX color code like #6366f1?',
+        question: 'What is a HEX color code like #3b82f6?',
         options: ['A cheat code for games', 'A secret name for a color used in code', 'A font family name', 'A website address'],
         correct: 1,
-        explanation: '#6366f1 is actually indigo/purple — hex codes are the secret names colors use in code.',
+        explanation: 'Hex codes are how code names colors. #3b82f6 is a shade of blue — the # is followed by 6 characters that describe the exact color.',
       },
       {
-        question: 'What does "typography" mean in web design?',
-        options: ['The speed of a website', 'How text is styled — fonts, sizes, and weights', 'The color palette', 'The database structure'],
+        question: 'What does CSS stand for?',
+        options: ['Computer Screen Style', 'Cascading Style Sheets', 'Colorful Site Settings', 'Custom Script System'],
         correct: 1,
-        explanation: 'Typography is all about how text looks: font family, size, weight, and line spacing.',
+        explanation: 'CSS = Cascading Style Sheets. It\'s the language that controls how HTML elements look — colors, fonts, sizes, and layouts.',
       },
       {
-        question: 'Why are BUTTONS important on a website?',
-        options: ['They make pages load faster', 'They store data on the server', 'They invite users to take action', 'They display images'],
+        question: 'What does border-radius do in CSS?',
+        options: ['Sets the text color', 'Adds a shadow behind an element', 'Rounds the corners of an element', 'Changes the font size'],
         correct: 2,
-        explanation: 'Buttons are calls to action — they guide users toward doing something like signing up or learning more.',
+        explanation: 'border-radius rounds the corners of boxes! 0 = sharp square corners, 999px = a fully rounded pill shape.',
       },
     ],
     missions: [
 
-      // ── Mission 4 — Color Story ──────────────────────────────────────────────
+      // ── Mission 5 — The Color Lab ─────────────────────────────────────────────────
       {
-        id: 'mission-4',
-        number: 4,
+        id: 'mission-5',
+        number: 5,
         act: 2,
         title: 'The Color Lab',
-        subtitle: 'Colors speak before visitors read a word',
+        subtitle: 'Colors speak before visitors read a single word',
         concept: 'colors',
         xp: 110,
         badge: null,
         steps: [
           {
+            id: 'color-explain',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Here's a secret most people don't know...",
+              "Colors trigger emotions INSTANTLY — before anyone reads a word.",
+              "Blue = calm and trustworthy. Red = urgent and exciting. Green = natural and fresh.",
+              "Your color choices tell visitors what KIND of website this is!",
+            ],
+            action: "Let me choose!",
+          },
+          {
             id: 'color-design',
             type: 'visual-builder',
             section: null,
             isStyleUpdate: true,
-            teki: "Colors trigger emotions instantly — blue = calm, red = urgent, green = growth. Pick your website's personality!",
+            teki: "Choose your website's personality! Pick a primary color and a background color.",
             fields: [
-              { id: 'primaryColor', label: 'Primary Color', type: 'color', storeSubKey: 'primaryColor', hint: 'Your brand color — buttons, links, highlights' },
-              { id: 'backgroundColor', label: 'Background Color', type: 'color', storeSubKey: 'backgroundColor', hint: 'The page background — light or dark?' },
+              { id: 'primaryColor', label: 'Primary Color', type: 'color', storeSubKey: 'primaryColor', hint: 'Your brand color — used for buttons, links, and highlights' },
+              { id: 'backgroundColor', label: 'Background Color', type: 'color', storeSubKey: 'backgroundColor', hint: 'The page background — light feels clean, dark feels bold' },
             ],
             action: "Colors are set!",
           },
           {
             id: 'color-observe',
             type: 'observation',
-            teki: "Same website. Completely different feeling.",
-            tekiMessages: ["The SAME layout — totally different personality. That's the power of color! 🎨"],
+            teki: "Same website. Completely different personality!",
+            tekiMessages: ["Feel the difference? The same layout looks totally different with new colors. That's the POWER of design! 🎨"],
             autoAdvance: true,
           },
           {
-            id: 'color-challenge',
+            id: 'color-css-challenge',
             type: 'code-challenge',
-            teki: "Complete the CSS rule that sets your brand color across the whole site:",
+            teki: "This CSS applies your brand color across the whole page. Complete the selector:",
             language: 'css',
             code: `___ {
-  --primary: #3b82f6;
+  --primary: {{primaryColor}};
 }`,
             answer: `:root {
-  --primary: #3b82f6;
+  --primary: {{primaryColor}};
 }`,
             blanks: [{ position: 0, answer: ':root' }],
             explanations: {
-              young: "Type :root — it means 'apply this to the WHOLE page'!",
-              junior: ":root targets the topmost HTML element. Variables defined here are available everywhere in your CSS.",
-              senior: ":root has higher specificity than html selector. CSS custom properties defined here cascade down to all elements.",
+              young: "Type :root — it means 'apply this to the WHOLE page'. Think of it as the master settings panel!",
+              junior: ":root targets the topmost HTML element. CSS variables (--name) defined here are available everywhere in your stylesheet.",
+              senior: ":root has higher specificity than the html selector. CSS custom properties defined here cascade to all child elements and can be overridden locally.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Your color is coded! 🎨",
+            successMessage: "Your color is in the code! 🎨",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 5 — Typography ───────────────────────────────────────────────
+      // ── Mission 6 — Fonts & Buttons ───────────────────────────────────────────────
       {
-        id: 'mission-5',
-        number: 5,
+        id: 'mission-6',
+        number: 6,
         act: 2,
-        title: 'Typography Workshop',
-        subtitle: 'Fonts have personality',
+        title: 'Fonts & Buttons',
+        subtitle: 'Typography and shapes complete the design',
         concept: 'typography',
-        xp: 100,
-        badge: null,
+        xp: 130,
+        badge: { id: 'designer', label: 'Designer', emoji: '🎨' },
         steps: [
           {
-            id: 'type-design',
+            id: 'font-explain',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Design isn't just colors — FONTS have personality too!",
+              "A modern sans-serif feels like technology. A classic serif feels like a newspaper.",
+              "And BUTTON shapes send signals — pill buttons feel friendly, sharp buttons feel serious.",
+              "Let's give your website its final look!",
+            ],
+            action: "Let's style it!",
+          },
+          {
+            id: 'font-design',
             type: 'visual-builder',
             section: null,
             isStyleUpdate: true,
-            teki: "FONTS have personality — Modern = tech & clean, Classic = trust & tradition, Code = geeky & precise. Which fits your brand?",
+            teki: "Pick your font style and button shape — this is your website's personality!",
             fields: [
               { id: 'fontFamily', label: 'Font Style', type: 'select', options: ['sans-serif', 'serif', 'monospace'], labels: ['Modern', 'Classic', 'Code'], storeSubKey: 'fontFamily', hint: 'The overall text personality' },
-              { id: 'headingSize', label: 'Heading Size', type: 'select', options: ['2xl', '3xl', '4xl', '5xl'], labels: ['Small', 'Medium', 'Large', 'Huge'], storeSubKey: 'headingSize', hint: 'How bold are your titles?' },
+              { id: 'buttonStyle', label: 'Button Shape', type: 'select', options: ['rounded', 'pill', 'square'], labels: ['Rounded', 'Pill', 'Square'], storeSubKey: 'buttonStyle', hint: 'How your buttons look' },
             ],
-            action: "Typography done!",
+            action: "Styled!",
           },
           {
-            id: 'type-observe',
+            id: 'font-observe',
             type: 'observation',
-            teki: "Feel the difference?",
-            tekiMessages: ["Same words — totally different personality. Typography shapes how people FEEL about your content!"],
+            teki: "Now THAT is a designed website!",
+            tekiMessages: ["Colors + fonts + buttons — all working together. Your website has a real identity now! ✨"],
             autoAdvance: true,
           },
           {
-            id: 'type-challenge',
+            id: 'font-css-challenge',
             type: 'code-challenge',
-            teki: "Complete the CSS rule that changes the font:",
+            teki: "Here's the CSS that sets your font. Fill in the property name:",
             language: 'css',
             code: `body {
-  ____-family: 'Inter', sans-serif;
-  font-____: 16px;
+  ___-family: 'Inter', sans-serif;
+  font-size: 16px;
 }`,
             answer: `body {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
 }`,
-            blanks: [{ position: 0, answer: 'font' }, { position: 1, answer: 'size' }],
+            blanks: [{ position: 0, answer: 'font' }],
             explanations: {
-              young: "font-family changes the style of text. font-size changes how BIG it is!",
-              junior: "font-family sets the typeface. Always include a fallback (like sans-serif) in case the main font doesn't load.",
-              senior: "Font stacks: primary font → fallback → generic family. Use system-ui or Inter for modern UI. Load web fonts from Google Fonts or self-host for performance.",
+              young: "font-family changes the STYLE of all text! 'Inter' is the name of the font.",
+              junior: "font-family sets the typeface for all text inside <body>. Always include a fallback (like sans-serif) in case the named font doesn't load.",
+              senior: "Font stacks: primary font → fallback → generic family. Use system-ui or Inter for performant UI. Self-host fonts or use font-display: swap.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Text styled! 📝",
+            successMessage: "Font styled! 📝",
             action: "Check it!",
-          },
-        ],
-      },
-
-      // ── Mission 6 — Button Lab ───────────────────────────────────────────────
-      {
-        id: 'mission-6',
-        number: 6,
-        act: 2,
-        title: 'Button Lab',
-        subtitle: 'Buttons are invitations — design them right',
-        concept: 'buttons',
-        xp: 120,
-        badge: { id: 'designer', label: 'Designer', emoji: '🎨' },
-        steps: [
-          {
-            id: 'button-design',
-            type: 'visual-builder',
-            section: null,
-            isStyleUpdate: true,
-            teki: "Pill buttons feel friendly. Sharp corners feel serious. Rounded is in-between. Design your website's button style!",
-            fields: [
-              { id: 'buttonStyle', label: 'Button Shape', type: 'select', options: ['rounded', 'pill', 'square'], labels: ['Rounded', 'Pill ●', 'Square □'], storeSubKey: 'buttonStyle' },
-              { id: 'buttonColor', label: 'Button Color', type: 'color', storeSubKey: 'buttonColor' },
-            ],
-            action: "Buttons look great!",
-          },
-          {
-            id: 'button-challenge',
-            type: 'code-challenge',
-            teki: "To make a pill-shaped button, you need border-radius: 999px. Complete it:",
-            language: 'css',
-            code: `button {
-  background: #3b82f6;
-  color: white;
-  border-______: 999px;
-  padding: 12px 24px;
-}`,
-            answer: `button {
-  background: #3b82f6;
-  color: white;
-  border-radius: 999px;
-  padding: 12px 24px;
-}`,
-            blanks: [{ position: 0, answer: 'radius' }],
-            explanations: {
-              young: "border-radius rounds the corners! 999px makes it a perfect pill shape.",
-              junior: "border-radius controls corner rounding. 0 = sharp corners, 50% = circle/pill, 8px = subtly rounded.",
-              senior: "border-radius: 999px is a hack to ensure pill shape regardless of button height. More explicit: border-radius: 9999px or use 50vh.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Buttons polished! ✨",
-            action: "Check it!",
-          },
-          {
-            id: 'design-complete',
-            type: 'observation',
-            teki: "Now THAT is a designed website!",
-            tekiMessages: ["Colors, fonts, buttons — all working together. Your website has a real identity now! ✨"],
-            autoAdvance: true,
           },
           {
             id: 'act2-complete',
             type: 'act-complete',
             actId: 'act2',
             title: 'ACT 2 Complete!',
-            message: "Your website has a real personality now! Time to learn what's actually powering it under the hood.",
+            message: "Your website now has a real personality — colors, fonts, and buttons all working together. Time to peek under the hood and learn the language that powers it all!",
             power: { label: 'Designer', emoji: '🎨' },
             xpBonus: 200,
             action: "Show me the language!",
@@ -489,12 +528,12 @@ export const ACTS = [
     ],
   },
 
-  // ── ACT 3 ── Teaching The Website Words ─────────────────────────────────────
+  // ── ACT 3 ── The Language of the Web ─────────────────────────────────────────────
   {
     id: 'act3',
     number: 3,
-    title: 'Teaching The Website Words',
-    tagline: 'Learn HTML — the language of the web',
+    title: 'The Language of the Web',
+    tagline: 'HTML — how every website is written',
     color: '#f59e0b',
     emoji: '📝',
     quiz: [
@@ -502,389 +541,410 @@ export const ACTS = [
         question: 'What does HTML stand for?',
         options: ['High Tech Markup Layout', 'HyperText Markup Language', 'Home Template Making Language', 'How To Make Links'],
         correct: 1,
-        explanation: 'HTML = HyperText Markup Language — the code that gives every webpage its structure.',
+        explanation: 'HTML = HyperText Markup Language. It\'s the standard language for creating web pages. Every single website uses it.',
       },
       {
         question: 'What is an HTML TAG?',
-        options: ['A type of password', 'A color code', 'A label that wraps content to give it meaning', 'A file extension'],
+        options: ['A type of password', 'A color value', 'A label wrapped in < > that gives content meaning', 'A file extension'],
         correct: 2,
-        explanation: 'Tags like <h1> or <p> wrap content and tell the browser what that content is.',
+        explanation: 'Tags like <h1> or <p> wrap content and tell the browser WHAT that content is — a heading, a paragraph, a button, etc.',
       },
       {
-        question: 'What does the <h1> tag create?',
-        options: ['A button', 'The largest heading on the page', 'A clickable link', 'An image'],
+        question: 'What goes inside the <body> tag?',
+        options: ['CSS styles and colors only', 'All the visible content of the page', 'The page title only', 'JavaScript code only'],
         correct: 1,
-        explanation: '<h1> makes the biggest, most important heading — search engines pay special attention to it.',
+        explanation: 'The <body> contains everything visitors can SEE on the page — headings, text, images, buttons, and sections.',
       },
     ],
     missions: [
 
-      // ── Mission 7 — Decode Your Website ────────────────────────────────────
+      // ── Mission 7 — Meet HTML ─────────────────────────────────────────────────────
       {
         id: 'mission-7',
         number: 7,
         act: 3,
-        title: 'Decode Your Website',
-        subtitle: 'Your website is made of just text',
-        concept: 'html-basics',
-        xp: 150,
+        title: 'Meet HTML',
+        subtitle: 'The language every webpage is written in',
+        concept: 'html-intro',
+        xp: 120,
         badge: null,
         steps: [
           {
-            id: 'html-intro',
+            id: 'html-intro-msg',
             type: 'teki-message',
             mood: 'excited',
             messages: [
-              "Secret revealed: your beautiful website is made entirely of text in angle brackets. It's called HTML — and you're about to read it!",
+              "You built a website without writing a single line of code!",
+              "But here's the truth — everything you built has CODE behind it.",
+              "That code is called HTML — HyperText Markup Language.",
+              "It's the language every single website is written in. And it's simple!",
             ],
-            autoAdvance: true,
+            action: "Teach me HTML!",
           },
           {
-            id: 'html-h1-challenge',
+            id: 'html-tags-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "HTML works with TAGS — little labels wrapped in angle brackets < >.",
+              "A tag has two parts: an OPENING tag and a CLOSING tag.",
+              "<h1> opens a heading. </h1> closes it. The slash / means closing.",
+              "Everything between the tags is the content!",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'h1-challenge',
             type: 'code-challenge',
-            teki: "Write an h1 heading with your site name:",
+            teki: "Write the heading tag that wraps your website name:",
             language: 'html',
             code: `<___>{{name}}</___>`,
             answer: `<h1>{{name}}</h1>`,
             blanks: [{ position: 0, answer: 'h1' }, { position: 1, answer: 'h1' }],
             explanations: {
-              young: "Type h1 in both blanks — opening <h1> and closing </h1>!",
-              junior: "HTML tags wrap content: <h1> opens, </h1> closes. The / in the closing tag is important!",
-              senior: "Heading tags h1–h6 create a semantic document outline. Use them for structure, not just visual sizing.",
+              young: "<h1> is the biggest, most important heading! Think of it as the TITLE of your website.",
+              junior: "<h1> is heading level 1 — the most important heading on the page. Browsers display it large and bold by default.",
+              senior: "<h1> is a semantic heading. Use exactly one per page for SEO. Heading levels (h1–h6) create a document outline.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "You wrote HTML! 🎉",
-            action: "Check it!",
-          },
-          {
-            id: 'html-p-challenge',
-            type: 'code-challenge',
-            teki: "Paragraphs use a <p> tag. Write a short description:",
-            language: 'html',
-            code: `<___>Welcome to {{name}} — a site about {{topic}}!</___>`,
-            answer: `<p>Welcome to {{name}} — a site about {{topic}}!</p>`,
-            blanks: [{ position: 0, answer: 'p' }, { position: 1, answer: 'p' }],
-            explanations: {
-              young: "<p> is for paragraphs — regular text like sentences in a book!",
-              junior: "<p> creates a paragraph with automatic spacing above and below. It's the go-to tag for body text.",
-              senior: "<p> is a block-level element. Browsers apply default margins. Use CSS to control spacing explicitly.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Paragraph perfect! ✅",
-            action: "Check it!",
-          },
-          {
-            id: 'html-link-challenge',
-            type: 'code-challenge',
-            teki: "Links use a special tag. Write a link to your homepage:",
-            language: 'html',
-            code: `<_ href="/">Go Home</_>`,
-            answer: `<a href="/">Go Home</a>`,
-            blanks: [{ position: 0, answer: 'a' }, { position: 1, answer: 'a' }],
-            explanations: {
-              young: "The <a> tag is the LINK tag! 'a' stands for anchor — like dropping an anchor on a page you want to find again.",
-              junior: "<a href='url'> creates a hyperlink. href is the address it goes to. / means the homepage.",
-              senior: "<a> is an inline element. href can be absolute (https://...) or relative (/path). Use target='_blank' with rel='noopener' for external links.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Link built! 🔗",
+            successMessage: "Your first HTML tag! 🎉",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 8 — Nesting & Structure ─────────────────────────────────────
+      // ── Mission 8 — The Blueprint ─────────────────────────────────────────────────
       {
         id: 'mission-8',
         number: 8,
         act: 3,
-        title: 'Boxes Inside Boxes',
-        subtitle: 'HTML is organized like Russian dolls',
-        concept: 'nesting',
+        title: 'The Blueprint',
+        subtitle: 'Every HTML page has the same skeleton',
+        concept: 'html-structure',
         xp: 130,
         badge: null,
         steps: [
           {
-            id: 'div-challenge',
-            type: 'code-challenge',
-            teki: "Wrap this content in a div with class 'card':",
-            language: 'html',
-            code: `<___ class="____">
-  <h2>Space Paws</h2>
-  <p>Cats in space!</p>
-</___>`,
-            answer: `<div class="card">
-  <h2>Space Paws</h2>
-  <p>Cats in space!</p>
-</div>`,
-            blanks: [{ position: 0, answer: 'div' }, { position: 1, answer: 'card' }, { position: 2, answer: 'div' }],
-            explanations: {
-              young: "Tag = div, class name = card. The closing tag </div> matches the opening <div>!",
-              junior: "class='card' names this div so CSS can target it with .card. The value in the class attribute is up to you.",
-              senior: "class values are case-sensitive and space-separated for multiple classes. Use BEM naming for large projects.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Structured like a pro! 🗂️",
-            action: "Check it!",
+            id: 'structure-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Here's something interesting — every HTML page on the ENTIRE internet has the same basic skeleton.",
+              "It starts with <html>, has a <head> for settings (invisible), and a <body> for content (visible).",
+              "Think of it like a book: the title page (<head>) vs the actual chapters (<body>).",
+            ],
+            action: "Makes sense!",
           },
           {
-            id: 'img-challenge',
+            id: 'html-structure-challenge',
             type: 'code-challenge',
-            teki: "Images are tricky — they're self-closing. Complete this image tag:",
-            language: 'html',
-            code: `<___ src="fluffy.jpg" ___="A golden retriever" />`,
-            answer: `<img src="fluffy.jpg" alt="A golden retriever" />`,
-            blanks: [{ position: 0, answer: 'img' }, { position: 1, answer: 'alt' }],
-            explanations: {
-              young: "img shows pictures! The alt text is a description for people who can't see images.",
-              junior: "<img> is a void element — no closing tag. src is the image path, alt is accessibility text for screen readers.",
-              senior: "Always include descriptive alt text for WCAG compliance. Empty alt='' for decorative images tells screen readers to skip them.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Image tagged! 🖼️",
-            action: "Check it!",
-          },
-        ],
-      },
-
-      // ── Mission 9 — Page Architecture ───────────────────────────────────────
-      {
-        id: 'mission-9',
-        number: 9,
-        act: 3,
-        title: 'The Full Picture',
-        subtitle: 'How a complete HTML page is structured',
-        concept: 'page-structure',
-        xp: 140,
-        badge: { id: 'html-coder', label: 'HTML Coder', emoji: '📝' },
-        steps: [
-          {
-            id: 'head-challenge',
-            type: 'code-challenge',
-            teki: "Where does the page TITLE go? In <head> or <body>?",
+            teki: "Complete the HTML skeleton — where does all the visible content go?",
             language: 'html',
             code: `<html>
-  <____>
+  <head>
     <title>{{name}}</title>
-  </____>
-  <body>...</body>
+  </head>
+  <___>
+    <h1>Welcome!</h1>
+  </___>
 </html>`,
             answer: `<html>
   <head>
     <title>{{name}}</title>
   </head>
-  <body>...</body>
+  <body>
+    <h1>Welcome!</h1>
+  </body>
 </html>`,
-            blanks: [{ position: 0, answer: 'head' }, { position: 1, answer: 'head' }],
+            blanks: [{ position: 0, answer: 'body' }, { position: 1, answer: 'body' }],
             explanations: {
-              young: "<head> holds the title — it shows in the browser tab but not on the page itself!",
-              junior: "<title> goes inside <head>. It appears in the browser tab, bookmarks, and search engine results.",
-              senior: "<title> is a critical SEO element. Keep it under 60 characters, include the primary keyword, avoid duplicates across pages.",
+              young: "The <body> is like the STAGE — all the content visitors can see goes inside it!",
+              junior: "<body> contains everything rendered on screen. <head> contains metadata like <title> and CSS links — invisible to visitors.",
+              senior: "The document structure: <!DOCTYPE html> → <html lang> → <head> with meta charset/viewport → <body>. The <head> content is parsed but not rendered.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Architecture understood! 🏛️",
+            successMessage: "HTML structure complete! 🏗️",
             action: "Check it!",
           },
           {
-            id: 'semantic-challenge',
+            id: 'paragraph-msg',
+            type: 'teki-message',
+            mood: 'happy',
+            messages: [
+              "You know the skeleton. Now let's add more tags!",
+              "<p> creates a paragraph — regular text that visitors read.",
+              "Every sentence block on a webpage is wrapped in <p>...</p>.",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'paragraph-challenge',
             type: 'code-challenge',
-            teki: "The main content of your page goes inside which tag?",
+            teki: "Add a paragraph below the heading:",
             language: 'html',
-            code: `<body>
-  <header>Nav goes here</header>
-  <____>Page content goes here</____>
-  <footer>Copyright goes here</footer>
-</body>`,
-            answer: `<body>
-  <header>Nav goes here</header>
-  <main>Page content goes here</main>
-  <footer>Copyright goes here</footer>
-</body>`,
-            blanks: [{ position: 0, answer: 'main' }, { position: 1, answer: 'main' }],
+            code: `<h1>{{headline}}</h1>
+<___>{{subtext}}</___>`,
+            answer: `<h1>{{headline}}</h1>
+<p>{{subtext}}</p>`,
+            blanks: [{ position: 0, answer: 'p' }, { position: 1, answer: 'p' }],
             explanations: {
-              young: "<main> is where the real stuff goes — the main content that visitors came to see!",
-              junior: "<main> wraps the primary content of the page. There should only be one <main> per page.",
-              senior: "<main> is a semantic landmark that assistive technologies use to jump to primary content. Skip navigation links often target it.",
+              young: "<p> makes a paragraph — it's for regular text, like the description below a big heading!",
+              junior: "<p> is a block-level element. Each <p> starts on a new line with top/bottom margin by default.",
+              senior: "<p> is a block container for flow content. Nesting block elements inside a <p> is invalid HTML.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Full page structured! 🎯",
+            successMessage: "Paragraph tag added! 📄",
             action: "Check it!",
+          },
+        ],
+      },
+
+      // ── Mission 9 — Link It Up ────────────────────────────────────────────────────
+      {
+        id: 'mission-9',
+        number: 9,
+        act: 3,
+        title: 'Link It Up',
+        subtitle: 'Links connect the entire web together',
+        concept: 'links',
+        xp: 140,
+        badge: { id: 'html-coder', label: 'HTML Coder', emoji: '📝' },
+        steps: [
+          {
+            id: 'link-explain',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Here's a BIG concept — the web is called the 'web' because pages are LINKED together!",
+              "Every link you've ever clicked is made with one tag: <a>.",
+              "The <a> tag needs an href attribute that says WHERE to go.",
+              "href = Hypertext REFerence — the web address of the destination.",
+            ],
+            action: "Show me!",
+          },
+          {
+            id: 'link-challenge',
+            type: 'code-challenge',
+            teki: "Create a link to another page. Fill in the attribute that sets the destination:",
+            language: 'html',
+            code: `<a ___="https://example.com">Visit Example</a>`,
+            answer: `<a href="https://example.com">Visit Example</a>`,
+            blanks: [{ position: 0, answer: 'href' }],
+            explanations: {
+              young: "href is the address of the page you want to go to — like the destination on a road sign!",
+              junior: "href sets the hyperlink reference. Without it, <a> renders as text but goes nowhere. Always include descriptive link text for accessibility.",
+              senior: "Use href='#id' for same-page links, href='/' for root. Add target='_blank' rel='noopener noreferrer' for external links in new tabs.",
+            },
+            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
+            successMessage: "Link created! 🔗",
+            action: "Check it!",
+          },
+          {
+            id: 'html-review-msg',
+            type: 'teki-message',
+            mood: 'proud',
+            messages: [
+              "You now speak HTML! Let's recap what you know:",
+              "<h1> = big heading, <p> = paragraph, <a href> = link, <button> = clickable button.",
+              "<header>, <main>, <footer> = the three sections of every website.",
+              "These 7 tags power MOST of what you see on websites every day!",
+            ],
+            action: "I know HTML!",
           },
           {
             id: 'act3-complete',
             type: 'act-complete',
             actId: 'act3',
             title: 'ACT 3 Complete!',
-            message: "You can read AND write HTML! You understand tags, nesting, attributes, and page structure. Now let's give your website a memory.",
+            message: "You speak HTML! Tags, structure, headings, paragraphs, links — you understand the language every website is written in. Next: making it smart with JavaScript!",
             power: { label: 'HTML Coder', emoji: '📝' },
             xpBonus: 200,
-            action: "Give it memory!",
+            action: "Make it smart!",
           },
         ],
       },
     ],
   },
 
-  // ── ACT 4 ── Giving The Website Memory ──────────────────────────────────────
+  // ── ACT 4 ── Memory Machine ───────────────────────────────────────────────────────
   {
     id: 'act4',
     number: 4,
-    title: 'Giving The Website Memory',
-    tagline: 'Variables — secret boxes for data',
-    color: '#10b981',
+    title: 'Memory Machine',
+    tagline: 'JavaScript — teach your website to remember',
+    color: '#8b5cf6',
     emoji: '🧠',
     quiz: [
       {
-        question: 'What is a VARIABLE in code?',
-        options: ['A type of error message', 'A named box that stores a value', 'A website color code', 'A kind of button'],
+        question: 'What is a VARIABLE in programming?',
+        options: ['A type of HTML tag', 'A named container that stores a value', 'A CSS color setting', 'An error in the code'],
         correct: 1,
-        explanation: 'A variable is like a labeled box — you give it a name and store a value inside it.',
+        explanation: 'A variable is like a labeled box — you give it a name and put a value inside. You can read and change that value later.',
       },
       {
-        question: 'Which is the correct way to create a variable in JavaScript?',
-        options: ['create color = "blue"', 'variable color: "blue"', 'let color = "blue"', 'set color = "blue"'],
-        correct: 2,
-        explanation: 'In JavaScript you declare variables with let (or const/var). The syntax is: let name = value.',
+        question: 'What is the difference between let and const?',
+        options: ['const can change, let cannot', 'let can change, const cannot be reassigned', 'They are exactly the same', 'const is for HTML, let is for CSS'],
+        correct: 1,
+        explanation: 'let declares a variable that CAN be changed. const declares one that CANNOT be reassigned after its first value.',
       },
       {
-        question: 'What happens when you change a variable\'s value?',
-        options: ['The code crashes', 'Nothing changes on the page', 'All places that use it update automatically', 'It creates a brand-new file'],
+        question: 'What does document.querySelector() do?',
+        options: ['Writes new HTML to the page', 'Deletes an element', 'Finds an HTML element by its CSS selector', 'Creates a new variable'],
         correct: 2,
-        explanation: 'That\'s the power of variables — change the value once and everywhere it\'s used reflects the new value.',
+        explanation: 'querySelector finds an existing HTML element (like a <h1> or a div with a specific id) so JavaScript can change it.',
       },
     ],
     missions: [
 
-      // ── Mission 10 — Secret Boxes ────────────────────────────────────────────
+      // ── Mission 10 — Store Information ─────────────────────────────────────────────
       {
         id: 'mission-10',
         number: 10,
         act: 4,
-        title: 'Secret Boxes',
-        subtitle: 'Variables are named containers for data',
+        title: 'Store Information',
+        subtitle: "Variables are JavaScript's memory",
         concept: 'variables',
-        xp: 160,
+        xp: 140,
         badge: null,
         steps: [
           {
-            id: 'var-declare-challenge',
+            id: 'js-intro-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Your website looks great. But it doesn't DO anything yet.",
+              "That's about to change. Meet JAVASCRIPT — the brain of your website.",
+              "If HTML is the skeleton and CSS is the skin, JavaScript is the BRAIN.",
+              "It makes websites remember, react, calculate, and interact!",
+            ],
+            action: "Teach me JavaScript!",
+          },
+          {
+            id: 'variables-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "The most fundamental thing in all of programming: VARIABLES.",
+              "A variable is like a labeled box — put a value in, give it a name, use it later.",
+              "In JavaScript we use 'let' to create a variable that can change.",
+              "We use 'const' for a value that stays the same forever.",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'let-challenge',
             type: 'code-challenge',
-            teki: "Create a variable to track how many visitors your site has:",
+            teki: "Create a variable called 'greeting' and store a welcome message in it:",
             language: 'javascript',
-            code: `___ visitorCount = 0;`,
-            answer: `let visitorCount = 0;`,
+            code: `___ greeting = "Welcome to {{name}}!";
+console.log(greeting);`,
+            answer: `let greeting = "Welcome to {{name}}!";
+console.log(greeting);`,
             blanks: [{ position: 0, answer: 'let' }],
             explanations: {
-              young: "Type 'let' to open a new box! Then give it the name 'visitorCount' and start at 0.",
-              junior: "'let' declares a variable. The = sign assigns the starting value. Starting at 0 makes sense for a counter.",
-              senior: "Use 'const' if you'd use 'let' to store an object or array that you mutate without reassigning. Reserve 'let' for primitives that get reassigned.",
+              young: "Use 'let' to create a box and put something in it! The = sign means 'store this value'.",
+              junior: "'let' declares a variable that can be reassigned. The = is assignment, not 'equals'. console.log() prints the value to the browser console.",
+              senior: "'let' is block-scoped. Prefer const by default — use let only when you need to reassign. Avoid var (function-scoped, legacy).",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
             successMessage: "Variable created! 📦",
             action: "Check it!",
           },
           {
-            id: 'var-update-challenge',
+            id: 'const-challenge',
             type: 'code-challenge',
-            teki: "A visitor arrived! Add 1 to the count:",
+            teki: "Use 'const' for your site name — it never changes:",
             language: 'javascript',
-            code: `let visitorCount = 0;
-
-// A visitor arrived!
-visitorCount = visitorCount ___ 1;
-
-console.log(visitorCount); // should show 1`,
-            answer: `let visitorCount = 0;
-
-// A visitor arrived!
-visitorCount = visitorCount + 1;
-
-console.log(visitorCount); // should show 1`,
-            blanks: [{ position: 0, answer: '+' }],
+            code: `___ siteName = "{{name}}";
+let visitors = 0;
+visitors = visitors + 1;`,
+            answer: `const siteName = "{{name}}";
+let visitors = 0;
+visitors = visitors + 1;`,
+            blanks: [{ position: 0, answer: 'const' }],
             explanations: {
-              young: "Use + to add! visitorCount = visitorCount + 1 means 'take the old count and add 1 to it'.",
-              junior: "Reassigning a variable: the right side is evaluated first, then stored. visitorCount += 1 is shorthand.",
-              senior: "visitorCount++ is idiomatic. ++visitorCount and visitorCount++ differ in when the increment happens — be careful in expressions.",
+              young: "'const' means CONSTANT — this box is locked! The value can never be changed.",
+              junior: "'const' prevents reassignment. Use it for values that should never change — site name, config values, fixed data.",
+              senior: "const prevents reassignment but not mutation. const obj = {} still lets you do obj.key = 'val'. Use Object.freeze() for deep immutability.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Counter works! 🧮",
-            action: "Check it!",
-          },
-          {
-            id: 'var-types-challenge',
-            type: 'code-challenge',
-            teki: "Variables can hold different types of data. Complete this:",
-            language: 'javascript',
-            code: `let name    = "{{name}}";    // ___ (in quotes)
-let count   = 42;              // ___ (no quotes)
-let isLive  = true;            // ___ (true or false)`,
-            answer: `let name    = "{{name}}";    // string (in quotes)
-let count   = 42;              // number (no quotes)
-let isLive  = true;            // boolean (true or false)`,
-            blanks: [{ position: 0, answer: 'string' }, { position: 1, answer: 'number' }, { position: 2, answer: 'boolean' }],
-            explanations: {
-              young: "Text = string (has quotes). Numbers = number. Yes/No = boolean (true or false)!",
-              junior: "JavaScript has 3 primitive types you'll use most: string (text), number (any number), boolean (true/false).",
-              senior: "Primitives: string, number, bigint, boolean, undefined, null, symbol. Objects and arrays are reference types. typeof operator reveals the type.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Types mastered! 🧠",
+            successMessage: "const vs let — nailed it! 🔒",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 11 — Dynamic Website ─────────────────────────────────────────
+      // ── Mission 11 — Find & Change ────────────────────────────────────────────────
       {
         id: 'mission-11',
         number: 11,
         act: 4,
-        title: 'Wiring Variables to Your Website',
-        subtitle: 'Change a variable — the website updates',
-        concept: 'dom-variables',
+        title: 'Find & Change',
+        subtitle: 'JavaScript can reach into HTML and change anything',
+        concept: 'dom',
         xp: 160,
-        badge: { id: 'memory-master', label: 'Memory Master', emoji: '🧠' },
+        badge: { id: 'js-starter', label: 'JS Starter', emoji: '🧠' },
         steps: [
+          {
+            id: 'dom-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Here's where JavaScript gets POWERFUL.",
+              "JavaScript can find ANY element on your page and change it!",
+              "It uses something called the DOM — Document Object Model.",
+              "Think of the DOM as a family tree of your HTML. JS can grab any branch and modify it.",
+            ],
+            action: "How?",
+          },
+          {
+            id: 'queryselector-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "The tool: document.querySelector()",
+              "Inside the () you put a CSS selector — like '#hero-title' for an element with id='hero-title'.",
+              "Once you have the element, you can change its text with .textContent",
+              "Example: element.textContent = 'New text here'",
+            ],
+            action: "Let me try it!",
+          },
           {
             id: 'queryselector-challenge',
             type: 'code-challenge',
-            teki: "Find the hero heading (h1) and update its text:",
+            teki: "Find the headline element by its id and update its text:",
             language: 'javascript',
-            code: `let headline = "{{headline}}";
-
-document.____________('h1').textContent = headline;`,
-            answer: `let headline = "{{headline}}";
-
-document.querySelector('h1').textContent = headline;`,
+            code: `let title = document.___('#hero-title');
+title.textContent = "{{headline}}";`,
+            answer: `let title = document.querySelector('#hero-title');
+title.textContent = "{{headline}}";`,
             blanks: [{ position: 0, answer: 'querySelector' }],
             explanations: {
-              young: "querySelector is the 'finder' — it searches your page for a specific element!",
-              junior: "querySelector('h1') finds the first h1 element. You can use any CSS selector: '#id', '.class', 'tag'.",
-              senior: "querySelector returns null if not found — always check or use optional chaining: document.querySelector('h1')?.textContent",
+              young: "querySelector finds the element you want — like using a search box to find one specific thing on the page!",
+              junior: "querySelector('#id') finds the element with that id. The # means 'by id'. You can also use '.' for class names.",
+              senior: "querySelector returns the first matching element or null. Use querySelectorAll for multiple elements. Cache results to avoid repeated DOM queries.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Element found! 🔍",
+            successMessage: "Element found and updated! ✨",
             action: "Check it!",
           },
           {
             id: 'textcontent-challenge',
             type: 'code-challenge',
-            teki: "Now put the site description into the <p> tag under your headline:",
+            teki: "Now update the paragraph text — fill in the property that changes text content:",
             language: 'javascript',
-            code: `let description = "{{subtext}}";
-
-document.querySelector('p').___________ = description;`,
-            answer: `let description = "{{subtext}}";
-
-document.querySelector('p').textContent = description;`,
+            code: `let desc = document.querySelector('#hero-desc');
+desc.___ = "{{subtext}}";`,
+            answer: `let desc = document.querySelector('#hero-desc');
+desc.textContent = "{{subtext}}";`,
             blanks: [{ position: 0, answer: 'textContent' }],
             explanations: {
-              young: "textContent puts your text INTO the element — like filling a container!",
-              junior: ".textContent is a property you can read (get the current text) or write (change the text).",
-              senior: "Alternatively: .innerText (respects CSS visibility), .innerHTML (parses HTML). textContent is fastest and safest for plain text.",
+              young: "textContent is the text inside the element. Setting it changes what visitors see — like editing a sticky note!",
+              junior: "textContent sets the text inside an element, replacing all existing content. It's safe — no HTML injection possible.",
+              senior: "Prefer textContent over innerHTML for plain text — it's safer (prevents XSS) and faster. Use innerHTML only when inserting real HTML structure.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Website is dynamic! ⚡",
+            successMessage: "Text updated with JavaScript! 🔄",
             action: "Check it!",
           },
           {
@@ -892,198 +952,209 @@ document.querySelector('p').textContent = description;`,
             type: 'act-complete',
             actId: 'act4',
             title: 'ACT 4 Complete!',
-            message: "Your website now has memory — it stores and displays data. Next: teach it to THINK and make decisions!",
-            power: { label: 'Memory Master', emoji: '🧠' },
+            message: "JavaScript is now in your toolkit! Variables store data, querySelector finds elements, and textContent changes what visitors see. Now let's teach your website to THINK!",
+            power: { label: 'JS Starter', emoji: '🧠' },
             xpBonus: 200,
-            action: "Teach it to think!",
+            action: "Make it think!",
           },
         ],
       },
     ],
   },
 
-  // ── ACT 5 ── Teaching The Website To Think ──────────────────────────────────
+  // ── ACT 5 ── Website Thinks ────────────────────────────────────────────────────────
   {
     id: 'act5',
     number: 5,
-    title: 'Teaching The Website To Think',
-    tagline: 'Conditions — the power of decision making',
-    color: '#8b5cf6',
-    emoji: '🤔',
+    title: 'Website Thinks',
+    tagline: 'Make decisions with if/else',
+    color: '#06b6d4',
+    emoji: '💭',
     quiz: [
       {
         question: 'What does an IF statement do?',
-        options: ['Loops through a list of items', 'Runs code ONLY when a condition is true', 'Stores data in a variable', 'Defines a reusable function'],
+        options: ['Repeats code a set number of times', 'Runs code only when a condition is true', 'Stores a value in a variable', 'Creates an HTML element'],
         correct: 1,
-        explanation: 'An if statement checks a condition — if it\'s true, the code inside runs; otherwise it\'s skipped.',
+        explanation: 'An if statement checks a condition — if it\'s true, it runs the code inside. If it\'s false, it skips it.',
       },
       {
-        question: 'Which keyword handles the "otherwise" case in an if statement?',
-        options: ['else', 'unless', 'when', 'other'],
-        correct: 0,
-        explanation: 'else runs when the if condition is false — it\'s the fallback plan.',
+        question: 'What does === mean in JavaScript?',
+        options: ['Assigns a value to a variable', 'Strict equality — checks if two values are exactly equal', 'Greater than or equal to', 'Not equal to'],
+        correct: 1,
+        explanation: '=== is strict equality. It checks that two values are the same type AND same value. Use it instead of == which does loose comparison.',
       },
       {
-        question: 'Which expression is TRUE in JavaScript?',
-        options: ['"cat" === "dog"', '5 > 10', '3 < 7', '1 === 2'],
+        question: 'What does ELSE do in an if/else statement?',
+        options: ['Runs when the if condition is TRUE', 'Always runs no matter what', 'Runs when the if condition is FALSE', 'Stops the program'],
         correct: 2,
-        explanation: '3 is less than 7, so 3 < 7 evaluates to true.',
+        explanation: 'else is the fallback — it only runs when the if condition is false. Together if/else covers ALL possible outcomes.',
       },
     ],
     missions: [
 
-      // ── Mission 12 — If This, Then That ─────────────────────────────────────
+      // ── Mission 12 — Making Decisions ──────────────────────────────────────────────
       {
         id: 'mission-12',
         number: 12,
         act: 5,
-        title: 'If This, Then That',
-        subtitle: 'Make your website make decisions',
-        concept: 'conditionals',
-        xp: 160,
+        title: 'Making Decisions',
+        subtitle: 'If this, do that — the core of all logic',
+        concept: 'if-else',
+        xp: 150,
         badge: null,
         steps: [
           {
-            id: 'if-keyword-challenge',
+            id: 'if-intro-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Websites that show the SAME thing to everyone are boring.",
+              "A smart website adapts — it shows different content based on who is visiting, what time it is, what the user clicked!",
+              "The tool for this is the IF statement — one of the most important things in all of programming.",
+            ],
+            action: "Teach me if!",
+          },
+          {
+            id: 'if-syntax-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "if (condition) { do this }",
+              "The condition is a question that's either TRUE or FALSE.",
+              "If true → run the code in { }. If false → skip it.",
+              "Example: if (age >= 18) { showAdultContent() }",
+            ],
+            action: "I see it!",
+          },
+          {
+            id: 'if-challenge',
             type: 'code-challenge',
-            teki: "Start the decision. What keyword begins an if statement?",
+            teki: "Complete the if statement that checks if a visitor is new:",
             language: 'javascript',
-            code: `let score = 95;
+            code: `let isNewVisitor = true;
 
-___ (score >= 90) {
-  grade = "A+";
+__ (isNewVisitor) {
+  document.querySelector('#greeting').textContent = "Welcome! First time here?";
 }`,
-            answer: `let score = 95;
+            answer: `let isNewVisitor = true;
 
-if (score >= 90) {
-  grade = "A+";
+if (isNewVisitor) {
+  document.querySelector('#greeting').textContent = "Welcome! First time here?";
 }`,
             blanks: [{ position: 0, answer: 'if' }],
             explanations: {
-              young: "Type 'if' — it starts every decision in JavaScript!",
-              junior: "if (condition) { ... } — the condition is inside parentheses, the code to run is inside curly braces.",
-              senior: "if evaluates the expression to a truthy/falsy value. Any non-zero, non-empty, non-null, non-undefined value is truthy.",
+              young: "'if' means: CHECK if this is true, THEN do it. Like asking a question before doing something!",
+              junior: "if (condition) { code } — if the condition evaluates to true (or truthy), the code block runs. true/false values are called booleans.",
+              senior: "JavaScript uses truthy/falsy. Be explicit in conditions — if (count > 0) not if (count). Use strict equality (===) to avoid coercion surprises.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Decision started! ✅",
+            successMessage: "Your website can make decisions! 🧠",
             action: "Check it!",
           },
           {
             id: 'else-challenge',
             type: 'code-challenge',
-            teki: "Now add the fallback — what runs when the condition is FALSE?",
+            teki: "Add an ELSE to handle returning visitors:",
             language: 'javascript',
-            code: `let score = 72;
+            code: `let isNewVisitor = false;
 
-if (score >= 90) {
-  grade = "A+";
-} ____ {
-  grade = "Keep trying!";
+if (isNewVisitor) {
+  document.querySelector('#greeting').textContent = "Welcome! First time here?";
+} ___ {
+  document.querySelector('#greeting').textContent = "Welcome back! 👋";
 }`,
-            answer: `let score = 72;
+            answer: `let isNewVisitor = false;
 
-if (score >= 90) {
-  grade = "A+";
+if (isNewVisitor) {
+  document.querySelector('#greeting').textContent = "Welcome! First time here?";
 } else {
-  grade = "Keep trying!";
+  document.querySelector('#greeting').textContent = "Welcome back! 👋";
 }`,
             blanks: [{ position: 0, answer: 'else' }],
             explanations: {
-              young: "Type 'else' — it means 'otherwise do THIS'!",
-              junior: "else is the fallback block. If the if condition is false, else runs instead.",
-              senior: "Avoid deep if/else nesting. Consider early returns, guard clauses, or lookup tables for complex branching.",
+              young: "'else' is the backup plan! If the first thing isn't true, run THIS instead.",
+              junior: "else runs when the if condition is false. Every possible outcome is covered: new visitor OR returning visitor.",
+              senior: "if/else covers two branches. For simple ternary: const msg = isNew ? 'Welcome!' : 'Welcome back!' For more branches, use else if or switch.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Fallback added! 🔀",
-            action: "Check it!",
-          },
-          {
-            id: 'comparison-challenge',
-            type: 'code-challenge',
-            teki: "Use STRICT equality to check if the visitor's name matches:",
-            language: 'javascript',
-            code: `let visitor = "Alex";
-
-if (visitor ___ "Alex") {
-  message = "Welcome back, Alex! 👋";
-}`,
-            answer: `let visitor = "Alex";
-
-if (visitor === "Alex") {
-  message = "Welcome back, Alex! 👋";
-}`,
-            blanks: [{ position: 0, answer: '===' }],
-            explanations: {
-              young: "=== means 'exactly equal'. Three equals signs checks both the value AND the type!",
-              junior: "=== is strict equality — checks value AND type. == does type coercion (dangerous!). Always use ===.",
-              senior: "=== is referentially equal for primitives. For objects/arrays, === checks same reference in memory, not deep equality.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Comparison nailed! 🎯",
+            successMessage: "Both cases handled! ✅",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 13 — Smart Homepage ──────────────────────────────────────────
+      // ── Mission 13 — More Choices ─────────────────────────────────────────────────
       {
         id: 'mission-13',
         number: 13,
         act: 5,
-        title: 'Smart Homepage',
-        subtitle: 'Build a time-aware greeting for your site',
-        concept: 'conditional-logic',
+        title: 'More Choices',
+        subtitle: 'else if handles multiple conditions',
+        concept: 'else-if',
         xp: 160,
-        badge: { id: 'logic-thinker', label: 'Logic Thinker', emoji: '🤔' },
+        badge: { id: 'logic-thinker', label: 'Logic Thinker', emoji: '💭' },
         steps: [
+          {
+            id: 'elseif-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "if/else is great for TWO choices. But what about three? Four?",
+              "That's where ELSE IF comes in.",
+              "You can chain multiple conditions: if → else if → else if → else.",
+              "Only ONE block runs — the first condition that's true wins!",
+            ],
+            action: "Show me!",
+          },
+          {
+            id: 'comparison-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Quick tip — the comparison operators you'll use in conditions:",
+              "=== means 'exactly equal to'",
+              "> means 'greater than',  < means 'less than'",
+              ">= means 'greater than OR equal to'",
+            ],
+            action: "Got them all!",
+          },
           {
             id: 'elseif-challenge',
             type: 'code-challenge',
-            teki: "Add the middle case — afternoon — between morning and evening:",
+            teki: "Create a time-aware greeting! Fill in the missing keyword:",
             language: 'javascript',
-            code: `if (hour < 12) {
+            code: `let hour = new Date().getHours();
+let greeting;
+
+if (hour < 12) {
   greeting = "Good morning! ☀️";
-} ____ __  (hour < 18) {
+} ___ if (hour < 18) {
   greeting = "Good afternoon! 🌤️";
 } else {
   greeting = "Good evening! 🌙";
-}`,
-            answer: `if (hour < 12) {
+}
+
+document.querySelector('#greeting').textContent = greeting;`,
+            answer: `let hour = new Date().getHours();
+let greeting;
+
+if (hour < 12) {
   greeting = "Good morning! ☀️";
 } else if (hour < 18) {
   greeting = "Good afternoon! 🌤️";
 } else {
   greeting = "Good evening! 🌙";
-}`,
-            blanks: [{ position: 0, answer: 'else' }, { position: 1, answer: 'if' }],
-            explanations: {
-              young: "Type 'else' then 'if' — it's like saying 'otherwise, IF it's before 6pm, show afternoon!'",
-              junior: "'else if' creates a chained condition. The space between 'else' and 'if' matters!",
-              senior: "Chains of else-if evaluate sequentially. Since we already checked hour < 12 above, hour < 18 here implicitly means 12 ≤ hour < 18.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Smart greeting built! 🕐",
-            action: "Check it!",
-          },
-          {
-            id: 'dom-update-challenge',
-            type: 'code-challenge',
-            teki: "Now put the greeting onto the page — find the #greeting element and update it:",
-            language: 'javascript',
-            code: `let greeting = "Good morning! ☀️";
-
-document.querySelector('___________').textContent = greeting;`,
-            answer: `let greeting = "Good morning! ☀️";
+}
 
 document.querySelector('#greeting').textContent = greeting;`,
-            blanks: [{ position: 0, answer: '#greeting' }],
+            blanks: [{ position: 0, answer: 'else' }],
             explanations: {
-              young: "Use #greeting to find the element with id='greeting'. The # means 'look for an ID'!",
-              junior: "# targets an ID in CSS selectors. querySelector('#greeting') finds the element with id='greeting'.",
-              senior: "IDs should be unique per page. getElementById('greeting') is slightly faster but querySelector is more flexible. Use class selectors for reusable patterns.",
+              young: "'else if' adds another question! Is it morning? Afternoon? If neither, it must be evening!",
+              junior: "else if chains additional conditions. Only the first true condition runs. new Date().getHours() returns the current hour (0–23).",
+              senior: "new Date().getHours() returns 0–23. For timezone-aware code use Intl.DateTimeFormat. This pattern is better as a switch for many cases.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Page updated dynamically! 🏠",
+            successMessage: "Time-aware website! ⏰",
             action: "Check it!",
           },
           {
@@ -1091,224 +1162,227 @@ document.querySelector('#greeting').textContent = greeting;`,
             type: 'act-complete',
             actId: 'act5',
             title: 'ACT 5 Complete!',
-            message: "Your website can now THINK — it reads the situation and decides what to show. Next: make it respond to the people clicking it!",
-            power: { label: 'Logic Thinker', emoji: '🤔' },
+            message: "Your website now THINKS! It can check conditions, make decisions, and show different content based on real data. Next: making it respond to users in real time!",
+            power: { label: 'Logic Thinker', emoji: '💭' },
             xpBonus: 200,
-            action: "Make it react!",
+            action: "Make it interactive!",
           },
         ],
       },
     ],
   },
 
-  // ── ACT 6 ── Bringing It To Life ─────────────────────────────────────────────
+  // ── ACT 6 ── Alive & Interactive ──────────────────────────────────────────────────
   {
     id: 'act6',
     number: 6,
-    title: 'Bringing It To Life',
-    tagline: 'Events — make it respond',
-    color: '#ef4444',
+    title: 'Alive & Interactive',
+    tagline: 'Respond to users with events',
+    color: '#10b981',
     emoji: '⚡',
     quiz: [
       {
-        question: 'What is a DOM EVENT?',
-        options: ['A database entry', 'Something that happens when the user interacts — click, type, hover', 'A CSS property', 'A special file type'],
+        question: 'What is an EVENT in JavaScript?',
+        options: ['A type of variable', 'Something that happens — like a click, keypress, or scroll', 'An HTML tag', 'A CSS property'],
         correct: 1,
-        explanation: 'DOM events fire when users interact with the page — every click, keypress, and scroll is an event.',
+        explanation: 'Events are things that happen in the browser — a user clicks, types, scrolls, or hovers. JavaScript listens for these and runs code in response.',
       },
       {
-        question: 'Which event fires when a user CLICKS a button?',
-        options: ['onHover', 'onType', 'onClick', 'onLoad'],
-        correct: 2,
-        explanation: 'onClick is the most common event — it fires every time the element is clicked.',
+        question: 'What does addEventListener() do?',
+        options: ['Removes a button from the page', 'Waits for a specific event and runs a function when it fires', 'Creates a new HTML element', 'Changes a CSS style'],
+        correct: 1,
+        explanation: 'addEventListener attaches a listener to an element. When the event fires, the function you provided runs automatically.',
       },
       {
-        question: 'What does addEventListener do?',
-        options: ['Adds a new HTML element to the page', 'Removes a CSS style', 'Connects a function to run when a specific event happens', 'Creates a new variable'],
+        question: 'How do you read what a user typed in an <input> field?',
+        options: ['input.innerHTML', 'input.textContent', 'input.value', 'input.text'],
         correct: 2,
-        explanation: 'addEventListener wires an element to a function so your code reacts when that event fires.',
+        explanation: '.value is the property that holds whatever the user typed into an input field. textContent doesn\'t work for input values.',
       },
     ],
     missions: [
 
-      // ── Mission 14 — Wake Up That Button ────────────────────────────────────
+      // ── Mission 14 — Click Magic ──────────────────────────────────────────────────
       {
         id: 'mission-14',
         number: 14,
         act: 6,
-        title: 'Wake Up That Button',
-        subtitle: 'Make the hero button actually do something',
-        concept: 'click-events',
+        title: 'Click Magic',
+        subtitle: 'Make your website respond to clicks',
+        concept: 'events',
         xp: 160,
         badge: null,
         steps: [
           {
-            id: 'dead-button',
+            id: 'events-intro-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Here's where it gets REALLY exciting.",
+              "So far your website just sits there. It doesn't respond to anything.",
+              "But websites are interactive — they react when you click, type, scroll!",
+              "The mechanism behind this: EVENTS.",
+            ],
+            action: "Teach me events!",
+          },
+          {
+            id: 'addeventlistener-msg',
             type: 'teki-message',
             mood: 'thinking',
             messages: [
-              "Try clicking your hero button in the preview right now. Go on... it does absolutely nothing. Let's fix that!",
+              "addEventListener is your tool for listening to events.",
+              "You give it TWO things: the event name (like 'click') and a function to run.",
+              "Syntax: element.addEventListener('click', function() { ... })",
+              "When the user clicks that element, your function runs instantly!",
             ],
-            autoAdvance: true,
+            action: "Let me try it!",
           },
           {
             id: 'addeventlistener-challenge',
             type: 'code-challenge',
-            teki: "Complete the code to make the button listen for clicks:",
+            teki: "Make the hero button show an alert when clicked! Fill in the event listener method:",
             language: 'javascript',
-            code: `let btn = document.querySelector('button');
+            code: `let heroBtn = document.querySelector('#hero-btn');
 
-btn._____________('click', function() {
-  alert("Hello from {{name}}!");
+heroBtn.___('click', function() {
+  alert("Thanks for clicking!");
 });`,
-            answer: `let btn = document.querySelector('button');
+            answer: `let heroBtn = document.querySelector('#hero-btn');
 
-btn.addEventListener('click', function() {
-  alert("Hello from {{name}}!");
+heroBtn.addEventListener('click', function() {
+  alert("Thanks for clicking!");
 });`,
             blanks: [{ position: 0, answer: 'addEventListener' }],
             explanations: {
-              young: "Type addEventListener — it's the magic that says 'listen for a click!'",
-              junior: "addEventListener is a method on DOM elements. It attaches an event listener that fires the callback when the event occurs.",
-              senior: "addEventListener is non-destructive — you can attach multiple listeners to the same event. onclick = fn only allows one listener.",
+              young: "addEventListener is like a guard that waits and listens — when the click happens, it runs your code!",
+              junior: "addEventListener(event, handler) attaches a function to an element. 'click' is the event type. The handler function runs every time the event fires.",
+              senior: "Prefer named functions over anonymous for addEventListener so you can call removeEventListener later. Consider event delegation for dynamic elements.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Button is awake! ⚡",
-            action: "Check it!",
-          },
-          {
-            id: 'event-type-challenge',
-            type: 'code-challenge',
-            teki: "The first argument to addEventListener is the event TYPE. Complete it:",
-            language: 'javascript',
-            code: `btn.addEventListener('_____', function() {
-  btn.textContent = "Clicked! 🎉";
-});`,
-            answer: `btn.addEventListener('click', function() {
-  btn.textContent = "Clicked! 🎉";
-});`,
-            blanks: [{ position: 0, answer: 'click' }],
-            explanations: {
-              young: "Type 'click' — it means 'run this when someone clicks'!",
-              junior: "'click' fires on mouse click. Other events: 'mouseover' (hover), 'keydown' (key press), 'submit' (form submit).",
-              senior: "Event types are strings. Common: 'click', 'input', 'change', 'submit', 'keydown', 'keyup', 'mouseenter', 'mouseleave', 'focus', 'blur'.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Event type set! 🖱️",
+            successMessage: "Button is alive! ⚡",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 15 — Talk to Visitors ────────────────────────────────────────
+      // ── Mission 15 — Read the User ────────────────────────────────────────────────
       {
         id: 'mission-15',
         number: 15,
         act: 6,
-        title: 'Talk to Visitors',
-        subtitle: 'Read what users type with .value',
-        concept: 'inputs',
+        title: 'Read the User',
+        subtitle: 'Get what the user types from an input',
+        concept: 'input-value',
         xp: 160,
         badge: null,
         steps: [
           {
-            id: 'value-challenge',
-            type: 'code-challenge',
-            teki: "Grab what the user typed in the input field:",
-            language: 'javascript',
-            code: `let name = document.querySelector('#nameInput')._____;`,
-            answer: `let name = document.querySelector('#nameInput').value;`,
-            blanks: [{ position: 0, answer: 'value' }],
-            explanations: {
-              young: "Type .value — it's like reading what's inside the input box!",
-              junior: ".value is a property on input elements. It returns the current text the user typed.",
-              senior: ".value returns a string for text inputs. For checkboxes, use .checked. For select, use .value (the selected option's value attribute).",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Input read! 📥",
-            action: "Check it!",
+            id: 'input-value-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Websites don't just wait for clicks — they also read what you TYPE.",
+              "An <input> field lets users enter text.",
+              "JavaScript can grab what's in the input at any moment using the .value property.",
+              "input.value gives you the text the user typed as a string.",
+            ],
+            action: "Got it!",
           },
           {
-            id: 'concatenation-challenge',
+            id: 'input-value-challenge',
             type: 'code-challenge',
-            teki: "Now build the greeting by joining strings together with +:",
+            teki: "When the button is clicked, read the input and greet the user by name:",
             language: 'javascript',
-            code: `let name = "Alex";
-let greeting = "Hello, " ___ name ___ "! Welcome to {{name}}.";`,
-            answer: `let name = "Alex";
-let greeting = "Hello, " + name + "! Welcome to {{name}}.";`,
-            blanks: [{ position: 0, answer: '+' }, { position: 1, answer: '+' }],
+            code: `let nameInput = document.querySelector('#name-input');
+let greetEl   = document.querySelector('#greeting');
+
+document.querySelector('#submit-btn').addEventListener('click', function() {
+  let name = nameInput.___;
+  greetEl.textContent = "Hello, " + name + "!";
+});`,
+            answer: `let nameInput = document.querySelector('#name-input');
+let greetEl   = document.querySelector('#greeting');
+
+document.querySelector('#submit-btn').addEventListener('click', function() {
+  let name = nameInput.value;
+  greetEl.textContent = "Hello, " + name + "!";
+});`,
+            blanks: [{ position: 0, answer: 'value' }],
             explanations: {
-              young: "The + between text pieces glues them together like puzzle pieces! 'Hello, ' + 'Alex' = 'Hello, Alex'.",
-              junior: "String concatenation with +. Alternatively, template literals are cleaner: `Hello, ${name}! Welcome to {{name}}.`",
-              senior: "Template literals (backtick strings) are preferred over + concatenation. They're more readable and handle newlines naturally.",
+              young: ".value reads what the user typed — like peeking inside the input box!",
+              junior: ".value is a property on <input> elements that holds the current text. It updates live as the user types.",
+              senior: ".value returns a string. For number inputs use parseFloat(input.value) or input.valueAsNumber. Always validate input before using it.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Strings joined! 🔗",
+            successMessage: "Reading user input! 📩",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 16 — The Like Counter ────────────────────────────────────────
+      // ── Mission 16 — Like Counter ─────────────────────────────────────────────────
       {
         id: 'mission-16',
         number: 16,
         act: 6,
-        title: 'The Like Counter',
-        subtitle: 'Variables + events + DOM updates — all together',
-        concept: 'state-pattern',
+        title: 'Like Counter',
+        subtitle: 'Combine variables + events to build a real feature',
+        concept: 'counter',
         xp: 200,
-        badge: { id: 'action-creator', label: 'Action Creator', emoji: '⚡' },
+        badge: { id: 'interactive-builder', label: 'Interactive Builder', emoji: '⚡' },
         steps: [
           {
-            id: 'increment-challenge',
-            type: 'code-challenge',
-            teki: "A user liked your post! Add 1 to the likes count:",
-            language: 'javascript',
-            code: `let likes = 0;
-
-// User clicked the like button!
-likes = likes ___ 1;`,
-            answer: `let likes = 0;
-
-// User clicked the like button!
-likes = likes + 1;`,
-            blanks: [{ position: 0, answer: '+' }],
-            explanations: {
-              young: "Use + to add 1! likes + 1 means 'take the current likes and add one more'.",
-              junior: "likes = likes + 1 reads likes, adds 1, stores the result back in likes. Shorthand: likes += 1 or likes++.",
-              senior: "likes++ is most idiomatic. In React you'd use setLikes(prev => prev + 1) to avoid stale closure issues.",
-            },
-            ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Like counted! ❤️",
-            action: "Check it!",
+            id: 'counter-intro-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "You know variables. You know events.",
+              "Let's combine them to build something REAL — a like counter!",
+              "Every time the user clicks the like button, a number goes up.",
+              "This is how Instagram, YouTube, and Twitter all work at their core!",
+            ],
+            action: "Build it!",
           },
           {
-            id: 'full-counter-challenge',
+            id: 'increment-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "The ++ operator adds 1 to a variable.",
+              "count++ is exactly the same as count = count + 1.",
+              "Combined with textContent, you can show the updated number instantly!",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'counter-challenge',
             type: 'code-challenge',
-            teki: "Put it all together! Complete the full like button:",
+            teki: "Complete the like counter — add ++ to increment count each time the button is clicked:",
             language: 'javascript',
-            code: `let likes = 0;
+            code: `let count = 0;
+let likeBtn   = document.querySelector('#like-btn');
+let likeCount = document.querySelector('#like-count');
 
-document.querySelector('#likeBtn').___________('click', () => {
-  likes = likes + 1;
-  document.querySelector('#count').__________ = likes;
+likeBtn.addEventListener('click', function() {
+  count___;
+  likeCount.textContent = count + " likes";
 });`,
-            answer: `let likes = 0;
+            answer: `let count = 0;
+let likeBtn   = document.querySelector('#like-btn');
+let likeCount = document.querySelector('#like-count');
 
-document.querySelector('#likeBtn').addEventListener('click', () => {
-  likes = likes + 1;
-  document.querySelector('#count').textContent = likes;
+likeBtn.addEventListener('click', function() {
+  count++;
+  likeCount.textContent = count + " likes";
 });`,
-            blanks: [{ position: 0, answer: 'addEventListener' }, { position: 1, answer: 'textContent' }],
+            blanks: [{ position: 0, answer: '++' }],
             explanations: {
-              young: "addEventListener listens for the click, textContent shows the result!",
-              junior: "addEventListener wires the event. textContent sets the visible text. Together they make the button interactive.",
-              senior: "Consider using a dedicated render function instead of inline DOM updates — makes the pattern clearer and easier to extend.",
+              young: "count++ adds 1 to count every time the button is clicked. Then we show the new count on the page!",
+              junior: "++ is the increment operator. count++ adds 1 to count each time the function runs — every click = +1 like.",
+              senior: "++ modifies count in place via closure. State lives in memory and resets on page reload — for persistence use localStorage.setItem().",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Like button is LIVE! ⚡",
+            successMessage: "Like counter works! ❤️",
             action: "Check it!",
           },
           {
@@ -1316,183 +1390,222 @@ document.querySelector('#likeBtn').addEventListener('click', () => {
             type: 'act-complete',
             actId: 'act6',
             title: 'ACT 6 Complete!',
-            message: "Your website reacts, responds, and remembers user actions! That's interactive programming. Next: work with collections of data!",
-            power: { label: 'Action Creator', emoji: '⚡' },
+            message: "Your website is ALIVE! Events, input values, counters — you can now make websites that respond, react, and remember user actions. One act left: the full toolkit!",
+            power: { label: 'Interactive Builder', emoji: '⚡' },
             xpBonus: 200,
-            action: "Show me collections!",
+            action: "Get the full toolkit!",
           },
         ],
       },
     ],
   },
 
-  // ── ACT 7 ── Working With Collections ───────────────────────────────────────
+  // ── ACT 7 ── The Full Toolkit ──────────────────────────────────────────────────────
   {
     id: 'act7',
     number: 7,
-    title: 'Working With Collections',
-    tagline: 'Arrays and loops',
-    color: '#06b6d4',
-    emoji: '📦',
+    title: 'The Full Toolkit',
+    tagline: 'Arrays, loops, and functions — the power trio',
+    color: '#f97316',
+    emoji: '🛠️',
     quiz: [
       {
-        question: 'What is an ARRAY?',
-        options: ['A single number', 'A type of image', 'An ordered list of values stored in one variable', 'A website link'],
-        correct: 2,
-        explanation: 'An array is a list — like [1, 2, 3] or ["red", "blue", "green"] — stored under one name.',
-      },
-      {
-        question: 'How do you access the FIRST item in an array?',
-        options: ['array[1]', 'array.first', 'array[0]', 'array.get(1)'],
-        correct: 2,
-        explanation: 'Arrays start counting from 0, so the first item is always at index [0].',
-      },
-      {
-        question: 'What does array.push() do?',
-        options: ['Removes the first item', 'Adds a new item to the end of the array', 'Sorts the array alphabetically', 'Counts how many items there are'],
+        question: 'What is an ARRAY in JavaScript?',
+        options: ['A single variable with one value', 'A list of multiple values stored in one variable', 'A CSS styling rule', 'A type of HTML tag'],
         correct: 1,
-        explanation: 'push() appends a new value to the end — making the array one item longer.',
+        explanation: 'An array is a list! Instead of creating 100 separate variables, you put them all in one array: ["item1", "item2", "item3"].',
+      },
+      {
+        question: 'What does forEach() do?',
+        options: ['Creates a new array', 'Removes the last item from an array', 'Runs a function once for each item in an array', 'Sorts an array alphabetically'],
+        correct: 2,
+        explanation: 'forEach loops through every item in an array and runs your function on each one. Add one item to the array — forEach handles it automatically.',
+      },
+      {
+        question: 'What is a FUNCTION in JavaScript?',
+        options: ['A CSS color value', 'A reusable named block of code', 'An HTML attribute', 'A type of variable'],
+        correct: 1,
+        explanation: 'A function is a reusable named block of code. Define it once, call it as many times as you need — from anywhere!',
       },
     ],
     missions: [
 
-      // ── Mission 17 — Your Collection ────────────────────────────────────────
+      // ── Mission 17 — Lists of Things ──────────────────────────────────────────────
       {
         id: 'mission-17',
         number: 17,
         act: 7,
-        title: 'Your Collection',
-        subtitle: 'Arrays hold ordered lists of data',
+        title: 'Lists of Things',
+        subtitle: 'Arrays store multiple values. forEach loops through them.',
         concept: 'arrays',
-        xp: 160,
+        xp: 180,
         badge: null,
         steps: [
           {
-            id: 'array-design',
-            type: 'visual-builder',
-            section: 'features',
-            isStyleUpdate: false,
-            teki: "What are 4 things about your website or topic? Add them — they'll become a gallery of cards!",
-            fields: [
-              {
-                id: 'featureList',
-                label: 'Your items',
-                type: 'tags',
-                storeSubKey: 'featureList',
-                suggestions: ['Design', 'Code', 'Create', 'Learn', 'Build', 'Share', 'Explore', 'Inspire'],
-                hint: 'Type and press Enter for each item',
-              },
+            id: 'arrays-intro-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "What if you needed to store 50 products? 100 names? 1000 posts?",
+              "Creating 100 separate variables would be madness!",
+              "That's why ARRAYS exist — one variable that holds a whole list.",
+              "Arrays are surrounded by square brackets: [ item1, item2, item3 ]",
             ],
-            action: "Items added!",
+            action: "Show me arrays!",
           },
           {
-            id: 'array-index-challenge',
+            id: 'array-challenge',
             type: 'code-challenge',
-            teki: "Get the SECOND item from the array (remember: counting starts at 0!):",
+            teki: "Create an array of 3 topics your website covers:",
             language: 'javascript',
-            code: `let skills = ["design", "code", "create", "share"];
+            code: `const topics = ___"Travel", "Music", "Food"___;
 
-let second = skills[_];  // should be "code"`,
-            answer: `let skills = ["design", "code", "create", "share"];
+console.log(topics[0]); // "Travel"
+console.log(topics.length); // 3`,
+            answer: `const topics = ["Travel", "Music", "Food"];
 
-let second = skills[1];  // should be "code"`,
-            blanks: [{ position: 0, answer: '1' }],
+console.log(topics[0]); // "Travel"
+console.log(topics.length); // 3`,
+            blanks: [{ position: 0, answer: '[' }, { position: 1, answer: ']' }],
             explanations: {
-              young: "The SECOND item is at position 1, because counting starts at 0! skills[0]=design, skills[1]=code.",
-              junior: "Index 1 = second item. Zero-indexing is universal in programming — the first index is always 0.",
-              senior: "Zero-indexing comes from C where arrays were implemented as pointer arithmetic. The index is the offset from the start.",
+              young: "Square brackets [ ] create an array — like a shopping list! Items are separated by commas.",
+              junior: "Arrays use [] with comma-separated values. topics[0] accesses the first item (arrays start at index 0). .length returns the count.",
+              senior: "Arrays are objects in JS. Use const for arrays — it prevents reassignment, not mutation. Push/pop/splice can still modify the contents.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Index mastered! 🎯",
+            successMessage: "Array created! 📋",
             action: "Check it!",
           },
           {
-            id: 'push-challenge',
+            id: 'foreach-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "Arrays are great for storing data. But how do you USE all those items?",
+              "With forEach — it loops through every item in the array automatically.",
+              "topics.forEach(function(topic) { ... })",
+              "The function runs once for EACH item. 3 topics = runs 3 times!",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'foreach-challenge',
             type: 'code-challenge',
-            teki: "Add a new item to the END of the array:",
+            teki: "Use forEach to add each topic as a list item on the page:",
             language: 'javascript',
-            code: `let skills = ["design", "code", "create"];
+            code: `const topics = ["Travel", "Music", "Food"];
+const list = document.querySelector('#topic-list');
 
-skills.____("inspire");
+topics.___(function(topic) {
+  list.innerHTML += "<li>" + topic + "</li>";
+});`,
+            answer: `const topics = ["Travel", "Music", "Food"];
+const list = document.querySelector('#topic-list');
 
-console.log(skills.length); // should show 4`,
-            answer: `let skills = ["design", "code", "create"];
-
-skills.push("inspire");
-
-console.log(skills.length); // should show 4`,
-            blanks: [{ position: 0, answer: 'push' }],
+topics.forEach(function(topic) {
+  list.innerHTML += "<li>" + topic + "</li>";
+});`,
+            blanks: [{ position: 0, answer: 'forEach' }],
             explanations: {
-              young: "push() adds a new item to the END of the list — like pushing a new book onto a shelf!",
-              junior: "array.push(item) appends to the end and returns the new length. Its opposite is pop() which removes the last item.",
-              senior: "push() mutates the original array. For immutable patterns (React state, Redux), use spread: [...skills, 'inspire'] instead.",
+              young: "forEach visits each item in the list and runs your function on it — like going through each item on a checklist!",
+              junior: "forEach(callback) calls callback(item) for each element. Add 1 item to topics → 1 new <li> appears automatically.",
+              senior: "forEach is fine for simple side effects. Prefer map() to transform items into new values. For large lists, use DocumentFragment instead of += on innerHTML.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Item added! ➕",
+            successMessage: "forEach loop working! 🔄",
             action: "Check it!",
           },
         ],
       },
 
-      // ── Mission 18 — Automatic Gallery ──────────────────────────────────────
+      // ── Mission 18 — Make a Tool ──────────────────────────────────────────────────
       {
         id: 'mission-18',
         number: 18,
         act: 7,
-        title: 'Automatic Gallery',
-        subtitle: 'Loops do repetitive work automatically',
-        concept: 'loops',
-        xp: 180,
-        badge: { id: 'data-collector', label: 'Data Collector', emoji: '📦' },
+        title: 'Make a Tool',
+        subtitle: 'Functions let you write code once and use it anywhere',
+        concept: 'functions',
+        xp: 200,
+        badge: { id: 'toolkit-complete', label: 'Full Toolkit', emoji: '🛠️' },
         steps: [
           {
-            id: 'foreach-challenge',
+            id: 'functions-intro-msg',
+            type: 'teki-message',
+            mood: 'excited',
+            messages: [
+              "Final piece of the toolkit: FUNCTIONS.",
+              "A function is a named, reusable block of code.",
+              "Imagine writing the same 5 lines of code 10 different times. Painful!",
+              "With a function: write it once, give it a name, call it 10 times from anywhere!",
+            ],
+            action: "Teach me functions!",
+          },
+          {
+            id: 'functions-syntax-msg',
+            type: 'teki-message',
+            mood: 'thinking',
+            messages: [
+              "function greet(name) { return 'Hello, ' + name; }",
+              "function → the keyword that creates it",
+              "greet → the name you give it (how you call it later)",
+              "(name) → the input it receives (called a parameter)",
+              "return → sends the result back out",
+            ],
+            action: "Got it!",
+          },
+          {
+            id: 'function-define-challenge',
             type: 'code-challenge',
-            teki: "Call forEach to loop through every item in the array:",
+            teki: "Define a function called 'formatTitle' that adds an emoji to any title:",
             language: 'javascript',
-            code: `let skills = ["design", "code", "create"];
+            code: `___ formatTitle(title) {
+  return "🌟 " + title;
+}
 
-skills._______(function(skill) {
-  console.log(skill);
-});`,
-            answer: `let skills = ["design", "code", "create"];
+let result = formatTitle("{{name}}");
+console.log(result); // "🌟 {{name}}"`,
+            answer: `function formatTitle(title) {
+  return "🌟 " + title;
+}
 
-skills.forEach(function(skill) {
-  console.log(skill);
-});`,
-            blanks: [{ position: 0, answer: 'forEach' }],
+let result = formatTitle("{{name}}");
+console.log(result); // "🌟 {{name}}"`,
+            blanks: [{ position: 0, answer: 'function' }],
             explanations: {
-              young: "Type forEach — it means 'for EACH item, do this'!",
-              junior: "array.forEach(fn) calls fn once for each item. The item is passed automatically as the first argument.",
-              senior: "forEach receives (currentValue, index, array) in the callback. The index is useful for showing numbered lists.",
+              young: "Type 'function' to start — it's the magic keyword that creates a reusable tool!",
+              junior: "'function' keyword declares a named function. The name after it is how you call it. Parameters in () receive values from the caller.",
+              senior: "Function declarations are hoisted — you can call them before they appear in code. Arrow functions (const f = () => {}) are not hoisted and have lexical 'this'.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Loop running! 🔄",
+            successMessage: "Function built! 🛠️",
             action: "Check it!",
           },
           {
-            id: 'createElement-challenge',
+            id: 'return-challenge',
             type: 'code-challenge',
-            teki: "Inside the loop, create a new div for each skill:",
+            teki: "Make this function send its result back — add the keyword that returns a value:",
             language: 'javascript',
-            code: `skills.forEach(function(skill) {
-  let card = document.____________('div');
-  card.textContent = skill;
-  document.querySelector('#gallery').appendChild(card);
-});`,
-            answer: `skills.forEach(function(skill) {
-  let card = document.createElement('div');
-  card.textContent = skill;
-  document.querySelector('#gallery').appendChild(card);
-});`,
-            blanks: [{ position: 0, answer: 'createElement' }],
+            code: `function double(number) {
+  ___ number * 2;
+}
+
+let result = double(5);
+console.log(result); // 10`,
+            answer: `function double(number) {
+  return number * 2;
+}
+
+let result = double(5);
+console.log(result); // 10`,
+            blanks: [{ position: 0, answer: 'return' }],
             explanations: {
-              young: "createElement makes a brand-new HTML element! 'div' is the type — you can make any HTML tag.",
-              junior: "document.createElement(tag) creates a new DOM node in memory. Use appendChild to add it to the page.",
-              senior: "createElement + appendChild triggers layout — avoid inside large loops. Use document fragment or innerHTML for batch DOM updates.",
+              young: "'return' sends the answer OUT of the function — like the kitchen handing you your finished meal!",
+              junior: "'return' exits the function and sends a value back to wherever it was called. Without return, the function returns undefined.",
+              senior: "return exits the function immediately. Use early returns for guard clauses. A function without a return statement implicitly returns undefined.",
             },
             ageExposure: { young: 'guided', junior: 'fill-blank', senior: 'fill-blank' },
-            successMessage: "Gallery builds itself! 🎴",
+            successMessage: "Value returned! ✅",
             action: "Check it!",
           },
           {
@@ -1500,10 +1613,10 @@ skills.forEach(function(skill) {
             type: 'act-complete',
             actId: 'act7',
             title: 'ACT 7 Complete!',
-            message: "Arrays + loops = automatic content generation! Add one item to an array, one more card appears. That's the power of data-driven web development.",
-            power: { label: 'Data Collector', emoji: '📦' },
+            message: "You have the FULL toolkit! Variables, DOM manipulation, conditionals, events, arrays, loops, and functions — you can now build any interactive website. You're a Junior Creator!",
+            power: { label: 'Full Toolkit', emoji: '🛠️' },
             xpBonus: 200,
-            action: "Teach it skills!",
+            action: "I'm a Junior Creator!",
           },
         ],
       },
@@ -1556,7 +1669,7 @@ skills.forEach(function(skill) {
             type: 'code-challenge',
             teki: "Define a function called 'double' that takes a number and returns it times 2:",
             language: 'javascript',
-            code: `________ double(number) {
+            code: `___ double(number) {
   return number * 2;
 }`,
             answer: `function double(number) {
@@ -1578,7 +1691,7 @@ skills.forEach(function(skill) {
             teki: "A function that doesn't return anything is useless. Make this one return the greeting:",
             language: 'javascript',
             code: `function greet(name) {
-  ______ "Hello, " + name + "!";
+  ___ "Hello, " + name + "!";
 }
 
 let msg = greet("Alex");  // msg should be "Hello, Alex!"`,
@@ -1606,7 +1719,7 @@ let msg = greet("Alex");  // msg should be "Hello, Alex!"`,
   return "Hello, " + name + "!";
 }
 
-let message = _____("{{name}}");
+let message = ___("{{name}}");
 console.log(message); // "Hello, {{name}}!"`,
             answer: `function greet(name) {
   return "Hello, " + name + "!";
@@ -1645,7 +1758,7 @@ console.log(message); // "Hello, {{name}}!"`,
             language: 'javascript',
             code: `let words = ["cat", "dog", "bird"];
 
-let randomIndex = Math._____(Math.random() * words.length);
+let randomIndex = Math.___(Math.random() * words.length);
 let randomWord = words[randomIndex];`,
             answer: `let words = ["cat", "dog", "bird"];
 
@@ -1672,7 +1785,7 @@ let nouns = ["Paws", "Whisker", "Rocket"];
 function generateName() {
   let adj  = adjs[Math.floor(Math.random() * adjs.length)];
   let noun = nouns[Math.floor(Math.random() * nouns.length)];
-  ______ adj + " " + noun;
+  ___ adj + " " + noun;
 }`,
             answer: `let adjs  = ["Fluffy", "Speedy", "Cosmic"];
 let nouns = ["Paws", "Whisker", "Rocket"];
