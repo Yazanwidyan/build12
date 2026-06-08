@@ -106,8 +106,10 @@ export default function FloatingTeki() {
 
   const zone    = useMemo(() => zoneForStep(currentStep), [currentStep?.id]);
   const targetX = zone === "left" ? X_LEFT : zone === "right" ? X_RIGHT : X_CENTER;
-  // Section highlight overrides the dock Y for both zones
-  const targetY = travelY ?? DOCK_Y;
+  // travelY (section-following) only applies during observation (right zone, popup hidden).
+  // During canvas-input / code-challenge the popup IS visible — TEKI must stay at DOCK_Y
+  // so it never lands on top of the popup or its action button.
+  const targetY = zone === "right" ? (travelY ?? DOCK_Y) : DOCK_Y;
 
   // posX/posY are absolute screen coordinates (element anchored top-left: 0,0)
   const posX = useMotionValue(X_CENTER);
