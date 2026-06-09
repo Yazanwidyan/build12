@@ -1,6 +1,7 @@
-import Button from "@/components/ui/Button";
+import MissionRunner from "@/components/journey/MissionRunner";
 import { useStepAction } from "@/contexts/StepActionContext";
 import { useWebsiteLayout } from "@/contexts/WebsiteLayoutContext";
+import { ACTS } from "@/data/curriculum";
 import { useMissionEngine } from "@/engines/missionEngine";
 import { useTekiStore } from "@/stores/tekiStore";
 import {
@@ -15,6 +16,12 @@ import { useEffect, useMemo, useRef } from "react";
 import TekiCharacter from "./TekiCharacter";
 
 const TEKI_W = 300;
+
+const POPUP_TYPES = new Set([
+  "code-challenge", "canvas-input", "topic-picker", "color-picker",
+  "input", "visual-builder", "react-gateway", "react-concept",
+  "react-spotlight", "react-live-demo",
+]);
 
 // ── Stable viewport snapshot (valid until hard reload) ────────────────────────
 const VW = typeof window !== "undefined" ? window.innerWidth  : 1440;
@@ -84,8 +91,15 @@ export default function FloatingTeki() {
     highlightSection, challengeFlash,
   } = useTekiStore();
   const clearHighlight   = useTekiStore((s) => s.clearHighlight);
-  const { currentStep }  = useMissionEngine();
+  const {
+    currentStep, currentMission, currentStepIndex,
+    totalSteps, advanceStep, progressPercent,
+  } = useMissionEngine();
   const { sectionBounds } = useWebsiteLayout();
+
+  const isPopupStep  = POPUP_TYPES.has(currentStep?.type);
+  const act          = ACTS.find((a) => a.number === currentMission?.act);
+  const accentColor  = act?.color ?? "#6366f1";
   const { stepAction }   = useStepAction();
   const constraintsRef   = useRef(null);
 
@@ -186,94 +200,174 @@ export default function FloatingTeki() {
         transition={{ duration: 0.32, ease: "easeOut" }}
         whileDrag={{ cursor: "grabbing", scale: 1.04 }}
       >
-        {/* Speech bubble — anchored above the character, grows upward */}
+        {/* Speech bubble — popup step UI OR message text */}
         <AnimatePresence mode="popLayout">
-          {currentMessage && (
+          {(isPopupStep || !!currentMessage) && (
             <motion.div
-              key={currentMessage}
+              key={isPopupStep ? `popup-${currentStep.id}` : currentMessage}
               className="absolute pointer-events-auto"
-              style={{ bottom: "100%", left: 0, width: "100%", paddingBottom: 8 }}
+              style={{ bottom: "100%", left: 0, width: isPopupStep ? 320 : "100%", paddingBottom: 8 }}
               initial={{ opacity: 0, y: 14, scale: 0.88 }}
               animate={{ opacity: 1, y: 0,  scale: 1    }}
               exit={  { opacity: 0, y: -10, scale: 0.94 }}
               transition={{ type: "spring", stiffness: 420, damping: 26 }}
             >
               <div
-                className="px-4 py-3 leading-relaxed"
                 style={{
                   backgroundColor: "var(--bubble-bg)",
                   border: "1px solid var(--bubble-border)",
                   borderRadius: 20,
                   borderBottomLeftRadius: 0,
-                  fontWeight: 500,
-                  fontSize: 15,
                   boxShadow: "0 2px 20px rgba(99,102,241,0.18)",
-                  color: "var(--ink-muted)",
+                  overflow: "hidden",
                 }}
               >
-                {currentMessage}
-                {isTyping && (
-                  <span className="inline-flex gap-0.5 ml-2 align-middle">
-                    {[0, 1, 2].map((i) => (
-                      <motion.span
-                        key={i}
-                        style={{
-                          width: 4, height: 4, borderRadius: "50%",
-                          background: "var(--bubble-text)", display: "inline-block",
-                        }}
-                        animate={{ opacity: [0.25, 1, 0.25], y: [0, -3, 0] }}
-                        transition={{ duration: 0.75, repeat: Infinity, delay: i * 0.18 }}
+                {isPopupStep ? (
+                  /* ── Interactive step inside the bubble ── */
+                  <>
+                    {/* Compact header */}
+                    <div
+                      style={{
+                        display: "flex", alignItems: "center", gap: 6,
+                        padding: "8px 12px 6px",
+                        borderBottom: "1px solid var(--bubble-border)",
+                      }}
+                    >
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: accentColor, flexShrink: 0 }} />
+                      <span style={{ fontSize: 12, fontWeight: 700, color: "var(--ink)", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {currentMission?.title}
+                      </span>
+                      <span style={{ fontSize: 11, color: "var(--ink-faint)", flexShrink: 0 }}>
+                        {currentStepIndex + 1}/{totalSteps}
+                      </span>
+                    </div>
+
+                    {/* Thin progress bar */}
+                    <div style={{ height: 2, background: "var(--app-border)" }}>
+                      <motion.div
+                        style={{ height: "100%", background: accentColor }}
+                        animate={{ width: `${progressPercent}%` }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
                       />
-                    ))}
-                  </span>
+                    </div>
+
+                    {/* Step content */}
+                    <div style={{ padding: "10px 12px 4px" }}>
+                      <MissionRunner
+                        step={currentStep}
+                        stepIndex={currentStepIndex}
+                        onComplete={advanceStep}
+                      />
+                    </div>
+
+                    {/* Action button */}
+                    {stepAction && (
+                      <div
+                        style={{ padding: "6px 12px 10px" }}
+                        onPointerDown={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          onClick={stepAction.onClick}
+                          disabled={stepAction.disabled}
+                          style={{
+                            width: "100%",
+                            background: accentColor,
+                            color: "white",
+                            borderRadius: 10,
+                            padding: "7px 12px",
+                            fontSize: 13,
+                            fontWeight: 600,
+                            border: "none",
+                            cursor: stepAction.disabled ? "not-allowed" : "pointer",
+                            opacity: stepAction.disabled ? 0.5 : 1,
+                          }}
+                        >
+                          {stepAction.label}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  /* ── Regular message / action ── */
+                  <AnimatePresence mode="wait">
+                    {isTyping || !stepAction ? (
+                      <motion.div
+                        key="text"
+                        className="px-4 py-3 leading-relaxed"
+                        style={{ fontWeight: 500, fontSize: 15, color: "var(--ink-muted)" }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {currentMessage}
+                        {isTyping && (
+                          <span className="inline-flex gap-0.5 ml-2 align-middle">
+                            {[0, 1, 2].map((i) => (
+                              <motion.span
+                                key={i}
+                                style={{
+                                  width: 4, height: 4, borderRadius: "50%",
+                                  background: "var(--bubble-text)", display: "inline-block",
+                                }}
+                                animate={{ opacity: [0.25, 1, 0.25], y: [0, -3, 0] }}
+                                transition={{ duration: 0.75, repeat: Infinity, delay: i * 0.18 }}
+                              />
+                            ))}
+                          </span>
+                        )}
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="action"
+                        className="px-3 py-2.5"
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                        onPointerDown={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          onClick={stepAction.onClick}
+                          disabled={stepAction.disabled}
+                          style={{
+                            width: "100%",
+                            background: accentColor,
+                            color: "white",
+                            borderRadius: 12,
+                            padding: "6px 12px",
+                            fontSize: 13,
+                            fontWeight: 600,
+                            border: "none",
+                            cursor: stepAction.disabled ? "not-allowed" : "pointer",
+                            opacity: stepAction.disabled ? 0.5 : 1,
+                          }}
+                        >
+                          {stepAction.label}
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 )}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Character + action button */}
-        <div className="flex items-center gap-3">
-          <div className="shrink-0 pointer-events-none">
-            {/* Flash-reaction wrapper (shake / bounce) */}
-            <motion.div animate={reactionControls}>
-              {/* Mood-driven float */}
-              <motion.div animate={floatControls}>
-                {/* Pop-in when mood changes */}
-                <motion.div
-                  key={mood}
-                  initial={{ scale: 0.78, rotate: MOOD_POP_ROTATE[mood] ?? 0 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 450, damping: 16 }}
-                >
-                  <TekiCharacter size={68} mood={mood} />
-                </motion.div>
+        {/* Character */}
+        <div className="pointer-events-none">
+          <motion.div animate={reactionControls}>
+            <motion.div animate={floatControls}>
+              <motion.div
+                key={mood}
+                initial={{ scale: 0.78, rotate: MOOD_POP_ROTATE[mood] ?? 0 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 450, damping: 16 }}
+              >
+                <TekiCharacter size={68} mood={mood} />
               </motion.div>
             </motion.div>
-          </div>
-
-          <AnimatePresence mode="wait">
-            {stepAction && !isTyping && (
-              <motion.div
-                key={stepAction.label}
-                className="flex-1 pointer-events-auto"
-                initial={{ opacity: 0, x: 14, scale: 0.9  }}
-                animate={{ opacity: 1, x: 0,  scale: 1    }}
-                exit={  { opacity: 0, x: -10, scale: 0.88 }}
-                transition={{ type: "spring", stiffness: 360, damping: 26 }}
-                onPointerDown={(e) => e.stopPropagation()}
-              >
-                <Button
-                  variant="solid"
-                  color="blue"
-                  onClick={stepAction.onClick}
-                  disabled={stepAction.disabled}
-                >
-                  {stepAction.label}
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          </motion.div>
         </div>
       </motion.div>
     </>
